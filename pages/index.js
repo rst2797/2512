@@ -97,15 +97,9 @@ const Home = () => {
             >
               Free shipping all over India!!!
             </Marquee>
-            {/* <span
-                className="absolute right-4 top-2 text-2xl"
-                onClick={() => setClose(true)}
-              >
-                <IoClose />
-              </span> */}
           </div>
         )}
-        <Navbar position={!close ? 20 : 4} />
+        <Navbar position={true} />
         <SectionOne />
         <SectionTwo />
         <SectionThree />

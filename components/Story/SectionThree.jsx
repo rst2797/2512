@@ -5,7 +5,7 @@ const SectionThree = () => {
   return (
     <div className="relative">
       <Image
-        src="/images/story-2512.png"
+        src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/story-2512.png"
         alt="2512 | PACCHIS BARAH STORY"
         className="contrast-125"
         width={600}

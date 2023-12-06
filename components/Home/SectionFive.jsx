@@ -11,7 +11,7 @@ const SectionFive = () => {
         controls={false}
         className="object-cover h-[100vh] w-screen"
       >
-        <source src="/images/video/kanso.mp4" type="video/mp4" />
+        <source src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/video/kanso.mp4" type="video/mp4" />
       </video>
       <div className="absolute bottom-40 left-0 right-0 text-[#2F2E2D]">
         <h2 className="font-sansita-regular text-center">Kanso</h2>

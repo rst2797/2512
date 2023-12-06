@@ -59,7 +59,7 @@ function Product() {
   return (
     <div className="flex justify-between border-b border-white pb-4 mb-4">
       <Image
-        src="/images/products/wild-thought.png"
+        src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/products/wild-thought.png"
         alt=""
         width={70}
         height={100}

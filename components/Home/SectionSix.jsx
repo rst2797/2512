@@ -8,7 +8,7 @@ const SectionSix = () => {
         @pacchisbarah
       </h2>
       <p className="text-center py-2 font-semibold text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <Image src="/images/Frame 142.png" alt="" width={400} height={600} />
+      <Image src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/Frame 142.png" alt="" width={400} height={600} />
     </div>
   );
 };

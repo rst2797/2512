@@ -12,7 +12,7 @@ const SectionOne = ({ children }) => {
         className="object-cover h-[100vh] w-screen"
       >
         <source
-          src="/images/video/kanso.mp4"
+          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/video/kanso.mp4"
           type="video/mp4"
         />
       </video>

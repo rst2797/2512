@@ -5,19 +5,18 @@ import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
+import { FaMinus } from "react-icons/fa6";
+import 'animate.css';
 
 const Navbar = ({ position }) => {
   const [navOpen, setNavOpen] = useState(false);
-  useEffect(() => {
-    console.log(navOpen);
-  }, [navOpen]);
   return (
     <>
       <div className="px-[0.94rem] py-2">
         <nav
           className={`fixed ${
-            position ? "top-20" : "top-4"
-          } left-4 right-4 z-50 bg-[#E9E0D9CC] px-[1rem] py-[0.6rem] rounded-md drop-shadow-md transition-all`}
+            position ? "top-[3rem]" : "top-4"
+          } left-4 right-4 z-50 bg-[#e9e0d9] px-[1rem] py-[0.6rem] rounded-md drop-shadow-md transition-all`}
         >
           <div className="flex items-center justify-between">
             <div className="lg:hidden pt-2 pr-6">
@@ -33,9 +32,9 @@ const Navbar = ({ position }) => {
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
-                  className="!pt-2"
+                  className="!pt-1"
                   width={60}
-                  height={50}
+                  height={45}
                 />
               </a>
             </Link>
@@ -55,10 +54,10 @@ const Navbar = ({ position }) => {
 export default Navbar;
 
 const NavList = ({ navOpen, setNavOpen }) => {
-  const [aboutOpen, setAboutOpen] = useState(true);
+  const [aboutOpen, setAboutOpen] = useState(false);
   return (
     <div
-      className={`font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}
+      className={`animate__animated animate__slideInLeft font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}
     >
       <div className="">
         <div className="flex flex-end relative top-10 left-64 right-0 text-[2rem]">
@@ -83,7 +82,7 @@ const NavList = ({ navOpen, setNavOpen }) => {
           >
             <div className="flex justify-between items-baseline">
               <h3 className="text-[1.25rem]">About Us</h3>
-              <IoMdAdd className="text-[1.25rem]" />
+              {!aboutOpen ? <IoMdAdd className="text-[1.25rem]" /> : <FaMinus className="text-[1rem]"/>}
             </div>
             {aboutOpen && (
               <ul className="text-[0.875rem] pl-4">

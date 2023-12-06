@@ -6,7 +6,7 @@ const SectionOne = () => {
   return (
     <div className="relative z-20">
       <Image
-        src="/images/home_header.png"
+        src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home_header.png"
         alt=""
         width={900}
         height={1800}

@@ -5,7 +5,7 @@ const SectionOne = ({ children }) => {
   return (
     <div className="relative">
       <Image
-        src="/images/Frame 133.png"
+        src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/Frame 133.png"
         alt="2512 | Pacchis Barah - Sustainability"
         className="object-cover w-[100vw] h-[100vh]"
         width={500}
