@@ -11,8 +11,6 @@ module.exports = {
   swcMinify: true,
   reactStrictMode: true,
   images: {
-    domains: [
-      "s3.eu-north-1.amazonaws.com/web.pacchisbarah"
-    ],
-  }
+    domains: ['s3.eu-north-1.amazonaws.com'],
+  },
 };
