@@ -21,7 +21,7 @@ const ProfileOptions = () => {
     },
   ];
   return (
-    <div className="px-[.94rem] pt-[1.88rem] relative h-[68vh] ">
+    <div className="px-[.94rem] pt-[1.88rem] relative h-[58vh] ">
       {options.map((option) => (
         <div className="flex justify-between items-center pt-[.62rem] pb-[.94rem] border-b-2 text-[#2F2E2D] border-white font-[700]" key={option.id}>
           <h3>{option.name}</h3>

@@ -1,57 +1,10 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navbar from "../../components/common/header";
 import ProfileOptions from "../../components/Profile/ProfileOptions.jsx";
 import Footer from "../../components/common/footer.jsx";
 import Image from "next/image";
-// import { fetchGraphQLData } from "../utils/graphql/query";
-const Profile = () => {
-  //   const [close, setClose] = useState(false);
-  //   const [products, setProducts] = useState(false);
-
-  //   useEffect(() => {
-  //       const fetchData = async () => {
-  //         const query = `
-  //           {
-  //             products(first: 10) {
-  //               edges {
-  //                 node {
-  //                   handle
-  //                   id
-  //                   description
-  //                   title
-  //                   tags
-  //                   status
-  //                   variants(first: 10) {
-  //                     edges {
-  //                       node {
-  //                         availableForSale
-  //                         compareAtPrice
-  //                         id
-  //                         displayName
-  //                         createdAt
-  //                         price
-  //                         title
-  //                         sku
-  //                       }
-  //                     }
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         `;
-
-  //         try {
-  //           const data = await fetchGraphQLData(query);
-  //           setProducts(data.products.edges);
-  //         } catch (error) {
-  //           // Handle error
-  //         }
-  //       };
-
-  //       fetchData();
-  //     }, [products]);
+const Profile = ({name}) => {
   return (
     <main className="container min-h-screen bg-[#f2eadf] relative px-[.94rem]">
       <Head>
@@ -84,14 +37,14 @@ const Profile = () => {
       <Navbar />
       <div className="pt-24 flex flex-col items-center justify-center">
         <Image
-          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.JPG"
+          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
           alt=""
           width={100}
           height={100}
           className="rounded-full"
         />
         <h3 className="font-sansita-regular !text-[1.5rem] pt-[.88rem] text-[#2F2E2D]">
-          Juliya Benz
+          {name}
         </h3>
       </div>
       <ProfileOptions />
@@ -101,3 +54,12 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export async function getServerSideProps(context) {
+  console.log(context.query.slug);
+  return {
+    props: {
+      name: context.query.slug,
+    },
+  };
+}
