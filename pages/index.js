@@ -11,54 +11,8 @@ import SectionFour from "../components/Home/SectionFour.jsx";
 import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
 import SectionSeven from "../components/Home/SectionSeven.jsx";
-import { fetchGraphQLData } from "../utils/graphql/query";
 const Home = () => {
   const [close, setClose] = useState(false);
-  const [products, setProducts] = useState(false);
-
-  useEffect(() => {
-      const fetchData = async () => {
-        const query = `
-          {
-            products(first: 10) {
-              edges {
-                node {
-                  handle
-                  id
-                  description
-                  title
-                  tags
-                  status
-                  variants(first: 10) {
-                    edges {
-                      node {
-                        availableForSale
-                        compareAtPrice
-                        id
-                        displayName
-                        createdAt
-                        price
-                        title
-                        sku
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        `;
-  
-        try {
-          const data = await fetchGraphQLData(query);
-          setProducts(data.products.edges);
-        } catch (error) {
-          // Handle error
-        }
-      };
-  
-      fetchData();
-    }, [products]);
   return (
     <main>
       <Head>
@@ -89,16 +43,14 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container min-h-screen bg-[#f2eadf] relative">
-        {!close && (
-          <div className="container sticky top-2 left-0 right-0 z-50 w-full drop-shadow-md text-[#A86549] px-[0.94rem]">
-            <Marquee
-              pauseOnHover
-              className="backdrop-sepia px-6 py-4 rounded-md font-semibold"
-            >
-              Free shipping all over India!!!
-            </Marquee>
-          </div>
-        )}
+        <div className="container sticky top-2 left-0 right-0 z-50 w-full drop-shadow-md text-[#A86549] px-[0.94rem]">
+          <Marquee
+            pauseOnHover
+            className="backdrop-sepia px-6 py-4 rounded-md font-semibold"
+          >
+            Free shipping all over India!!!
+          </Marquee>
+        </div>
         <Navbar position={true} />
         <SectionOne />
         <SectionTwo />
