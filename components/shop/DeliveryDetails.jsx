@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeliveryTruck from "./SVG/DeliveryTruckSVG";
 import FabricDetails from "./FabricDetails";
+import { useCart } from "react-use-cart";
 
-const DeliveryDetails = () => {
-  const [productQuantity, setProductQuantity] = useState(1);
+const DeliveryDetails = ({ product }) => {
+  const [productState, setProductState] = useState(product);
   return (
     <div className="py-[1.25rem] px-[0.94rem]">
       <div className="flex justify-between py-[1.25rem]">
         <Counter
-          productQuantity={productQuantity}
-          setProductQuantity={setProductQuantity}
+          productState={productState}
+          setProductState={setProductState}
         />
-        <AddToCart />
+        <AddToCart product={productState} />
       </div>
       <div className="py-[1.25rem]">
         <h4 className="font-lato-regular !text-[1rem] !font-[700] text-[#2F2E2D]">
@@ -37,10 +38,12 @@ const DeliveryDetails = () => {
             <h5 className="text-[#4BAF59] font-lato-regular !text-[0.75rem] !font-[700] !leading-[1rem]">
               Expected delivery by 7th August
             </h5>
-            <p className="font-lato-regular !text-[0.75rem] !leading-[1rem] !font-[400]">Final delivery based on items in bag</p>
+            <p className="font-lato-regular !text-[0.75rem] !leading-[1rem] !font-[400]">
+              Final delivery based on items in bag
+            </p>
           </span>
         </div>
-        <FabricDetails/>
+        <FabricDetails />
       </div>
     </div>
   );
@@ -48,35 +51,40 @@ const DeliveryDetails = () => {
 
 export default DeliveryDetails;
 
-const AddToCart = () => {
+const AddToCart = ({ product }) => {
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(product);
+  };
   return (
-    <button className="py-[0.6875rem] w-[13.0625rem] text-white bg-[#A86549] font-lato-regular !text-[1.125rem] !font-[700]">
+    <button
+      className="py-[0.6875rem] w-[13.0625rem] text-white bg-[#A86549] font-lato-regular !text-[1.125rem] !font-[700]"
+      onClick={handleAddToCart}
+    >
       Add to Bag
     </button>
   );
 };
-const Counter = ({ productQuantity, setProductQuantity }) => {
+const Counter = ({ productState, setProductState }) => {
+  useEffect(()=>{}, [productState])
   return (
     <div className="flex bg-white w-fit px-2 py-1 border-[2px] border-[#A86549] text-[#A86549]">
       <button
         className="focus:bg-transparent active:bg-transparent focus:outline-none font-bold"
-        disabled={productQuantity === 1}
-        onClick={() => {
-          setProductQuantity(productQuantity - 1);
-        }}
+        disabled={productState?.quantity === 1}
+        onClick={() => setProductState(productState.quantity - 1)}
       >
         -
       </button>
       <input
         disabled
-        value={productQuantity}
+        value={productState.quantity}
         className="w-12 text-center font-bold"
       />
       <button
         className="focus:bg-transparent active:bg-transparent font-bold"
-        onClick={() => {
-          setProductQuantity(productQuantity + 1);
-        }}
+        onClick={() => setProductState(productState.quantity + 1)}
       >
         +
       </button>

@@ -74,10 +74,10 @@ export default function SectionThree({ sliderImages, rating, numberOfRatings }) 
           </SwiperSlide>
         ))}
       </Swiper>
-      <span className="flex items-center bg-white max-w-fit p-1 rounded-md font-semibold drop-shadow-lg absolute bottom-8 right-6">
+     {rating && <span className="flex items-center bg-white max-w-fit p-1 rounded-md font-semibold drop-shadow-lg absolute bottom-8 right-6">
         {rating} <MdOutlineStarPurple500 className="text-[#FFD981]" /> |{" "}
         {numberOfRatings}
-      </span>
+      </span>}
     </div>
   );
 }

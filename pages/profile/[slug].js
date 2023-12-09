@@ -56,7 +56,6 @@ const Profile = ({name}) => {
 export default Profile;
 
 export async function getServerSideProps(context) {
-  console.log(context.query.slug);
   return {
     props: {
       name: context.query.slug,

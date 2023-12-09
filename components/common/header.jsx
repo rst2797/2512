@@ -7,9 +7,11 @@ import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
 import { FaMinus } from "react-icons/fa6";
 import 'animate.css';
+import { useCart } from "react-use-cart";
 
 const Navbar = ({ position }) => {
   const [navOpen, setNavOpen] = useState(false);
+  const { isEmpty, totalUniqueItems } = useCart();
   return (
     <>
       <div className="px-[0.94rem] py-2">
@@ -39,7 +41,8 @@ const Navbar = ({ position }) => {
               </a>
             </Link>
             <Link href="/cart" className="mb-2">
-              <a className="text-[1.25rem]">
+              <a className="text-[1.25rem] relative">
+                {!isEmpty && <span className="absolute right-2 top-0 text-xs bg-[#A86549] text-white rounded-full w-4 h-4 text-center" >{totalUniqueItems}</span>}
                 <IoBagOutline size={25} className="mx-4" />
               </a>
             </Link>

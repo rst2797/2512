@@ -1,6 +1,13 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const Checkout = () => {
+const Checkout = ({items}) => {
+  const [totalPrice, setTotalPrice] = useState(0)
+  useEffect(() => {
+    setTotalPrice(null);
+    setTotalPrice(items.reduce((acc, { price, quantity }) => acc + (price*quantity), 0));
+  }, [items]);
   return (
       <div className="absolute bottom-0 left-0 right-0 py-[1rem] px-[0.94rem] drop-shadow-2xl bg-[#f4f0ef]">
         <div className="flex items-center justify-between">
@@ -23,14 +30,14 @@ const Checkout = () => {
         </div>
         <div className="flex justify-between border-y-2 border-[#a1a1a1] py-2">
           <h4>Total</h4>
-          <h4>₹1,958</h4>
+          <h4>₹{totalPrice}</h4>
         </div>
 
         <button
           type="button"
           className="bg-[#A86549] w-full py-2 my-4 font-bold text-[white]"
         >
-          Proceed to Checkout - ₹1,958
+          Proceed to Checkout - ₹{totalPrice}
         </button>
       </div>
   );

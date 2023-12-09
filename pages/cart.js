@@ -4,8 +4,12 @@ import { IoMdClose } from "react-icons/io";
 import Navbar from "../components/common/header";
 import Checkout from "../components/Cart/Checkout.jsx";
 import Head from "next/head";
+import { useCart } from "react-use-cart";
+import { useEffect } from "react";
+import Link from "next/link";
 
 const Cart = () => {
+  const { items, isEmpty } = useCart();
   return (
     <div className="relative">
       <Head>
@@ -39,53 +43,77 @@ const Cart = () => {
             <h1 className="font-sansita-regular !text-[3rem] !font-[100] mb-4">
               Cart
             </h1>
-            <p className="text-xs underline cursor-pointer">Close</p>
+            <Link href="/shop/tshirt">
+              <a className="text-xs underline cursor-pointer">Close</a>
+            </Link>
           </div>
-          {[1, 2].map((ele) => (
-            <Product key={ele} />
-          ))}
+          {isEmpty ? (
+            <p>Your cart is empty</p>
+          ) : (
+            <>
+              {items.map((ele) => (
+                <Product key={ele.id} item={ele} />
+              ))}
+            </>
+          )}
         </div>
       </div>
-      <Checkout />
+      {!isEmpty && <Checkout items={items} />}
     </div>
   );
 };
 
 export default Cart;
 
-function Product() {
-  const [quantity, setQuantity] = useState(1);
+function Product({ item }) {
+  const { items, updateItemQuantity, getItem } = useCart();
+
+  const [quantity, setQuantity] = useState(getItem(item.id).quantity);
+  useEffect(() => {
+    updateItemQuantity(item.id, quantity);
+  }, [quantity]);
 
   return (
     <div className="flex justify-between border-b border-white pb-4 mb-4">
-      <Image
-        src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/products/wild-thought.png"
-        alt=""
-        width={70}
-        height={100}
-      />
+      <Image src={item.images[0]} alt="" width={70} height={100} />
       <div className="flex flex-col justify-between">
         <div>
-          <h2 className="font-lato-regular !text-[1rem]">Wild Thoughts</h2>
+          <h2 className="font-lato-regular !text-[1rem]">{item.name}</h2>
           <span className="font-lato-regular !text-[.75rem]">Size: Medium</span>
         </div>
         <QuntityCount quantity={quantity} setQuantity={setQuantity} />
       </div>
-      <Price />
+      <Price
+        id={item.id}
+        actualPrice={item.actualPrice}
+        offPercentage={item.offPercentage}
+      />
     </div>
   );
 }
-function Price() {
+function Price({ id, actualPrice, offPercentage }) {
+  const { removeItem, getItem } = useCart();
+  const { price, quantity } = getItem(id);
+  const [totalPrice, setTotalPrice] = useState(price * quantity);
+  useEffect(() => {
+    setTotalPrice(null);
+    setTotalPrice(price * quantity);
+  }, [quantity, price]);
+  const removeProduct = () => {
+    removeItem(id);
+  };
   return (
     <div className="flex flex-col justify-between text-right">
-      <span className="flex justify-end">
+      <span className="flex justify-end" onClick={removeProduct}>
         <IoMdClose className="opacity-25" />
       </span>
       <span className="flex flex-col">
-        <h3>₹979</h3>
+        <h3>₹{totalPrice}</h3>
         <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">
-          <span className="line-through">₹1399</span>{" "}
-          <span className="font-semibold text-[#49AC56]">30% OFF</span>
+          <span className="line-through">{actualPrice}</span>{" "}
+          <span className="font-semibold text-[#49AC56]">
+            {offPercentage}OFF
+          </span>
         </small>
       </span>
     </div>

@@ -10,7 +10,7 @@ const SectionOne = ({ children }) => {
           <p className="font-lato-regular !text-[1.125rem] text-[#2F2E2D]">
             Our
           </p>
-          <h2 className="font-sansita-regular !text-[3rem] !font-[700]">Collection</h2>
+          <h2 className="font-sansita-regular !text-[3rem] !font-[700]">T-shirt</h2>
         </div>
         <div className="pt-[2.5rem] pb-[3.75rem]">
           <Cards />

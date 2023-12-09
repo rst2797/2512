@@ -5,32 +5,23 @@ import { RiErrorWarningFill } from "react-icons/ri";
 
 const Form = () => {
   const validationSchema = Yup.object({
-    firstName: Yup.string().required(<RiErrorWarningFill />),
-    lastName: Yup.string().required(<RiErrorWarningFill />),
     email: Yup.string()
       .email(<RiErrorWarningFill />)
       .required(<RiErrorWarningFill />),
-    phone: Yup.string()
-      .matches(/^[0-9]+$/, <RiErrorWarningFill />)
-      .min(10)
-      .max(10)
+    password: Yup.string()
+      .min(6, <RiErrorWarningFill />)
+      .max(40, <RiErrorWarningFill />)
       .required(<RiErrorWarningFill />),
-    message: Yup.string().required(<RiErrorWarningFill />),
   });
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
     email: "",
-    phone: "",
-    message: "",
+    password: "",
   };
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      // Handle form submission
-      values = { ...values, name: values.firstName + " " + values.lastName };
       console.log("Form submitted with values:", values);
     },
   });
@@ -54,18 +45,18 @@ const Form = () => {
       </div>
 
       <div className="min-h-[42px] my-4 relative">
-        <label htmlFor="phone">Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="phone"
-          name="phone"
+          id="password"
+          name="password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.phone}
+          value={formik.values.password}
           className="bg-transparent border-b-2 border-white outline-none min-w-[100%]"
         />
-        {formik.touched.phone && formik.errors.phone && (
-          <div className="absolute right-0 top-6">{formik.errors.phone}</div>
+        {formik.touched.password && formik.errors.password && (
+          <div className="absolute right-0 top-6">{formik.errors.password}</div>
         )}
       </div>
       <button

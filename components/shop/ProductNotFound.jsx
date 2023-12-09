@@ -6,15 +6,11 @@ const ProductNotFound = () => {
   const router = useRouter();
   const timeoutId = setTimeout(() => {
     if (time === 0) {
-      console.log("Navigate to home");
       router.push("/");
       return;
     }
     setTime(time - 1);
   }, 1000);
-  //   useEffect(() => {
-  //     if (time === 0) clearTimeout(timeoutId);
-  //   }, [time]);
   return (
     <div className="relative">
       <h1 className="font-bold text-center capitalize flex items-center justify-center h-screen">

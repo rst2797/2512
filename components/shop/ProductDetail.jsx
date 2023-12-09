@@ -15,7 +15,7 @@ const ProductDetail = ({ product }) => {
     <main className="bg-[#f2eadf] pt-[5rem]">
         <Navbar />
       <div className="container border-b-4 border-white px-[0.94rem] pt-8">
-        <Breadcrumb name={product.name} category={product.category} />
+        <Breadcrumb name={product.breadcrumb} category={product.category} />
         <Carousel
           sliderImages={[...product.images]}
           rating={product.rating}
@@ -23,7 +23,7 @@ const ProductDetail = ({ product }) => {
         />
         <h2 className="pt-[2.5rem] text-[1.125rem] text-[#2F2E2D] font-lato-regular !font-[400]">{product.name}</h2>
         <div className="flex items-center">
-          <h2 className="text-[1.125rem] font-lato-regular font-[800]">{product.price}</h2>
+          <h2 className="text-[1.125rem] font-lato-regular font-[800]">₹{product.price}</h2>
           <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">
             <span className="line-through">{product.actualPrice}</span>{" "}
             <span className="font-semibold text-[#49AC56]">{product.offPercentage} OFF</span>
@@ -33,7 +33,7 @@ const ProductDetail = ({ product }) => {
       </div>
       <SelectColor product={product} />
       <SelectSize />
-      <DeliveryDetails />
+      <DeliveryDetails product={product} />
       <SecurityDetails />
       <SimilarProducts />
       <Subscribe/>

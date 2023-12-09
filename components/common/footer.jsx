@@ -23,10 +23,26 @@ const Footer = () => {
           />
         </div>
         <div className="text-[#a66347] flex justify-center py-8">
-          <FaInstagram className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
-          <FaFacebook className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
-          <FaPinterest className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
-          <FaYoutube className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
+          <Link href="https://instagram.com/pacchisbarah?igshid=MTNiYzNiMzkwZA==">
+            <a>
+              <FaInstagram className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
+            </a>
+          </Link>
+          <Link href="https://www.facebook.com/profile.php?id=100092235251751&mibextid=LQQJ4d">
+            <a>
+              <FaFacebook className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
+            </a>
+          </Link>
+          <Link href="https://pin.it/3NeEGst">
+            <a>
+              <FaPinterest className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
+            </a>
+          </Link>
+          <Link href="https://www.youtube.com/@PacchisBarah">
+            <a>
+              <FaYoutube className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />
+            </a>
+          </Link>
         </div>
         <div className="flex justify-around">
           <div className="flex flex-col">
@@ -35,7 +51,7 @@ const Footer = () => {
                 My Account
               </a>
             </Link>
-            <Link href="#" className="py-4">
+            <Link href="/home/delivery-returns" className="py-4">
               <a className="text-black font-semibold no-underline text-right pt-2">
                 Delivery & Return
               </a>
