@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 import Form from "../components/Login/Form";
 import Navbar from "../components/common/header";
 
-const Login = () => {
+const Login = ({successRedirection}) => {
   return (
     <main>
       <div className="container bg-[#f2eadf] min-h-screen">
@@ -14,7 +14,7 @@ const Login = () => {
               Login
             </h1>
           </div>
-          <Form />
+          <Form successRedirection={successRedirection} />
           <div className="flex items-center justify-center my-4">
             <div className="bg-white h-[2px] w-[130px]" />
             <div className="font-semibold px-3">OR</div>
@@ -37,3 +37,12 @@ const Login = () => {
 };
 
 export default Login;
+
+export function getServerSideProps(context) {
+  console.log(context);
+  return {
+    props: {
+      successRedirection: context.query.destination,
+    },
+  };
+}

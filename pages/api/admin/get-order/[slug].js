@@ -1,18 +1,15 @@
-import Order from "../../../schema/orders";
-import { User } from "../../../schema/user";
-import { connection } from "../../../utils/database";
+import Order from "../../../../schema/orders";
+import { connection } from "../../../../utils/database";
 
 export default async function getOrders(req, res) {
   try {
-    const { orderId, userId } = req.body;
+    const orderId = req.query.slug;
     connection();
     const order = await Order.findById(orderId);
-    const user = await User.findById(userId);
     res.status(200).json({
       error: false,
       success: true,
       order,
-      user,
       message: "Orders found successfully...",
     });
   } catch (error) {

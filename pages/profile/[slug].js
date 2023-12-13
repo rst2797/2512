@@ -4,7 +4,49 @@ import Navbar from "../../components/common/header";
 import ProfileOptions from "../../components/Profile/ProfileOptions.jsx";
 import Footer from "../../components/common/footer.jsx";
 import Image from "next/image";
-const Profile = ({name}) => {
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+const Profile = ({ id }) => {
+  const [responseData, setResponseData] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+  };
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("profileImage", selectedImage);
+
+      const response = await axios.post(
+        `/api/upload-profile-picture/${id}`,
+        formData
+      );
+
+      if (response.data.success) {
+        // Reload the user data after successful upload
+        axios.post("/api/get-user", { id }).then((res) => {
+          setResponseData(res.data);
+        });
+      } else {
+        // Handle error
+        console.error(
+          "Upload failed:",
+          response.data.message || "An error occurred"
+        );
+      }
+    } catch (error) {
+      console.error("Error uploading profile picture:", error.message);
+    }
+  };
+  useEffect(() => {
+    axios.post("/api/get-user", { id }).then((res) => {
+      setResponseData(res.data);
+    });
+  }, []);
   return (
     <main className="container min-h-screen bg-[#f2eadf] relative px-[.94rem]">
       <Head>
@@ -36,15 +78,28 @@ const Profile = ({name}) => {
       </Head>
       <Navbar />
       <div className="pt-24 flex flex-col items-center justify-center">
-        <Image
-          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
-          alt=""
-          width={100}
-          height={100}
-          className="rounded-full"
-        />
+        <div className="relative">
+          {selectedImage ? (
+            <Image
+              src={URL.createObjectURL(selectedImage)}
+              alt="Selected Profile Picture"
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+          ) : (
+            <Image
+              src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
+              alt="Profile Picture"
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+          )}
+          <input type="file" accept="image/*" onChange={handleImageChange} className="absolute left-0 right-0 top-0 bottom-0 opacity-0" />
+        </div>
         <h3 className="font-sansita-regular !text-[1.5rem] pt-[.88rem] text-[#2F2E2D]">
-          {name}
+          {responseData.user?.name}
         </h3>
       </div>
       <ProfileOptions />
@@ -58,7 +113,7 @@ export default Profile;
 export async function getServerSideProps(context) {
   return {
     props: {
-      name: context.query.slug,
+      id: context.query.slug,
     },
   };
 }

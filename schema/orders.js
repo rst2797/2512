@@ -78,7 +78,7 @@ const orderSchema = new Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["credit_card", "paypal", "cash_on_delivery"],
+      enum: ["pre_paid", "cash_on_delivery"],
       required: true,
     },
   },

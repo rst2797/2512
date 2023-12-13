@@ -6,12 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
 import { FaMinus } from "react-icons/fa6";
-import 'animate.css';
+import "animate.css";
 import { useCart } from "react-use-cart";
 
 const Navbar = ({ position }) => {
   const [navOpen, setNavOpen] = useState(false);
+  const [user, setUser] = useState({});
   const { isEmpty, totalUniqueItems } = useCart();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
   return (
     <>
       <div className="px-[0.94rem] py-2">
@@ -42,22 +47,33 @@ const Navbar = ({ position }) => {
             </Link>
             <Link href="/cart" className="mb-2">
               <a className="text-[1.25rem] relative">
-                {!isEmpty && <span className="absolute right-2 top-0 text-xs bg-[#A86549] text-white rounded-full w-4 h-4 text-center" >{totalUniqueItems}</span>}
+                {!isEmpty && (
+                  <span className="absolute right-2 top-0 text-xs bg-[#A86549] text-white rounded-full w-4 h-4 text-center">
+                    {totalUniqueItems}
+                  </span>
+                )}
                 <IoBagOutline size={25} className="mx-4" />
               </a>
             </Link>
           </div>
         </nav>
       </div>
-      {navOpen && <NavList navOpen={navOpen} setNavOpen={setNavOpen} />}
+      {navOpen && (
+        <NavList navOpen={navOpen} setNavOpen={setNavOpen} user={user} />
+      )}
     </>
   );
 };
 
 export default Navbar;
 
-const NavList = ({ navOpen, setNavOpen }) => {
+const NavList = ({ navOpen, setNavOpen, user }) => {
   const [aboutOpen, setAboutOpen] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
   return (
     <div
       className={`animate__animated animate__slideInLeft font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}
@@ -85,7 +101,11 @@ const NavList = ({ navOpen, setNavOpen }) => {
           >
             <div className="flex justify-between items-baseline">
               <h3 className="text-[1.25rem]">About Us</h3>
-              {!aboutOpen ? <IoMdAdd className="text-[1.25rem]" /> : <FaMinus className="text-[1rem]"/>}
+              {!aboutOpen ? (
+                <IoMdAdd className="text-[1.25rem]" />
+              ) : (
+                <FaMinus className="text-[1rem]" />
+              )}
             </div>
             {aboutOpen && (
               <ul className="text-[0.875rem] pl-4">
@@ -102,9 +122,15 @@ const NavList = ({ navOpen, setNavOpen }) => {
             )}
           </li>
           <li className="my-4 px-[1.88rem]">
-            <Link href="/auth">
-              <a className="text-[1.25rem]">My Account</a>
-            </Link>
+            {user ? (
+              <Link href={`/profile/${user._id}`}>
+                <a className="text-[1.25rem]">My Profile</a>
+              </Link>
+            ) : (
+              <Link href="/auth">
+                <a className="text-[1.25rem]">My Account</a>
+              </Link>
+            )}
           </li>
           <li className="my-4 px-[1.88rem]">
             <Link href="/contact">
@@ -114,13 +140,22 @@ const NavList = ({ navOpen, setNavOpen }) => {
         </ul>
       </div>
       <div className="mb-[5rem] flex justify-center">
-        <Link href="/login">
-          <a>
-            <button className="w-[15rem] py-[0.5625rem] text-white bg-[#A86549]">
-              Login
-            </button>
-          </a>
-        </Link>
+        {user ? (
+          <button
+            className="w-[15rem] py-[0.5625rem] text-white bg-[#A86549]"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link href="/login?destination=/">
+            <a>
+              <button className="w-[15rem] py-[0.5625rem] text-white bg-[#A86549]">
+                Login
+              </button>
+            </a>
+          </Link>
+        )}
       </div>
     </div>
   );

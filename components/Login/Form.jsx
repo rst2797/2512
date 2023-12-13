@@ -2,8 +2,12 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { RiErrorWarningFill } from "react-icons/ri";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Form = () => {
+const Form = ({successRedirection}) => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email(<RiErrorWarningFill />)
@@ -18,13 +22,31 @@ const Form = () => {
     email: "",
     password: "",
   };
+
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Form submitted with values:", values);
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post("/api/login", values);
+
+        if (response.data.success) {
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          localStorage.setItem("token", JSON.stringify(response.data.token));
+          toast.success(response.data.message);
+          console.log("" + successRedirection);
+          router.push("" + successRedirection);
+        } else {
+          toast.error(response.data.message || "An error occurred");
+        }
+      } catch (error) {
+        toast.error("An error occurred");
+      }
     },
   });
+
   return (
     <form onSubmit={formik.handleSubmit} className="px-2">
       <div className="min-h-[42px] my-4 relative">
@@ -65,6 +87,17 @@ const Form = () => {
       >
         Submit
       </button>
+      <div className="p-4">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          style={{ marginBottom: "1rem" }}
+        />
+      </div>
     </form>
   );
 };

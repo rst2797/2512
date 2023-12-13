@@ -5,11 +5,11 @@ export default async function updateOrderStatus(req, res) {
   try {
     connection();
 
-    const { orderId, status } = req.body; // Assuming you pass the new status in the request body
+    const { id, status } = req.body; // Assuming you pass the new status in the request body
 
     // Find the order by ID and update its status
     const updatedOrder = await Order.findByIdAndUpdate(
-      orderId,
+      id,
       { $set: { status } },
       { new: true }
     );

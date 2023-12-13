@@ -10,6 +10,10 @@ import Link from "next/link";
 
 const Cart = () => {
   const { items, isEmpty } = useCart();
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
   return (
     <div className="relative">
       <Head>
@@ -52,20 +56,34 @@ const Cart = () => {
           ) : (
             <>
               {items.map((ele) => (
-                <Product key={ele.id} item={ele} />
+                <Product key={ele.id} item={ele} disableRemove={false} />
               ))}
             </>
           )}
         </div>
       </div>
-      {!isEmpty && <Checkout items={items} />}
+      {!isEmpty && (
+        <>
+          {user ? (
+            <Checkout items={items} user={user} />
+          ) : (
+            <Link href="/login?destination=/cart">
+              <a className="absolute bottom-0 left-0 right-0 py-[1rem] px-[0.94rem]">
+                <button className="w-full py-[0.5625rem] font-bold text-white bg-[#A86549]">
+                  Login to checkout
+                </button>
+              </a>
+            </Link>
+          )}
+        </>
+      )}
     </div>
   );
 };
 
 export default Cart;
 
-function Product({ item }) {
+export function Product({ item, disableRemove }) {
   const { items, updateItemQuantity, getItem } = useCart();
 
   const [quantity, setQuantity] = useState(getItem(item.id).quantity);
@@ -81,17 +99,19 @@ function Product({ item }) {
           <h2 className="font-lato-regular !text-[1rem]">{item.name}</h2>
           <span className="font-lato-regular !text-[.75rem]">Size: Medium</span>
         </div>
-        <QuntityCount quantity={quantity} setQuantity={setQuantity} />
+        {!disableRemove && <QuntityCount quantity={quantity} setQuantity={setQuantity} />}
+        {disableRemove && <span className="font-lato-regular !text-[.75rem]">Quantity: {quantity}</span>}
       </div>
       <Price
         id={item.id}
         actualPrice={item.actualPrice}
         offPercentage={item.offPercentage}
+        disableRemove={disableRemove}
       />
     </div>
   );
 }
-function Price({ id, actualPrice, offPercentage }) {
+function Price({ id, actualPrice, offPercentage, disableRemove }) {
   const { removeItem, getItem } = useCart();
   const { price, quantity } = getItem(id);
   const [totalPrice, setTotalPrice] = useState(price * quantity);
@@ -104,9 +124,11 @@ function Price({ id, actualPrice, offPercentage }) {
   };
   return (
     <div className="flex flex-col justify-between text-right">
-      <span className="flex justify-end" onClick={removeProduct}>
-        <IoMdClose className="opacity-25" />
-      </span>
+      {!disableRemove && (
+        <span className="flex justify-end" onClick={removeProduct}>
+          <IoMdClose className="opacity-25" />
+        </span>
+      )}
       <span className="flex flex-col">
         <h3>₹{totalPrice}</h3>
         <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">

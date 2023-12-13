@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const SectionTwo = () => {
@@ -7,7 +8,9 @@ const SectionTwo = () => {
         Empowering You & the Planet
       </h1>
       <p className="font-lato-regular !leading-5 !text-[16px] lg:text-2xl">
-        A story of sustainability, creativity, and craftsmanship.
+        <Link href="/our-story">
+          <a>A story of sustainability, creativity, and craftsmanship.</a>
+        </Link>
       </p>
     </div>
   );
