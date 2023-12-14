@@ -157,8 +157,8 @@ const OrderDetails = ({ order, user }) => {
 export default OrderDetails;
 
 export async function getServerSideProps(context) {
-  const orderRes = await axios.get(`http://localhost:4545/api/admin/get-order/${context.query.slug[0]}`)
-  const userRes = await axios.get(`http://localhost:4545/api/admin/get-user/${context.query.slug[1]}`)
+  const orderRes = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-order/${context.query.slug[0]}`)
+  const userRes = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-user/${context.query.slug[1]}`)
 
   return {
     props: {

@@ -49,7 +49,7 @@ const Home = ({products}) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const res = await axios.get("http://localhost:4545/api/get-all-products");
+  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-all-products`);
   console.log(res.data);
   return {
     props: {

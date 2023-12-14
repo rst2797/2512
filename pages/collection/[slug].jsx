@@ -40,7 +40,7 @@ const TShirt = ({ product }) => {
 export default memo(TShirt);
 
 export async function getServerSideProps({ query }) {
-  const res = await axios.get(`http://localhost:4545/api/get-product/${query.slug}`)
+  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-product/${query.slug}`)
   const product = res.data.product;
   return {
     props: {
