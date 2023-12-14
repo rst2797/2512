@@ -25,6 +25,7 @@ export default async function Payment(req, res) {
     return res.status(500).json({
       error: true,
       success: false,
+      catchedError: error,
       message: "Error in creating payment",
     });
   }

@@ -32,11 +32,6 @@
 // };
 // export default MultipleItems;
 
-
-
-
-
-
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -44,9 +39,18 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { mans_collection } from "../../utils/products";
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import axios from "axios";
+import { InfinitySpin, MutatingDots } from "react-loader-spinner";
 
-export default function SectionThree({ sliderImages, rating, numberOfRatings }) {
+export default function SectionThree() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [productImages, setProductImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    axios.get("/api/get-all-products").then((res) => {
+      setProductImages([...res.data.products]);
+    });
+  }, []);
   useEffect(() => {}, [currentSlide]);
   const handleSlideChange = (swiper) => {
     setCurrentSlide(0);
@@ -62,22 +66,30 @@ export default function SectionThree({ sliderImages, rating, numberOfRatings }) 
         onSlideChange={handleSlideChange}
         className="mySwiper"
       >
-        {sliderImages.map((image, index) => (
+        {productImages.map((image, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={image}
+              src={image.images[1]}
               alt={`2512 | carousel image ${index + 1}`}
               width={400}
               height={500}
               className="object-cover"
+              onLoad={() => setLoading(false)}
             />
           </SwiperSlide>
         ))}
       </Swiper>
-     {rating && <span className="flex items-center bg-white max-w-fit p-1 rounded-md font-semibold drop-shadow-lg absolute bottom-8 right-6">
-        {rating} <MdOutlineStarPurple500 className="text-[#FFD981]" /> |{" "}
-        {numberOfRatings}
-      </span>}
+      {loading && (
+        <div className="h-[500px] flex justify-center items-center">
+          <InfinitySpin width="200" color="#A86549" />
+        </div>
+      )}
+      {/* {rating && (
+        <span className="flex items-center bg-white max-w-fit p-1 rounded-md font-semibold drop-shadow-lg absolute bottom-8 right-6">
+          {rating} <MdOutlineStarPurple500 className="text-[#FFD981]" /> |{" "}
+          {numberOfRatings}
+        </span>
+      )} */}
     </div>
   );
 }

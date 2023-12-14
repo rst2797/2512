@@ -34,6 +34,7 @@ const Viewcheckout = () => {
       totalAmount: totalPrice,
       paymentMethod,
     };
+    console.log(order);
     axios.post("/api/place-order", order).then((res) => {
       if (res.data.success) {
         router.push("/delivery-and-returns");

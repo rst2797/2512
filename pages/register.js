@@ -2,6 +2,7 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import Form from "../components/Register/Form";
 import Navbar from "../components/common/header";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -29,6 +30,18 @@ const Login = () => {
               cookiePolicy={"single_host_origin"}
               style={{ width: "330px" }}
             />
+          </div>
+          <div className="text-center">
+            <Link href="/register">
+              <a>
+                <span className="opacity-50">
+                  Already have an account?&nbsp;
+                </span>
+                <span className="text-blue-500 font-bold opacity-100">
+                  Login here!
+                </span>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

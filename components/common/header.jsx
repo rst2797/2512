@@ -79,7 +79,7 @@ const NavList = ({ navOpen, setNavOpen, user }) => {
       className={`animate__animated animate__slideInLeft font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}
     >
       <div className="">
-        <div className="flex flex-end relative top-10 left-64 right-0 text-[2rem]">
+        <div className="flex flex-end relative top-10 left-64 right-4 text-[2rem]">
           <IoMdClose onClick={() => setNavOpen(false)} />
         </div>
         <ul className="flex flex-col mt-12 px-4">

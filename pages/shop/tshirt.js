@@ -5,8 +5,9 @@ import Footer from "../../components/common/footer.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
 import SectionTwo from "../../components/Category/SectionTwo.jsx";
 import SectionThree from "../../components/Category/SectionThree.jsx";
+import axios from "axios";
 
-const Home = () => {
+const Home = ({products}) => {
   return (
     <main>
       <Head>
@@ -34,7 +35,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container bg-[#f2eadf] relative">
-        <SectionOne>
+        <SectionOne products={products}>
           <Navbar />
         </SectionOne>
         <SectionTwo />
@@ -46,3 +47,13 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const res = await axios.get("http://localhost:4545/api/get-all-products");
+  console.log(res.data);
+  return {
+    props: {
+      products: res.data.products,
+    },
+  };
+};

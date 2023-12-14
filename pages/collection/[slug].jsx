@@ -1,19 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import {
-  live_in_moment_tshirt_black,
-  live_in_moment_tshirt_white,
-  wild_thought_purple,
-  cultivate_simple_joy,
-  mindful_living,
-  monogram_black,
-  monogram_rust,
-  monogram_white,
-  peace_fuldispute,
-
-} from "../../utils/products";
 import ProductNotFound from "../../components/shop/ProductNotFound";
 import ProductDetail from "../../components/shop/ProductDetail.jsx";
+import axios from "axios";
+import { memo } from "react";
 
 const TShirt = ({ product }) => {
   return (
@@ -47,23 +37,14 @@ const TShirt = ({ product }) => {
     </main>
   );
 };
-export default TShirt;
+export default memo(TShirt);
 
 export async function getServerSideProps({ query }) {
-  const products = {
-    live_in_moment_tshirt_black,
-    live_in_moment_tshirt_white,
-    wild_thought_purple,
-    cultivate_simple_joy,
-    mindful_living,
-    monogram_black,
-    monogram_rust,
-    monogram_white,
-    peace_fuldispute,
-  };
+  const res = await axios.get(`http://localhost:4545/api/get-product/${query.slug}`)
+  const product = res.data.product;
   return {
     props: {
-      product: products[query.slug] ?? null,
+      product: {...product, id: product._id},
     },
   };
 }

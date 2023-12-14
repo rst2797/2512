@@ -1,13 +1,11 @@
-import Joi from "joi";
-import bcrypt from "bcrypt";
-import { User } from "../../schema/user.js";
-import { connection } from "../../utils/database";
 import Order from "../../schema/orders.js";
+import {connection} from "../../utils/database.js"
 
-export default async function Register(req, res) {
+export default async function PlaceOrder(req, res) {
   try {
     const { userId, items, totalAmount, paymentMethod } = req.body;
 
+    await connection()
     const order = new Order({
       user: userId,
       items,

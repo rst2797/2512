@@ -1,7 +1,7 @@
 import React from "react";
 import Cards from "../Category/ProductCards";
 
-const SectionOne = ({ children }) => {
+const SectionOne = ({ children, products }) => {
   return (
     <>
       {children}
@@ -13,7 +13,7 @@ const SectionOne = ({ children }) => {
           <h2 className="font-sansita-regular !text-[3rem] !font-[700]">T-shirt</h2>
         </div>
         <div className="pt-[2.5rem] pb-[3.75rem]">
-          <Cards />
+          <Cards products={products} />
         </div>
       </div>
     </>
