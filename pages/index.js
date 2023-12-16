@@ -42,8 +42,8 @@ const Home = () => {
         <link rel="canonical" href="https://www.2512.in/" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container min-h-screen bg-[#f2eadf] relative">
-        <div className="container sticky top-2 left-0 right-0 z-50 w-full drop-shadow-md text-[#A86549] px-[0.94rem]">
+      <div className="container lg:mx-0 min-h-screen bg-[#f2eadf] relative">
+        <div className="block lg:hidden container sticky top-2 left-0 right-0 z-50 w-full drop-shadow-md text-[#A86549] px-[0.94rem]">
           <Marquee
             pauseOnHover
             className="backdrop-sepia px-6 py-4 rounded-md font-semibold"
@@ -54,9 +54,10 @@ const Home = () => {
         <Navbar position={true} />
         <SectionOne />
         <SectionTwo />
+          
         <SectionThree />
         <SectionFour />
-        <SectionFive />
+        <SectionFive /> 
         <SectionSix />
         <SectionSeven />
         <Footer />

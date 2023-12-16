@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionSeven = () => {
   return (
-    <div className="bg-[#A86549] px-4 py-[1.125rem]">
+    <div className="bg-[#A86549] px-4 py-[1.125rem] lg:hidden">
       <p className="text-white text-xs text-center">
         Subscribe to our newsletter below and never miss the latest product or
         an exclusive offer.

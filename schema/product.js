@@ -45,6 +45,5 @@ export const Product =
     },
     quantity: {
       type: Number,
-      required: true,
     },
   });

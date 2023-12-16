@@ -18,6 +18,10 @@
   font-family: Lato-Bold;
   src: url('/fonts/lato/Lato-Bold.ttf'); 
 }
+@font-face { 
+  font-family: StayDreaming;
+  src: url('/fonts/stay_dreaming/Stay-Dreaming.otf'); 
+}
 
 .font-lato-bold{
   font-family: Lato-Bold;
@@ -59,6 +63,9 @@ a {
   font-size: 1.3rem;
   line-height: 1.5rem;
 }
+.font-stay-dreaming{
+  font-family: StayDreaming;
+}
 .google-btn button{
   width: 330px !important;
   display: flex;
@@ -66,7 +73,7 @@ a {
 }
 
 .drop-shadow-custom{
-  text-shadow: 5px 5px 20px white;
+  text-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
 }
 
 .input-focus{
@@ -134,4 +141,10 @@ select:-webkit-autofill:focus {
 .admin-logo{
   font-family: sans-serif;
   font-weight: 900;
+}
+
+@media screen and (max-width: 600px) {
+  .drop-shadow-custom{
+    text-shadow: 5px 5px 20px white;
+  }
 }

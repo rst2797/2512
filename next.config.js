@@ -14,7 +14,7 @@ module.exports = {
   swcMinify: true,
   reactStrictMode: true,
   images: {
-    domains: ["s3.eu-north-1.amazonaws.com"],
+    domains: ["s3.eu-north-1.amazonaws.com", "www.instagram.com"],
   },
   
 };

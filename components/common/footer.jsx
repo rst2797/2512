@@ -11,7 +11,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f2eadf] w-full py-8">
+    <footer className="bg-[#f2eadf] lg:bg-[#a66347] w-full py-8">
       <div className="container">
         <div className="flex justify-center">
           <Image
@@ -22,7 +22,7 @@ const Footer = () => {
             height={55}
           />
         </div>
-        <div className="text-[#a66347] flex justify-center py-8">
+        <div className="text-[#a66347] lg:text-[#f2eadf] flex justify-center py-8">
           <Link href="https://instagram.com/pacchisbarah?igshid=MTNiYzNiMzkwZA==">
             <a>
               <FaInstagram className="bg-white p-2 border-2 border-[#a66347] text-5xl mx-2" />

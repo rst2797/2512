@@ -65,7 +65,7 @@ export default function SectionThree() {
     setCurrentSlide(swiper.activeIndex);
   };
   return (
-    <div className="px-[.945rem]">
+    <div className="lg:hidden px-[.945rem]">
       <Swiper
         slidesPerView={"auto"}
         centeredSlides={true}
