@@ -5,7 +5,7 @@ import { IoArrowForward } from "react-icons/io5";
 
 const SectionFive = () => {
   return (
-    <div className="relative bg-[#A86549] min-h-screen">
+    <div className="relative bg-[#A86549] min-h-[90vh]">
       <video
         muted
         loop
