@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionThree = () => {
   return ( 
-    <div className="px-4 py-12 bg-[#F4E9DF]">
+    <div className="px-4 py-12 bg-[#F4E9DF] lg:hidden">
       <p className="py-3 text-xl font-semibold font-lato-regular text-[#2F2E2D]">Where Simplicity Inspires Serenity </p>{" "}
       <p className="py-3 text-xl font-semibold font-lato-regular text-[#2F2E2D]">
         Kanso, a timeless Japanese aesthetic, celebrates simplicity, purity, and

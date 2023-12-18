@@ -46,4 +46,7 @@ export const Product =
     quantity: {
       type: Number,
     },
+    selling_price: { type: Number, required: true },
+    sku: { type: String, required: true },
+    units: { type: String, default: "1" },
   });

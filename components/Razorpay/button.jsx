@@ -1,16 +1,17 @@
 import axios from "axios";
 import React from "react";
 
-const Button = ({ totalPrice }) => {
+const Button = ({ handlePPCheckout, totalPrice }) => {
   const handleCheckout = async () => {
     try {
-      const response = await axios.post("/api/payment", {
-        amount: totalPrice * 100,
+      console.log(process.env.NEXT_API_BASE_URL)
+      const response = await axios.post(`/api/payment`, {
+        amount: totalPrice,
         currency: "INR",
         receipt: "qwsaql",
       });
       var options = {
-        key: "rzp_test_QEgVnUZVvV6gcc",
+        key: "rzp_test_PcEzfOEz9mnsaC",
         subscription_id: response.data.order.id,
         name: "Acme Corp.",
         description: "Monthly Test Plan",
@@ -44,7 +45,7 @@ const Button = ({ totalPrice }) => {
   };
   return (
 <button
-  onClick={handleCheckout}
+  onClick={handlePPCheckout}
   className="rounded-lg bg-[#A86549] text-white font-bold w-full py-3 my-2 mx-2"
 >
   Pay Now - ₹{totalPrice}

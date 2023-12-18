@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const Form = ({successRedirection}) => {
   const validationSchema = Yup.object({
@@ -35,6 +36,7 @@ const Form = ({successRedirection}) => {
         if (response.data.success) {
           localStorage.setItem("user", JSON.stringify(response.data.user));
           localStorage.setItem("token", JSON.stringify(response.data.token));
+          Cookies.set("token", JSON.stringify(response.data.token), { expires: 2 }); 
           toast.success(response.data.message);
           console.log("" + successRedirection);
           router.push("" + successRedirection);

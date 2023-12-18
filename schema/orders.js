@@ -55,6 +55,18 @@ const orderItemSchema = new Schema({
     type: Number,
     required: true,
   },
+  selling_price: {
+    type: Number,
+    required: true,
+  },
+  sku: {
+    type: String,
+    required: true,
+  },
+  units: {
+    type: String,
+    default: "1",
+  },
 });
 const orderSchema = new Schema(
   {

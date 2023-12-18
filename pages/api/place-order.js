@@ -12,7 +12,9 @@ export default async function PlaceOrder(req, res) {
       totalAmount,
       paymentMethod,
     });
+
     await order.save();
+    // console.log(order)
     return res.status(200).json({
       error: false,
       success: true,

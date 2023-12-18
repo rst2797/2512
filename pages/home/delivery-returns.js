@@ -96,7 +96,7 @@ const Detail = () => {
   };
 
   return (
-    <main className="px-[.94rem] min-h-screen bg-[#f2eadf]">
+    <main className="min-h-screen bg-[#f2eadf]">
       <Head>
         <title>
           Sustainable & Stylish Clothing | 2512: Organic Gender-Inclusive
@@ -125,7 +125,7 @@ const Detail = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="px-[.94rem] text-[#2F2E2D]">
+      <div className="px-[.94rem] lg:px-20 text-[#2F2E2D]">
         <BreadCrumb name="Home" category="Delivery, Returns & Exchanges" />
         <div className="border-b-2 border-white">
           <h1 className="font-sansita-regular !text-[1.5rem] py-0">

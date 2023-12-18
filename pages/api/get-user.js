@@ -1,7 +1,8 @@
+import authMiddleware from "../../middleware/auth.js";
 import { User } from "../../schema/user.js";
 import { connection } from "../../utils/database";
 
-export default async function getUser(req, res) {
+async function getUser(req, res) {
   try {
     const { id } = req.body;
     await connection();
@@ -27,3 +28,5 @@ export default async function getUser(req, res) {
     });
   }
 }
+
+export default authMiddleware(getUser)

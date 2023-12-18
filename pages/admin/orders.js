@@ -69,7 +69,7 @@ const Orders = ({ orders }) => {
               {currentOrders?.map((ele, index) => (
                 <tr
                   key={ele.id}
-                  className="focus:bg-red-500 focus:text-white border-b-2 border-black"
+                  className="focus:text-white border-b-2 border-black hover:bg-blue-200 cursor-pointer"
                 >
                   <td className="border-x-2 border-black px-4 w-fit">
                     {index + 1}

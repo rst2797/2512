@@ -33,8 +33,8 @@ a {
 
 * {
   box-sizing: border-box;
+  transition: all 0.5s;
 }
-
 .container{
   max-width: 14450px;
   width: 100%;
@@ -142,9 +142,24 @@ select:-webkit-autofill:focus {
   font-family: sans-serif;
   font-weight: 900;
 }
+.quotes{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: -2rem;
+}
 
 @media screen and (max-width: 600px) {
   .drop-shadow-custom{
     text-shadow: 5px 5px 20px white;
   }
+}
+
+.swiper-button-prev{
+  margin-left: 2rem;
+  color: red;
+}
+.swiper-button-next{
+  margin-right: 2rem;
+}
+.swiper-button-prev::after, .swiper-button-next::after{
+  font-size: 0rem !important;
 }

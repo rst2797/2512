@@ -16,8 +16,9 @@ const Viewcheckout = () => {
   const { items } = useCart();
 
   useEffect(() => {}, [paymentMethod]);
+  const cookies = new Cookies();
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("user")));
+    setUserData(JSON.parse(cookies.get("user")));
   }, []);
   useEffect(() => {
     setTotalPrice(null);
@@ -27,20 +28,60 @@ const Viewcheckout = () => {
   }, [items]);
   const { emptyCart } = useCart();
   const router = useRouter();
-  const handleCheckout = () => {
+  const handleCODCheckout = () => {
     const order = {
       items,
       userId: userData._id,
       totalAmount: totalPrice,
       paymentMethod,
     };
-    console.log(order);
     axios.post("/api/place-order", order).then((res) => {
       if (res.data.success) {
-        router.push("/delivery-and-returns");
+        router.push(`/order/${res.data.orderId}/${userData._id}/${totalPrice}`);
         emptyCart();
       }
     });
+  };
+  const handlePPCheckout = async () => {
+    try {
+      console.log(process.env.NEXT_API_BASE_URL)
+      const response = await axios.post(`/api/payment`, {
+        amount: totalPrice,
+        currency: "INR",
+        receipt: "qwsaql",
+      });
+      var options = {
+        key: "rzp_test_PcEzfOEz9mnsaC",
+        subscription_id: response.data.order.id,
+        name: "Acme Corp.",
+        description: "Monthly Test Plan",
+        image: "/your_logo.jpg",
+        handler: function (response) {
+          alert(response.razorpay_payment_id),
+            alert(response.razorpay_subscription_id),
+            alert(response.razorpay_signature);
+        },
+        prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "+919876543210",
+        },
+        notes: {
+          note_key_1: "Tea. Earl Grey. Hot",
+          note_key_2: "Make it so.",
+        },
+        theme: {
+          color: "#F37254",
+        },
+      };
+      var rzp1 = new window.Razorpay(options);
+      rzp1.on("payment.failed", (res) => {
+        alert(res.error.code);
+      });
+      rzp1.open();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -107,11 +148,11 @@ const Viewcheckout = () => {
         <div className="fixed bottom-0 py-4 w-full flex justify-center bg-[#ffffffb8]">
           {paymentMethod &&
             (paymentMethod === "pre_paid" ? (
-              <Button totalPrice={totalPrice} />
+              <Button handlePPCheckout={handlePPCheckout} totalPrice={totalPrice} />
             ) : (
               <button
                 className="rounded-lg bg-[#A86549] text-white font-bold w-[80%] py-3 my-2 mx-2"
-                onClick={handleCheckout}
+                onClick={handleCODCheckout}
               >
                 Place Order - ₹{totalPrice}
               </button>
@@ -123,3 +164,15 @@ const Viewcheckout = () => {
 };
 
 export default Viewcheckout;
+
+export const getServerSideProps = async () => {
+  const response = await axios.post(`${process.env.NEXT_API_BASE_URL}/api/payment`, {
+    amount: 9500,
+    currency: "INR",
+    receipt: "receipt",
+  });
+  console.log(response.data);
+  return {
+    props: {},
+  };
+};

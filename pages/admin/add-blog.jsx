@@ -9,9 +9,11 @@ import {
 import draftToHtml from "draftjs-to-html";
 import { FaRegImage } from "react-icons/fa6";
 import Image from "next/image";
+import Link from "next/link";
 
 const TextEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [blogTitle, setTitle] = useState("");
   const [blogHtml, setBlogHtml] = useState("");
   const [image, setImage] = useState(
     "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
@@ -64,15 +66,25 @@ const TextEditor = () => {
     }
   };
   const uploadHandler = () => {
-    setBlogHtml(""+draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    setBlogHtml(
+      "" + draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    );
   };
+  useEffect(() => {
+    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    console.log(blogTitle);
+  }, [blogHtml, blogTitle]);
 
   return (
     <div>
-      <div className="flex justify-between mx-[10vw] mt-4">
-        <h1 className="flex flex-col text-center font-bold">
-          <span className="text-3xl">2512</span>
-          <small className="!text-xs">PACCHIS BARAH</small>
+      <div className="flex justify-between mx-[10vw] mt-4 ">
+        <h1 className="font-extrabold text-[#A86549]">
+          <Link href="/admin/orders">
+            <a className="flex flex-col text-center">
+              <span className="text-3xl">2512</span>
+              <small className="!text-xs">PACCHIS BARAH</small>
+            </a>
+          </Link>
         </h1>
         <div className="flex justify-center">
           <button
@@ -108,31 +120,23 @@ const TextEditor = () => {
         </button>
       </div>
       <div className="mx-[20vw] my-12 min-h-screen shadow-[0_35px_60px_8px_rgba(0,0,0,0.1)] p-12 border-[1px] border-[#6d6d6d]">
+        <input
+          type="text"
+          placeholder="Blog title..."
+          className="border-b-2 border-gray-500 placeholder:text-5xl text-5xl font-bold capitalize mb-8 py-2 active:outline focus:outline-none w-full"
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <div className="max-w-[60vw]">
           <Editor
             editorState={editorState}
             handleKeyCommand={handleKeyCommand}
             onChange={setEditorState}
-            toolbar={{
-              options: ["image"],
-              image: {
-                uploadEnabled: true,
-                previewImage: true,
-                inputAccept:
-                  "image/gif,image/jpeg,image/jpg,image/png,image/svg",
-                alt: { present: false, mandatory: false },
-                defaultSize: {
-                  height: "auto",
-                  width: "auto",
-                },
-              },
-            }}
           />
         </div>
       </div>
-      {image && (
+      {/* {image && (
         <Image src={image} alt="" width={400} height={500} id="image-preview" />
-      )}
+      )} */}
     </div>
   );
 };

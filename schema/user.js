@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 export const User =
   mongoose.models.User ||
   mongoose.model("User", {
+    role: {
+      type: String,
+      required: true,
+      default: "USER"
+    },
     name: {
       type: String,
       required: true,

@@ -12,7 +12,7 @@ const Cart = () => {
   const { items, isEmpty } = useCart();
   const [user, setUser] = useState(null);
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
+    setUser(JSON.parse(Cookie.get("user")));
   }, []);
   return (
     <div className="relative">

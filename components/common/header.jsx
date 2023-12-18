@@ -9,19 +9,24 @@ import { FaMinus } from "react-icons/fa6";
 import "animate.css";
 import { useCart } from "react-use-cart";
 import { FaRegUser } from "react-icons/fa6";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Navbar = ({ position }) => {
   const [navOpen, setNavOpen] = useState(false);
-  const [user, setUser] = useState({});
+  const [openMenu, setOpenMenu] = useState(false);
+  const [user, setUser] = useState(false);
   const { isEmpty, totalUniqueItems } = useCart();
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
+  const router = useRouter();
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    window.location.reload();
+    Cookies.remove("token");
+    router.push("/login?destination=/");
   };
   return (
     <>
@@ -67,10 +72,34 @@ const Navbar = ({ position }) => {
                     </a>
                   </Link>
                 </li>
-                <li className="mx-[1.5rem] my-2 md:my-0">
-                    <span className="!text-[1rem] font-bold font-lato-regular">
-                      About Us
-                    </span>
+                <li className="mx-[1.5rem] my-2 md:my-0 relative">
+                  <span
+                    className="!text-[1rem] font-bold font-lato-regular cursor-pointer select-none "
+                    onClick={() => setOpenMenu(!openMenu)}
+                  >
+                    About Us
+                  </span>
+                  {openMenu && (
+                    <div className="animate__animated animate__zoomIn bg-[#e9e0d9] absolute top-12 p-6 font-semibold">
+                      <ul>
+                        <li>
+                          <Link href="/our-story">
+                            <a className="select-none">Our Story</a>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/sustainability">
+                            <a className="select-none">Sustainability</a>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/kanso">
+                            <a className="select-none">Kanso</a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </li>
                 <li className="mx-[1.5rem] my-2 md:my-0">
                   <Link href="/contactus">
@@ -81,8 +110,12 @@ const Navbar = ({ position }) => {
                 </li>
               </ul>
             </div>
+
             <div className="flex items-center justify-evenly">
-              <Link href="/auth" className="mb-2">
+              <Link
+                href={user ? `/profile/${user._id}` : "/auth"}
+                className="mb-2"
+              >
                 <a className="lg:text-[1.25rem] relative hidden lg:block">
                   <FaRegUser size={25} className="mx-4" />
                 </a>
@@ -100,7 +133,7 @@ const Navbar = ({ position }) => {
               <div className="justify-center hidden lg:flex ml-4">
                 {user ? (
                   <button
-                    className="py-[0.625rem] px-[1.625rem] text-white bg-[#A86549] rounded-lg"
+                    className="py-[0.5rem] px-[1.25rem] text-xs text-white bg-[#A86549] rounded-lg"
                     onClick={handleLogout}
                   >
                     Logout
@@ -108,7 +141,7 @@ const Navbar = ({ position }) => {
                 ) : (
                   <Link href="/login?destination=/">
                     <a>
-                      <button className="py-[0.625rem] px-[1.625rem] text-white bg-[#A86549] rounded-lg">
+                      <button className="py-[0.5rem] px-[1.25rem] text-xs text-white bg-[#A86549] rounded-lg">
                         Login
                       </button>
                     </a>
@@ -120,7 +153,12 @@ const Navbar = ({ position }) => {
         </nav>
       </div>
       {navOpen && (
-        <NavList navOpen={navOpen} setNavOpen={setNavOpen} user={user} />
+        <NavList
+          navOpen={navOpen}
+          setNavOpen={setNavOpen}
+          user={user}
+          handleLogout={handleLogout}
+        />
       )}
     </>
   );
@@ -128,13 +166,8 @@ const Navbar = ({ position }) => {
 
 export default Navbar;
 
-const NavList = ({ navOpen, setNavOpen, user }) => {
+const NavList = ({ navOpen, setNavOpen, user, handleLogout }) => {
   const [aboutOpen, setAboutOpen] = useState(false);
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
   return (
     <div
       className={`animate__animated animate__slideInLeft font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}

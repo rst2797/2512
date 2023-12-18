@@ -48,7 +48,6 @@ const Login = ({ successRedirection }) => {
 export default Login;
 
 export function getServerSideProps(context) {
-  console.log(context);
   return {
     props: {
       successRedirection: context.query.destination,

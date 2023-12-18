@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
@@ -7,7 +7,15 @@ import SectionTwo from "../../components/Category/SectionTwo.jsx";
 import SectionThree from "../../components/Category/SectionThree.jsx";
 import axios from "axios";
 
-const Home = ({products}) => {
+const Home = ({ products }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      setLoading(false);
+    }
+  }, [products]);
+
   return (
     <main>
       <Head>
@@ -34,14 +42,18 @@ const Home = ({products}) => {
         <link rel="canonical" href="https://www.2512.in/collection" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container bg-[#f2eadf] relative">
-        <SectionOne products={products}>
-          <Navbar />
-        </SectionOne>
-        <SectionTwo />
-        <SectionThree />
-        <Footer />
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="container bg-[#f2eadf] relative">
+          <SectionOne products={products}>
+            <Navbar />
+          </SectionOne>
+          <SectionTwo />
+          <SectionThree />
+          <Footer />
+        </div>
+      )}
     </main>
   );
 };
@@ -49,11 +61,22 @@ const Home = ({products}) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-all-products`);
-  console.log(res.data);
-  return {
-    props: {
-      products: res.data.products,
-    },
-  };
-};
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+    );
+    return {
+      props: {
+        products: res.data.products,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
+}

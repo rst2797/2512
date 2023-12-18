@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionTwo = () => {
   return (
-    <div className="relative px-4">
+    <div className="relative px-4 lg:hidden">
       <p className="text-left mb-6 mt-6 text-lg  font-lato-bold">
         Our brand is built upon a passion for sustainable fashion and a
         commitment to leaving a positive impact on the world. Through certified

@@ -6,8 +6,14 @@ export default async function Payment(req, res) {
       key_id: process.env.PAYMENT_KEY,
       key_secret: process.env.PAYMENT_SECRET,
     });
-    const options = req.body;
+    const options = JSON.parse(req.body);
     const order = await razorpay.orders.create(options);
+    console.log({
+      error: false,
+      success: true,
+      message: "Payment created successfully...",
+      order,
+    });
     if (!order) {
       return res.status(500).json({
         error: true,
