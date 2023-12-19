@@ -5,21 +5,27 @@ import { getLocationByPostalCode } from "../../utils/getLocationByPostalCode";
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 import { useRouter } from "next/router";
+import Cookies from "cookies";
 
-const Order = ({ totalPrice, orderId, userId }) => {
-  const router = useRouter()
+const Order = ({ totalPrice, orderId, userId, token }) => {
+  const router = useRouter();
   const shipOrder = async () => {
-    const userResponse = await axios.get(`/api/admin/get-user/${userId}`);
+    const userResponse = await axios.get(`/api/admin/get-user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const orderResponse = await axios.get(`/api/admin/get-order/${orderId}`);
 
     const shippingDetails = {
       order: orderResponse.data.order,
       user: userResponse.data.user,
-      totalPrice
+      totalPrice,
     };
-    return await axios.post("/api/ship-order", shippingDetails).then(()=>{
-        router.push("/delivery-and-returns")
-    })
+    console.log(shippingDetails, userResponse.data);
+    return await axios.post("/api/ship-order", shippingDetails).then(() => {
+      router.push(`/delivery-and-returns/${userId}`);
+    });
   };
   useEffect(() => {
     shipOrder();
@@ -37,15 +43,18 @@ const Order = ({ totalPrice, orderId, userId }) => {
 
 export default Order;
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async (context) => {
+  const cookies = new Cookies(context.req, context.res);
+  const token = cookies.get("token").split("%22")[1];
   return {
     props: {
       city: "",
       state: "",
       country: "",
-      orderId: query.slug[0],
-      userId: query.slug[1],
-      totalPrice: query.slug[2]
+      orderId: context.query.slug[0],
+      userId: context.query.slug[1],
+      totalPrice: context.query.slug[2],
+      token,
     },
   };
 };

@@ -18,7 +18,7 @@ const SectionOne = () => {
         />
       </div>
 
-      <div className="px-[0.94rem] absolute z-20 top-[26rem] lg:top-[20rem] left-0 right-0 lg:left-[5.35rem] drop-shadow-custom text-center lg:text-left text-[#2F2E2D]">
+      <div className=" px-[0.94rem]  2xl:px-20  absolute z-20 top-[26rem] lg:top-[20rem] left-0 right-0 lg:left-0 drop-shadow-custom text-center lg:text-left text-[#2F2E2D]">
         <h1 className="font-sansita-regular lg:!text-[4rem] lg:!leading-[5.625rem] drop-shadow-lg">
           Sustainable. <br className="hidden lg:block" /> Beautiful.
         </h1>

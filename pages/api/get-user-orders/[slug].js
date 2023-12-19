@@ -1,7 +1,8 @@
+import authMiddleware from "../../../middleware/auth";
 import Order from "../../../schema/orders";
 import { connection } from "../../../utils/database";
 
-export default async function getUserOrders(req, res) {
+async function getUserOrders(req, res) {
   try {
     const userId = req.query.slug;
     connection();
@@ -19,3 +20,5 @@ export default async function getUserOrders(req, res) {
     });
   }
 }
+
+export default authMiddleware(getUserOrders)

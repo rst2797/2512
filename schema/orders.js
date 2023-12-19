@@ -88,6 +88,11 @@ const orderSchema = new Schema(
       enum: ["pending", "processing", "shipped", "delivered"],
       default: "pending",
     },
+    payment_status: {
+      type: Boolean,
+      enum: [true, false],
+      default: false,
+    },
     paymentMethod: {
       type: String,
       enum: ["pre_paid", "cash_on_delivery"],

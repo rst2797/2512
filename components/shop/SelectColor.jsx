@@ -3,7 +3,7 @@ import React from "react";
 
 const SelectColor = ({ product }) => {
   return (
-    <div className="py-[0.625rem] px-[0.94rem]">
+    <div className="py-[0.625rem]  px-[0.94rem]   2xl:px-20  ">
       <h2 className="text-2xl !text-[1rem] font-lato-regular font-semibold">Color</h2>
       <div className="flex justify-between px-0 py-[1.125rem] border-b-4 border-white">
         <Link href="/collection/live_in_moment_tshirt_white">

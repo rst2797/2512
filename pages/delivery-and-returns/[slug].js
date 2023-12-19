@@ -4,14 +4,20 @@ import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer";
 import Order from "../../components/DeliveryReturns/OrderCard.jsx";
 import axios from "axios";
-const DeliveryReturns = ({ orders }) => {
+import Cookies from "cookies";
+import { useRouter } from "next/router";
+const DeliveryReturns = ({ orders, success }) => {
   const [user, setUser] = useState(false);
+  const router = useRouter();
   useEffect(() => {
+    if(!success){
+      router.push("/login?destination=/")
+    }
     setUser(localStorage.getItem("user"));
   }, []);
   return (
     <main className="container min-h-screen bg-[#f2eadf] py-[.94rem] relative">
-      {user && (
+      {success && (
         <>
           <Head>
             <title>
@@ -54,14 +60,35 @@ const DeliveryReturns = ({ orders }) => {
 
 export default DeliveryReturns;
 
-export const getServerSideProps = async ({ query }) => {
-  const userId = query.slug;
+export const getServerSideProps = async (context) => {
+  const cookies = new Cookies(context.req, context.res);
+  const temp = cookies.get("token");
+
+  const token = temp?.split("%22")[1];
+
+  const userId = context.query.slug;
   const res = await axios.get(
-    `http://localhost:4545/api/get-user-orders/${userId}`
+    `${process.env.NEXT_API_BASE_URL}/api/get-user-orders/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    {
+      withCredentials: true,
+    }
   );
+ if(res.data.success){
   return {
     props: {
       orders: res.data.orders,
+      success: true
+    },
+  }
+ }else{
+  return {
+    props: {
+      success: false
     },
   };
+ }
 };

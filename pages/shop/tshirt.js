@@ -1,11 +1,11 @@
+import axios from "axios";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer.jsx";
-import SectionOne from "../../components/Collection/SectionOne.jsx";
 import SectionTwo from "../../components/Category/SectionTwo.jsx";
+import SectionOne from "../../components/Collection/SectionOne.jsx";
 import SectionThree from "../../components/Category/SectionThree.jsx";
-import axios from "axios";
 
 const Home = ({ products }) => {
   const [loading, setLoading] = useState(true);

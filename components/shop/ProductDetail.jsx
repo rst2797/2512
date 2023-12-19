@@ -14,7 +14,7 @@ const ProductDetail = ({ product }) => {
   return (
     <main className="bg-[#f2eadf] pt-[5rem]">
         <Navbar />
-      <div className="container border-b-4 border-white px-[0.94rem] pt-8">
+      <div className="container border-b-4 border-white  px-[0.94rem]  2xl:px-20  pt-8  ">
         <Breadcrumb name={product.breadcrumb} category={product.category} />
         <Carousel
           sliderImages={[...product.images]}

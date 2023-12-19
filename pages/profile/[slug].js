@@ -85,7 +85,7 @@ const Profile = ({ user, success }) => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Navbar />
-          <div className=" px-[.94rem]">
+          <div className=" px-[.94rem] 2xl:px-20">
             <div className="pt-24 flex flex-col items-center justify-center">
               <div className="relative">
                 {selectedImage ? (
@@ -134,13 +134,13 @@ export async function getServerSideProps(context) {
   const token = temp?.split("%22")[1];
 
   const res = await axios.post(
-    "http://localhost:4545/api/get-user",
+    `${process.env.NEXT_API_BASE_URL}/api/get-user`,
     {
       id: context.query.slug,
     },
     {
       headers: {
-        Authorization: "Bearer ".concat(token),
+        Authorization: `Bearer ${token}`,
       },
     },
     {

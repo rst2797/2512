@@ -12,7 +12,7 @@ const Cart = () => {
   const { items, isEmpty } = useCart();
   const [user, setUser] = useState(null);
   useEffect(() => {
-    setUser(JSON.parse(Cookie.get("user")));
+    setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
   return (
     <div className="relative">
@@ -40,9 +40,9 @@ const Cart = () => {
         <link rel="canonical" href="https://www.2512.in/cart" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-[#e2dad7] w-full lg:w-3/4 xl:w-2/3 mx-auto h-screen">
+      <div className="bg-[#e2dad7] w-full lg:w-3/4 xl:w-2/3 2xl:w-full 2xl:px-20  mx-auto h-screen">
         <Navbar />
-        <div className="p-6 pt-[4rem]">
+        <div className="p-6 2xl:p-0 2xl:pt-[4rem] pt-[4rem]">
           <div className="flex justify-between items-center py-4">
             <h1 className="font-sansita-regular !text-[3rem] !font-[100] mb-4">
               Cart

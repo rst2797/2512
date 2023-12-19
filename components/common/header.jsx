@@ -30,7 +30,7 @@ const Navbar = ({ position }) => {
   };
   return (
     <>
-      <div className="lg:px-0 px-[0.94rem] lg:py-0 py-2">
+      <div className="lg:px-0  px-[0.94rem]   2xl:px-20 lg:py-0 py-2">
         <nav
           className={`fixed lg:top-0 ${
             position ? "top-[3rem]" : "top-4"

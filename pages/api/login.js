@@ -40,7 +40,7 @@ export default async function handler(req, res) {
         email: user.email,
       },
       process.env.JWT_SECRET, // Use environment variable for the secret key
-      { expiresIn: "1h" }
+      { expiresIn: "2d" }
     );
 
     // If everything is valid, return success along with the token

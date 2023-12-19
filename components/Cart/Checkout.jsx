@@ -17,7 +17,7 @@ const Checkout = ({ items, user }) => {
   
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 py-[1rem] px-[0.94rem] drop-shadow-2xl bg-[#f4f0ef]">
+    <div className="absolute bottom-0 left-0 right-0 py-[1rem]  px-[0.94rem]   2xl:px-20 drop-shadow-2xl bg-[#f4f0ef]">
       <div className="flex items-center justify-between">
         <h4 className="font-lato-regular !text-sm !font-semibold">
           Promo Code

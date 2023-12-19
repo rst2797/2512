@@ -86,7 +86,9 @@ const OrderCard = ({ orders }) => {
                   </div>
                 </div>
                 <div className="flex flex-col justify-center px-3 text-right">
-                  <h2 className="font-bold text-[1.125rem]">{ele.price}</h2>
+                  <h2 className="font-bold text-[1.125rem]">
+                    ₹{order.totalAmount}
+                  </h2>
                   <h5 className="line-through text-[0.75rem]">
                     {ele.actualPrice}
                   </h5>

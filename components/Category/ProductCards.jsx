@@ -22,7 +22,7 @@ const ProductCards = ({ products }) => {
               {ele.name}
             </h2>
             <p className="font-lato-regular !text-[0.75rem] !leading-[1rem] pb-[1.125rem]">
-              {ele.price}
+            ₹{ele.price}
             </p>
           </a>
         </Link>

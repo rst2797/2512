@@ -19,7 +19,7 @@ const SecurityDetails = () => {
         },
     ]
   return (
-    <div className='flex justify-between pt-[1rem] pb-[2rem] px-[0.94rem] border-b-4 border-white'>
+    <div className='flex justify-between pt-[1rem] pb-[2rem]  px-[0.94rem]   2xl:px-20   border-b-4 border-white'>
         {
             secure.map((item, index) => (
                 <div key={index} className='flex flex-col items-center justify-center text-center'>

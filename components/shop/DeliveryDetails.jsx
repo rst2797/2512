@@ -6,7 +6,7 @@ import { useCart } from "react-use-cart";
 const DeliveryDetails = ({ product }) => {
   const [productState, setProductState] = useState(product);
   return (
-    <div className="py-[1.25rem] px-[0.94rem]">
+    <div className="py-[1.25rem]  px-[0.94rem]   2xl:px-20  ">
       <div className="flex justify-between py-[1.25rem]">
         <Counter
           productState={productState}

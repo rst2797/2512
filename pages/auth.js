@@ -7,7 +7,7 @@ const Registration = () => {
     <main>
       <div className="bg-[#f2eadf] overflow-y-auto h-screen">
         <Navbar />
-        <div className="container px-[0.94rem] pt-[6rem]">
+        <div className="container  px-[0.94rem]   2xl:px-20 pt-[6rem]">
           <div>
             <div className="pb-6">
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center pb-8">

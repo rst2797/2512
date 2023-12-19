@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionTwo = () => {
   return (
-    <div className="bg-[#A86549] text-white py-[1.13rem] px-[.94rem]">
+    <div className="bg-[#A86549] text-white py-[1.13rem] px-[.94rem] 2xl:px-20 ">
       <h5>all exclusive</h5>
       <h2 className="font-sansita-regular">Offers</h2>
 

@@ -4,7 +4,7 @@ const SelectSize = () => {
   const [size, setSize] = useState("S");
 
   return (
-    <div className="border-b-4 border-white py-[0.625rem] px-[0.94rem]">
+    <div className="border-b-4 border-white py-[0.625rem]  px-[0.94rem]   2xl:px-20  ">
       <div className="flex justify-between items-center">
         <h2 className="!text-[1rem] font-semibold font-lato-regular">
           Select Size

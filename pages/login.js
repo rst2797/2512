@@ -9,7 +9,7 @@ const Login = ({ successRedirection }) => {
     <main>
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
-        <div className="px-[0.94rem] pt-[6rem]">
+        <div className=" px-[0.94rem]   2xl:px-20 pt-[6rem]">
           <div className="pb-6">
             <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
               Login
