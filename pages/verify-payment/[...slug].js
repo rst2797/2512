@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useCart } from "react-use-cart";
+import { useCart } from "react-use-cart"
 
 const VerifyPayment = ({
   success,
@@ -15,16 +15,14 @@ const VerifyPayment = ({
 }) => {
   const { emptyCart } = useCart();
   const router = useRouter();
-  const [message, setMessage] = useState(
-    "Please Wait...."
-  );
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
+  const [message, setMessage] = useState("Please Wait....");
   useEffect(() => {
     if (authorized) {
       if (success) {
+        const userId = JSON.parse(localStorage.getItem("user"))._id;
         setMessage(messageResp);
         emptyCart();
-        router.push(`/order/${orderId}/${userId}/${totalAmount}`); //Need to change 
+        router.push(`/order/${orderId}/${userId}/${totalAmount}`); 
       }
     } else {
       setMessage(
@@ -32,7 +30,7 @@ const VerifyPayment = ({
       );
       router.push("/login?destination=/viewcheckout");
     }
-  }, []);
+  }, [message]);
   return (
     <div className="h-screen font-bold flex justify-center items-center">
       {message}
@@ -49,18 +47,18 @@ export const getServerSideProps = async (context) => {
   const signature = context.query.slug[2];
   const totalAmount = context.query.slug[3];
   const placedOrderId = context.query.slug[4];
-  const token = cookies.get("token").split("%22")[1];
+  const token = cookies.get("token")?.split("%22")[1];
 
   if (!token) {
     return {
       props: {
         success: false,
-        authorized: true,
+        authorized: false,
       },
     };
   }
   const response = await axios.post(
-    "http://localhost:4545/api/verify-payment",
+    `http://localhost:4545/api/verify-payment`,
     {
       order_id,
       payment_id,

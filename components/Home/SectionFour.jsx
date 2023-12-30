@@ -5,7 +5,7 @@ import { IoArrowForward } from "react-icons/io5";
 const SectionFour = () => {
   return (
     <>
-      <div className="bg-[#A86549] w-screen p-[1.875rem] lg:w-auto lg:hidden block">
+      <div className="bg-[#A86549] w-full p-[1.875rem] lg:w-auto lg:hidden block">
         <h2 className="font-sansita-regular !text-[2.5rem] text-white">
           Why Choose Us?
         </h2>
@@ -17,22 +17,22 @@ const SectionFour = () => {
           <a className="underline text-white my-4 text-[1rem]">Learn more</a>
         </Link>
       </div>
-      <div className="relative hidden lg:grid grid-cols-3 z-20 lg:min-h-[110vh] bg-cover bg-center bg-no-repeat lg:bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/web/homepage/2.png')]">
+      <div className="relative hidden lg:grid grid-cols-3 z-20 lg:min-h-[110vh] bg-cover bg-center bg-no-repeat lg:bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group+2.png')]">
         <div className="col-span-2" />
-        <div className="flex flex-col items-end justify-center h-screen px-[4.5rem] pt-32 container">
-          <h2 className="font-sansita-regular text-[#2F2E2D] w-full">
+        <div className="flex flex-col items-end justify-center h-full px-[4.5rem] pt-32 container bg-[#00000073]">
+          <h2 className="font-sansita-regular text-[#fff] w-full">
             Why Choose Us?
           </h2>
-          <h3 className="font-stay-dreaming w-full text-3xl mt-4 mb-1 text-[#2F2E2D]">
+          <h3 className=" w-full text-3xl text-center mt-4 mb-1 text-[#fff]">
             We are
           </h3>
-          <span className="bg-[#A86549] text-[#F4E9DF] w-full mb-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
+          <span className="bg-[#EADAC8] text-[#2F2E2D] w-full mb-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
             Fashion Forward
           </span>
-          <span className="bg-[#A86549] text-[#F4E9DF] w-full my-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
+          <span className="bg-[#EADAC8] text-[#2F2E2D] w-full my-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
             People Centric
           </span>
-          <span className="bg-[#A86549] text-[#F4E9DF] w-full my-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
+          <span className="bg-[#EADAC8] text-[#2F2E2D] w-full my-3 flex items-center justify-center h-[3rem] rounded-md !text-[1rem] !font-bold tracking-wide font-lato-regular">
             Planet Loving
           </span>
           <span className="lg:block hidden mt-[3rem] w-full">

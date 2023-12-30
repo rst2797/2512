@@ -55,8 +55,8 @@ const Orders = ({ orders }) => {
           </label>
           <table className="border-2 border-black w-full">
             <thead>
-              <tr className="border-b-2 border-black">
-                <th className="border-x-2 border-black">S. No.</th>
+              <tr className="border-b-2 border-black ">
+                <th className="border-x-2 border-black py-4">S. No.</th>
                 <th className="border-x-2 border-black px-6">Order Id</th>
                 <th className="border-x-2 border-black px-6">User Id</th>
                 <th className="border-x-2 border-black px-4">Total Amount</th>
@@ -69,12 +69,12 @@ const Orders = ({ orders }) => {
               {currentOrders?.map((ele, index) => (
                 <tr
                   key={ele.id}
-                  className="focus:text-white border-b-2 border-black hover:bg-blue-200 cursor-pointer"
+                  className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
                 >
                   <td className="border-x-2 border-black px-4 w-fit">
                     {index + 1}
                   </td>
-                  <td className="border-x-2 border-black px-4">{ele._id}</td>
+                  <td className="border-x-2 border-black px-4 py-3">{ele._id}</td>
                   <td className="border-x-2 border-black px-4">{ele.user}</td>
                   <td className="border-x-2 border-black px-4">
                     ₹&nbsp;{ele.totalAmount}
@@ -96,10 +96,10 @@ const Orders = ({ orders }) => {
                       <option value="delivered">Delivered</option>
                     </select>
                   </td>
-                  <td className="border-x-2 border-black px-4 cursor-pointer">
+                  <td className="border-x-2 border-black px-4 cursor-pointer text-blue-500 font-bold">
                     <Link href={`/admin/order/${ele._id}/${ele.user}`}>
                       <a className="flex items-center">
-                        <LuPointer /> &nbsp; See Order
+                        See Order
                       </a>
                     </Link>
                   </td>

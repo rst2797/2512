@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import DeliveryTruck from "./SVG/DeliveryTruckSVG";
 import FabricDetails from "./FabricDetails";
 import { useCart } from "react-use-cart";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const DeliveryDetails = ({ product }) => {
+const DeliveryDetails = ({ product, setProductQuantity }) => {
   const [productState, setProductState] = useState(product);
+  const [quantity, setQuantity] = useState(1);
   return (
-    <div className="py-[1.25rem]  px-[0.94rem]   2xl:px-20  ">
-      <div className="flex justify-between py-[1.25rem]">
-        <Counter
-          productState={productState}
-          setProductState={setProductState}
-        />
-        <AddToCart product={productState} />
-      </div>
-      <div className="py-[1.25rem]">
-        <h4 className="font-lato-regular !text-[1rem] !font-[700] text-[#2F2E2D]">
-          Delivery Details
-        </h4>
+    <div className="">
+      <Counter quantity={quantity} setQuantity={setQuantity} />
+      <AddToCart product={productState} quantity={quantity} />
 
-        <h5 className="font-lato-regular !text-[0.75rem] !font-[300] text-[#2F2E2D] py-[0.62rem]">
-          Enter Pincode to check deliver date
-        </h5>
+      <div className="pt-[2rem]">
+        <div className="">
+          <h4 className="text-[1rem] leading-[.5rem] font-[700] text-[#2F2E2D]">
+            Delivery Details
+          </h4>
+
+          <h5 className="text-[0.75rem] leading-[1rem] font-[500] text-[#2F2E2D] py-[0.62rem]">
+            Enter Pincode to check deliver date
+          </h5>
+        </div>
         <form action="" className="flex">
           <input
             type="text"
@@ -32,62 +33,72 @@ const DeliveryDetails = ({ product }) => {
             Change Pincode
           </button>
         </form>
-        <div className="flex items-center gap-[1.125rem] py-[1.25rem]">
-          <DeliveryTruck />
+        <div className="flex items-center gap-[1.125rem] py-[.5rem]">
           <span>
-            <h5 className="text-[#4BAF59] font-lato-regular !text-[0.75rem] !font-[700] !leading-[1rem]">
-              Expected delivery by 7th August
+            <h5 className="text-[#FF0909] font-lato-regular !text-[.75rem] !font-[700] !leading-[1rem]">
+              Expected delivery by 7th January
             </h5>
-            <p className="font-lato-regular !text-[0.75rem] !leading-[1rem] !font-[400]">
+            <p className="font-lato-regular !text-[0.65rem] !font-[400]">
               Final delivery based on items in bag
             </p>
           </span>
         </div>
-        <FabricDetails />
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        style={{ marginBottom: "1rem" }}
+      />
     </div>
   );
 };
 
 export default DeliveryDetails;
 
-const AddToCart = ({ product }) => {
+const AddToCart = ({ product, quantity }) => {
   const { addItem } = useCart();
 
   const handleAddToCart = () => {
-    addItem(product);
+    addItem({ ...product, quantity: quantity, units: quantity });
+    toast.success("Added to bag successfully...");
   };
   return (
     <button
-      className="py-[0.6875rem] w-[13.0625rem] text-white bg-[#A86549] font-lato-regular !text-[1.125rem] !font-[700]"
+      className="py-[0.3rem] my-2 rounded-xl w-[55%] text-white bg-[#A86549] font-lato-regular !text-[.75rem] !font-[700]"
       onClick={handleAddToCart}
     >
       Add to Bag
     </button>
   );
 };
-const Counter = ({ productState, setProductState }) => {
-  useEffect(()=>{}, [productState])
+const Counter = ({ quantity, setQuantity }) => {
   return (
-    <div className="flex bg-white w-fit px-2 py-1 border-[2px] border-[#A86549] text-[#A86549]">
-      <button
-        className="focus:bg-transparent active:bg-transparent focus:outline-none font-bold"
-        disabled={productState?.quantity === 1}
-        onClick={() => setProductState(productState.quantity - 1)}
-      >
-        -
-      </button>
-      <input
-        disabled
-        value={productState.quantity}
-        className="w-12 text-center font-bold"
-      />
-      <button
-        className="focus:bg-transparent active:bg-transparent font-bold"
-        onClick={() => setProductState(productState.quantity + 1)}
-      >
-        +
-      </button>
+    <div className="flex items-center pt-4 pb-2">
+      <p className="font-semibold pr-4">Quantity: </p>
+      <div className="flex bg-white w-fit px-2 border-[2px] rounded-lg">
+        <button
+          className="focus:bg-transparent active:bg-transparent focus:outline-none px-2"
+          disabled={quantity === 1}
+          onClick={() => setQuantity(quantity - 1)}
+        >
+          -
+        </button>
+        <input
+          disabled
+          value={quantity}
+          className="w-8 text-sm text-center border-x-[1px]"
+        />
+        <button
+          className="focus:bg-transparent active:bg-transparent px-2"
+          onClick={() => setQuantity(quantity + 1)}
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 };

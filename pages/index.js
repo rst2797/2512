@@ -54,7 +54,6 @@ const Home = () => {
         <Navbar position={true} />
         <SectionOne />
         <SectionTwo />
-          
         <SectionThree />
         <SectionFour />
         <SectionFive /> 

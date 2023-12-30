@@ -12,6 +12,7 @@ export default async function PlaceOrder(req, res) {
   try {
     const { order, user, totalPrice } = req.body;
     // const { city, state, country } = getLocationByPostalCode(user.postalCode);
+    console.log("Order:- ", order)
 
     const orderToShip = {
       order_id: generateOrderId(order._id),

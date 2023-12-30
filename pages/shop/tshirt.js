@@ -6,6 +6,7 @@ import Footer from "../../components/common/footer.jsx";
 import SectionTwo from "../../components/Category/SectionTwo.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
 import SectionThree from "../../components/Category/SectionThree.jsx";
+import { rediss } from "../../utils/redis";
 
 const Home = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -42,18 +43,12 @@ const Home = ({ products }) => {
         <link rel="canonical" href="https://www.2512.in/collection" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className="container bg-[#f2eadf] relative">
-          <SectionOne products={products}>
-            <Navbar />
-          </SectionOne>
-          <SectionTwo />
-          <SectionThree />
-          <Footer />
-        </div>
-      )}
+      <div className="container bg-[#f2eadf] relative">
+        <SectionOne products={products}>
+          <Navbar />
+        </SectionOne>
+        <Footer />
+      </div>
     </main>
   );
 };
@@ -62,17 +57,26 @@ export default Home;
 
 export async function getServerSideProps() {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
-    );
+    const cachedData = await rediss.get("products");
+    const parsedCache = JSON.parse(cachedData);
+    if (!parsedCache) {
+      const res = await axios.get(
+        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+      );
+      await rediss.set("products", JSON.stringify(res.data));
+      return {
+        props: {
+          products: res.data.products,
+        },
+      };
+    }
     return {
       props: {
-        products: res.data.products,
+        products: parsedCache.products,
       },
     };
   } catch (error) {
     console.error("Error fetching data:", error);
-
     return {
       props: {
         products: [],

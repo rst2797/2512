@@ -3,42 +3,31 @@ import GoogleLogin from "react-google-login";
 import Form from "../components/Login/Form";
 import Navbar from "../components/common/header";
 import Link from "next/link";
+import Image from "next/image";
 
 const Login = ({ successRedirection }) => {
   return (
     <main>
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
-        <div className=" px-[0.94rem]   2xl:px-20 pt-[6rem]">
-          <div className="pb-6">
-            <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
-              Login
-            </h1>
-          </div>
-          <Form successRedirection={successRedirection} />
-          <div className="flex items-center justify-center my-4">
-            <div className="bg-white h-[2px] w-[130px]" />
-            <div className="font-semibold px-3">OR</div>
-            <div className="bg-white h-[2px] w-[130px]" />
-          </div>
-          <div className="flex justify-center gap-4 google-btn pb-8">
-            <GoogleLogin
-              clientId="YOUR_GOOGLE_CLIENT_ID"
-              onSuccess={null}
-              onFailure={null}
-              cookiePolicy={"single_host_origin"}
+        <div className="pt-[4rem]">
+          <div className="2xl:grid grid-cols-3 ">
+            <Image
+              src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
+              alt=""
+              width={200}
+              height={675}
             />
-          </div>
-            <div className="text-center py-4">
-              <Link href="/register">
-                <a>
-                  <span className="opacity-50">Don&apos;t have an account?&nbsp;</span>
-                  <span className="text-blue-500 font-bold opacity-100">
-                    Register here!
-                  </span>
-                </a>
-              </Link>
+            <div className="px-[0.94rem] col-span-2 2xl:px-20 pt-[4.5rem]">
+              <div className="pb-6">
+                <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
+                  Login
+                </h1>
+              </div>
+              <Form successRedirection={successRedirection} />
             </div>
+          </div>
+          
         </div>
       </div>
     </main>

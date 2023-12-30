@@ -9,7 +9,7 @@ const SectionTwo = () => {
       <h5 className="py-[.94rem] font-lato-regular !font-[400] !text-[0.875rem]">
         Etiam in nibh vitae elit eleifend mattis. Nulla pretium{" "}
       </h5>
-      <form action="" className="text-black flex pb-[1rem]">
+      <form action="" className="text-[#2F2E2D] flex pb-[1rem]">
         <input
           type="text"
           defaultValue={466001}

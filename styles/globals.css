@@ -105,10 +105,13 @@ a {
   display: inline-block;
   background-color: white;
   color: #A86549;
-  padding: 10px 15px;
+  padding: auto;
   font-family: sans-serif, Arial;
-  font-size: 16px;
+  font-size: 10px;
+  font-weight: bold;
+  margin: 0 .2rem;
   border: 2px solid #A86549;
+  border-radius: 20rem;
 }
 .radio-toolbar label:hover {
   background-color: #dfd;
@@ -133,8 +136,8 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /* border: 1px solid transparent; */
   /* -webkit-text-fill-color: white; */
-  -webkit-box-shadow: 0 0 0px 1000px #f2eadf inset;
-  box-shadow: 0 0 0px 1000px #f2eadf inset;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #fff inset;
   transition: background-color 5000s ease-in-out 0s;
   /* color: white; */
 }
@@ -163,3 +166,19 @@ select:-webkit-autofill:focus {
 .swiper-button-prev::after, .swiper-button-next::after{
   font-size: 0rem !important;
 }
+
+
+/* input[type='radio']:checked:after {
+  width: 10px;
+  height: 10px;
+  border-radius: 15px;
+  top: -7px;
+  left: 1px;
+  border: 1px solid #A86549;
+  position: relative;
+  background-color: #A86549;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+} */

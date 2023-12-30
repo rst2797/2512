@@ -1,12 +1,9 @@
-import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useCart } from "react-use-cart";
 
-const Checkout = ({ items, user }) => {
+const Checkout = ({ items }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     setTotalPrice(null);
@@ -15,39 +12,37 @@ const Checkout = ({ items, user }) => {
     );
   }, [items]);
   
-
   return (
-    <div className="absolute bottom-0 left-0 right-0 py-[1rem]  px-[0.94rem]   2xl:px-20 drop-shadow-2xl bg-[#f4f0ef]">
-      <div className="flex items-center justify-between">
-        <h4 className="font-lato-regular !text-sm !font-semibold">
-          Promo Code
-        </h4>
-        <form action="" className="text-black flex border-2 border-[#e6e3e2]">
-          <input
-            type="text"
-            className="w-[9rem] h-[2.5625rem] py-[0.8125rem] px-[1rem] bg-[#f3f3f3]"
-          />
-          <button className="text-[#A86549] bg-[#f3f3f3] font-lato-regular !text-[.8rem] !font-[700] py-[0.2rem] px-[0.425rem] w-[5rem] tracking-wide">
-            Apply
-          </button>
-        </form>
-      </div>
-      <div className="flex justify-between border-t-2 border-[#a1a1a1] mt-3 py-2">
-        <h4>Shipping</h4>
-        <h4>Free</h4>
-      </div>
-      <div className="flex justify-between border-y-2 border-[#a1a1a1] py-2">
-        <h4>Total</h4>
+    <div className="h-[98%] min-h-[70vh] py-[1rem]  px-[0.94rem] 2xl:px-12 rounded-xl bg-white">
+    <h2 className="font-lato-regular !font-semibold !text-[1.2rem]">Price details (2 items)</h2>
+      <div className="flex justify-between text-sm py-4 pt-8 pb-2 font-semibold">
+        <h4>Total MRP</h4>
         <h4>₹{totalPrice}</h4>
       </div>
+      <div className="flex justify-between text-sm py-3 border-y-[1px] border-[#a1a1a1] font-semibold">
+        <h4>Discount on MRP</h4>
+        <h4 className="text-[#2EE0A0]">₹{totalPrice}</h4>
+      </div>
+      <div className="flex justify-between text-sm py-3 border-b-[1px] border-[#a1a1a1] font-semibold">
+        <h4>Coupon Discount</h4>
+        <h4 className="cursor-not-allowed">Apply coupon</h4>
+      </div>
+      <div className="flex justify-between text-sm py-3 border-b-[1px] border-[#a1a1a1] font-semibold">
+        <h4>Shipping fee</h4>
+        <h4 className="text-[#2EE0A0]">Free</h4>
+      </div>
+      <div className="flex justify-between text-lg font-semibold py-4">
+        <h4>Total Amount</h4>
+        <h4>₹1,958</h4>
+      </div>
 
-      <Link href="/viewcheckout">
+      <Link href="/checkout">
         <a>
           <button
             type="button"
-            className="bg-[#A86549] w-full py-2 my-4 font-bold text-[white] rounded-lg"
+            className="bg-[#A86549] w-full py-2 my-4 font-bold text-sm text-[white] rounded-lg"
           >
-            Proceed to Checkout - ₹{totalPrice}
+            Place Order
           </button>
         </a>
       </Link>

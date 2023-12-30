@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { createShipment } from "../../utils/shiprocketApi";
 import { getLocationByPostalCode } from "../../utils/getLocationByPostalCode";
 import axios from "axios";
-import { InfinitySpin } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import Cookies from "cookies";
+import Navbar from "../../components/common/header";
+import Footer from "../../components/common/footer";
 
 const Order = ({ totalPrice, orderId, userId, token }) => {
   const router = useRouter();
@@ -24,7 +26,7 @@ const Order = ({ totalPrice, orderId, userId, token }) => {
     };
     console.log(shippingDetails, userResponse.data);
     return await axios.post("/api/ship-order", shippingDetails).then(() => {
-      router.push(`/delivery-and-returns/${userId}`);
+      router.push(`/order-history/${userId}?newOrder=true`);
     });
   };
   useEffect(() => {
@@ -32,12 +34,26 @@ const Order = ({ totalPrice, orderId, userId, token }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <InfinitySpin width="200" color="#A86549" />
-      <h1 className="font-bold text-[#A86549">
-        Hang Tight While 2512 Creating Your Shipment...
-      </h1>
-    </div>
+    <>
+      <Navbar />
+      <div className="flex flex-col justify-center items-center h-screen bg-[#F4E9DF]">
+        <RotatingLines
+          visible={true}
+          height="96"
+          width="96"
+          strokeColor="#A86549"
+          strokeWidth="5"
+          animationDuration="0.75"
+          ariaLabel="rotating-lines-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+        <h1 className="font-bold text-[#2F2E2D] text-center font-sansita-regular !text-xl">
+          Hang Tight <br /> While 2512 Creating Your Shipment...
+        </h1>
+      </div>
+      <Footer />
+    </>
   );
 };
 

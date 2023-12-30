@@ -5,12 +5,9 @@ const SectionOne = ({ children, products }) => {
   return (
     <>
       {children}
-      <div className=" ">
+      <div className="mx-auto max-w-[1450px]">
         <div className="py-[1.25rem] px-[.94rem] 2xl:px-20">
           <div className="pt-[6rem]">
-            <p className="font-lato-regular !text-[1.125rem] text-[#2F2E2D]">
-              Our
-            </p>
             <h2 className="font-sansita-regular !text-[3rem] !font-[700]">
               T-shirt
             </h2>

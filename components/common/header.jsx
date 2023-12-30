@@ -40,7 +40,7 @@ const Navbar = ({ position }) => {
             <div className="lg:hidden pt-2 pr-6">
               <button
                 onClick={() => setNavOpen(!navOpen)}
-                className="text-black font-semibold focus:outline-none"
+                className="text-[#2F2E2D] font-semibold focus:outline-none"
               >
                 <GiHamburgerMenu size={25} />
               </button>

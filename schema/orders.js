@@ -67,6 +67,10 @@ const orderItemSchema = new Schema({
     type: String,
     default: "1",
   },
+  size: {
+    type: String,
+    required: true,
+  },
 });
 const orderSchema = new Schema(
   {
@@ -95,7 +99,7 @@ const orderSchema = new Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["pre_paid", "cash_on_delivery"],
+      enum: ["Prepaid", "COD"],
       required: true,
     },
   },

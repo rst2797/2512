@@ -123,8 +123,8 @@ const OrderDetails = ({ order, user }) => {
                     <span className="font-semibold">Color:</span> {item.color}
                   </p>
                   <p className="mb-2 whitespace-nowrap">
-                    <span className="font-semibold">Actual Price:</span>{" "}
-                    {item.actualPrice}
+                    <span className="font-semibold">Size:</span>{" "}
+                    {item.size}
                   </p>
                 </div>
                 <div className="flex flex-col justify-center">

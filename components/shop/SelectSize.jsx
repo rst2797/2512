@@ -1,63 +1,84 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const SelectSize = () => {
+const SelectSize = ({ setProductSize }) => {
   const [size, setSize] = useState("S");
+  useEffect(() => {
+    setProductSize(size);
+  }, [size]);
 
   return (
-    <div className="border-b-4 border-white py-[0.625rem]  px-[0.94rem]   2xl:px-20  ">
-      <div className="flex justify-between items-center">
+    <div className="">
+      <div className="flex items-center justify-between w-[55%] py-1">
         <h2 className="!text-[1rem] font-semibold font-lato-regular">
-          Select Size
+          Size: &nbsp; {size}
         </h2>
         <h3 className="text-[#A86549] font-semibold !text-[0.75rem] font-lato-regular underline cursor-pointer">
           Size Chart
         </h3>
       </div>
       <>
-        <div className="radio-toolbar flex justify-between">
+        <div className="radio-toolbar w-[55%] flex justify-between">
           <input
             type="radio"
             id="radioApple"
             name="SIZE"
-            defaultValue="S"
+            value="S"
+            onChange={(e) => setSize(e.target.value)}
             defaultChecked
           />
-          <label htmlFor="radioApple">S</label>
+          <label className="py-3 px-4 mr-4" htmlFor="radioApple">
+            S
+          </label>
           <input
             type="radio"
             id="M"
             name="SIZE"
-            defaultValue="M"
+            value="M"
+            onChange={(e) => setSize(e.target.value)}
           />
-          <label htmlFor="M">M</label>
+          <label className="py-3 px-4 mx-4" htmlFor="M">
+            M
+          </label>
           <input
             type="radio"
             id="L"
             name="SIZE"
-            defaultValue="L"
+            value="L"
+            onChange={(e) => setSize(e.target.value)}
           />
-          <label htmlFor="L">L</label>
+          <label className="py-3 px-4 mx-4" htmlFor="L">
+            L
+          </label>
           <input
             type="radio"
             id="XL"
             name="SIZE"
-            defaultValue="XL"
+            value="XL"
+            onChange={(e) => setSize(e.target.value)}
           />
-          <label htmlFor="XL">XL</label>
+          <label className="py-3 px-[.85rem] mx-4" htmlFor="XL">
+            XL
+          </label>
           <input
             type="radio"
             id="2XL"
             name="SIZE"
-            defaultValue="2XL"
+            value="2XL"
+            onChange={(e) => setSize(e.target.value)}
           />
-          <label htmlFor="2XL">2XL</label>
+          <label className="py-3 px-[.65rem] mx-4" htmlFor="2XL">
+            2XL
+          </label>
           <input
             type="radio"
             id="3XL"
             name="SIZE"
-            defaultValue="3XL"
+            value="3XL"
+            onChange={(e) => setSize(e.target.value)}
           />
-          <label htmlFor="3XL">3XL</label>
+          <label className="py-3 px-[.6rem] ml-4" htmlFor="3XL">
+            3XL
+          </label>
         </div>
       </>
     </div>

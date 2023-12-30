@@ -2,18 +2,20 @@ import axios from "axios";
 import Script from "next/script";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Product } from "./cart.js";
 import { useRouter } from "next/router";
 import { useCart } from "react-use-cart";
-import { IoMdArrowBack } from "react-icons/io";
+import Navbar from "../components/common/header";
+import Footer from "../components/common/footer";
+import { IoMdArrowBack, IoMdClose } from "react-icons/io";
+import Image from "next/image";
+import ProceedCheckout from "../components/view-checkout/ProceedCheckout";
 
 export default function YourBillingComponent() {
   const [userData, setUserData] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState(null);
-  const { items, isEmpty } = useCart();
+  const [paymentMethod, setPaymentMethod] = useState("Prepaid");
+  const { items } = useCart();
 
-  useEffect(() => {}, [paymentMethod]);
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("user")));
   }, []);
@@ -22,7 +24,8 @@ export default function YourBillingComponent() {
     setTotalPrice(
       items.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
     );
-  }, [items]);
+    console.log(totalPrice);
+  }, []);
   const { emptyCart } = useCart();
   const router = useRouter();
   const handleCODCheckout = () => {
@@ -52,7 +55,7 @@ export default function YourBillingComponent() {
       items,
       userId: userData._id,
       totalAmount: totalPrice,
-      paymentMethod: "pre_paid",
+      paymentMethod: "Prepaid",
     };
     axios.post("/api/place-order", order).then((resp) => {
       if (resp.data.success) {
@@ -88,7 +91,6 @@ export default function YourBillingComponent() {
                 contact: res.data.phone,
               },
             };
-
             const paymentObject = new window.Razorpay(options);
             paymentObject.open();
 
@@ -107,43 +109,30 @@ export default function YourBillingComponent() {
   };
 
   return (
-    <div className="bg-[#e2dad7] h-screen">
+    <div className="bg-[#e2dad7] ">
       <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"
       />
+      <Navbar />
 
-      <div className="bg-[#e2dad7]">
-        <div className={`flex flex-col `}>
-          {paymentMethod ? (
-            <div className="my-4 px-4">
-              <h3 className="font-sansita-regular !text-2xl text-left flex items-center">
-                <IoMdArrowBack
-                  className="rounded-lg bg-[#A86549] text-white font-bold w-6 h-7 mr-4 p-1"
-                  onClick={() => setPaymentMethod(null)}
-                />
-                Address
-              </h3>
-              <div className="border-y-2 border-slate-600 font-bold my-4">
-                <h4 className="py-2">{userData?.name}</h4>
-                <h4 className="py-2">{userData?.email}</h4>
-                <h4 className="py-2">{userData?.phone}</h4>
-                <h4 className="py-2">{userData?.address}</h4>
-              </div>
-            </div>
-          ) : (
-            <div className="my-4 mx-4 px-2">
-              <h3 className="font-sansita-regular !text-2xl text-left">
-                Payment Method
-              </h3>
-              <div className="border-y-2 border-slate-600 font-bold my-4 flex flex-col py-4">
+      <div className="bg-[#F4E9DF] pt-20 lg:px-20">
+        <div className={`flex flex-col mx-auto max-w-[1450px]`}>
+          <div className="my-4 mx-4">
+            <h3 className="font-sansita-regular text-left">Checkout</h3>
+            <div className="grid grid-cols-3 gap-12">
+              <div className="bg-white rounded-xl font-bold my-4 flex flex-col py-4 px-6 col-span-2">
+                <h3 className="font-lato-regular !font-semibold pb-4">
+                  Choose Payment Mode
+                </h3>
                 <label className="inline-flex items-center py-1 font-bold tracking-wider">
                   <input
                     type="radio"
                     className="form-radio w-5 h-5"
                     name="radioGroup"
-                    value={"pre_paid"}
-                    onChange={() => setPaymentMethod("pre_paid")}
+                    value={"Prepaid"}
+                    defaultChecked
+                    onChange={() => setPaymentMethod("Prepaid")}
                   />
                   <span className="ml-2 capitalize">Pay Now</span>
                 </label>
@@ -152,46 +141,102 @@ export default function YourBillingComponent() {
                     type="radio"
                     className="form-radio w-5 h-5"
                     name="radioGroup"
-                    value={"cash_on_delivery"}
-                    onChange={() => setPaymentMethod("cash_on_delivery")}
+                    value={"COD"}
+                    onChange={() => setPaymentMethod("COD")}
                   />
                   <span className="ml-2 capitalize">Cash On Delivery</span>
                 </label>
+                <div className="flex justify-center pt-12 w-[60%]">
+                  {paymentMethod &&
+                    (paymentMethod === "Prepaid" ? (
+                      <button
+                        className="rounded-lg bg-[#A86549] text-white text-xs font-bold w-full py-2 my-2 mx-2"
+                        onClick={() => makePayment({ productId: "2512" })}
+                      >
+                        Pay Now
+                      </button>
+                    ) : (
+                      <button
+                        className="rounded-lg bg-[#A86549] text-white text-xs font-bold w-full py-2 my-2 mx-2"
+                        onClick={handleCODCheckout}
+                      >
+                        Place Order
+                      </button>
+                    ))}
+                </div>
+              </div>
+              <div className="my-4">
+                <ProceedCheckout items={items} btn={false} minHeight={false} />
               </div>
             </div>
-          )}
-          <div className="mt-4 mb-32 w-full px-6">
-            <h3 className="font-sansita-regular !text-2xl text-left">
-              Order Summary
-            </h3>
-            <div className="border-y-2 border-slate-600 font-bold my-4">
-              {items.map((ele, index) => (
-                <div className="my-2" key={ele.id}>
-                  <Product item={ele} disableRemove={true} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="fixed bottom-0 py-4 w-full flex justify-center bg-[#e2dad7]">
-            {paymentMethod &&
-              (paymentMethod === "pre_paid" ? (
-                <button
-                  className="rounded-lg bg-[#A86549] text-white font-bold w-[80%] py-3 my-2 mx-2"
-                  onClick={() => makePayment({ productId: "2512" })}
-                >
-                  Pay Now - ₹{totalPrice}
-                </button>
-              ) : (
-                <button
-                  className="rounded-lg bg-[#A86549] text-white font-bold w-[80%] py-3 my-2 mx-2"
-                  onClick={handleCODCheckout}
-                >
-                  Place Order - ₹{totalPrice}
-                </button>
-              ))}
           </div>
         </div>
       </div>
+      <Footer />
+    </div>
+  );
+}
+
+export function Product({ item, disableRemove }) {
+  const { items, updateItemQuantity, getItem } = useCart();
+
+  const [quantity, setQuantity] = useState(getItem(item.id).units);
+
+  return (
+    <div className="flex justify-between border-b border-white pb-4 mb-4">
+      <Image
+        src={item.images[0]}
+        alt="Sustainable and Organic Cloths"
+        width={70}
+        height={100}
+      />
+      <div className="flex flex-col justify-between">
+        <div>
+          <h2 className="font-lato-regular !text-[1rem]">{item.name}</h2>
+          <span className="font-lato-regular !text-[.75rem]">
+            Size: {item.size}
+          </span>
+        </div>
+        <span className="font-lato-regular !text-[.75rem]">
+          Quantity: {quantity}
+        </span>
+      </div>
+      <Price
+        id={item.id}
+        actualPrice={item.actualPrice}
+        offPercentage={item.offPercentage}
+        disableRemove={disableRemove}
+      />
+    </div>
+  );
+}
+function Price({ id, actualPrice, offPercentage, disableRemove }) {
+  const { removeItem, getItem } = useCart();
+  const { price, quantity } = getItem(id);
+  const [totalPrice, setTotalPrice] = useState(price * quantity);
+  useEffect(() => {
+    setTotalPrice(null);
+    setTotalPrice(price * quantity);
+  }, [quantity, price]);
+  const removeProduct = () => {
+    removeItem(id);
+  };
+  return (
+    <div className="flex flex-col justify-between text-right">
+      {!disableRemove && (
+        <span className="flex justify-end" onClick={removeProduct}>
+          <IoMdClose className="opacity-25" />
+        </span>
+      )}
+      <span className="flex flex-col">
+        <h3>₹{totalPrice}</h3>
+        <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">
+          <span className="line-through">{actualPrice}</span>{" "}
+          <span className="font-semibold text-[#49AC56]">
+            {offPercentage}OFF
+          </span>
+        </small>
+      </span>
     </div>
   );
 }

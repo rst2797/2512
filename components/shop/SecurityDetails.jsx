@@ -1,35 +1,39 @@
-import React from 'react'
-import CardSecure from "./SVG/CardProtectionSVG"
+import React from "react";
+import CardSecure from "./SVG/CardProtectionSVG";
 import { BsGlobeCentralSouthAsia } from "react-icons/bs";
 import { GiClothes } from "react-icons/gi";
+import Image from "next/image";
 
 const SecurityDetails = () => {
-    const secure = [
-        {
-            title: 'Sustainable Clothing',
-            Logo: GiClothes
-        },
-        {
-            title: 'Secure Checkout',
-            Logo: CardSecure
-        },
-        {
-            title: 'Pan India Delivery',
-            Logo: BsGlobeCentralSouthAsia
-        },
-    ]
+  const secure = [
+    {
+      title: "Sustainable Clothing",
+      Logo: "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/products/security/Group+206+(1).png",
+    },
+    {
+      title: "Secure Checkout",
+      Logo: "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/products/security/Group+207.png",
+    },
+    {
+      title: "Pan India Delivery",
+      Logo: "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/products/security/Group+208.png",
+    },
+  ];
   return (
-    <div className='flex justify-between pt-[1rem] pb-[2rem]  px-[0.94rem]   2xl:px-20   border-b-4 border-white'>
-        {
-            secure.map((item, index) => (
-                <div key={index} className='flex flex-col items-center justify-center text-center'>
-                    <item.Logo className='text-4xl'/>
-                    <h2 className='font-lato-regular !text-[1rem] !font-[400] mt-[0.69rem]'>{item.title}</h2>
-                </div>
-            ))
-        }
-    </div>
-  )
-}
+    <>
+      {secure.map((item, index) => (
+        <div
+          key={index + 2}
+          className="flex items-center justify-center text-center"
+        >
+          <Image src={item.Logo} alt="" width={50} height={50} />
+          <h2 className="font-lato-regular !text-[1rem] !font-[400] w-1/2">
+            {item.title}
+          </h2>
+        </div>
+      ))}
+    </>
+  );
+};
 
-export default SecurityDetails
+export default SecurityDetails;

@@ -13,9 +13,28 @@ const Profile = ({ user, success }) => {
   const [responseData, setResponseData] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
+  const handleImageChange = async (e) => {
+    e.preventDefault();
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+
+    try {
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+
+      // Send the binary file to the backend API
+      await axios
+        .post(`/api/get-signedurl-to-upload/${userId}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log("Form:- ", formData);
+          // axios.put(res.data.putSigned, formData);
+        });
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   const handleUpload = async () => {
@@ -85,38 +104,77 @@ const Profile = ({ user, success }) => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Navbar />
-          <div className=" px-[.94rem] 2xl:px-20">
-            <div className="pt-24 flex flex-col items-center justify-center">
-              <div className="relative">
-                {selectedImage ? (
-                  <Image
-                    src={URL.createObjectURL(selectedImage)}
-                    alt="Selected Profile Picture"
-                    width={100}
-                    height={100}
-                    className="rounded-full"
+          <div className="py-4 px-[.94rem] 2xl:px-20 mx-auto max-w-[1450px]">
+            <div className="pt-24 grid grid-cols-4 gap-12">
+              <ProfileOptions user={user} />
+              <div className="w-[70%] col-span-3 pt-6">
+                <div className="relative w-fit">
+                  {selectedImage ? (
+                    <Image
+                      src={URL.createObjectURL(selectedImage)}
+                      alt="Selected Profile Picture"
+                      width={100}
+                      height={100}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <Image
+                      src={user?.profile}
+                      alt="Profile Picture"
+                      width={100}
+                      height={100}
+                      className="rounded-full"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="absolute left-0 right-0 top-0 bottom-0 opacity-0"
                   />
-                ) : (
-                  <Image
-                    src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
-                    alt="Profile Picture"
-                    width={100}
-                    height={100}
-                    className="rounded-full"
-                  />
-                )}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="absolute left-0 right-0 top-0 bottom-0 opacity-0"
-                />
+                </div>
+                <div className="flex justify-between pb-4 border-b-[1px] border-black">
+                  <h3 className="font-lato-regular !text-[1.3rem] font-semibold pt-[.88rem] text-[#2F2E2D] ">
+                    Profile Details
+                  </h3>
+                  <button className="bg-[#A86549] text-white font-semibold text-sm rounded-xl py-0 px-[1.25rem] w-[10rem]">
+                    Edit
+                  </button>
+                </div>
+                <table className="w-full font-lato-regular !font-semibold !text-[1rem]">
+                  <tbody>
+                    <tr>
+                      <td className="py-2">Full Name</td>
+                      <td className="py-2">{user?.name}</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Mobile No.</td>
+                      <td className="py-2">{user?.phone}</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Email ID</td>
+                      <td className="py-2">{user?.email}</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Gender</td>
+                      <td className="py-2">Male</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Date of Birth</td>
+                      <td className="py-2">28/07/1998</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Location</td>
+                      <td className="py-2 capitalize">{user?.address}</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Alternate Mobile</td>
+                      <td className="py-2">----Not Added----</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <h3 className="font-sansita-regular !text-[1.5rem] pt-[.88rem] text-[#2F2E2D]">
-                {user?.name}
-              </h3>
             </div>
-            <ProfileOptions user={user} />
           </div>
           <Footer />
         </>
@@ -132,30 +190,31 @@ export async function getServerSideProps(context) {
   const temp = cookies.get("token");
 
   const token = temp?.split("%22")[1];
-
-  const res = await axios.post(
-    `${process.env.NEXT_API_BASE_URL}/api/get-user`,
-    {
-      id: context.query.slug,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_API_BASE_URL}/api/get-user`,
+      {
+        id: context.query.slug,
       },
-    },
-    {
-      withCredentials: true,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    if (res.data.success) {
+      return {
+        props: {
+          user: res.data.user,
+          success: true,
+        },
+      };
     }
-  );
-  console.log("Profile user", res.data);
-  if (res.data.success) {
-    return {
-      props: {
-        user: res.data.user,
-        success: true,
-      },
-    };
-  } else {
+    throw new Error("Something went wrong!!!");
+  } catch (error) {
     return {
       props: {
         success: false,

@@ -4,10 +4,11 @@ import ProductNotFound from "../../components/shop/ProductNotFound";
 import ProductDetail from "../../components/shop/ProductDetail.jsx";
 import axios from "axios";
 import { memo } from "react";
+import { rediss } from "../../utils/redis";
 
 const TShirt = ({ product }) => {
   return (
-    <main>
+    <main className="bg-[#f2eadf]">
       <Head>
         <title>Classic Black Tees for Men - 2512 Wardrobe Essentials</title>
         <meta property="og:type" content="website" />
@@ -40,11 +41,26 @@ const TShirt = ({ product }) => {
 export default memo(TShirt);
 
 export async function getServerSideProps({ query }) {
-  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-product/${query.slug}`)
+  const cachedProduct = await rediss.get(query.slug);
+  const parsedProduct = await JSON.parse(cachedProduct);
+  if (parsedProduct) {
+    const updatedProduct = { ...parsedProduct, size: "S" };
+    return {
+      props: {
+        product: { ...updatedProduct, id: parsedProduct._id },
+      },
+    };
+  }
+  const res = await axios.get(
+    `${process.env.NEXT_API_BASE_URL}/api/get-product/${query.slug}`
+  );
   const product = res.data.product;
+  await rediss.set(query.slug, JSON.stringify(product));
+
+  const updatedProduct = { ...product, size: "S" };
   return {
     props: {
-      product: {...product, id: product._id},
+      product: { ...updatedProduct, id: product._id },
     },
   };
 }

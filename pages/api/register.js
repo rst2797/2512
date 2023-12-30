@@ -1,5 +1,6 @@
 import Joi from "joi";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { User } from "../../schema/user.js";
 import { connection } from "../../utils/database";
 
@@ -34,13 +35,30 @@ export default async function Register(req, res) {
     const isUserExist = await User.findOne({ email });
     if (!isUserExist) {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = new User({ name, email, phone, postalCode, password: hashedPassword, address });
+      const user = new User({
+        name,
+        email,
+        phone,
+        postalCode,
+        password: hashedPassword,
+        address,
+      });
       await user.save();
+
+      const token = jwt.sign(
+        {
+          email: email,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "2d" }
+      );
+
       return res.status(200).json({
         error: false,
         success: true,
         message: "success",
         user,
+        token,
       });
     } else {
       return res.status(403).json({

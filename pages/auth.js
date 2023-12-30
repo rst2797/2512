@@ -32,7 +32,7 @@ const Registration = () => {
               <div className="font-semibold px-3">OR</div>
               <div className="bg-white h-[2px] w-[130px]" />
             </div>
-            <Link href="/login">
+            <Link href="/login?destination=/">
               <a>
                 <button
                   type="submit"

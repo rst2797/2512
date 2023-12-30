@@ -38,7 +38,7 @@ const Story = () => {
           <Navbar />
         </SectionOne>
         <SectionTwo />
-        <SectionThree />
+        {/* <SectionThree /> */}
         <Footer />
       </div>
     </main>

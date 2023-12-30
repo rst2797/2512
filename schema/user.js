@@ -21,6 +21,11 @@ export const User =
       type: String,
       required: true,
     },
+    altphone: {
+      type: String,
+      required: true,
+      default: "----Not Added----"
+    },
     password: {
       type: String,
       required: true,
@@ -33,4 +38,9 @@ export const User =
       type: String,
       required: true,
     },
+    profile: {
+      type: String,
+      required: true,
+      default: "/images/profile/avatar.jpg"
+    }
   });
