@@ -62,13 +62,16 @@ const Cart = () => {
                 {user ? (
                   <Checkout items={items} />
                 ) : (
+                  <div className="bg-white rounded-xl h-[96%] relative mb-2 mx-2 flex flex-col justify-center items-center">
+                  <h2 className="text-center font-bold text-2xl px-4 ">Snap! You need to login to proceed</h2>
                   <Link href="/login?destination=/cart">
-                    <a className="absolute bottom-0 left-0 right-0 py-[1rem] px-[0.94rem]">
-                      <button className="w-full py-[0.5625rem] font-bold text-white bg-[#A86549]">
+                    <a className="py-[1rem] px-[0.94rem]">
+                      <button className="px-4 py-[0.5625rem] font-bold text-white rounded-lg bg-[#A86549]">
                         Login to checkout
                       </button>
                     </a>
                   </Link>
+                  </div>
                 )}
               </>
             </div>

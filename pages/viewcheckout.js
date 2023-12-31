@@ -9,6 +9,7 @@ import Footer from "../components/common/footer";
 import { IoMdArrowBack, IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import ProceedCheckout from "../components/view-checkout/ProceedCheckout";
+import Cookies from "js-cookie";
 
 export default function YourBillingComponent() {
   const [userData, setUserData] = useState(null);
@@ -17,6 +18,10 @@ export default function YourBillingComponent() {
   const { items } = useCart();
 
   useEffect(() => {
+    const cookies = Cookies.get("token")
+    if (!cookies) {
+      return router.push("/login?destination=/viewcheckout");
+    }
     setUserData(JSON.parse(localStorage.getItem("user")));
   }, []);
   useEffect(() => {

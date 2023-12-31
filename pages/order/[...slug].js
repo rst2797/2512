@@ -30,6 +30,9 @@ const Order = ({ totalPrice, orderId, userId, token }) => {
     });
   };
   useEffect(() => {
+    if (!token) {
+      router.push("/login?destination=/shop/tshirt");
+    }
     shipOrder();
   }, []);
 
@@ -61,7 +64,9 @@ export default Order;
 
 export const getServerSideProps = async (context) => {
   const cookies = new Cookies(context.req, context.res);
-  const token = cookies.get("token").split("%22")[1];
+  const serializedToken = cookies.get("token");
+  const token = serializedToken?.split("%22")[1];
+
   return {
     props: {
       city: "",
@@ -70,7 +75,7 @@ export const getServerSideProps = async (context) => {
       orderId: context.query.slug[0],
       userId: context.query.slug[1],
       totalPrice: context.query.slug[2],
-      token,
+      token: token ?? false,
     },
   };
 };
