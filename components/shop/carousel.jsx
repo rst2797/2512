@@ -94,7 +94,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 
-const Carousel = ({ sliderImages, rating, numberOfRatings }) => {
+const   Carousel = ({ sliderImages, rating, numberOfRatings }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
@@ -110,7 +110,7 @@ const Carousel = ({ sliderImages, rating, numberOfRatings }) => {
   };
 
   return (
-    <div className="relative flex justify-around px-12 pb-6">
+    <div className="relative flex justify-around lg:px-12 pb-6">
       <div className="w-full object-cover relative">
       <button
         onClick={handlePrev}
@@ -121,8 +121,8 @@ const Carousel = ({ sliderImages, rating, numberOfRatings }) => {
         <Image
           src={sliderImages[currentIndex]}
           alt={`Image ${currentIndex + 1}`}
-          width={1800}
-          height={1900} 
+          width={800}
+          height={1000} 
           placeholder="blur"
           className="rounded-2xl"
           blurDataURL="/product-placeholder.jpg"

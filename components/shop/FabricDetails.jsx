@@ -1,87 +1,79 @@
+import Link from "next/link";
 import React, { useState } from "react";
-import { FaPlus, FaMinus, FaRegStar  } from "react-icons/fa";
+import { useEffect } from "react";
+import { FaPlus, FaMinus, FaRegStar } from "react-icons/fa";
 
-const FabricDetails = () => {
+const FabricDetails = ({ product, setActiveFabricDetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+  useEffect(() => {
+    setActiveFabricDetails({
+      open: "description",
+      product: product.sku,
+    });
+  }, []);
 
-  const handleClick = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
+  const handleClick = (open) => {
+    setActiveFabricDetails({ product: product.sku, open });
   };
 
   return (
-    <div className="accordion px-14">
-      <div className="accordion-item transition-all py-[1rem] border-y-[1px] !border-black">
-        <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]" onClick={() => handleClick(0)}>
+    <div className="accordion lg:px-14">
+      <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-y-[1px] !border-black">
+        <h2
+          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          onClick={() => handleClick("description")}
+        >
           <span className="accordion-header-text">Description</span>
-          <span className="accordion-header-icon">{activeIndex === 0 ? <FaMinus/> : <FaPlus/>}</span>
+          <span className="accordion-header-icon">
+            {activeIndex === 0 ? <FaMinus /> : <FaPlus />}
+          </span>
         </h2>
-        {activeIndex === 0 && (
-          <div className="accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-              necessitatibus velit assumenda explicabo dolorem? Itaque autem
-              vero natus ipsam ipsa corporis debitis doloremque nihil.
-            </p>
-          </div>
-        )}
       </div>
-      <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
-        <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]" onClick={() => handleClick(1)}>
+      <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
+        <h2
+          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          onClick={() => handleClick("material")}
+        >
           <span className="accordion-header-text">Material</span>
-          <span className="accordion-header-icon">{activeIndex === 1 ? <FaMinus/> : <FaPlus/>}</span>
+          <span className="accordion-header-icon">
+            {activeIndex === 1 ? <FaMinus /> : <FaPlus />}
+          </span>
         </h2>
-        {activeIndex === 1 && (
-          <div className="accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-              necessitatibus velit assumenda explicabo dolorem? Itaque autem
-              vero natus ipsam ipsa corporis debitis doloremque nihil.
-            </p>
-          </div>
-        )}
       </div>
 
-      <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
-        <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]" onClick={() => handleClick(2)}>
+      <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
+        <h2
+          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          onClick={() => handleClick("care")}
+        >
           <span className="accordion-header-text">Care</span>
-          <span className="accordion-header-icon">{activeIndex === 2 ? <FaMinus/> : <FaPlus/>}</span>
+          <span className="accordion-header-icon">
+            {activeIndex === 2 ? <FaMinus /> : <FaPlus />}
+          </span>
         </h2>
-        {activeIndex === 2 && (
-          <div className="accordion-body pl-8">
-            <ul>
-              <li className="list-disc">Machine or Hand Wash In Cold Water</li>
-              <li className="list-disc">Do Not Dry Clean</li>
-              <li className="list-disc">Do Not Tumble Dry</li>
-              <li className="list-disc">Do Not Iron On Suede</li>
-            </ul>
-          </div>
-        )}
       </div>
 
-      <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
-        <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]" onClick={() => handleClick(3)}>
-          <span className="accordion-header-text">Delivery, Returns & Exchange</span>
-          <span className="accordion-header-icon">{activeIndex === 3 ? <FaMinus/> : <FaPlus/>}</span>
-        </h2>
-        {activeIndex === 3 && (
-          <div className="accordion-body">
-            <p>This is the content for item 3.</p>
+      <Link href="/home/delivery-returns" >
+        <a target="_blank">
+          <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
+            <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
+              <span className="accordion-header-text">
+                Delivery, Returns & Exchange
+              </span>
+              <span className="accordion-header-icon">
+                {activeIndex === 3 ? <FaMinus /> : <FaPlus />}
+              </span>
+            </h2>
           </div>
-        )}
-      </div>
-      <div className="accordion-item transition-all py-[1rem] border-b-[1px] border-black">
+        </a>
+      </Link>
+      <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] border-black">
         <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
-               {
-                [1, 2, 3, 4, 5].map(ele=>(
-                    <FaRegStar key={ele} />
-                ))
-               }
+            {[1, 2, 3, 4, 5].map((ele) => (
+              <FaRegStar key={ele} />
+            ))}
           </span>
         </h2>
       </div>

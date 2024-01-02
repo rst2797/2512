@@ -42,9 +42,9 @@ const Story = () => {
         <SectionOne>
           <Navbar />
         </SectionOne>
-        <SectionTwo />
+        {/* <SectionTwo /> */}
         <SectionThree />
-        <SectionFour />
+        {/* <SectionFour /> */}
         <SectionFive />
         <Footer />
       </div>

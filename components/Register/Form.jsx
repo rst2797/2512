@@ -87,7 +87,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
-              className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-full max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-full max-w-full"
             />
             {formik.touched.firstName && formik.errors.firstName && (
               <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -108,7 +108,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
-              className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-full max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-full max-w-full"
             />
             {formik.touched.lastName && formik.errors.lastName && (
               <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -130,7 +130,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
-            className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%] max-w-full"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%] max-w-full"
           />
           {formik.touched.email && formik.errors.email && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -159,7 +159,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 w-[80%] max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 w-[80%] max-w-full"
             />
           </div>
           {formik.touched.phone && formik.errors.phone && (
@@ -181,7 +181,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
-            className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%]"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
           />
           {formik.touched.password && formik.errors.password && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -201,7 +201,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.postalCode}
-            className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%]"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
           />
           {formik.touched.postalCode && formik.errors.postalCode && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -221,7 +221,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.address}
-            className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%]"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
           />
           {formik.touched.address && formik.errors.address && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">

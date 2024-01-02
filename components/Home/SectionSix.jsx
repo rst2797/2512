@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const SectionSix = () => {
   return (
-    <div className="bg-[#f2eadf] p-4 lg:px-24 flex flex-col justify-center items-center lg:flex-row lg:justify-between">
+    <div className="bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group.png')] p-4 lg:px-24 flex flex-col justify-center items-center lg:flex-row lg:justify-between">
       <table>
         <tbody>
           <tr className="border-b-[1px] border-black">
@@ -94,7 +94,7 @@ const SectionSix = () => {
         </tbody>
       </table>
 
-      <div className="w-[40%]">
+      <div className="lg:w-[40%]">
         <h2 className="font-sansita-regular !text-[2.5rem] !font-light lg:!text-[3rem] text-[#2F2E2D] !leading-[4rem] text-center">
           Dress with purpose, share with pride.
         </h2>

@@ -1,15 +1,16 @@
 import Image from "next/image";
 import React from "react";
+import Cards from "./Cards"
 
 const SectionTwo = () => {
   return (
     <div className="px-[1.88rem] py-4 bg-[#F4E9DF]">
       <div className="lg:flex justify-center lg:pb-8">
-        <h2 className="font-sansita-regular !text-[4rem] text-center">
+        <h2 className="font-sansita-regular !text-[2.5rem] lg:!text-[4rem] text-center">
           How we embrace sustainability?
         </h2>
       </div>
-      <div className="">
+      <div className="hidden lg:block">
         <div className="flex justify-evenly items-center">
           <div className="flex">
             <div className="rounded-xl bg-[#A86549] drop-shadow-2xl flex items-center px-12 py-3">
@@ -134,6 +135,9 @@ const SectionTwo = () => {
             care for our planet.
           </p>
         </div>
+      </div>
+      <div className="block lg:hidden">
+        <Cards/>
       </div>
     </div>
   );

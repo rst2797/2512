@@ -125,7 +125,7 @@ export default function YourBillingComponent() {
         <div className={`flex flex-col mx-auto max-w-[1450px]`}>
           <div className="my-4 mx-4">
             <h3 className="font-sansita-regular text-left">Checkout</h3>
-            <div className="grid grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-12">
               <div className="bg-white rounded-xl font-bold my-4 flex flex-col py-4 px-6 col-span-2">
                 <h3 className="font-lato-regular !font-semibold pb-4">
                   Choose Payment Mode
@@ -151,7 +151,7 @@ export default function YourBillingComponent() {
                   />
                   <span className="ml-2 capitalize">Cash On Delivery</span>
                 </label>
-                <div className="flex justify-center pt-12 w-[60%]">
+                <div className="flex justify-center pt-12 lg:w-[60%]">
                   {paymentMethod &&
                     (paymentMethod === "Prepaid" ? (
                       <button

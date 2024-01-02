@@ -7,22 +7,12 @@ import { PiStarFourLight } from "react-icons/pi";
 
 const SectionOne = () => {
   return (
-    <div className="relative z-20 lg:mt-12 lg:min-h-[100vh] bg-cover bg-center bg-no-repeat lg:bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/0O9A8802+1.png')]">
-      <div className="block lg:hidden">
-        <Image
-          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home_header.png"
-          alt="Sustainable Cloths with 100% cotton | Organic Cloths | 2512 Cloths"
-          width={900}
-          height={1800}
-          className="object-fit w-screen min-h-screen"
-        />
-      </div>
-
-      <div className=" px-[0.94rem]  2xl:px-20 text-white absolute z-20 top-[26rem] lg:top-[22rem] left-0 right-0 lg:left-0 drop-shadow-custom text-center lg:text-left">
-        <h1 className="font-sansita-regular lg:!text-[4rem] lg:!leading-[5.5rem] drop-shadow-lg">
+    <div className="relative z-20 min-h-[100vh] bg-cover bg-center bg-no-repeat bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/0O9A8802+1.png')]">
+      <div className=" px-[0.94rem]  2xl:px-20 text-white absolute z-20 top-[26rem] lg:top-[22rem] left-0 right-0 lg:left-0 text-center lg:text-left">
+        <h1 className="font-sansita-regular lg:!text-[4rem] lg:!leading-[5.5rem]">
           Sustainable. <br className="hidden lg:block" /> Beautiful.
         </h1>
-        <p className="font-lato-regular drop-shadow-lg lg:drop-shadow-none lg:w-[26rem] lg:text-[1.75rem] lg:leading-[2.375rem] ">
+        <p className="font-lato-regular lg:drop-shadow-none lg:w-[26rem] lg:text-[1.75rem] lg:leading-[2.375rem] ">
           A collection that embodies the concept of simplicity{" "}
           <span className="block lg:hidden">
             <Link href="/kanso">
@@ -38,10 +28,10 @@ const SectionOne = () => {
           </Link>
         </span>
       </div>
-      <div className="absolute mt-12 bottom-0 left-0 right-0 bg-[#A86549] text-white hidden lg:block">
+      <div className="absolute mt-12 bottom-0 left-0 right-0 bg-[#A86549] text-white">
         <Marquee
           pauseOnHover
-          className="backdrop-sepia px-6 py-4 rounded-md text-[.8rem] h-[2.5rem] uppercase"
+          className="px-6 py-4 rounded-md text-[.8rem] h-[2.5rem] uppercase"
         >
           Free shipping all over India! &nbsp;<PiStarFourLight/>&nbsp;
           Free shipping all over India! &nbsp;<PiStarFourLight/>&nbsp;

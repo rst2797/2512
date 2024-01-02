@@ -30,11 +30,9 @@ const Navbar = ({ position }) => {
   };
   return (
     <>
-      <div className="lg:px-0  px-[0.94rem]   2xl:px-20 lg:py-0 py-2">
+      <div className="lg:px-0 2xl:px-20 lg:py-0 ">
         <nav
-          className={`fixed lg:top-0 ${
-            position ? "top-[3rem]" : "top-4"
-          } lg:left-0 left-4 lg:right-0 right-4 z-50 bg-[#e9e0d9] px-[1rem] lg:px-[5.37rem] py-[0.6rem]  rounded-md lg:rounded-none drop-shadow-md lg:drop-shadow-none transition-all`}
+          className={`lg:border-b-2 border-[#A86549] fixed top-0 left-0 right-0 z-50 bg-[#F4E9DF] px-[1rem] lg:px-[5.37rem] drop-shadow-md lg:drop-shadow-none transition-all`}
         >
           <div className="flex items-center justify-between">
             <div className="lg:hidden pt-2 pr-6">
@@ -46,33 +44,32 @@ const Navbar = ({ position }) => {
               </button>
             </div>
             <Link href="/">
-              <a className="text-2xl font-bold">
+              <a className="text-2xl font-bold pt-[.5rem] lg:border-r-2 border-[#A86549] lg:pr-12">
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
-                  className="!pt-1"
-                  width={60}
-                  height={45}
+                  width={65}
+                  height={50}
                 />
               </a>
             </Link>
             <div className="hidden lg:block">
               <ul className="flex flex-wrap list-none leading-loose lg:pl-44">
-                <li className="mx-[1.5rem] my-2 md:my-0">
+                <li className="px-[1.5rem] border-x-[2px] border-[#A86549] py-4 md:my-0">
                   <Link href="/">
                     <a className="!text-[1rem] font-bold font-lato-regular">
                       Home
                     </a>
                   </Link>
                 </li>
-                <li className="mx-[1.5rem] my-2 md:my-0">
+                <li className="px-[1.5rem] pt-4 md:my-0">
                   <Link href="/shop/tshirt">
                     <a className="!text-[1rem] font-bold font-lato-regular">
                       Shop
                     </a>
                   </Link>
                 </li>
-                <li className="mx-[1.5rem] my-2 md:my-0 relative">
+                <li className="px-[1.5rem] border-x-[2px] border-[#A86549] py-4 md:my-0 relative">
                   <span
                     className="!text-[1rem] font-bold font-lato-regular cursor-pointer select-none "
                     onClick={() => setOpenMenu(!openMenu)}
@@ -80,7 +77,7 @@ const Navbar = ({ position }) => {
                     About Us
                   </span>
                   {openMenu && (
-                    <div className="animate__animated animate__zoomIn bg-[#e9e0d9] absolute top-12 p-6 font-semibold">
+                    <div className="animate__animated animate__zoomIn bg-[#F4E9DF] absolute top-12 p-6 font-semibold">
                       <ul>
                         <li>
                           <Link href="/our-story">
@@ -101,7 +98,7 @@ const Navbar = ({ position }) => {
                     </div>
                   )}
                 </li>
-                <li className="mx-[1.5rem] my-2 md:my-0">
+                <li className="px-[1.5rem] border-r-[2px] border-[#A86549] py-4 md:my-0">
                   <Link href="/contactus">
                     <a className="!text-[1rem] font-bold font-lato-regular">
                       Contact Us
@@ -111,23 +108,20 @@ const Navbar = ({ position }) => {
               </ul>
             </div>
 
-            <div className="flex items-center justify-evenly">
-              <Link
-                href={user ? `/profile/${user._id}` : "/auth"}
-                className="mb-2"
-              >
-                <a className="lg:text-[1.25rem] relative hidden lg:block">
-                  <FaRegUser size={25} className="mx-4" />
+            <div className="flex items-center flex-row-reverse lg:flex-row justify-evenly">
+              <Link href={user ? `/profile/${user._id}` : "/auth"}>
+                <a className="lg:text-[1.25rem] relative">
+                  <FaRegUser size={25} className="pl-1 lg:p-0 lg:mx-4" />
                 </a>
               </Link>
-              <Link href="/cart" className="mb-2">
+              <Link href="/cart">
                 <a className="text-[1.25rem] relative">
                   {!isEmpty && (
                     <span className="absolute right-2 top-0 text-xs bg-[#A86549] text-white rounded-full w-4 h-4 text-center">
                       {totalUniqueItems}
                     </span>
                   )}
-                  <IoBagOutline size={25} className="mx-4" />
+                  <IoBagOutline size={25} className="lg:mx-4" />
                 </a>
               </Link>
               <div className="justify-center hidden lg:flex ml-4">
@@ -172,8 +166,8 @@ const NavList = ({ navOpen, setNavOpen, user, handleLogout }) => {
     <div
       className={`animate__animated animate__slideInLeft font-semibold bg-[#EADAC8] w-[80vw] h-screen fixed top-0 left-0 z-50 flex flex-col justify-between`}
     >
-      <div className="">
-        <div className="flex flex-end relative top-10 left-64 right-4 text-[2rem]">
+      <div className="flex flex-end relative">
+        <div className="absolute top-5 right-4 text-[2rem]">
           <IoMdClose onClick={() => setNavOpen(false)} />
         </div>
         <ul className="flex flex-col mt-12 px-4">

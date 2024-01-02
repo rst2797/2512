@@ -39,8 +39,8 @@ const Checkout = () => {
     <main className="bg-[#F4E9DF] min-h-screen">
       <Navbar />
       <div className="mx-auto max-w-[1450px] pt-24">
-        <h1 className="font-sansita-regular pb-4">Checkout</h1>
-        <div className="grid grid-cols-3 gap-12">
+        <h1 className="font-sansita-regular pb-4 px-4 lg:px-0">Checkout</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-12 px-4 lg:px-0">
           <div className="col-span-2">
             {/* Delivery Detail */}
             <div className="bg-white p-6 rounded-xl">
@@ -74,7 +74,7 @@ const Checkout = () => {
               </h3>
               {items.map((ele) => (
                 <div
-                  className="flex items-center justify-between w-[40%] border-b-[1px] py-2"
+                  className="flex items-center justify-between lg:w-[40%] border-b-[1px] py-2"
                   key={ele.id}
                 >
                   <Image src={ele.images[0]} alt="" width={80} height={100} />
@@ -86,7 +86,10 @@ const Checkout = () => {
             </div>
           </div>
           {/* Proceed card */}
+          <div className="hidden lg:block">
           <ProceedCheckout items={items} />
+          </div>
+
         </div>
 
         {/* Order Summary */}
@@ -96,13 +99,13 @@ const Checkout = () => {
           </h3>
           {items.map((ele) => (
             <div
-              className="flex justify-between items-center border-b-[1px] border-[#0000005a]"
+              className="flex justify-between items-center border-b-[1px] border-[#0000005a] my-2"
               key={ele.id}
             >
-              <div className="flex items-center w-[40%] border-b-[1px] py-2">
+              <div className="flex items-center lg:w-[40%] border-b-[1px] py-2">
                 <Image src={ele.images[0]} alt="" width={120} height={150} />
                 <div className="px-4">
-                  <h3 className="font-sansita-regular !text-2xl">{ele.name}</h3>
+                  <h3 className="font-sansita-regular !text-xl lg:!text-2xl">{ele.name}</h3>
                   <div className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
                     Size: {ele.size}
                   </div>
@@ -116,14 +119,17 @@ const Checkout = () => {
                   ₹{ele.price}
                 </h2>
                 <div className="flex items-center">
-                  <h4 className="text-sm font-semibold line-through">₹1399</h4>
-                  <h5 className="text-xs text-[#FF0909] font-bold px-2">
+                  <h4 className="text-xs font-semibold line-through">₹1399</h4>
+                  <h5 className="text-xs text-[#FF0909] font-bold pl-2 whitespace-nowrap">
                     30% OFF
                   </h5>
                 </div>
               </div>
             </div>
           ))}
+          <div className="block lg:hidden">
+            <ProceedCheckout items={items} />
+          </div>
         </div>
       </div>
       <Footer />

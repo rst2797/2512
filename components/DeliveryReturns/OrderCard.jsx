@@ -37,7 +37,7 @@ const OrderCard = ({ orders }) => {
                           Delivered On 10-Jan-2024
                         </h2>
                       </div>
-                      <div className="flex justify-between w-[800px]">
+                      <div className="flex justify-between lg:w-[800px]">
                         <div className="">
                           <h3 className="text-[#2F2E2D] font-lato-regular !text-[1rem] mt-2 font-semibold ">
                             {ele.name}
@@ -50,14 +50,14 @@ const OrderCard = ({ orders }) => {
                               {ele.actualPrice}
                             </h5>
                           </div>
-                          <div className="flex justify-between w-[12rem]">
+                          <div className="flex justify-between w-[10rem] lg:w-[12rem] pt-12 lg:pt-0 py-4">
                             <h4 className="text-[.65rem]">
                               <span className="font-semibold ">
                                 Size:&nbsp;
                               </span>
                               {ele.size}
                             </h4>
-                            <h4 className="text-[.65rem]">
+                            <h4 className="text-[.65rem] px-16 lg:px-0">
                               <span className="font-semibold">
                                 Color:&nbsp;
                               </span>
@@ -71,17 +71,17 @@ const OrderCard = ({ orders }) => {
                             </h4>
                           </div>
                         </div>
-                        <div className="flex flex-col justify-between gap-1 py-4">
+                        <div className="flex flex-col lg:justify-between gap-1 py-4">
                           <button className="bg-[#A86549] text-white font-semibold text-xs py-[.5rem] px-[2rem] rounded-lg">Exchange</button>
                           <button className="bg-[#A86549] text-white font-semibold text-xs py-[.5rem] px-[2rem] rounded-lg">Return</button>
                         </div>
                       </div>
-                      <div className="flex gap-4 mt-4">
-                        <button className="bg-[#EADAC8] py-[.5rem] px-[3rem] text-xs font-semibold rounded-lg">
+                      <div className="flex gap-4 lg:mt-4">
+                        <button className="bg-[#EADAC8] py-[.5rem] px-[2rem] lg:px-[3rem] text-xs font-semibold rounded-lg">
                           Buy Again
                         </button>
                         <Link href={`/collection/${ele._id}`} >
-                         <a className="bg-[#EADAC8] py-[.5rem] px-[3rem] text-xs font-semibold rounded-lg"> View Product</a>
+                         <a className="bg-[#EADAC8] py-[.5rem] px-[2rem] lg:px-[3rem] text-xs font-semibold rounded-lg"> View Product</a>
                         </Link>
                       </div>
                     </div>

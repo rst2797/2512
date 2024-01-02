@@ -21,7 +21,7 @@ const ProfileOptions = ({ user }) => {
     },
   ];
   return (
-    <div className="px-[1.5rem] pt-[1rem] relative my-4 h-[97%] rounded-3xl bg-white drop-shadow-lg">
+    <div className="px-[1.5rem] pt-[1rem] relative my-4 h-[40vh] lg:h-[97%] w-[92vw] lg:w-auto rounded-3xl bg-white drop-shadow-lg">
       {options.map((option) => (
         <Link href={option.link} key={option.id}>
           <a>

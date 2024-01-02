@@ -5,15 +5,15 @@ import { IoArrowForward } from "react-icons/io5";
 
 const SectionFive = () => {
   return (
-    <div className="relative bg-[#ae6847] overflow-hidden max-h-[90vh] lg:bg-contain lg:bg-left lg:bg-no-repeat lg:bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group+3.png')]">
-      <div className="lg:grid grid-cols-5 -gap-8">
+    <div className="relative overflow-hidden max-h-[90vh] lg:bg-contain lg:bg-left lg:bg-no-repeat bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group+3.png')]">
+      <div className="lg:grid grid-cols-5 flex flex-col-reverse -gap-8">
         <Link href="/kanso">
-          <a className="absolute lg:relative lg:top-32 lg:flex flex-col bottom-40 left-0 right-0  text-[#2F2E2D] lg:text-white ">
+          <a className="lg:relative lg:top-32 lg:py-0 py-32 lg:flex flex-col bottom-40 left-0 right-0 text-white ">
             <>
-              <h2 className="font-sansita-regular text-center lg:pt-20 lg:text-start lg:px-12 lg:py-1 drop-shadow-custom">
+              <h2 className="font-sansita-regular text-center lg:pt-20 lg:text-start lg:px-12 lg:py-1">
               Kanso Our First Collection
               </h2>
-              <p className="font-semibold text-sm px-6 lg:px-12 lg:py-4 lg:w-full text-justify  drop-shadow-custom">
+              <p className="font-semibold text-sm px-6 lg:px-12 py-4 lg:w-full text-center lg:text-justify">
                 Carefully curated collection of t-shirt made with organic cotton
                 and minimal embroidery.
               </p>
@@ -27,7 +27,7 @@ const SectionFive = () => {
             </>
           </a>
         </Link>
-        <div className="hidden lg:block col-span-4">
+        <div className="col-span-4">
           <Image
             src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/22+1.png"
             alt=""

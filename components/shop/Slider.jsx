@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
@@ -18,7 +19,7 @@ export default function SectionThree() {
     });
   }, []);
   return (
-    <div className="relative px-[.945rem] cursor-pointer">
+    <div className="relative lg:px-[.945rem] cursor-pointer">
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
@@ -27,6 +28,11 @@ export default function SectionThree() {
         pagination={{
           clickable: true,
         }}
+        navigation={{
+          nextEl: '.next-arrow',
+          prevEl: '.prev-arrow',
+        }}
+        modules={[Navigation]} 
         breakpoints={{
           400: {
             slidesPerView: 1,
@@ -59,8 +65,8 @@ export default function SectionThree() {
               className="object-cover rounded-t-lg"
               onLoad={() => setLoading(false)}
             />
-            <h3 className="font-sansita-regular !text-[.75rem] !leading-6 px-4">{image.name}</h3>
-            <h5 className="text-xs px-4 py-1">{image.actualPrice}</h5>
+            <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">{image.name}</h3>
+            <h5 className="px-4 py-1 font-bold text-sm">{image.actualPrice}</h5>
               </a>
             </Link>
           </SwiperSlide>

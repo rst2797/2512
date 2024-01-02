@@ -29,12 +29,14 @@ const Register = () => {
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
         <div className="2xl:grid grid-cols-3">
-          <Image
-            src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
-            alt=""
-            width={200}
-            height={500}
-          />
+          <div className="hidden lg:block">
+            <Image
+              src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
+              alt=""
+              width={450}
+              height={750}
+            />
+          </div>
           <div className="px-[0.94rem] col-span-2 2xl:px-20 pt-[4.5rem]">
             <div className="pb-6">
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
@@ -47,26 +49,16 @@ const Register = () => {
               <div className="font-semibold px-3">OR</div>
               <div className="bg-white lg:bg-black h-[1px] w-[200px]" />
             </div>
-            <div className="text-center lg:hidden">
-              <Link href="/register">
-                <a>
-                  <span className="opacity-50">
-                    Already have an account?&nbsp;
-                  </span>
-                  <span className="text-blue-500 font-bold opacity-100">
-                    Login here!
-                  </span>
-                </a>
-              </Link>
-            </div>
-            <div className="my-2 px-48 text-center">
-              <p className="font-semibold text-md">Reach out to us via email:</p>
+            <div className="my-2 lg:px-48 text-center">
+              <p className="font-semibold text-md">
+                Reach out to us via email:
+              </p>
               <p className="text-xl font-semibold">contactus@2512.in</p>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </main>
   );
 };

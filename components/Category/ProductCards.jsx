@@ -5,7 +5,7 @@ import Rating from "../common/RatingStars";
 
 const ProductCards = ({ products }) => {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-y-4 lg:gap-x-10 lg:gap-y-16">
       {products?.map((ele) => (
         <Link href={`/collection/${ele._id}`} key={ele.id}>
           <a className="w-fit bg-white rounded-xl hover:drop-shadow-lg">

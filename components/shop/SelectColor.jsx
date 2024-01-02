@@ -20,7 +20,7 @@ const SelectColor = ({ product }) => {
         <Link href="#">
           <a>
             <button
-              className={`!text-[0.9375rem] rounded-full p-4 mx-2 border-2 border-[#A86549] bg-[#A86549] text-white text-center font-bold flex justify-center items-center ${
+              className={`!text-[0.9375rem] rounded-full p-4 mx-2 border-2 border-[#A86549] bg-[#B55A30] text-white text-center font-bold flex justify-center items-center ${
                 product.color === "rust" ? "opacity-100" : "opacity-50"
               }`}
             />

@@ -27,9 +27,9 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
           <input
             type="text"
             defaultValue={466001}
-            className="w-[12.125rem] h-[2.5625rem] py-[0.8125rem] px-[1rem]"
+            className="w-full lg:w-[12.125rem] h-[2.5625rem] py-[0.8125rem] px-[1rem]"
           />
-          <button className="text-[#A86549] font-lato-regular !font-[700] !text-[0.8125rem] py-[0.6875rem] px-[0.625rem] w-[8.5rem] h-[2.5625rem] bg-white">
+          <button className="text-[#A86549] font-lato-regular !font-[700] !text-[0.8125rem] py-[0.6875rem] px-[0.625rem] w-[12rem] lg:w-[8.5rem] h-[2.5625rem] bg-white">
             Change Pincode
           </button>
         </form>
@@ -68,7 +68,7 @@ const AddToCart = ({ product, quantity }) => {
   };
   return (
     <button
-      className="py-[0.3rem] my-2 rounded-xl w-[55%] text-white bg-[#A86549] font-lato-regular !text-[.75rem] !font-[700]"
+      className="py-[0.3rem] my-2 rounded-lg w-full lg:w-[55%] text-white bg-[#A86549] font-lato-regular !text-[.75rem] !font-[700]"
       onClick={handleAddToCart}
     >
       Add to Bag

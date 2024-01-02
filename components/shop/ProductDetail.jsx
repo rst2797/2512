@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Breadcrumb from "../common/breadcrumb";
 import Navbar from "../common/header";
 import Footer from "../common/footer";
@@ -11,26 +11,42 @@ import SimilarProducts from "./SimilarProducts";
 import Subscribe from "../Home/SectionSeven";
 import Rating from "../common/RatingStars";
 import FabricDetails from "./FabricDetails";
+import { fabricDetails } from "../../utils/fabricDetails";
+import Link from "next/link";
+import MobFabricDetails from "./MobFabricDetails";
 
 const ProductDetail = ({ product }) => {
+  const [activeFabricDetail, setActiveFabricDetails] = useState({
+    open: "description",
+    product: product.sku,
+  });
+
   const setProductSize = (s) => {
     product.size = s;
   };
-  useEffect(() => {}, [product]);
+
+  useEffect(() => {
+    console.log(activeFabricDetail);
+  }, [product, activeFabricDetail]);
   return (
     <>
       <main className="bg-[#f2eadf] pt-[5rem] mx-auto max-w-[1450px]">
         <Navbar />
-        <div className="container border-b-4 border-white px-[0.94rem] pt-8 grid grid-cols-2 gap-12">
-          <div className="p-4">
+        <div className="container border-b-4 border-white px-[0.94rem] pt-8 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+          <div className="lg:p-4">
             <Carousel
               sliderImages={[...product.images]}
               rating={product.rating}
               numberOfRatings={product.numberOfRatings}
             />
-            <FabricDetails />
+            <div className="hidden lg:block">
+              <FabricDetails
+                product={product}
+                setActiveFabricDetails={setActiveFabricDetails}
+              />
+            </div>
           </div>
-          <div className="p-6 ml-12">
+          <div className="relative lg:p-6 lg:ml-12">
             <Breadcrumb name={product.breadcrumb} category={product.category} />
             <h2 className="!text-[1.5rem] text-[#2F2E2D] font-sansita-regular">
               {product.name}
@@ -54,24 +70,34 @@ const ProductDetail = ({ product }) => {
             </div>
             <SelectSize setProductSize={setProductSize} />
             <DeliveryDetails product={product} />
-            <div>
-              <p className="font-semibold w-[90%] py-10">
-                Crafted from 100% organic cotton, our tee is incredibly soft and
-                gentle on your skin. The relaxed fit is perfect for any
-                occasion, whether you&apos;re lounging at home or out and about.
-                And because it&apos;s gender neutral, it&apos;s a versatile
-                addition to any wardrobe. The embroidery Live in the moment is a
-                meaningful message for each of us to focus on the present rather
-                than being anxious about the future.
+            <div className="hidden lg:block">
+              <p className="font-semibold lg:w-[90%] pt-10 pb-5">
+                {activeFabricDetail.open === "care" ||
+                activeFabricDetail.open === "material" ? (
+                  <>
+                    {fabricDetails[activeFabricDetail.product][
+                      activeFabricDetail.open
+                    ].map((ele, index) => (
+                      <ul key={index}>
+                        <li className="py-2 list-disc">{ele}</li>
+                      </ul>
+                    ))}
+                  </>
+                ) : (
+                  fabricDetails[activeFabricDetail.product][
+                    activeFabricDetail.open
+                  ]
+                )}
               </p>
             </div>
-            <div className="flex bg-[#A86549] rounded-2xl py-4 text-white w-[90%]">
+            <MobFabricDetails product={product}/>
+            <div className="lg:absolute bottom-14 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
               <SecurityDetails />
             </div>
           </div>
         </div>
         <SimilarProducts />
-        <Subscribe />
+        {/* <Subscribe /> */}
       </main>
       <Footer />
     </>

@@ -43,7 +43,7 @@ const Cart = () => {
       </Head>
       <div className="bg-[#F4E9DF] w-full lg:w-3/4 xl:w-2/3 2xl:w-full 2xl:px-20 min-h-screen">
         <Navbar />
-        <div className="p-6 2xl:p-0 2xl:pt-[4rem] pt-[4rem] mx-auto max-w-[1450px]">
+        <div className="p-3 lg:p-6 2xl:p-0 2xl:pt-[4rem] pt-[4rem] mx-auto max-w-[1450px]">
           <div className="flex justify-between items-center py-4">
             <h1 className="font-sansita-regular !text-[3rem] !font-[100] mb-4">
               Cart
@@ -52,8 +52,8 @@ const Cart = () => {
           {isEmpty ? (
             <p>Your cart is empty</p>
           ) : (
-            <div className="grid grid-cols-3 gap-12 justify-between py-4">
-              <div className="col-span-2 ">
+            <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-12 justify-between py-4">
+              <div className="lg:col-span-2">
                 {items.map((ele) => (
                   <Product key={ele.id} item={ele} disableRemove={false} />
                 ))}
@@ -63,14 +63,16 @@ const Cart = () => {
                   <Checkout items={items} />
                 ) : (
                   <div className="bg-white rounded-xl h-[96%] relative mb-2 mx-2 flex flex-col justify-center items-center">
-                  <h2 className="text-center font-bold text-2xl px-4 ">Snap! You need to login to proceed</h2>
-                  <Link href="/login?destination=/cart">
-                    <a className="py-[1rem] px-[0.94rem]">
-                      <button className="px-4 py-[0.5625rem] font-bold text-white rounded-lg bg-[#A86549]">
-                        Login to checkout
-                      </button>
-                    </a>
-                  </Link>
+                    <h2 className="text-center font-bold text-2xl px-4 ">
+                      Snap! You need to login to proceed
+                    </h2>
+                    <Link href="/login?destination=/cart">
+                      <a className="py-[1rem] px-[0.94rem]">
+                        <button className="px-4 py-[0.5625rem] font-bold text-white rounded-lg bg-[#A86549]">
+                          Login to checkout
+                        </button>
+                      </a>
+                    </Link>
                   </div>
                 )}
               </>
@@ -85,7 +87,7 @@ const Cart = () => {
 
 export default Cart;
 
-export function Product({ item, disableRemove }) {
+export function Product({ item }) {
   const { items, updateItemQuantity, getItem, removeItem } = useCart();
 
   const [quantity, setQuantity] = useState(getItem(item.id).units);
@@ -98,16 +100,20 @@ export function Product({ item, disableRemove }) {
 
   return (
     <div className="relative flex bg-white rounded-xl p-2 mb-4">
-      <Image
-        src={item.images[0]}
-        alt="Sustainable and Organic Cloths"
-        width={250}
-        height={280}
-        className="rounded-xl"
-      />
-      <div className="flex flex-col justify-center px-4">
+      <div className="flex justify-center items-center max-w-[40%] lg:max-w-full">
+        <Image
+          src={item.images[0]}
+          alt="Sustainable and Organic Cloths"
+          width={250}
+          height={280}
+          className="rounded-xl"
+        />
+      </div>
+      <div className="flex flex-col justify-center px-4" >
         <div>
-          <h2 className="font-sansita-regular !text-[2rem]">{item.name}</h2>
+          <h2 className="font-sansita-regular !text-xl lg:!text-[2rem]">
+            {item.name}
+          </h2>
           <span className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
             Size: {item.size}
           </span>
@@ -115,12 +121,15 @@ export function Product({ item, disableRemove }) {
         <span className="font-lato-regular !text-[1rem] !font-semibold pb-2">
           Color: {"White"}
         </span>
-        <QuntityCount quantity={quantity} setQuantity={setQuantity} />
+        <span className="flex items-center">
+          <span className="font-semibold">Quantity: &nbsp; </span>
+          <QuntityCount quantity={quantity} setQuantity={setQuantity} />
+        </span>
         <span className="font-lato-regular !font-extrabold py-2 !text-[1.5rem]">
           ₹{item.price}
         </span>
         <div className="flex items-center leading-3">
-          <span className="font-lato-regular !font-extrabold !text-[1rem] pr-2 line-through">
+          <span className="font-lato-regular !font-extrabold !text-[.75rem] pr-2 line-through">
             {item.actualPrice}
           </span>
           <span className="text-xs text-[#FF0909] font-bold">

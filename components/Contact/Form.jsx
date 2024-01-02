@@ -70,10 +70,10 @@ const Form = ({ phoneCodes }) => {
     },
   });
   return (
-    <div className="flex justify-center">
-      <div className="w-[70%]">
-        <form onSubmit={formik.handleSubmit} className="px-2">
-          <div className="w-full my-4 lg:my-1 relative mr-4">
+    <div className="lg:flex justify-center">
+      <div className="lg:w-[70%]">
+        <form onSubmit={formik.handleSubmit} className="lg:px-2">
+          <div className="w-full my-4 lg:my-1 relative lg:mr-4">
             <label className="font-semibold" htmlFor="firstName">
               Your Name
             </label>
@@ -86,10 +86,10 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
-              className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-full max-w-full"
+              className="py-2 px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 min-w-full max-w-full"
             />
             {formik.touched.firstName && formik.errors.firstName && (
-              <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
+              <div className="absolute top-9 right-2">
                 {formik.errors.firstName}
               </div>
             )}
@@ -100,7 +100,7 @@ const Form = ({ phoneCodes }) => {
             </label>
             <br />
             <div className="flex">
-              <select className="font-semibold text-xs py-2 w-min rounded-xl mr-4">
+              <select className="font-semibold text-xs py-2 w-min rounded-xl lg:mr-4">
                 {phoneCodes?.map((ele, index) => (
                   <option key={index}>
                     {ele.code}&nbsp;{ele.phoneCode}
@@ -115,11 +115,11 @@ const Form = ({ phoneCodes }) => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
-                className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 w-full max-w-full"
+                className="py-2 px-4 ml-2 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 w-full max-w-full"
               />
             </div>
             {formik.touched.phone && formik.errors.phone && (
-              <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
+              <div className="absolute top-9 right-2">
                 {formik.errors.phone}
               </div>
             )}
@@ -137,10 +137,10 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              className="px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%] max-w-full"
+              className="py-2 px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 min-w-[100%] max-w-full"
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
+              <div className="absolute top-9 right-2">
                 {formik.errors.email}
               </div>
             )}
@@ -159,10 +159,10 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.address}
-              className="resize-none px-4 bg-transparent border-b-2 border-white outline-none lg:bg-white rounded-xl lg:py-2 min-w-[100%]"
+              className="resize-none py-2 px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 min-w-[100%]"
             />
             {formik.touched.address && formik.errors.address && (
-              <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
+              <div className="absolute top-9 right-2">
                 {formik.errors.address}
               </div>
             )}

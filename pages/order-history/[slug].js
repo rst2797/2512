@@ -57,7 +57,7 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
                 <link rel="icon" href="/favicon.ico" />
               </Head>
               <Navbar />
-              <h1 className="font-sansita-regular !text-[2.5rem] pb-[.94rem] px-[7rem] pt-16 text-[#2F2E2D] !font-[700]">
+              <h1 className="font-sansita-regular !text-[2rem] lg:!text-[2.5rem] pb-[.94rem] px-[7rem] pt-16 text-[#2F2E2D] !font-[700]">
                 Order History
               </h1>
               <Order orders={orders} />

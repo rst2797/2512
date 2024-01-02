@@ -63,7 +63,7 @@ const Form = ({ successRedirection }) => {
       onSubmit={formik.handleSubmit}
       className="px-2 flex flex-col items-center"
     >
-      <div className="min-h-[42px] max-w-[100%] my-4 relative">
+      <div className="lg:min-h-[42px] w-full lg:w-auto lg:max-w-[100%] my-4 relative">
         <label htmlFor="email">Email</label>
         <br />
         <input
@@ -74,14 +74,14 @@ const Form = ({ successRedirection }) => {
           onBlur={formik.handleBlur}
           value={formik.values.email}
           placeholder="Email Address"
-          className="bg-white outline-none min-w-[32rem] max-w-full rounded-lg py-2 px-4"
+          className="bg-white outline-none min-w-full lg:min-w-[32rem] max-w-full rounded-lg py-2 px-4"
         />
         {formik.touched.email && formik.errors.email && (
           <div className="absolute right-1 top-9">{formik.errors.email}</div>
         )}
       </div>
 
-      <div className="min-h-[42px] max-w-[100%] my-4 relative">
+      <div className="lg:min-h-[42px] w-full lg:w-auto lg:max-w-[100%] my-4 relative">
         <label htmlFor="password">Password:</label>
         <div className="relative">
           <input
@@ -92,7 +92,7 @@ const Form = ({ successRedirection }) => {
             onBlur={formik.handleBlur}
             value={formik.values.password}
             placeholder="Password"
-            className="bg-white outline-none min-w-[32rem] rounded-lg py-2 px-4"
+            className="bg-white outline-none min-w-full lg:min-w-[32rem] rounded-lg py-2 px-4"
           />
           {hide ? (
             <HiEye
@@ -110,7 +110,7 @@ const Form = ({ successRedirection }) => {
           <div className="absolute right-1 top-9">{formik.errors.password}</div>
         )}
       </div>
-      <div className="w-[32rem]">
+      <div className="w-full lg:w-[32rem]">
         <Link href="/forget-password">
           <a className="text-[#A86549] underline flex justify-end font-semibold">
             Forgot Password?{" "}
@@ -119,7 +119,7 @@ const Form = ({ successRedirection }) => {
       </div>
       <button
         type="submit"
-        className="bg-[#A86549] w-[32rem] py-3 text-white font-semibold text-md my-3 rounded-lg"
+        className="bg-[#A86549] w-full lg:w-[32rem] py-3 text-white font-semibold text-md my-3 rounded-lg"
       >
         Continue
       </button>
@@ -139,10 +139,10 @@ const Form = ({ successRedirection }) => {
         <div className="font-semibold px-3">New to 2512?</div>
         <div className="bg-white h-[2px] w-[130px]" />
       </div>
-      <div className="my-3 w-[32rem]">
+      <div className="my-3 w-full lg:w-[32rem]">
         <Link href="/register">
           <a>
-            <span className="font-bold text-center hidden lg:block rounded-xl bg-white py-2">
+            <span className="font-bold text-center block rounded-xl bg-white py-2">
               Create your account{" "}
             </span>
           </a>

@@ -19,7 +19,7 @@ const Checkout = ({ items }) => {
   }, [items]);
 
   return (
-    <div className="h-[98%] min-h-[70vh] py-[1rem]  px-[0.94rem] 2xl:px-12 rounded-xl bg-white">
+    <div className="lg:h-[98%] lg:min-h-[70vh] py-[1rem] px-[2rem] lg:px-[0.94rem] 2xl:px-12 rounded-xl bg-white">
       <h2 className="font-lato-regular !font-semibold !text-[1.2rem]">
         Price details ({totalUniqueItems} items)
       </h2>

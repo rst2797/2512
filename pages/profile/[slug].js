@@ -105,9 +105,9 @@ const Profile = ({ user, success }) => {
           </Head>
           <Navbar />
           <div className="py-4 px-[.94rem] 2xl:px-20 mx-auto max-w-[1450px]">
-            <div className="pt-24 grid grid-cols-4 gap-12">
+            <div className="pt-24 grid-cols-1 grid lg:grid-cols-4 gap-12">
               <ProfileOptions user={user} />
-              <div className="w-[70%] col-span-3 pt-6">
+              <div className="lg:w-[70%] col-span-3 pt-6">
                 <div className="relative w-fit">
                   {selectedImage ? (
                     <Image
@@ -137,7 +137,7 @@ const Profile = ({ user, success }) => {
                   <h3 className="font-lato-regular !text-[1.3rem] font-semibold pt-[.88rem] text-[#2F2E2D] ">
                     Profile Details
                   </h3>
-                  <button className="bg-[#A86549] text-white font-semibold text-sm rounded-xl py-0 px-[1.25rem] w-[10rem]">
+                  <button className="bg-[#A86549] hidden lg:block text-white font-semibold text-sm rounded-xl py-0 px-[1.25rem] w-[10rem]">
                     Edit
                   </button>
                 </div>
@@ -173,6 +173,9 @@ const Profile = ({ user, success }) => {
                     </tr>
                   </tbody>
                 </table>
+                <button className="bg-[#A86549] lg:hidden text-white font-semibold text-sm rounded-lg py-2 px-[1.25rem] w-full my-4">
+                    Edit
+                  </button>
               </div>
             </div>
           </div>

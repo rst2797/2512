@@ -27,14 +27,16 @@ const Register = () => {
     <main>
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
-        <div className="2xl:grid grid-cols-3">
-          <Image
-            src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
-            alt=""
-            width={200}
-            height={500}
-          />
-          <div className="px-[0.94rem] col-span-2 2xl:px-20 pt-[4.5rem]">
+        <div className="lg:grid lg:grid-cols-3">
+          <div className="hidden lg:block">
+            <Image
+              src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
+              alt=""
+              width={200}
+              height={500}
+            />
+          </div>
+          <div className="px-[0.94rem] lg:col-span-2 2xl:px-20 pt-[4.5rem]">
             <div className="pb-6">
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
                 Create Account
@@ -49,7 +51,7 @@ const Register = () => {
               </div>
               <div className="bg-white lg:bg-black h-[2px] w-[150px]" />
             </div>
-            <div className="flex justify-center google-btn pb-8 lg:hidden">
+            {/* <div className="flex justify-center google-btn pb-8 lg:hidden">
               <GoogleLogin
                 clientId="YOUR_GOOGLE_CLIENT_ID"
                 buttonText="Sign in with Google"
@@ -58,23 +60,13 @@ const Register = () => {
                 cookiePolicy={"single_host_origin"}
                 style={{ width: "330px" }}
               />
-            </div>
-            <div className="text-center lg:hidden">
-              <Link href="/register">
-                <a>
-                  <span className="opacity-50">
-                    Already have an account?&nbsp;
-                  </span>
-                  <span className="text-blue-500 font-bold opacity-100">
-                    Login here!
-                  </span>
-                </a>
-              </Link>
-            </div>
-            <div className="my-3 px-48">
+            </div> */}
+            <div className="lg:my-3 lg:px-48">
               <Link href="/login?destination=/">
                 <a>
-                  <span className="font-bold text-center hidden lg:block rounded-xl bg-white py-2">Login</span>
+                  <span className="font-bold text-center rounded-xl px-44 lg:px-0 bg-white py-2">
+                    Login
+                  </span>
                 </a>
               </Link>
             </div>
