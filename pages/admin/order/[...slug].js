@@ -3,32 +3,21 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import RadioGroup from "../../../components/admin/order/RadioGroup";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const OrderDetails = ({ order, user }) => {
   const [orderData, setOrderData] = useState(order);
-  const [userData, setUserData] = useState(user);
-
-  // const fetchOrderData = async (orderId, userId) => {
-  // //   try {
-  // //     const response = await axios.post("/api/admin/get-order", {
-  // //       orderId,
-  // //       userId,
-  // //     });
-  // //     if (response.data.success) {
-  // //       setOrderData(response.data.order);
-  // //       setUserData(response.data.user);
-  // //       console.log(orderData);
-  // //     } else {
-  // //       console.error("Error fetching order:", response.data.message);
-  // //     }
-  // //   } catch (error) {
-  // //     console.error("Error fetching order:", error.message);
-  // //   }
-  // // };
-
-  useEffect(() => {}, [orderData]);
-  // useEffect(() => {
-  //   fetchOrderData(orderId, userId);
-  // }, []);
+  const [userData, setUserData] = useState({});
+  useEffect(() => {
+    setUserData(JSON.parse(localStorage.getItem("user")));
+    if (
+      JSON.parse(localStorage.getItem("user"))._id !==
+        "65856027c169c5523ff9462e" &&
+      JSON.parse(localStorage.getItem("user")).role !== "ADMIN"
+    ) {
+      return router.push("/");
+    }
+  }, [orderData]);
   const [checkedItems, setCheckedItems] = useState([]);
   return (
     <div className="container mx-auto p-6 bg-[#F4E9DF] min-h-screen">
@@ -123,8 +112,7 @@ const OrderDetails = ({ order, user }) => {
                     <span className="font-semibold">Color:</span> {item.color}
                   </p>
                   <p className="mb-2 whitespace-nowrap">
-                    <span className="font-semibold">Size:</span>{" "}
-                    {item.size}
+                    <span className="font-semibold">Size:</span> {item.size}
                   </p>
                 </div>
                 <div className="flex flex-col justify-center">
@@ -150,6 +138,17 @@ const OrderDetails = ({ order, user }) => {
           ))}
         </div>
       </div>
+      <div className="p-4">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          style={{ marginBottom: "1rem", width: "fit-content" }}
+        />
+      </div>
     </div>
   );
 };
@@ -157,13 +156,12 @@ const OrderDetails = ({ order, user }) => {
 export default OrderDetails;
 
 export async function getServerSideProps(context) {
-  const orderRes = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-order/${context.query.slug[0]}`)
-  const userRes = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-user/${context.query.slug[1]}`)
-
+  const orderRes = await axios.get(
+    `${process.env.NEXT_API_BASE_URL}/api/admin/get-order/${context.query.slug[0]}`
+  );
   return {
     props: {
       order: orderRes.data.order,
-      user: userRes.data.user,
     },
   };
 }

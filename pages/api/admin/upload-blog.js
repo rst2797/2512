@@ -1,15 +1,16 @@
-import { Blog } from "../../../schema/blogs";
+import authAdminMiddleware from "../../../middleware/authAdmin";
+import { Blogs } from "../../../schema/blogs";
 import Order from "../../../schema/orders";
 import { connection } from "../../../utils/database";
 
-export default async function uploadBlog(req, res) {
+async function uploadBlog(req, res) {
   try {
     connection();
 
     const { title, bloghtml, blogsummary } = req.body; // Assuming you pass the new status in the request body
 
     // Find the order by ID and update its status
-    const blogData = new Blog({
+    const blogData = new Blogs({
       title,
       bloghtml,
       blogsummary
@@ -29,3 +30,4 @@ export default async function uploadBlog(req, res) {
     });
   }
 }
+export default authAdminMiddleware(uploadBlog)

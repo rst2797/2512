@@ -1,97 +1,78 @@
 import React from "react";
 import * as Yup from "yup";
-import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
+import axios from "axios";
 
 const Form = ({ phoneCodes }) => {
+  const [selectedPhoneCode, setSelectedPhoneCode] = useState("+91");
   const router = useRouter();
   const validationSchema = Yup.object({
-    firstName: Yup.string().required(<RiErrorWarningFill />),
-    lastName: Yup.string().required(<RiErrorWarningFill />),
+    name: Yup.string().required(<RiErrorWarningFill />),
     email: Yup.string()
       .email(<RiErrorWarningFill />)
       .required(<RiErrorWarningFill />),
-    phone: Yup.string()
-      .matches(/^[0-9]+$/, <RiErrorWarningFill />)
-      .min(10, <RiErrorWarningFill />)
-      .max(10, <RiErrorWarningFill />)
-      .required(<RiErrorWarningFill />),
-    password: Yup.string()
-      .min(6, <RiErrorWarningFill />)
-      .max(40, <RiErrorWarningFill />)
-      .required(<RiErrorWarningFill />),
-    postalCode: Yup.string().required(<RiErrorWarningFill />),
-    address: Yup.string().required(<RiErrorWarningFill />),
+    phone: Yup.string().required(<RiErrorWarningFill />),
+    message: Yup.string().required(<RiErrorWarningFill />),
   });
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "",
-    password: "",
-    postalCode: "",
-    address: "",
+    message: "",
   };
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values) => {
-      const { email, phone, password, postalCode, address } = values;
-      values = {
-        name: values.firstName + " " + values.lastName,
-        email,
-        phone,
-        password,
-        postalCode,
-        address,
-        currency: phoneCodes.currency,
-      };
+    onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await axios.post("/api/register", values);
-        if (res.success) {
-          toast.success(res.message);
-          localStorage.setItem("user", JSON.stringify(res.user));
-          localStorage.setItem("token", res.token);
-          Cookies.set("token", JSON.stringify(response.data.token), {
-            expires: 2,
-          });
-          router.push(`/profile/${res.user._id}`);
+        if (values.message[0] === " ") {
+          throw new Error("Invalid message!!!");
         } else {
-          throw res.message;
+          values = {
+            ...values,
+            phone: `${selectedPhoneCode} ${values.phone}`,
+          };
+          const response = await axios.post(
+            `http://localhost:4545/api/contact-us`,
+            values
+          );
+          toast.success(response.data.message);
+          resetForm();
         }
       } catch (error) {
-        console.log("Error caught:-  ", error);
-        toast.error(error);
+        // Handle errors from both the try-catch block and axios request
+        console.log("Error caught:", error.message);
+        toast.error(error.message);
       }
     },
   });
+
   return (
     <div className="lg:flex justify-center">
       <div className="lg:w-[70%]">
         <form onSubmit={formik.handleSubmit} className="lg:px-2">
           <div className="w-full my-4 lg:my-1 relative lg:mr-4">
-            <label className="font-semibold" htmlFor="firstName">
+            <label className="font-semibold" htmlFor="name">
               Your Name
             </label>
             <br />
             <input
-              type="firstName"
-              id="firstName"
-              name="firstName"
-              placeholder="First Name"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your Name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.firstName}
+              value={formik.values.name}
               className="py-2 px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 min-w-full max-w-full"
             />
-            {formik.touched.firstName && formik.errors.firstName && (
-              <div className="absolute top-9 right-2">
-                {formik.errors.firstName}
-              </div>
+            {formik.touched.name && formik.errors.name && (
+              <div className="absolute top-9 right-2">{formik.errors.name}</div>
             )}
           </div>
           <div className="my-4 relative">
@@ -100,7 +81,12 @@ const Form = ({ phoneCodes }) => {
             </label>
             <br />
             <div className="flex">
-              <select className="font-semibold text-xs py-2 w-min rounded-xl lg:mr-4">
+              <select
+                className="font-semibold text-xs py-2 w-min rounded-xl lg:mr-4"
+                name="phoneCode"
+                onChange={(e) => setSelectedPhoneCode(e.target.value)}
+              >
+                <option>IN&nbsp;+91</option>
                 {phoneCodes?.map((ele, index) => (
                   <option key={index}>
                     {ele.code}&nbsp;{ele.phoneCode}
@@ -147,23 +133,23 @@ const Form = ({ phoneCodes }) => {
           </div>
 
           <div className="my-4 relative">
-            <label className="font-semibold" htmlFor="address">
+            <label className="font-semibold" htmlFor="message">
               Message
             </label>
             <textarea
-              type="address"
-              id="address"
-              name="address"
+              type="message"
+              id="message"
+              name="message"
               placeholder="Type here..."
               rows={5}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.address}
+              value={formik.values.message}
               className="resize-none py-2 px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl lg:py-2 min-w-[100%]"
             />
-            {formik.touched.address && formik.errors.address && (
+            {formik.touched.message && formik.errors.message && (
               <div className="absolute top-9 right-2">
-                {formik.errors.address}
+                {formik.errors.message}
               </div>
             )}
           </div>

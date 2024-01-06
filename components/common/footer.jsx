@@ -8,8 +8,26 @@ import {
 } from "react-icons/fa";
 import Logo from "./Logo";
 import Image from "next/image";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:4545/api/subscribe", {
+        email: e.target.email.value,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
   return (
     <footer className="bg-[#a66347] h-auto flex flex-col justify-center w-full lg:px-12">
       <div className=" mx-auto max-w-[1450px] pb-8">
@@ -86,13 +104,23 @@ const Footer = () => {
                   Subscribe to our newsletter below and never miss the latest
                   product or an exclusive offer.
                 </p>
-                <form action="" className="flex flex-col lg:block pt-3">
+                <form
+                  action=""
+                  className="flex flex-col lg:block pt-3"
+                  onSubmit={(e) => {
+                    handleSubscribe(e);
+                  }}
+                >
                   <input
-                    type="text"
-                    className="border-b-[1px] border-white bg-transparent lg:placeholder:text-start placeholder:text-center placeholder:text-white placeholder:text-xs py-1"
+                    type="email"
+                    name="email"
+                    className="border-b-[1px] text-white border-white bg-transparent lg:placeholder:text-start placeholder:text-center placeholder:text-white placeholder:text-xs py-1"
                     placeholder="Enter your email address"
                   />
-                  <button className="bg-[#F4E9DF] rounded-md text-xs py-[0.625rem] px-[1.625rem] my-2 font-bold">
+                  <button
+                    type="submit"
+                    className="bg-[#F4E9DF] rounded-md text-xs py-[0.625rem] px-[1.625rem] my-2 font-bold"
+                  >
                     Subscribe
                   </button>
                 </form>
@@ -128,6 +156,17 @@ const Footer = () => {
             </a>
           </Link>
         </div>
+      </div>
+      <div className="p-4">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          style={{ marginBottom: "1rem", width: "fit-content" }}
+        />
       </div>
     </footer>
   );

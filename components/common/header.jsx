@@ -26,6 +26,7 @@ const Navbar = ({ position }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     Cookies.remove("token");
+    setUser(null);
     router.push("/login?destination=/");
   };
   return (

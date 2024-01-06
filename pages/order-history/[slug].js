@@ -61,15 +61,6 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
                 Order History
               </h1>
               <Order orders={orders} />
-              <ToastContainer
-                position="bottom-center"
-                autoClose={1500}
-                hideProgressBar={true}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnHover
-                style={{ marginBottom: "1rem" }}
-              />
             </>
           )}
         </div>

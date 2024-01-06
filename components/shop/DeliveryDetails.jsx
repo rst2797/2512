@@ -44,7 +44,7 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
           </span>
         </div>
       </div>
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-center"
         autoClose={1000}
         hideProgressBar={true}
@@ -52,7 +52,7 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
         closeOnClick
         pauseOnHover
         style={{ marginBottom: "1rem" }}
-      />
+      /> */}
     </div>
   );
 };

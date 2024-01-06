@@ -1,7 +1,8 @@
 import Order from "../../../schema/orders";
 import { connection } from "../../../utils/database";
+import authAdminMiddleware from "../../../middleware/authAdmin"
 
-export default async function getOrders(req, res) {
+async function getOrders(req, res) {
   try {
     connection();
     const orders = await Order.find();
@@ -18,3 +19,4 @@ export default async function getOrders(req, res) {
     });
   }
 }
+export default authAdminMiddleware(getOrders)

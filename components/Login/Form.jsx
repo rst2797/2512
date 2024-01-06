@@ -13,9 +13,11 @@ import { useState } from "react";
 import Link from "next/link";
 import login from "../../pages/api/controller/loginUser";
 import GoogleLogin from "react-google-login";
+import { ThreeDots } from "react-loader-spinner";
 
 const Form = ({ successRedirection }) => {
   const [hide, setHide] = useState(true);
+  const [login, setLogin] = useState(false);
   const validationSchema = Yup.object({
     email: Yup.string()
       .email(<RiErrorWarningFill />)
@@ -38,6 +40,7 @@ const Form = ({ successRedirection }) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setLogin(true);
         const response = await axios.post("/api/login", values);
 
         if (response.data.success) {
@@ -47,13 +50,26 @@ const Form = ({ successRedirection }) => {
             expires: 2,
           });
           toast.success(response.data.message);
-          router.push("" + successRedirection);
+          console.log(
+            response.data.user._id === "65856027c169c5523ff9462e",
+            response.data.user.role === "ADMIN"
+          );
+          if (
+            response.data.user._id === "65856027c169c5523ff9462e" &&
+            response.data.user.role === "ADMIN"
+          ) {
+            return router.push("/admin/orders");
+          } else {
+            router.push("" + successRedirection);
+          }
         } else {
           toast.error(response.data.message);
+          setLogin(false);
         }
       } catch (error) {
-        console.log(response.data.message);
-        toast.error(response.data.message);
+        setLogin(false);
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message);
       }
     },
   });
@@ -119,9 +135,24 @@ const Form = ({ successRedirection }) => {
       </div>
       <button
         type="submit"
-        className="bg-[#A86549] w-full lg:w-[32rem] py-3 text-white font-semibold text-md my-3 rounded-lg"
+        className="bg-[#A86549] w-full lg:w-[32rem] flex justify-center py-3 text-white font-semibold text-md my-3 rounded-lg overflow-y-hidden"
       >
-        Continue
+        {login ? (
+          <div className="max-h-[1.5rem]">
+            <ThreeDots
+              visible={true}
+              height="30"
+              width="30"
+              color="#ffff"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
+          "Continue"
+        )}
       </button>
       <div className="p-4">
         <ToastContainer
@@ -142,7 +173,7 @@ const Form = ({ successRedirection }) => {
       <div className="my-3 w-full lg:w-[32rem]">
         <Link href="/register">
           <a>
-            <span className="font-bold text-center block rounded-xl bg-white py-2">
+            <span className="font-bold text-center block rounded-lg bg-white py-3">
               Create your account{" "}
             </span>
           </a>

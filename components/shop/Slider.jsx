@@ -66,7 +66,7 @@ export default function SectionThree() {
               onLoad={() => setLoading(false)}
             />
             <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">{image.name}</h3>
-            <h5 className="px-4 py-1 font-bold text-sm">{image.actualPrice}</h5>
+            <h5 className="px-4 py-1 font-bold text-sm">₹{image.actualPrice}</h5>
               </a>
             </Link>
           </SwiperSlide>

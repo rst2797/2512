@@ -28,12 +28,13 @@ const Register = () => {
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
         <div className="lg:grid lg:grid-cols-3">
-          <div className="hidden lg:block">
+          <div className="hidden 2xl:block h-screen overflow-y-hidden">
             <Image
               src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
               alt=""
-              width={200}
-              height={500}
+              width={400}
+              height={900}
+              className="object-cover"
             />
           </div>
           <div className="px-[0.94rem] lg:col-span-2 2xl:px-20 pt-[4.5rem]">
@@ -61,12 +62,10 @@ const Register = () => {
                 style={{ width: "330px" }}
               />
             </div> */}
-            <div className="lg:my-3 lg:px-48">
+            <div className="lg:my-3 flex justify-center w-full">
               <Link href="/login?destination=/">
-                <a>
-                  <span className="font-bold text-center rounded-xl px-44 lg:px-0 bg-white py-2">
-                    Login
-                  </span>
+                <a className="font-bold text-center rounded-lg w-[55%] bg-white py-2">
+                  Login
                 </a>
               </Link>
             </div>

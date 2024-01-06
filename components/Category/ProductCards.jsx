@@ -25,7 +25,7 @@ const ProductCards = ({ products }) => {
                   ₹{ele.price}
                 </p>
                 <p className="font-lato-regular !font-semibold !text-[.7rem] !leading-[1.5rem] px-1 line-through">
-                  {ele.actualPrice}
+                  ₹{ele.actualPrice}
                 </p>
                 <p className="font-lato-regular !font-bold !text-[.7rem] text-[#FF0909] !leading-[1.5rem]">
                   {ele.offPercentage} OFF

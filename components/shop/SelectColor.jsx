@@ -5,7 +5,7 @@ const SelectColor = ({ product }) => {
   return (
     <div className="w-72 h-auto flex flex-col">
       <div className="font-semibold">
-        <h2>Color: White</h2>
+        <h2 className="capitalize">Color: {product.color}</h2>
       </div>
       <div className="flex px-0 py-[.5rem] w-[25%]">
         <Link href="#">

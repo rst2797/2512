@@ -109,7 +109,7 @@ export function Product({ item }) {
           className="rounded-xl"
         />
       </div>
-      <div className="flex flex-col justify-center px-4" >
+      <div className="flex flex-col justify-center px-4">
         <div>
           <h2 className="font-sansita-regular !text-xl lg:!text-[2rem]">
             {item.name}
@@ -118,8 +118,8 @@ export function Product({ item }) {
             Size: {item.size}
           </span>
         </div>
-        <span className="font-lato-regular !text-[1rem] !font-semibold pb-2">
-          Color: {"White"}
+        <span className="font-lato-regular capitalize !text-[1rem] !font-semibold pb-2">
+          Color: {item.color}
         </span>
         <span className="flex items-center">
           <span className="font-semibold">Quantity: &nbsp; </span>
@@ -130,7 +130,7 @@ export function Product({ item }) {
         </span>
         <div className="flex items-center leading-3">
           <span className="font-lato-regular !font-extrabold !text-[.75rem] pr-2 line-through">
-            {item.actualPrice}
+            ₹{item.actualPrice}
           </span>
           <span className="text-xs text-[#FF0909] font-bold">
             {item.offPercentage} OFF

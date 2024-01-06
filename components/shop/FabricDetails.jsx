@@ -3,17 +3,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaPlus, FaMinus, FaRegStar } from "react-icons/fa";
 
-const FabricDetails = ({ product, setActiveFabricDetails }) => {
+const FabricDetails = ({ activeFabricDetail, setActiveFabricDetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
-    setActiveFabricDetails({
-      open: "description",
-      product: product.sku,
-    });
+    setActiveFabricDetails("description");
   }, []);
 
   const handleClick = (open) => {
-    setActiveFabricDetails({ product: product.sku, open });
+    setActiveFabricDetails(open);
   };
 
   return (
@@ -25,7 +22,7 @@ const FabricDetails = ({ product, setActiveFabricDetails }) => {
         >
           <span className="accordion-header-text">Description</span>
           <span className="accordion-header-icon">
-            {activeIndex === 0 ? <FaMinus /> : <FaPlus />}
+            {activeFabricDetail === "description" ? <FaMinus /> : <FaPlus />}
           </span>
         </h2>
       </div>
@@ -36,7 +33,7 @@ const FabricDetails = ({ product, setActiveFabricDetails }) => {
         >
           <span className="accordion-header-text">Material</span>
           <span className="accordion-header-icon">
-            {activeIndex === 1 ? <FaMinus /> : <FaPlus />}
+            {activeFabricDetail === "material" ? <FaMinus /> : <FaPlus />}
           </span>
         </h2>
       </div>
@@ -48,7 +45,7 @@ const FabricDetails = ({ product, setActiveFabricDetails }) => {
         >
           <span className="accordion-header-text">Care</span>
           <span className="accordion-header-icon">
-            {activeIndex === 2 ? <FaMinus /> : <FaPlus />}
+            {activeFabricDetail === "care" ? <FaMinus /> : <FaPlus />}
           </span>
         </h2>
       </div>

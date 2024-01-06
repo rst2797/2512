@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
-import register from "../../pages/api/controller/registerUser";
+import axios from "axios";
+import { HiEye } from "react-icons/hi2";
+import { HiEyeOff } from "react-icons/hi";
 
 const Form = ({ phoneCodes }) => {
   const router = useRouter();
+  const [hide, setHide] = useState(true);
+
   const validationSchema = Yup.object({
     firstName: Yup.string().required(<RiErrorWarningFill />),
     lastName: Yup.string().required(<RiErrorWarningFill />),
@@ -53,20 +57,21 @@ const Form = ({ phoneCodes }) => {
       };
       try {
         const res = await axios.post("/api/register", values);
-        if (res.success) {
-          toast.success(res.message);
-          localStorage.setItem("user", JSON.stringify(res.user));
-          localStorage.setItem("token", res.token);
-          Cookies.set("token", JSON.stringify(response.data.token), {
+        if (res.data.success) {
+          toast.success(res.data.message);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem("token", res.data.token);
+          Cookies.set("token", JSON.stringify(res.data.token), {
             expires: 2,
           });
-          router.push(`/profile/${res.user._id}`);
+          console.log(res.data);
+          router.push(`/profile/${res.data.user._id}`);
         } else {
-          throw res.message;
+          throw new Error(res.data.message);
         }
       } catch (error) {
-        console.log("Error caught:-  ", error);
-        toast.error(error);
+        if (error.response.data.status)
+          toast.error(error.response.data.message);
       }
     },
   });
@@ -87,7 +92,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
-              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-full max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-full max-w-full"
             />
             {formik.touched.firstName && formik.errors.firstName && (
               <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -108,7 +113,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
-              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-full max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-full max-w-full"
             />
             {formik.touched.lastName && formik.errors.lastName && (
               <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -130,7 +135,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%] max-w-full"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%] max-w-full"
           />
           {formik.touched.email && formik.errors.email && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -144,7 +149,7 @@ const Form = ({ phoneCodes }) => {
           </label>
           <br />
           <div className="flex">
-            <select className="font-semibold text-xs py-2 w-min rounded-xl mr-4">
+            <select className="font-semibold text-xs py-2 w-min rounded-lg mr-4">
               {phoneCodes?.map((ele, index) => (
                 <option key={index}>
                   {ele.code}&nbsp;{ele.phoneCode}
@@ -159,7 +164,7 @@ const Form = ({ phoneCodes }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 w-[80%] max-w-full"
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 w-[80%] max-w-full"
             />
           </div>
           {formik.touched.phone && formik.errors.phone && (
@@ -173,16 +178,29 @@ const Form = ({ phoneCodes }) => {
           <label className="font-semibold" htmlFor="password">
             Password:
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
-          />
+          <div className="relative">
+            <input
+              type={hide ? "password" : "text"}
+              id="password"
+              name="password"
+              placeholder="Password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%]"
+            />
+            {hide ? (
+              <HiEye
+                className="absolute top-3 right-6"
+                onClick={() => setHide(false)}
+              />
+            ) : (
+              <HiEyeOff
+                className="absolute top-3 right-6"
+                onClick={() => setHide(true)}
+              />
+            )}
+          </div>
           {formik.touched.password && formik.errors.password && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
               {formik.errors.password}
@@ -201,7 +219,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.postalCode}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%]"
           />
           {formik.touched.postalCode && formik.errors.postalCode && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
@@ -221,7 +239,7 @@ const Form = ({ phoneCodes }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.address}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-xl py-2 min-w-[100%]"
+            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%]"
           />
           {formik.touched.address && formik.errors.address && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
