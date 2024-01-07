@@ -160,7 +160,7 @@ export default AnalyticsReport;
 export const getServerSideProps = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:4545/api/admin/delivered-orders"
+      `${process.env.NEXT_API_BASE_URL}/api/admin/delivered-orders`
     );
     return {
       props: {
