@@ -16,7 +16,7 @@ const Footer = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4545/api/subscribe", {
+      .post("/api/subscribe", {
         email: e.target.email.value,
       })
       .then((res) => {
