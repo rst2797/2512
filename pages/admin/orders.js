@@ -9,6 +9,14 @@ import Cookies from "cookies";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
+const fetchOrders = async (token) => {
+  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-all-orders`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
+};
 const Orders = ({ response, orders }) => {
   const [orderResponse, setOrderResponse] = useState(orders);
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,55 +119,61 @@ const Orders = ({ response, orders }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(currentOrders).length === 0 ? <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center font-bold text-xl">No record found!!</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr> : currentOrders?.map((ele, index) => (
-                    <tr
-                      key={ele.id}
-                      className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
-                    >
-                      <td className="border-x-2 border-black px-4 w-fit">
-                        {index + 1}
+                  {Object.entries(currentOrders).length === 0 ? (
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td className="text-center font-bold text-xl">
+                        No record found!!
                       </td>
-                      <td className="border-x-2 border-black px-4 py-3">
-                        {ele._id}
-                      </td>
-                      <td className="border-x-2 border-black px-4">
-                        {ele.user}
-                      </td>
-                      <td className="border-x-2 border-black px-4">
-                        ₹&nbsp;{ele.totalAmount}
-                      </td>
-                      <td className="border-x-2 border-black px-4">
-                        {ele.paymentMethod}
-                      </td>
-                      <td className="border-x-2 border-black px-4">
-                        <select
-                          name="status"
-                          id="status"
-                          value={ele.status}
-                          onChange={(e) => handleStatusChange(ele._id, e)}
-                          className="focus:outline-none active:outline-none bg-transparent"
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="processing">Processing</option>
-                          <option value="shipped">Shipped</option>
-                          <option value="delivered">Delivered</option>
-                        </select>
-                      </td>
-                      <td className="border-x-2 border-black px-4 cursor-pointer text-blue-500 font-bold">
-                        <Link href={`/admin/order/${ele._id}/${ele.user}`}>
-                          <a className="flex items-center">See Order</a>
-                        </Link>
-                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
-                  ))}
+                  ) : (
+                    currentOrders?.map((ele, index) => (
+                      <tr
+                        key={ele.id}
+                        className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
+                      >
+                        <td className="border-x-2 border-black px-4 w-fit">
+                          {index + 1}
+                        </td>
+                        <td className="border-x-2 border-black px-4 py-3">
+                          {ele._id}
+                        </td>
+                        <td className="border-x-2 border-black px-4">
+                          {ele.user}
+                        </td>
+                        <td className="border-x-2 border-black px-4">
+                          ₹&nbsp;{ele.totalAmount}
+                        </td>
+                        <td className="border-x-2 border-black px-4">
+                          {ele.paymentMethod}
+                        </td>
+                        <td className="border-x-2 border-black px-4">
+                          <select
+                            name="status"
+                            id="status"
+                            value={ele.status}
+                            onChange={(e) => handleStatusChange(ele._id, e)}
+                            className="focus:outline-none active:outline-none bg-transparent"
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                          </select>
+                        </td>
+                        <td className="border-x-2 border-black px-4 cursor-pointer text-blue-500 font-bold">
+                          <Link href={`/admin/order/${ele._id}/${ele.user}`}>
+                            <a className="flex items-center">See Order</a>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
               <div className="mt-4">
@@ -202,11 +216,7 @@ export const getServerSideProps = async (context) => {
   const token = serializedToken?.split("%22")[1];
 
   try {
-    const res = await axios.get(`http://localhost:4545/api/admin/get-all-orders`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetchOrders(token);
 
     if (res.data.success) {
       return {

@@ -76,7 +76,7 @@ const TextEditor = () => {
       console.log(convertToRaw(editorState.getCurrentContent()).blocks[0].text);
       axios
         .post(
-          `http://localhost:4545/api/admin/upload-blog`,
+          `${process.env.NEXT_API_BASE_URL}/api/admin/upload-blog`,
           {
             title: blogTitle,
             bloghtml: blogHtml,

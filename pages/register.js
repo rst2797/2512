@@ -28,7 +28,7 @@ const Register = () => {
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
         <div className="lg:grid lg:grid-cols-3">
-          <div className="hidden 2xl:block h-screen overflow-y-hidden">
+          <div className="hidden xl:block h-screen overflow-y-hidden">
             <Image
               src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
               alt=""

@@ -7,7 +7,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const ProductCards = ({ products }) => {
   const [productState, setProductState] = useState(products);
@@ -24,12 +24,9 @@ const ProductCards = ({ products }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `http://localhost:4545/api/admin/delete-product?product_id=${productId}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          )
+          .delete(`/api/admin/delete-product?product_id=${productId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
           .then((res) => {
             if (res.data.success) {
               setProductState((prevState) => {

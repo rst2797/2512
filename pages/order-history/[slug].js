@@ -74,7 +74,6 @@ export default DeliveryReturns;
 
 export const getServerSideProps = async (context) => {
   const cookies = new Cookies(context.req, context.res);
-  console.log(context.query.newOrder);
   const temp = cookies.get("token");
 
   const token = temp?.split("%22")[1];

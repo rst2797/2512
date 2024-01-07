@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
   const handleDownload = async () => {
     axios
-      .get(`http://localhost:4545/api/admin/get-subscriber-emails`, {
+      .get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-subscriber-emails`, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },

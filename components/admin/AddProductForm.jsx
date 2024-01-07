@@ -48,7 +48,7 @@ const ProductForm = ({ setAddProduct }) => {
     // ${process.env.NEXT_API_BASE_URL}
     axios
       .post(
-        `http://localhost:4545/api/admin/add-product`,
+        `/api/admin/add-product`,
         { ...values, selling_price: values.price },
         {
           headers: {

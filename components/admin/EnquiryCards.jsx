@@ -9,7 +9,7 @@ const EnquiryCards = ({ contacts }) => {
   const handleResolve = (id) => {
     axios
       .delete(
-        `http://localhost:4545/api/admin/resolve-enquiry?enquiry_id=${id}`,
+        `${process.env.NEXT_API_BASE_URL}/api/admin/resolve-enquiry?enquiry_id=${id}`,
         {
           headers: {
             Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,

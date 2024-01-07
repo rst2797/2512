@@ -22,7 +22,7 @@ const sendResetEmail = (userEmail, resetToken) => {
     // ...
   });
 
-  const resetLink = `http://localhost:4545/reset-password?token=${resetToken}`;
+  const resetLink = `${process.env.NEXT_API_BASE_URL}/reset-password?token=${resetToken}`;
 
   const mailOptions = {
     from: "your@email.com",

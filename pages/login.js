@@ -12,7 +12,7 @@ const Login = ({ successRedirection }) => {
         <Navbar />
         <div className="pt-[4rem]">
           <div className="2xl:grid grid-cols-3">
-            <div className="hidden 2xl:block h-[92vh] overflow-y-hidden">
+            <div className="hidden lg:block h-[92vh] overflow-y-hidden">
               <Image
                 src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
                 alt=""

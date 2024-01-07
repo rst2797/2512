@@ -38,7 +38,7 @@ const Form = ({ phoneCodes }) => {
             phone: `${selectedPhoneCode} ${values.phone}`,
           };
           const response = await axios.post(
-            `http://localhost:4545/api/contact-us`,
+            `${process.env.NEXT_API_BASE_URL}/api/contact-us`,
             values
           );
           toast.success(response.data.message);
