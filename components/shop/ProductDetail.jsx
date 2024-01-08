@@ -11,16 +11,30 @@ import SimilarProducts from "./SimilarProducts";
 import Rating from "../common/RatingStars";
 import FabricDetails from "./FabricDetails";
 import MobFabricDetails from "./MobFabricDetails";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 const ProductDetail = ({ product }) => {
   const [activeFabricDetail, setActiveFabricDetails] = useState("description");
-
+  const [ratings, setRatings] = useState("description");
   const setProductSize = (s) => {
     product.size = s;
   };
 
   useEffect(() => {
     console.log(activeFabricDetail);
+    axios
+      .post(`/api/get-product-rating`, {
+        productId: product._id,
+      })
+      .then((res) => {
+        if (res.status == 200) {
+          setRatings({
+            totalRatings: res.data.totalRatings,
+            averageRating: res.data.averageRating,
+          });
+        }
+      });
   }, [product, activeFabricDetail]);
   return (
     <>
@@ -28,9 +42,12 @@ const ProductDetail = ({ product }) => {
         <Navbar />
         <div className="container border-b-4 border-white px-[0.94rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
           <div className="lg:p-4">
-          <div className="lg:hidden block">
-           <Breadcrumb name={product.breadcrumb} category={product.category} />
-           </div>
+            <div className="lg:hidden block">
+              <Breadcrumb
+                name={product.breadcrumb}
+                category={product.category}
+              />
+            </div>
             <Carousel
               sliderImages={[...product.images]}
               rating={product.rating}
@@ -45,9 +62,12 @@ const ProductDetail = ({ product }) => {
             </div>
           </div>
           <div className="relative lg:p-6">
-           <div className="hidden lg:block">
-           <Breadcrumb name={product.breadcrumb} category={product.category} />
-           </div>
+            <div className="hidden lg:block">
+              <Breadcrumb
+                name={product.breadcrumb}
+                category={product.category}
+              />
+            </div>
             <h2 className="!text-[1.5rem] text-[#2F2E2D] font-sansita-regular">
               {product.name}
             </h2>
@@ -63,7 +83,10 @@ const ProductDetail = ({ product }) => {
               </small>
             </div>
             <p className="font-bold flex items-center !text-[0.75rem]">
-              4.5 &nbsp; <Rating /> &nbsp; 664 Ratings
+              {ratings.averageRating} &nbsp;{" "}
+              <Rating overallRating={ratings.averageRating} /> &nbsp;{" "}
+              {ratings.totalRatings}{" "}
+              {ratings.totalRatings > 1 ? "Ratings" : "Rating"}
             </p>
             <div>
               <SelectColor product={product} />
@@ -93,7 +116,17 @@ const ProductDetail = ({ product }) => {
           </div>
         </div>
         <SimilarProducts />
-        {/* <Subscribe /> */}
+        <div className="p-4">
+          <ToastContainer
+            position="bottom-center"
+            autoClose={1000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnHover
+            style={{ marginBottom: "1rem", width: "fit-content" }}
+          />
+        </div>
       </main>
       <Footer />
     </>

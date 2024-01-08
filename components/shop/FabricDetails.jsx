@@ -2,8 +2,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaPlus, FaMinus, FaRegStar } from "react-icons/fa";
+import EditableRating from "../common/EditableRating";
 
-const FabricDetails = ({ activeFabricDetail, setActiveFabricDetails }) => {
+const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
     setActiveFabricDetails("description");
@@ -68,9 +69,7 @@ const FabricDetails = ({ activeFabricDetail, setActiveFabricDetails }) => {
         <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
-            {[1, 2, 3, 4, 5].map((ele) => (
-              <FaRegStar key={ele} />
-            ))}
+            <EditableRating productId={product._id} readOnly={false} />
           </span>
         </h2>
       </div>
