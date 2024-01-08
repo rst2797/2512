@@ -24,10 +24,13 @@ const ProductDetail = ({ product }) => {
   }, [product, activeFabricDetail]);
   return (
     <>
-      <main className="bg-[#f2eadf] pt-[5rem] mx-auto px-20 max-w-[1450px]">
+      <main className="bg-[#f2eadf] pt-[5rem] mx-auto lg:px-20 max-w-[1450px]">
         <Navbar />
-        <div className="container border-b-4 border-white px-[0.94rem] pt-8 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+        <div className="container border-b-4 border-white px-[0.94rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
           <div className="lg:p-4">
+          <div className="lg:hidden block">
+           <Breadcrumb name={product.breadcrumb} category={product.category} />
+           </div>
             <Carousel
               sliderImages={[...product.images]}
               rating={product.rating}
@@ -42,7 +45,9 @@ const ProductDetail = ({ product }) => {
             </div>
           </div>
           <div className="relative lg:p-6">
-            <Breadcrumb name={product.breadcrumb} category={product.category} />
+           <div className="hidden lg:block">
+           <Breadcrumb name={product.breadcrumb} category={product.category} />
+           </div>
             <h2 className="!text-[1.5rem] text-[#2F2E2D] font-sansita-regular">
               {product.name}
             </h2>
