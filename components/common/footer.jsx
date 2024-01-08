@@ -30,7 +30,7 @@ const Footer = () => {
   };
   return (
     <footer className="bg-[#a66347] h-auto flex flex-col justify-center w-full lg:px-12">
-      <div className=" mx-auto max-w-[1450px] pb-8">
+      <div className="mx-auto max-w-[1450px] pb-8">
         <div className="container lg:flex">
           <div className="flex flex-col">
             <div className="lg:w-1/2 flex justify-center lg:block">
@@ -70,6 +70,11 @@ const Footer = () => {
                       Blog
                     </a>
                   </Link>
+                  <Link href="/terms-and-conditions" className="py-4">
+                    <a className="text-white font-medium text-sm py-2 no-underline text-center lg:text-left">
+                      Terms and Conditions
+                    </a>
+                  </Link>
                 </div>
                 <div className="border-l-2 lg:border-none border-white h-32" />
 
@@ -92,6 +97,11 @@ const Footer = () => {
                   <Link href="/kanso">
                     <a className="text-white font-medium text-sm py-2 no-underline">
                       Kanso
+                    </a>
+                  </Link>
+                  <Link href="/privacy-and-policy">
+                    <a className="text-white font-medium text-sm py-2 no-underline">
+                      Privacy and Policy
                     </a>
                   </Link>
                 </div>

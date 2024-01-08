@@ -3,10 +3,10 @@ import Image from "next/image";
 
 const SectionOne = ({ children }) => {
   return (
-    <div className="relative bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/sustainability/Mask+group.png')] min-h-screen lg:min-h-[91vh] lg:mt-16 bg-center bg-no-repeat bg-cover">
-      <div className="absolute bottom-0 lg:top-0 left-0 right-0">
+    <div className="relative bg-[url('/images/product.png')] h-[115vh] bg-center bg-no-repeat bg-contain">
+      <div className="">
         {children}
-        <div className="text-white lg:text-[#2F2E2D] bg-[#00000074] lg:bg-transparent lg:px-20 lg:w-[42%]">
+        <div className="text-white lg:text-[#2F2E2D] bg-[#00000074] lg:bg-transparent lg:px-20 lg:w-[42%] lg:pt-28">
           <h1 className="story-title font-sansita-regular mt-12 text-center lg:text-start py-[1.85rem] relative z-40">
             Sustainability
           </h1>

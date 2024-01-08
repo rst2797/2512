@@ -33,7 +33,7 @@ const Navbar = ({ position }) => {
     <>
       <div className="lg:px-0 2xl:px-20 lg:py-0 ">
         <nav
-          className={`lg:border-b-2 border-[#A86549] fixed top-0 left-0 right-0 z-50 bg-[#F4E9DF] px-[1rem] lg:px-[5.37rem] drop-shadow-md lg:drop-shadow-none transition-all`}
+          className={`lg:border-b-[1px] border-[#A86549] fixed top-0 left-0 right-0 z-50 bg-[#F4E9DF] px-[1rem] lg:px-[5.37rem] drop-shadow-md lg:drop-shadow-none transition-all`}
         >
           <div className="flex items-center justify-between">
             <div className="lg:hidden pt-2 pr-6">
@@ -45,18 +45,18 @@ const Navbar = ({ position }) => {
               </button>
             </div>
             <Link href="/">
-              <a className="text-2xl font-bold pt-[.5rem] lg:border-r-2 border-[#A86549] lg:pr-12">
+              <a className="text-2xl font-bold pt-[.5rem] pb-[.3rem] lg:border-r-[1px] lg:border-[#A86549] lg:pr-12">
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
-                  width={65}
-                  height={50}
+                  width={55}
+                  height={40}
                 />
               </a>
             </Link>
             <div className="hidden lg:block">
               <ul className="flex flex-wrap list-none leading-loose lg:pl-44">
-                <li className="px-[1.5rem] border-x-[2px] border-[#A86549] py-4 md:my-0">
+                <li className="px-[1.5rem] border-x-[1px] border-[#A86549] py-4 md:my-0">
                   <Link href="/">
                     <a className="!text-[1rem] font-bold font-lato-regular">
                       Home
@@ -70,15 +70,16 @@ const Navbar = ({ position }) => {
                     </a>
                   </Link>
                 </li>
-                <li className="px-[1.5rem] border-x-[2px] border-[#A86549] py-4 md:my-0 relative">
-                  <span
-                    className="!text-[1rem] font-bold font-lato-regular cursor-pointer select-none "
-                    onClick={() => setOpenMenu(!openMenu)}
-                  >
+                <li
+                  onMouseEnter={() => setOpenMenu(!openMenu)}
+                  onMouseLeave={() => setOpenMenu(!openMenu)}
+                  className="px-[1.5rem] border-x-[1px] border-[#A86549] py-4 md:my-0 relative cursor-pointer"
+                >
+                  <span className="!text-[1rem] font-bold font-lato-regular cursor-pointer select-none ">
                     About Us
                   </span>
                   {openMenu && (
-                    <div className="animate__animated animate__zoomIn bg-[#F4E9DF] absolute top-12 p-6 font-semibold">
+                    <div className=" bg-[#F4E9DF] absolute top-12 p-6 font-semibold">
                       <ul>
                         <li>
                           <Link href="/our-story">
@@ -99,7 +100,7 @@ const Navbar = ({ position }) => {
                     </div>
                   )}
                 </li>
-                <li className="px-[1.5rem] border-r-[2px] border-[#A86549] py-4 md:my-0">
+                <li className="px-[1.5rem] border-r-[1px] border-[#A86549] py-4 md:my-0">
                   <Link href="/contactus">
                     <a className="!text-[1rem] font-bold font-lato-regular">
                       Contact Us

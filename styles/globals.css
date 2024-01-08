@@ -249,7 +249,7 @@ select:-webkit-autofill:focus {
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  font-size: 0rem !important;
+  font-size: 2rem !important;
 }
 
 

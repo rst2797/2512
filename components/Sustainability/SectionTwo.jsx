@@ -4,7 +4,7 @@ import Cards from "./Cards"
 
 const SectionTwo = () => {
   return (
-    <div className="px-[1.88rem] py-4 bg-[#F4E9DF]">
+    <div className="px-[1.88rem] py-4 bg-[#F4E9DF] mx-auto max-w-[1450px]">
       <div className="lg:flex justify-center lg:pb-8">
         <h2 className="font-sansita-regular !text-[2.5rem] lg:!text-[4rem] text-center">
           How we embrace sustainability?

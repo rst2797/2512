@@ -24,7 +24,7 @@ const ProductDetail = ({ product }) => {
   }, [product, activeFabricDetail]);
   return (
     <>
-      <main className="bg-[#f2eadf] pt-[5rem] mx-auto max-w-[1450px]">
+      <main className="bg-[#f2eadf] pt-[5rem] mx-auto px-20 max-w-[1450px]">
         <Navbar />
         <div className="container border-b-4 border-white px-[0.94rem] pt-8 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
           <div className="lg:p-4">
@@ -41,7 +41,7 @@ const ProductDetail = ({ product }) => {
               />
             </div>
           </div>
-          <div className="relative lg:p-6 lg:ml-12">
+          <div className="relative lg:p-6">
             <Breadcrumb name={product.breadcrumb} category={product.category} />
             <h2 className="!text-[1.5rem] text-[#2F2E2D] font-sansita-regular">
               {product.name}
@@ -51,9 +51,9 @@ const ProductDetail = ({ product }) => {
                 ₹{product.price}
               </h2>
               <small className="!text-[.85rem] ml-[0.75rem] font-lato-regular font-bold">
-                <span className="line-through">{product.actualPrice}</span>{" "}
+                <span className="line-through">₹{product.actualPrice}</span>{" "}
                 <span className="font-bold text-[#FF0909]">
-                  ₹{product.offPercentage} OFF
+                  {product.offPercentage} OFF
                 </span>
               </small>
             </div>
@@ -82,7 +82,7 @@ const ProductDetail = ({ product }) => {
               </p>
             </div>
             <MobFabricDetails product={product} />
-            <div className="lg:absolute bottom-14 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
+            <div className="lg:absolute bottom-2 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
               <SecurityDetails />
             </div>
           </div>

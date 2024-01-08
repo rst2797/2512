@@ -3,7 +3,7 @@ import React from "react";
 
 const SectionFive = () => {
   return (
-    <div className="relative px-4 lg:px-20 lg:py-6 flex flex-col-reverse lg:grid grid-cols-2 gap-8 lg:h-[80vh] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_4.png')] overflow-hidden">
+    <div className="relative px-4 lg:px-20 lg:py-6 flex flex-col-reverse lg:grid grid-cols-2 gap-8 lg:h-[87vh] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_4.png')] overflow-hidden">
       <div className="flex flex-col justify-center ">
         <h2 className="font-sansita-regular text-center lg:text-start leading-[70px] text-[#2F2E2D] lg:text-[#2F2E2D]">
           Note from the Founder

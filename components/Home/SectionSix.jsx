@@ -4,7 +4,8 @@ import Link from "next/link";
 
 const SectionSix = () => {
   return (
-    <div className="bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group.png')] p-4 lg:px-24 flex flex-col justify-center items-center lg:flex-row lg:justify-between">
+    <div className="bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group.png')] p-4 lg:px-24">
+      <div className="mx-auto max-w-[1450px] flex flex-col justify-center items-center lg:flex-row lg:justify-between">
       <table>
         <tbody>
           <tr className="border-b-[1px] border-black">
@@ -108,6 +109,7 @@ const SectionSix = () => {
             </h2>
           </a>
         </Link>
+      </div>
       </div>
     </div>
   );

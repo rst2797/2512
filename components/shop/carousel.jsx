@@ -91,11 +91,19 @@
 
 // components/Carousel.js
 import Image from "next/image";
-import React, { useState } from "react";
-import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
+import React, { useState, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const   Carousel = ({ sliderImages, rating, numberOfRatings }) => {
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+// import required modules
+import { Navigation } from "swiper/modules";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+
+const Carousel = ({ sliderImages, rating, numberOfRatings }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderRef = useRef();
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -112,27 +120,44 @@ const   Carousel = ({ sliderImages, rating, numberOfRatings }) => {
   return (
     <div className="relative flex justify-around lg:px-12 pb-6">
       <div className="w-full object-cover relative">
-      <button
-        onClick={handlePrev}
-        className="drop-shadow-lg absolute left-4 top-1/2 z-40 transform -translate-y-1/2 rounded-full w-12 h-12 text-white flex justify-center items-center text-2xl font-bold bg-[#A86549]"
-      >
-        <IoIosArrowRoundBack/>
-      </button>
-        <Image
-          src={sliderImages[currentIndex]}
-          alt={`Image ${currentIndex + 1}`}
-          width={800}
-          height={1000} 
-          placeholder="blur"
-          className="rounded-2xl"
-          blurDataURL="/product-placeholder.jpg"
-        />
-      <button
-        onClick={handleNext}
-        className="drop-shadow-lg absolute right-4 top-1/2 z-40 transform -translate-y-1/2 rounded-full w-12 h-12 text-white flex justify-center items-center text-2xl font-bold bg-[#A86549]"
-      >
-        <IoIosArrowRoundForward/>
-      </button>
+        <div className="relative flex justify-center items-center py-4">
+          <Swiper
+            onSwiper={(it) => (sliderRef.current = it)}
+            modules={[Navigation]}
+            loop={true}
+            className="relative w-full flex flex-row"
+          >
+            <div className="absolute inset-y-0 left-6 z-50 flex items-center">
+              <button
+                onClick={() => sliderRef.current?.slidePrev()}
+                className="bg-[#A86549] text-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none"
+              >
+                <IoIosArrowRoundBack className="text-2xl" />
+              </button>
+            </div>
+            {sliderImages.map((ele, index) => (
+              <SwiperSlide key={index + 1}>
+                <Image
+                  src={ele}
+                  alt={`2512 Exclusive Tee ${index + 1}`}
+                  width={800}
+                  height={1000}
+                  placeholder="blur"
+                  className="rounded-2xl"
+                  blurDataURL="/product-placeholder.jpg"
+                />
+              </SwiperSlide>
+            ))}
+            <div className="absolute z-50 inset-y-0 right-6 flex items-center">
+              <button
+                onClick={() => sliderRef.current?.slideNext()}
+                className="bg-[#A86549] text-white -mr-2 lg:-mr-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none"
+              >
+                <IoIosArrowRoundForward className="text-2xl" />
+              </button>
+            </div>
+          </Swiper>
+        </div>
       </div>
     </div>
   );

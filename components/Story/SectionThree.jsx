@@ -5,7 +5,7 @@ import WebGrid from "./WebGrid";
 const SectionThree = () => {
   return (
     <div className="relative lg:w-full lg:grid grid-cols-2 items-center bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_3.png')]">
-      <div className="">
+      <div className="mx-auto max-w-[1450px]">
         <h2 className="font-sansita-regular lg:hidden block leading-[70px] px-3 pt-4 !text-[2.5rem] text-center lg:text-start text-[#F4E9DF] w-full">
           “Fashion forward, People centric, Planet loving”
         </h2>
@@ -13,8 +13,8 @@ const SectionThree = () => {
           src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_2-transparent.png"
           alt="2512 | PACCHIS BARAH STORY"
           className="contrast-125 brightness-125"
-          width={500}
-          height={600}
+          width={800}
+          height={800}
         />
       </div>
       <div className="px-4 text-[#F4E9DF]">
