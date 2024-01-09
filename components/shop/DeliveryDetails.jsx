@@ -68,7 +68,7 @@ const AddToCart = ({ product, quantity }) => {
   };
   return (
     <button
-      className="py-[0.3rem] my-2 rounded-lg w-full lg:w-[55%] text-white bg-[#A86549] font-lato-regular !text-[.75rem] !font-[700]"
+      className="py-[0.3rem] my-4 rounded-lg w-full lg:w-[55%] text-white bg-[#A86549] font-lato-regular !text-[.75rem] !font-[700]"
       onClick={handleAddToCart}
     >
       Add to Bag
@@ -77,7 +77,7 @@ const AddToCart = ({ product, quantity }) => {
 };
 const Counter = ({ quantity, setQuantity }) => {
   return (
-    <div className="flex items-center pt-4 pb-2">
+    <div className="flex items-center py-4">
       <p className="font-semibold pr-4">Quantity: </p>
       <div className="flex bg-white w-fit px-2 border-[2px] rounded-lg">
         <button

@@ -62,7 +62,7 @@ const ProductDetail = ({ product }) => {
             </div>
           </div>
           <div className="relative lg:p-6">
-            <div className="hidden lg:block">
+            <div className="hidden lg:block mt-6">
               <Breadcrumb
                 name={product.breadcrumb}
                 category={product.category}
@@ -88,13 +88,15 @@ const ProductDetail = ({ product }) => {
               {ratings.totalRatings}{" "}
               {ratings.totalRatings > 1 ? "Ratings" : "Rating"}
             </p>
-            <div>
+            <div className="lg:pt-8">
               <SelectColor product={product} />
             </div>
-            <SelectSize setProductSize={setProductSize} />
+            <div className="lg:py-4">
+              <SelectSize setProductSize={setProductSize} />
+            </div>
             <DeliveryDetails product={product} />
             <div className="hidden lg:block">
-              <p className="font-semibold lg:w-[90%] pt-10 pb-5">
+              <p className="font-semibold lg:w-[90%] pt-16 pb-5">
                 {activeFabricDetail === "care" ||
                 activeFabricDetail === "material" ? (
                   <>
@@ -110,7 +112,7 @@ const ProductDetail = ({ product }) => {
               </p>
             </div>
             <MobFabricDetails product={product} />
-            <div className="lg:absolute bottom-2 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
+            <div className="lg:absolute bottom-3 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
               <SecurityDetails />
             </div>
           </div>

@@ -11,7 +11,7 @@ const Breadcrumb = ({name, category}) => {
 
   return (
     <nav>
-      <ul className="flex items-center pb-1 font-semibold text-xs">
+      <ul className="flex items-center pb-2 font-bold text-xs lg:text-[.8rem]">
         <li>
           <Link href="/shop/tshirt">
             <a>Shop</a>

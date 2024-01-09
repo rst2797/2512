@@ -45,7 +45,7 @@ const Navbar = ({ position }) => {
               </button>
             </div>
             <Link href="/">
-              <a className="text-2xl font-bold pt-[.5rem] pb-[.3rem] lg:border-r-[1px] lg:border-[#A86549] lg:pr-12">
+              <a className="text-2xl font-bold pt-[.5rem] pb-[.3rem] lg:border-r-[1px] lg:border-[#A86549] lg:pr-12 pl-6 lg:pl-0">
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
@@ -79,7 +79,7 @@ const Navbar = ({ position }) => {
                     About Us
                   </span>
                   {openMenu && (
-                    <div className=" bg-[#F4E9DF] absolute top-12 p-6 font-semibold">
+                    <div className=" bg-[#F4E9DF] absolute -left-4 top-12 p-6 font-semibold">
                       <ul>
                         <li>
                           <Link href="/our-story">
@@ -110,7 +110,7 @@ const Navbar = ({ position }) => {
               </ul>
             </div>
 
-            <div className="flex items-center flex-row-reverse lg:flex-row justify-evenly">
+            <div className="flex items-center flex-row-reverse lg:flex-row justify-evenly gap-4 lg:gap-0">
               <Link href={user ? `/profile/${user._id}` : "/auth"}>
                 <a className="lg:text-[1.25rem] relative">
                   <FaRegUser size={25} className="pl-1 lg:p-0 lg:mx-4" />

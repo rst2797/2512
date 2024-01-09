@@ -141,10 +141,10 @@ const Carousel = ({ sliderImages, rating, numberOfRatings }) => {
                   src={ele}
                   alt={`2512 Exclusive Tee ${index + 1}`}
                   width={800}
-                  height={1000}
+                  height={1155}
                   placeholder="blur"
                   className="rounded-2xl"
-                  blurDataURL="/product-placeholder.jpg"
+                  blurDataURL="/images/placeholders/image.png"
                 />
               </SwiperSlide>
             ))}

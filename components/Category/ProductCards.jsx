@@ -35,7 +35,7 @@ const ProductCards = ({ products }) => {
               src={ele.images[0]}
               alt={ele.breadcrumb}
               width={350}
-              height={400}
+              height={500}
               priority="high"
               className="rounded-t-xl"
             />

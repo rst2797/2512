@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const SelectSize = ({ setProductSize }) => {
   const [size, setSize] = useState("S");
@@ -6,13 +7,24 @@ const SelectSize = ({ setProductSize }) => {
     setProductSize(size);
   }, [size]);
 
+  const handleSizeChart = () => {
+    Swal.fire({
+      imageUrl: "/images/size-chart.png",
+      imageHeight: 500,
+      imageAlt: "2512 size chart | Pacchis Barah Size Chart",
+    });
+  };
+
   return (
     <div className="">
       <div className="flex items-center justify-between w-[55%] py-1">
         <h2 className="!text-[1rem] font-semibold font-lato-regular">
           Size: &nbsp; {size}
         </h2>
-        <h3 className="text-[#A86549] font-semibold !text-[0.75rem] font-lato-regular underline cursor-pointer">
+        <h3
+          onClick={() => handleSizeChart()}
+          className="text-[#A86549] font-semibold !text-[0.75rem] font-lato-regular underline cursor-pointer"
+        >
           Size Chart
         </h3>
       </div>

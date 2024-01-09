@@ -1,18 +1,14 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import { IoClose } from "react-icons/io5";
-import Marquee from "react-fast-marquee";
 import Navbar from "../components/common/header";
 import Footer from "../components/common/footer.jsx";
 import SectionOne from "../components/Home/SectionOne.jsx";
 import SectionTwo from "../components/Home/SectionTwo.jsx";
-import SectionThree from "../components/Home/SectionThree.jsx";
 import SectionFour from "../components/Home/SectionFour.jsx";
 import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
-import SectionSeven from "../components/Home/SectionSeven.jsx";
-const Home = () => {
-  const [close, setClose] = useState(false);
+import {rediss} from "../utils/redis";
+const Home = ({products}) => {
   return (
     <main>
       <Head>
@@ -45,9 +41,9 @@ const Home = () => {
       <div className="container lg:mx-0 min-h-screen bg-[#f2eadf] relative">
         <Navbar position={true} />
         <SectionOne />
-        <SectionTwo />
+        <SectionTwo products={products} />
         <SectionFour />
-        <SectionFive /> 
+        <SectionFive />
         <SectionSix />
         <Footer />
       </div>
@@ -56,3 +52,9 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const cachedProducts = await rediss.get("products");
+  if (cachedProducts)
+    return { props: { products: JSON.parse(cachedProducts).products } };
+};

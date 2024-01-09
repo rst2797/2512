@@ -18,7 +18,7 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
     <div className="accordion lg:px-14">
       <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-y-[1px] !border-black">
         <h2
-          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
           onClick={() => handleClick("description")}
         >
           <span className="accordion-header-text">Description</span>
@@ -29,7 +29,7 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
       </div>
       <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
         <h2
-          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
           onClick={() => handleClick("material")}
         >
           <span className="accordion-header-text">Material</span>
@@ -41,7 +41,7 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
 
       <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
         <h2
-          className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
+          className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
           onClick={() => handleClick("care")}
         >
           <span className="accordion-header-text">Care</span>
@@ -54,7 +54,7 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
       <Link href="/home/delivery-returns" >
         <a target="_blank">
           <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
-            <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
+            <h2 className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
               <span className="accordion-header-text">
                 Delivery, Returns & Exchange
               </span>
@@ -66,7 +66,7 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
         </a>
       </Link>
       <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] border-black">
-        <h2 className="accordion-header flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
+        <h2 className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
             <EditableRating productId={product._id} readOnly={false} />
