@@ -7,8 +7,8 @@ import SectionTwo from "../components/Home/SectionTwo.jsx";
 import SectionFour from "../components/Home/SectionFour.jsx";
 import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
-import {rediss} from "../utils/redis";
-const Home = ({products}) => {
+import { rediss } from "../utils/redis";
+const Home = ({ products }) => {
   return (
     <main>
       <Head>
@@ -37,6 +37,13 @@ const Home = ({products}) => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="preload"
+          href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/0O9A8802+1.png"
+          as="image"
+          type="image/*"
+          crossOrigin="anonymous"
+        />
       </Head>
       <div className="container lg:mx-0 min-h-screen bg-[#f2eadf] relative">
         <Navbar position={true} />

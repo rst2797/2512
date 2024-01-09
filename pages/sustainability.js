@@ -32,6 +32,13 @@ const Story = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/sustainability" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="preload"
+          href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/sustainability/Mask+group.png"
+          as="image"
+          type="image/*"
+          crossOrigin="anonymous"
+        />
       </Head>
       <div className="container min-h-screen bg-[#f2eadf] relative">
         <SectionOne>
