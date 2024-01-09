@@ -91,7 +91,7 @@ const Profile = ({ user, success }) => {
               property="og:url"
               content="https://www.2512.in/profile/darshan"
             />
-            <meta property="og:image" content="/favicon.ico" />
+            <meta property="og:image" content="/icons/favicon.ico" />
             <meta
               name="description"
               content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
@@ -99,9 +99,9 @@ const Profile = ({ user, success }) => {
             <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
             <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/icons/favicon.ico" />
             <link rel="canonical" href="https://www.2512.in/profile/darshan" />
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/icons/favicon.ico" />
           </Head>
           <Navbar />
           <div className="py-4 px-[.94rem] 2xl:px-20 mx-auto max-w-[1450px]">

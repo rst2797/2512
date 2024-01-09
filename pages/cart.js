@@ -29,7 +29,7 @@ const Cart = () => {
           content="Review and checkout your sustainable fashion picks at www.2512.in. Secure your style journey with 2512's eco-conscious choices. Elevate your wardrobe responsibly. #2512Fashion #SecureCheckout"
         />
         <meta property="og:url" content="https://www.2512.in/cart" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Review and checkout your sustainable fashion picks at www.2512.in. Secure your style journey with 2512's eco-conscious choices. Elevate your wardrobe responsibly. #2512Fashion #SecureCheckout"
@@ -37,9 +37,9 @@ const Cart = () => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/cart" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <div className="bg-[#F4E9DF] w-full lg:w-3/4 xl:w-2/3 2xl:w-full 2xl:px-20 min-h-screen">
         <Navbar />

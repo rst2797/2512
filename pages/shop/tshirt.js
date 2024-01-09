@@ -31,7 +31,7 @@ const Home = ({ products }) => {
           content="Explore Stylish fashion at www.2512.in – where style meets sustainability. Discover our curated collection, including timeless black tees. Elevate your wardrobe with 2512. #2512Fashion #MensStyle"
         />
         <meta property="og:url" content="https://www.2512.in/collection" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Explore Stylish fashion at www.2512.in – where style meets sustainability. Discover our curated collection, including timeless black tees. Elevate your wardrobe with 2512. #2512Fashion #MensStyle"
@@ -39,9 +39,9 @@ const Home = ({ products }) => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/collection" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <div className="container bg-[#f2eadf] relative">
         <SectionOne products={products}>

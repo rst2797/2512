@@ -112,7 +112,7 @@ const Detail = () => {
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimamx-6 list, greener coding. Shop on mobile & web."
         />
         <meta property="og:url" content="https://www.2512.in/home/delivery-returns" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimamx-6 list, greener coding. Shop on mobile & web."
@@ -120,9 +120,9 @@ const Detail = () => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/home/delivery-returns" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <Navbar />
       <div className="px-[.94rem] lg:px-20 text-[#2F2E2D]">

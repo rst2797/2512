@@ -26,7 +26,7 @@ const Home = ({ products }) => {
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
         />
         <meta property="og:url" content="https://www.2512.in/" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_1.png" />
         <meta
           name="description"
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
@@ -34,9 +34,8 @@ const Home = ({ products }) => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link
           rel="preload"
           href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/0O9A8802+1.png"

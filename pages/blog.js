@@ -42,14 +42,14 @@ const Blog = () => {
           property="og:description"
           content="Explore our blog for the latest insights on organic and sustainable fashion. Stay updated with 2512's eco-friendly initiatives."
         />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta property="og:url" content="https://www.2512.in/blog" />
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/blog" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <Navbar />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-[.94rem] py-24 text-[#2F2E2D] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/blog/Mask+group+3.png')]">

@@ -41,7 +41,7 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
                   content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
                 />
                 <meta property="og:url" content="https://www.2512.in/" />
-                <meta property="og:image" content="/favicon.ico" />
+                <meta property="og:image" content="/icons/favicon.ico" />
                 <meta
                   name="description"
                   content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
@@ -52,9 +52,9 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
                 />
                 <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/icons/favicon.ico" />
                 <link rel="canonical" href="https://www.2512.in/" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/icons/favicon.ico" />
               </Head>
               <Navbar />
               <h1 className="font-sansita-regular !text-[2rem] lg:!text-[2.5rem] pb-[.94rem] px-[7rem] pt-16 text-[#2F2E2D] !font-[700]">

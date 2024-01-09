@@ -22,17 +22,17 @@ const TShirt = ({ product }) => {
         />
         <meta property="og:url" content="https://www.2512.in/sustainability" />{" "}
         {/*Need to update dynamically */}
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Elevate your style with our expanded male black tee collection. Discover timeless simplicity and comfort. Explore the 2512 wardrobe essentials. #2512Fashion #MensStyle"
         />
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/sustainability" />{" "}
         {/*Need to update dynamically */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       {product ? <ProductDetail product={product} /> : <ProductNotFound />}
     </main>

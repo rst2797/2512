@@ -20,7 +20,7 @@ const Kanso = () => {
           content="Experience Kanso at www.2512.in – where simplicity meets sophistication. Explore our latest collection, blending timeless design with modern style. Elevate your wardrobe. #2512Fashion #KansoCollection"
         />
         <meta property="og:url" content="https://www.2512.in/kanso" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Experience Kanso at www.2512.in – where simplicity meets sophistication. Explore our latest collection, blending timeless design with modern style. Elevate your wardrobe. #2512Fashion #KansoCollection"
@@ -28,9 +28,9 @@ const Kanso = () => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/kanso" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <main className="container">
         <SectionOne>

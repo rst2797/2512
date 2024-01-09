@@ -26,7 +26,7 @@ const Story = () => {
           content="Dive into the narrative behind www.2512.in – where sustainability meets style. Explore our story, unveiling the ethos of our organic, gender-inclusive fashion brand."
         />
         <meta property="og:url" content="https://www.2512.in/our-story" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/icons/favicon.ico" />
         <meta
           name="description"
           content="Dive into the narrative behind www.2512.in – where sustainability meets style. Explore our story, unveiling the ethos of our organic, gender-inclusive fashion brand."
@@ -34,9 +34,9 @@ const Story = () => {
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/our-story" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
         <link
           rel="preload"
           href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_1.png"
