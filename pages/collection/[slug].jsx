@@ -10,23 +10,20 @@ const TShirt = ({ product }) => {
   return (
     <main className="bg-[#f2eadf]">
       <Head>
-        <title>Classic Black Tees for Men - 2512 Wardrobe Essentials</title>
+        <title>{`${product.breadcrumb} - 2512 Wardrobe Essentials`}</title>
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Classic Black Tees for Men - 2512 Wardrobe Essentials"
+          content={`${product.breadcrumb} - 2512 Wardrobe Essentials`}
         />
+        <meta property="og:description" content={`${product.description}`} />
         <meta
-          property="og:description"
-          content="Elevate your style with our expanded male black tee collection. Discover timeless simplicity and comfort. Explore the 2512 wardrobe essentials. #2512Fashion #MensStyle"
-        />
-        <meta property="og:url" content="https://www.2512.in/sustainability" />{" "}
+          property="og:url"
+          content="https://www.2512.in/sustainability"
+        />{" "}
         {/*Need to update dynamically */}
         <meta property="og:image" content="/icons/favicon.ico" />
-        <meta
-          name="description"
-          content="Elevate your style with our expanded male black tee collection. Discover timeless simplicity and comfort. Explore the 2512 wardrobe essentials. #2512Fashion #MensStyle"
-        />
+        <meta name="description" content={`${product.description}`} />
         <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
         <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
         <link rel="icon" href="/icons/favicon.ico" />
