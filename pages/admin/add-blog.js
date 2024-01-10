@@ -13,14 +13,18 @@ import Link from "next/link";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 const TextEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [blogTitle, setTitle] = useState("");
   const [blogHtml, setBlogHtml] = useState("");
-  const [image, setImage] = useState(
-    "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/profile.jpg"
-  );
+  const [featureMedia, setFeatureMedia] = useState(null);
+
+  const [thumbnailAlt, setThumbnailAlt] = useState("");
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
+  const router = useRouter();
 
   const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -45,27 +49,44 @@ const TextEditor = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
   };
 
-  const addImage = (e) => {
-    const file = e.target.files[0];
+  const addImage = async (e) => {
+    e.preventDefault();
+    const blogId = Date.now();
 
-    if (file) {
-      const reader = new FileReader();
+    try {
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      console.log(e.target.files[0]);
 
-      reader.onloadend = () => {
-        // Log the image data to the console
-        console.log({
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          dataUrl: reader.result, // Fix the typo here
+      await axios
+        .post(
+          `/api/admin/get-signed-url-to-upload-blog-thumbnail?blogId=${blogId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          axios.put(res.data.putSigned, e.target.files[0]).then((res) => {
+            axios
+              .get(
+                `/api/get-profile-picture-signedurl/blogs-thumbnail/${blogId}_${e.target.files[0].name}`
+              )
+              .then((res) => {
+                console.log(res.data);
+                setFeatureMedia(res.data.url);
+                toast.success("Profile updated successfully....");
+              });
+          });
+        })
+        .catch((error) => {
+          toast.error("Something went wrong!!");
         });
-      };
-
-      // Set the image state with the correct data
-      setImage(reader.result);
-
-      // Read the selected image file as a data URL
-      reader.readAsDataURL(file);
+    } catch (error) {
+      toast.error("Error uploading image");
     }
   };
   const uploadHandler = () => {
@@ -73,39 +94,56 @@ const TextEditor = () => {
       setBlogHtml(
         "" + draftToHtml(convertToRaw(editorState.getCurrentContent()))
       );
-      console.log(convertToRaw(editorState.getCurrentContent()).blocks[0].text);
-      axios
-        .post(
-          `${process.env.NEXT_API_BASE_URL}/api/admin/upload-blog`,
-          {
-            title: blogTitle,
-            bloghtml: blogHtml,
-            blogsummary: convertToRaw(editorState.getCurrentContent()).blocks[0]
-              .text,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${JSON.parse(
-                localStorage.getItem("token")
-              )}`,
+      if (featureMedia && blogHtml) {
+        axios
+          .post(
+            `/api/admin/upload-blog`,
+            {
+              title: blogTitle,
+              bloghtml: blogHtml,
+              blogsummary: convertToRaw(editorState.getCurrentContent())
+                .blocks[0].text,
+              alt: thumbnailAlt,
+              featuremedia: featureMedia,
+              metaTitle: metaTitle || blogTitle,
+              metaDescription,
             },
-          }
-        )
-        .then((res) => {
-          if (res.data.success) {
-            toast.success(res.data.message);
-          } else {
-            throw new Error(res.data.message);
-          }
+            {
+              headers: {
+                Authorization: `Bearer ${JSON.parse(
+                  localStorage.getItem("token")
+                )}`,
+              },
+            }
+          )
+          .then((res) => {
+            if (res.data.success) {
+              toast.success(res.data.message);
+              setTimeout(() => {
+                router.push("/admin/orders");
+              }, 1500);
+            } else {
+              throw new Error(res.data.message);
+            }
+          });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Blog can't be upload without thumbnail image!!!",
+          showConfirmButton: false,
+          timer: 1500,
         });
+        throw new Error("Blog can't be upload without thumbnail image!!!");
+      }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message);
     }
   };
   useEffect(() => {
     console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     console.log(blogTitle);
-  }, [blogHtml, blogTitle]);
+  }, [blogHtml, blogTitle, editorState]);
 
   return (
     <div>
@@ -166,9 +204,64 @@ const TextEditor = () => {
           />
         </div>
       </div>
-      {/* {image && (
-        <Image src={image} alt="" width={400} height={500} id="image-preview" />
-      )} */}
+      <div className="flex flex-col lg:flex-row justify-around items-center px-[20vw]">
+        {featureMedia && (
+          <>
+            <div className="flex flex-col w-full ">
+              <lable htmlFor="thumbnailAlt" className="font-bold text-xl pt-5">
+                Enter image alt text
+              </lable>
+              <input
+                id={"thumbnailAlt"}
+                placeholder="Enter an image alt tag here...."
+                onChange={(e) => setThumbnailAlt(e.target.value)}
+                defaultValue={"2512 blog thumbnail"}
+                className="border-b-[1px] border-black h-fit w-[70%] outline-none"
+              />
+              <lable htmlFor="metaTitle" className="font-bold text-xl pt-5">
+                Enter meta title
+              </lable>
+              <input
+                id={"metaTitle"}
+                placeholder="Enter an image alt tag here...."
+                onChange={(e) => setMetaTitle(e.target.value)}
+                defaultValue={blogTitle}
+                className="border-b-[1px] border-black h-fit w-[70%] outline-none"
+              />
+              <lable
+                htmlFor="metaDescription"
+                className="font-bold text-xl pt-5"
+              >
+                Enter meta description
+              </lable>
+              <textarea
+                id={"metaDescription"}
+                placeholder="Enter blog meta description here, make sure to keep it in the range of 150 to 170"
+                onChange={(e) => setMetaDescription(e.target.value)}
+                minLength={150}
+                maxLength={170}
+                rows={4}
+                className="border-b-[1px] border-black h-fit w-[70%] outline-none resize-none"
+              />
+              <button
+                onClick={uploadHandler}
+                className="bg-[#A86549] px-6 py-1 font-bold text-white rounded-lg w-[70%] my-3"
+              >
+                Upload
+              </button>
+            </div>
+            <div className="p-2">
+              <Image
+                src={featureMedia}
+                alt="2512 blog thumbnail"
+                width={600}
+                height={500}
+                className="rounded-2xl"
+              />
+            </div>
+          </>
+        )}
+      </div>
       <div className="p-4">
         <ToastContainer
           position="bottom-center"

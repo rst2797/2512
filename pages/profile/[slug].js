@@ -9,8 +9,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "cookies";
+import { ThreeDots } from "react-loader-spinner";
+import { toast } from "react-toastify";
 const Profile = ({ user, success }) => {
-  const [responseData, setResponseData] = useState({});
+  const [profileLoader, setProfileLoader] = useState(false);
+  const [profile, setProfile] = useState(user.profile);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = async (e) => {
@@ -21,6 +24,7 @@ const Profile = ({ user, success }) => {
       const formData = new FormData();
       formData.append("image", e.target.files[0]);
       console.log(e.target.files[0]);
+      setProfileLoader(true);
 
       await axios
         .post(`/api/get-signedurl-to-upload/${userId}`, formData, {
@@ -29,48 +33,35 @@ const Profile = ({ user, success }) => {
           },
         })
         .then((res) => {
-          fileToBinary(e.target.files[0])
-            .then((binaryData) => {
-              axios.put(res.data.putSigned, binaryData).then((res) => {
+          axios.put(res.data.putSigned, e.target.files[0]).then((res) => {
+            axios
+              .get(
+                `/api/get-profile-picture-signedurl/user-profiles-pictures/${userId}_${e.target.files[0].name}`
+              )
+              .then((res) => {
+                console.log(res.data);
                 axios
-                  .get(
-                    `/api/get-profile-picture-signedurl/user-profiles-pictures/${userId}_${e.target.files[0].name}`
-                  )
+                  .post(`/api/update-profile?userId=${userId}`, {
+                    imageUri: res.data.url,
+                  })
                   .then((res) => {
-                    console.log(res.data);
-                    axios.post(`/api/update-profile?userId=${userId}`, {
-                      imageUri: res.data.url,
-                    });
+                    setProfileLoader(false);
+                    toast.success("Profile updated successfully....");
+                    setProfile(res.data.user.profile);
                   });
               });
-            })
-            .catch((error) => {
-              console.error("Error:", error.message);
-            });
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+          setProfileLoader(false);
         });
     } catch (error) {
       console.error("Error uploading image:", error);
+      setProfileLoader(false);
     }
   };
 
-  async function fileToBinary(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        // The result property contains the binary data
-        const binaryData = reader.result;
-        resolve(binaryData);
-      };
-
-      reader.onerror = () => {
-        reject(new Error("Error reading the file"));
-      };
-
-      // Read the file as binary data
-      reader.readAsBinaryString(file);
-    });
-  }
   const router = useRouter();
   useEffect(() => {
     if (!success) {
@@ -127,7 +118,7 @@ const Profile = ({ user, success }) => {
                     />
                   ) : (
                     <Image
-                      src={user?.profile}
+                      src={profile}
                       alt="Profile Picture"
                       width={100}
                       height={100}
@@ -140,6 +131,20 @@ const Profile = ({ user, success }) => {
                     onChange={handleImageChange}
                     className="absolute left-0 right-0 top-0 bottom-0 opacity-0"
                   />
+                  {profileLoader && (
+                    <div className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0 w-full h-[95%] bg-[#0000006c] rounded-full">
+                      <ThreeDots
+                        visible={true}
+                        height="70"
+                        width="70"
+                        color="#fff"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="flex justify-between pb-4 border-b-[1px] border-black">
                   <h3 className="font-lato-regular !text-[1.3rem] font-semibold pt-[.88rem] text-[#2F2E2D] ">

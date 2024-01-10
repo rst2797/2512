@@ -7,13 +7,25 @@ async function uploadBlog(req, res) {
   try {
     connection();
 
-    const { title, bloghtml, blogsummary } = req.body; // Assuming you pass the new status in the request body
+    const {
+      title,
+      bloghtml,
+      blogsummary,
+      alt,
+      featureMedia,
+      metaTitle,
+      metaDescription,
+    } = req.body; // Assuming you pass the new status in the request body
 
     // Find the order by ID and update its status
     const blogData = new Blogs({
       title,
       bloghtml,
-      blogsummary
+      blogsummary,
+      alt,
+      image: featureMedia,
+      metaTitle,
+      metaDescription,
     });
 
     const savedBlog = await blogData.save();
@@ -30,4 +42,4 @@ async function uploadBlog(req, res) {
     });
   }
 }
-export default authAdminMiddleware(uploadBlog)
+export default authAdminMiddleware(uploadBlog);

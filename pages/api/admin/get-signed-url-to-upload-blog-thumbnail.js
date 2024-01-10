@@ -1,8 +1,5 @@
 import formidable from "formidable";
-import {
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const config = {
@@ -19,10 +16,10 @@ const s3Client = new S3Client({
   },
 });
 
-async function putObjectURL(ContentType, filename, userId) {
+async function putObjectURL(ContentType, filename, blogId) {
   const command = new PutObjectCommand({
     Bucket: "web.pacchisbarah.profile-pictures",
-    Key: `user-profiles-pictures/${userId}_${filename}`,
+    Key: `blogs-thumbnail/${blogId}_${filename}`,
     ContentType,
   });
   const url = await getSignedUrl(s3Client, command);
@@ -32,13 +29,12 @@ async function putObjectURL(ContentType, filename, userId) {
 async function handler(req, res) {
   try {
     const form = formidable({});
-    const userId = req.query.slug;
+    const { blogId } = req.query;
 
     // Listen for the 'file' event
     await form.on("file", async (name, file) => {
       // Create a unique filename using the original file name
       const fileName = `${Date.now()}_${file.originalFilename}`;
-      console.log(fileName + " " + file);
 
       try {
         // Check if the file path exists
@@ -48,7 +44,7 @@ async function handler(req, res) {
         const putSigned = await putObjectURL(
           file.mimetype,
           file.originalFilename,
-          userId
+          blogId
         );
 
         return res.status(200).json({

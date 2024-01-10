@@ -7,7 +7,7 @@ import Image from "next/image";
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 import { useEffect } from "react";
 
-export default function Carousel({ activeSlide, setActiveSlide }) {
+export default function Carousel({ blogs, activeSlide, setActiveSlide }) {
   useEffect(() => {
     console.log(activeSlide);
   }, [activeSlide]);
@@ -51,9 +51,9 @@ export default function Carousel({ activeSlide, setActiveSlide }) {
         onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
         className="mySwiper relative"
       >
-        {blogSlider.map((item) => (
+        {blogs.blogs.map((item) => (
           <SwiperSlide key={item.id} className="text-center ">
-            <Image src={item.image} alt={item.title} width={500} height={550} />
+            <Image src={item.image} alt={item.alt} width={500} height={550} />
           </SwiperSlide>
         ))}
       </Swiper>

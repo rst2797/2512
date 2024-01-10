@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus, FaMinus, FaRegStar } from "react-icons/fa";
 import Link from "next/link";
+import EditableRating from "../common/EditableRating";
 
 const MobFabricDetails = ({ product }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -18,7 +19,7 @@ const MobFabricDetails = ({ product }) => {
       <div className="accordion-item transition-all py-[1rem] border-y-[1px] !border-black">
         <h2
           className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
-          onClick={() => handleClick(0)} 
+          onClick={() => handleClick(0)}
         >
           <span className="accordion-header-text">Description</span>
           <span className="accordion-header-icon">
@@ -34,7 +35,7 @@ const MobFabricDetails = ({ product }) => {
       <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
         <h2
           className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
-          onClick={() => handleClick(1)} 
+          onClick={() => handleClick(1)}
         >
           <span className="accordion-header-text">Material</span>
           <span className="accordion-header-icon">
@@ -44,13 +45,11 @@ const MobFabricDetails = ({ product }) => {
         {activeIndex === 1 && (
           <div className="accordion-body">
             <p className="pl-8">
-              {product["material"].map(
-                (ele, index) => (
-                  <ul key={index}>
-                    <li className="py-2 list-disc">{ele}</li>
-                  </ul>
-                )
-              )}
+              {product["material"].map((ele, index) => (
+                <ul key={index}>
+                  <li className="py-2 list-disc">{ele}</li>
+                </ul>
+              ))}
             </p>
           </div>
         )}
@@ -59,7 +58,7 @@ const MobFabricDetails = ({ product }) => {
       <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
         <h2
           className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]"
-          onClick={() => handleClick(2)} 
+          onClick={() => handleClick(2)}
         >
           <span className="accordion-header-text">Care</span>
           <span className="accordion-header-icon">
@@ -97,9 +96,7 @@ const MobFabricDetails = ({ product }) => {
         <h2 className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
-            {[1, 2, 3, 4, 5].map((ele) => (
-              <FaRegStar key={ele} />
-            ))}
+            <EditableRating productId={product._id} readOnly={false} />
           </span>
         </h2>
       </div>
