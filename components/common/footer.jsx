@@ -6,7 +6,6 @@ import {
   FaPinterest,
   FaYoutube,
 } from "react-icons/fa";
-import Logo from "./Logo";
 import Image from "next/image";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -43,65 +42,72 @@ const Footer = () => {
               />
             </div>
             <div className="flex flex-col lg:flex-row justify-between">
-              <div className="max-w-full lg:text-justify text-center mx-4 px-4 text-white text-lg">
+              <div className="max-w-full w-[45%] lg:text-start text-center mx-4 px-4 text-white text-lg">
                 Discover conscious fashion at PacchisBarah – your sustainable,
                 gender-inclusive organic clothing brand. Minimal design and
                 maximum impact. Shop now on mobile & web at www.2512.in
               </div>
-              <div className="flex justify-around py-12 lg:py-0 px-12 lg:px-0 w-full">
-                <div className="flex flex-col text-sm lg:ml-24">
+              <div className="flex justify-around py-12 lg:py-0 px-4 lg:px-0 w-full">
+                <div className="flex flex-col text-lg lg:ml-4">
                   <Link href="/auth">
-                    <a className="text-white font-medium text-sm pb-3 no-underline text-center lg:text-left border-b-[1px] border-white">
+                    <a className="text-white text-lg pb-3 no-underline text-center lg:text-left border-b-[1px] border-white">
                       My Account
                     </a>
                   </Link>
                   <Link href="/home/delivery-returns" className="py-4">
-                    <a className="text-white font-medium text-sm py-2 no-underline text-center lg:text-left pt-2">
+                    <a className="text-white text-lg py-2 no-underline text-center lg:text-left pt-2">
                       Delivery & Return
                     </a>
                   </Link>
                   <Link href="/contactus" className="py-4">
-                    <a className="text-white font-medium text-sm py-2 no-underline text-center lg:text-left">
+                    <a className="text-white text-lg py-2 no-underline text-center lg:text-left">
                       Contact Us
                     </a>
                   </Link>
                   <Link href="/blog" className="py-4">
-                    <a className="text-white font-medium text-sm py-2 no-underline text-center lg:text-left">
+                    <a className="text-white text-lg py-2 no-underline text-center lg:text-left">
                       Blog
                     </a>
                   </Link>
-                  <Link href="/terms-and-conditions" className="py-4">
-                    <a className="text-white font-medium text-sm py-2 no-underline text-center lg:text-left">
-                      Terms and Conditions
-                    </a>
-                  </Link>
                 </div>
-                <div className="border-l-2 lg:border-none border-white h-32" />
+                <div className="border-l-2 lg:border-none border-white h-32 lg:hidden" />
 
-                <div className="flex flex-col items-center lg:items-start lg:pl-4 text-sm">
+                <div className="flex flex-col items-center lg:items-start lg:pl-4 text-lg">
                   <Link href="/our-story">
-                    <a className="text-white font-medium text-sm pb-3 no-underline border-b-[1px] border-white lg:mr-20 lg:pr-14">
+                    <a className="text-white text-lg pb-3 no-underline border-b-[1px] lg:w-[130px] border-white">
                       About Us
                     </a>
                   </Link>
                   <Link href="/our-story">
-                    <a className="text-white font-medium text-sm py-2 no-underline pt-2">
+                    <a className="text-white text-lg py-2 no-underline pt-2">
                       Our Story
                     </a>
                   </Link>
                   <Link href="/sustainability">
-                    <a className="text-white font-medium text-sm py-2 no-underline">
+                    <a className="text-white text-lg py-2 no-underline">
                       Sustainability
                     </a>
                   </Link>
                   <Link href="/kanso">
-                    <a className="text-white font-medium text-sm py-2 no-underline">
+                    <a className="text-white text-lg py-2 no-underline">
                       Kanso
                     </a>
                   </Link>
+                </div>
+                <div className="flex flex-col items-center lg:items-start text-lg">
+                  <Link href="/our-story">
+                    <a className="text-white text-lg pb-3 no-underline border-b-[1px] lg:w-[180px] border-white lg:mr-12">
+                      Customer Policies
+                    </a>
+                  </Link>
+                  <Link href="/terms-and-conditions" className="py-4">
+                    <a className="text-white text-lg py-2 no-underline text-center lg:text-left">
+                      Terms & Conditions
+                    </a>
+                  </Link>
                   <Link href="/privacy-and-policy">
-                    <a className="text-white font-medium text-sm py-2 no-underline">
-                      Privacy and Policy
+                    <a className="text-white text-lg py-2 no-underline">
+                      Privacy Policy
                     </a>
                   </Link>
                 </div>
@@ -129,7 +135,7 @@ const Footer = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-[#F4E9DF] rounded-md text-xs py-[0.625rem] px-[1.625rem] my-2 font-bold"
+                    className="bg-[#F4E9DF] rounded-md text-xs py-[0.625rem] px-[1.625rem] my-2 mx-1 font-bold"
                   >
                     Subscribe
                   </button>

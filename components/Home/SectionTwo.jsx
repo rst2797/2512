@@ -43,15 +43,19 @@ const SectionTwo = ({ products }) => {
         >
           {products?.map((ele) => (
             <SwiperSlide key={ele._id}>
-              <Image
-                src={ele.images[1]}
-                alt={ele.breadcrumb}
-                width={450}
-                height={550}
-                placeholder="blur"
-                blurDataURL="/images/placeholders/image.png"
-                className="rounded-xl drop-shadow-xl w-full lg:w-auto"
-              />
+              <Link href={`/collection/${ele._id}`}>
+                <a>
+                  <Image
+                    src={ele.images[0]}
+                    alt={ele.breadcrumb}
+                    width={450}
+                    height={550}
+                    placeholder="blur"
+                    blurDataURL="/images/placeholders/image.png"
+                    className="rounded-xl drop-shadow-xl w-full lg:w-auto"
+                  />
+                </a>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

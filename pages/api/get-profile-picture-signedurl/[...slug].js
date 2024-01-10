@@ -16,10 +16,9 @@ const s3Client = new S3Client({
 });
 
 async function getObjectURL(req, res) {
-    console.log()
   const command = new GetObjectCommand({
     Bucket: "web.pacchisbarah.profile-pictures",
-    Key: req.query.slug,
+    Key: req.query.slug[0]+"/"+req.query.slug[1],
   });
   const url = await getSignedUrl(s3Client, command);
   return res.status(200).json({

@@ -50,12 +50,26 @@ const Register = () => {
               <div className="font-semibold px-3">OR</div>
               <div className="bg-white lg:bg-black h-[1px] w-[200px]" />
             </div>
-            <div className="my-2 lg:px-48 text-center">
-              <p className="font-semibold text-md">
-                Reach out to us via email:
+            <div className="my-2 lg:px-48 text-center flex justify-center items-center">
+              <div className="px-4">
+                <p className="font-semibold text-md">
+                  Reach out to us via email:
+                </p>
+                <p className="text-xl font-semibold">contactus@2512.in</p>
+              </div>
+              <p className="text-center font-semibold text-md border-l-[1px] w-[35%] px-4 border-black">
+                <span className="font-bold">Address <br/></span>
+                <span>Gram Bhanwarasala, Sanwer Road, Indore</span>
               </p>
-              <p className="text-xl font-semibold">contactus@2512.in</p>
             </div>
+            {/* <div className="flex items-center justify-center pt-6">
+              <div className="lg:bg-black h-[1px] pb-[0.115em] w-[165px]" />
+              <div className="font-semibold px-3">Our Address</div>
+              <div className="lg:bg-black h-[1px] pb-[0.115em] w-[165px]" />
+            </div>
+              <p className="text-center font-semibold text-md">
+                Gram Bhanwarasala, Sanwer Road, Indore
+              </p> */}
           </div>
         </div>
       </div>

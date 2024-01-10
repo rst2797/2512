@@ -20,8 +20,8 @@ const Profile = ({ user, success }) => {
     try {
       const formData = new FormData();
       formData.append("image", e.target.files[0]);
+      console.log(e.target.files[0]);
 
-      // Send the binary file to the backend API
       await axios
         .post(`/api/get-signedurl-to-upload/${userId}`, formData, {
           headers: {
@@ -29,40 +29,48 @@ const Profile = ({ user, success }) => {
           },
         })
         .then((res) => {
-          console.log("Form:- ", formData);
-          // axios.put(res.data.putSigned, formData);
+          fileToBinary(e.target.files[0])
+            .then((binaryData) => {
+              axios.put(res.data.putSigned, binaryData).then((res) => {
+                axios
+                  .get(
+                    `/api/get-profile-picture-signedurl/user-profiles-pictures/${userId}_${e.target.files[0].name}`
+                  )
+                  .then((res) => {
+                    console.log(res.data);
+                    axios.post(`/api/update-profile?userId=${userId}`, {
+                      imageUri: res.data.url,
+                    });
+                  });
+              });
+            })
+            .catch((error) => {
+              console.error("Error:", error.message);
+            });
         });
     } catch (error) {
       console.error("Error uploading image:", error);
     }
   };
 
-  const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("profileImage", selectedImage);
+  async function fileToBinary(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-      const response = await axios.post(
-        `/api/upload-profile-picture/${id}`,
-        formData
-      );
+      reader.onloadend = () => {
+        // The result property contains the binary data
+        const binaryData = reader.result;
+        resolve(binaryData);
+      };
 
-      if (response.data.success) {
-        // Reload the user data after successful upload
-        axios.post("/api/get-user", { id }).then((res) => {
-          setResponseData(res.data);
-        });
-      } else {
-        // Handle error
-        console.error(
-          "Upload failed:",
-          response.data.message || "An error occurred"
-        );
-      }
-    } catch (error) {
-      console.error("Error uploading profile picture:", error.message);
-    }
-  };
+      reader.onerror = () => {
+        reject(new Error("Error reading the file"));
+      };
+
+      // Read the file as binary data
+      reader.readAsBinaryString(file);
+    });
+  }
   const router = useRouter();
   useEffect(() => {
     if (!success) {
@@ -174,8 +182,8 @@ const Profile = ({ user, success }) => {
                   </tbody>
                 </table>
                 <button className="bg-[#A86549] lg:hidden text-white font-semibold text-sm rounded-lg py-2 px-[1.25rem] w-full my-4">
-                    Edit
-                  </button>
+                  Edit
+                </button>
               </div>
             </div>
           </div>

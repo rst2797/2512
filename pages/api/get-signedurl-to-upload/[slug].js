@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import formidable from "formidable";
 import {
-  GetObjectCommand,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -25,7 +24,7 @@ const s3Client = new S3Client({
 async function putObjectURL(ContentType, filename, userId) {
   const command = new PutObjectCommand({
     Bucket: "web.pacchisbarah.profile-pictures",
-    Key: `uploads/${userId}_${filename}`,
+    Key: `user-profiles-pictures/${userId}_${filename}`,
     ContentType,
   });
   const url = await getSignedUrl(s3Client, command);
@@ -54,7 +53,7 @@ async function handler(req, res) {
           userId
         );
 
-        return res.json({
+        return res.status(200).json({
           success: true,
           message:
             "Generated signedURL successfully, upload your image on the below url",
