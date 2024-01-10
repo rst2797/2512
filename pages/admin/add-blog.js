@@ -104,7 +104,7 @@ const TextEditor = () => {
               blogsummary: convertToRaw(editorState.getCurrentContent())
                 .blocks[0].text,
               alt: thumbnailAlt,
-              featuremedia: featureMedia,
+              featureMedia: featureMedia,
               metaTitle: metaTitle || blogTitle,
               metaDescription,
             },

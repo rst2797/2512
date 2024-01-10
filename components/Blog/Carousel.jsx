@@ -53,7 +53,7 @@ export default function Carousel({ blogs, activeSlide, setActiveSlide }) {
       >
         {blogs.blogs.map((item) => (
           <SwiperSlide key={item.id} className="text-center ">
-            <Image src={item.image} alt={item.alt} width={500} height={550} />
+            <Image src={item.image} alt={item.alt} width={500} height={550} className="rounded-xl" />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -10,7 +10,7 @@ const Blog = ({ blogData }) => {
       <div className="container bg-[#f2eadf] min-h-screen ">
         <Navbar />
         <div className="py-[6rem] min-h-screen mx-auto max-w-[1450px] px-4 lg:px-12">
-          <h1 className="font-sansita-regular">{blogData?.title}</h1>
+          <h1 className="font-sansita-regular py-6">{blogData?.title}</h1>
           <div className="flex justify-center">
             <Image
               src={blogData?.image}
@@ -19,7 +19,7 @@ const Blog = ({ blogData }) => {
               alt={blogData?.alt}
             />
           </div>
-          <div dangerouslySetInnerHTML={{ __html: blogData?.bloghtml }} />
+          <div className="py-6" dangerouslySetInnerHTML={{ __html: blogData?.bloghtml }} />
         </div>
         <Footer />
       </div>
