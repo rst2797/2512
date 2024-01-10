@@ -8,7 +8,7 @@ const SectionFive = () => {
         <h2 className="font-sansita-regular text-center lg:text-start leading-[70px] text-[#2F2E2D] lg:text-[#2F2E2D]">
           Note from the Founder
         </h2>
-        <h3 className="text-[7rem] text-[#A86549] font-extrabold font-mono leading-[7rem] text-center mt-4 quotes">
+        <h3 className="text-[7rem] text-[#A86549] font-extrabold font-mono leading-[7rem] text-start mt-4 quotes">
           &ldquo;
         </h3>
 

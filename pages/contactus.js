@@ -57,10 +57,10 @@ const Register = () => {
                 </p>
                 <p className="text-xl font-semibold">contactus@2512.in</p>
               </div>
-              <p className="text-center font-semibold text-md border-l-[1px] w-[35%] px-4 border-black">
+              {/* <p className="text-center font-semibold text-md border-l-[1px] w-[35%] px-4 border-black">
                 <span className="font-bold">Address <br/></span>
                 <span>Gram Bhanwarasala, Sanwer Road, Indore</span>
-              </p>
+              </p> */}
             </div>
             {/* <div className="flex items-center justify-center pt-6">
               <div className="lg:bg-black h-[1px] pb-[0.115em] w-[165px]" />
