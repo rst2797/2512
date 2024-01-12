@@ -9,7 +9,7 @@ const SimilarProducts = () => {
         <h2 className="font-sansita-regular !text-4xl">You may also like</h2>
       </div>
       <div className="pt-[2.5rem] pb-[3.75rem]">
-        <Slider sliderImages={[...live_in_moment_tshirt_black.images]}/>
+        <Slider />
       </div>
     </div>
   );

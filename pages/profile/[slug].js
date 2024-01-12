@@ -13,7 +13,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 const Profile = ({ user, success }) => {
   const [profileLoader, setProfileLoader] = useState(false);
-  const [profile, setProfile] = useState(user.profile);
+  const [profile, setProfile] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = async (e) => {
@@ -38,16 +38,16 @@ const Profile = ({ user, success }) => {
               .get(
                 `/api/get-profile-picture-signedurl/user-profiles-pictures/${userId}_${e.target.files[0].name}`
               )
-              .then((res) => {
+              .then((response) => {
                 console.log(res.data);
                 axios
-                  .post(`/api/update-profile?userId=${userId}`, {
-                    imageUri: res.data.url,
-                  })
+                  .put(
+                    `/api/update-profile?userId=${userId}&profile=${e.target.files[0].name}`
+                  )
                   .then((res) => {
                     setProfileLoader(false);
                     toast.success("Profile updated successfully....");
-                    setProfile(res.data.user.profile);
+                    setProfile(response.data.url);
                   });
               });
           });
@@ -66,11 +66,23 @@ const Profile = ({ user, success }) => {
   useEffect(() => {
     if (!success) {
       router.push("/login?destination=/");
+    } else {
+      if (user.profile.includes("/")) {
+        setProfile(user.profile);
+      } else {
+        axios
+          .get(
+            `/api/get-profile-picture-signedurl/user-profiles-pictures/${user.profile}`
+          )
+          .then((res) => {
+            setProfile(res.data.url);
+          });
+      }
     }
   }, []);
   return (
     <main className="container min-h-screen bg-[#f2eadf] relative">
-      {success && (
+      {success && profile && (
         <>
           <Head>
             <title>
@@ -103,7 +115,7 @@ const Profile = ({ user, success }) => {
             <link rel="icon" href="/icons/favicon.ico" />
           </Head>
           <Navbar />
-          <div className="py-4 px-[.94rem] 2xl:px-20 mx-auto max-w-[1450px]">
+          <div className="py-4 px-[.94rem] 2xl:px-20 mx-auto max-w-[1450px] min-h-[90vh]">
             <div className="pt-24 grid-cols-1 grid lg:grid-cols-4 gap-12">
               <ProfileOptions user={user} />
               <div className="lg:w-[70%] col-span-3 pt-6">

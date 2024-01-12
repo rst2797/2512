@@ -16,8 +16,6 @@ const blogSchema = new mongoose.Schema(
     image: {
       type: String,
       required: true,
-      default:
-        "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/web/Blog/New+Project+(5).png",
     },
     alt: { type: String },
     metaTitle: { type: String, default: "Sustainable Clothing - 2512 blog" },
@@ -32,4 +30,5 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-export const Blogs = mongoose.models.Blogs || mongoose.model("Blogs", blogSchema);
+export const Blogs =
+  mongoose.models.Blogs || mongoose.model("Blogs", blogSchema);

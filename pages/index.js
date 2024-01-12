@@ -8,6 +8,7 @@ import SectionFour from "../components/Home/SectionFour.jsx";
 import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
 import { rediss } from "../utils/redis";
+import axios from "axios";
 const Home = ({ products }) => {
   return (
     <main>
@@ -26,7 +27,10 @@ const Home = ({ products }) => {
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
         />
         <meta property="og:url" content="https://www.2512.in/" />
-        <meta property="og:image" content="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_1.png" />
+        <meta
+          property="og:image"
+          content="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_1.png"
+        />
         <meta
           name="description"
           content="Discover conscious fashion at www.2512.in – your sustainable, gender-inclusive clothing brand. Minimalist, greener coding. Shop on mobile & web."
@@ -59,8 +63,68 @@ const Home = ({ products }) => {
 
 export default Home;
 
-export const getServerSideProps = async () => {
-  const cachedProducts = await rediss.get("products");
-  if (cachedProducts)
-    return { props: { products: JSON.parse(cachedProducts).products } };
+const getPresignedUrls = async (key, file) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
+    );
+
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
 };
+export async function getServerSideProps() {
+  try {
+    const cachedData = await rediss.get("products");
+    const parsedCache = JSON.parse(cachedData);
+
+    if (!parsedCache) {
+      const res = await axios.get(
+        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+      );
+      console.log(res.data);
+
+      const products = await Promise.all(
+        res.data.products.map(async (product) => {
+          let images = [];
+
+          await Promise.all(
+            product.images.map(async (img) => {
+              if (img.includes("https://s3")) {
+                images.push(img);
+              } else {
+                const presigned = await getPresignedUrls("products-image", img);
+                images.push(presigned);
+              }
+            })
+          );
+
+          return { ...product, images };
+        })
+      );
+
+      // await rediss.set("products", JSON.stringify({ products }));
+
+      return {
+        props: {
+          products,
+        },
+      };
+    }
+
+    return {
+      props: {
+        products: parsedCache.products,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
+}

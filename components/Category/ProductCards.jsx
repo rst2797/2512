@@ -8,16 +8,10 @@ const ProductCards = ({ products }) => {
   const [render, setRender] = useState(false);
   const [ratings, setRatings] = useState([]);
   useEffect(() => {
+    const productIds = products.map((obj) => obj._id);
     axios
       .post(`/api/get-products-rating`, {
-        productIds: [
-          "657adf3a9bf64e606dfb4719",
-          "657adfdc9bf64e606dfb471a",
-          "657ae02f9bf64e606dfb471b",
-          "657ae05c9bf64e606dfb471c",
-          "657ae09c9bf64e606dfb471d",
-          "657ae0c39bf64e606dfb471e",
-        ],
+        productIds,
       })
       .then((res) => {
         setRatings([res.data.ratings]);

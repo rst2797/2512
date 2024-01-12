@@ -12,7 +12,7 @@ const SelectColor = ({ product }) => {
           <a>
             <button
               className={`!text-[0.9375rem] rounded-full p-4 border-2 border-[#A86549] bg-white text-center font-bold flex justify-center items-center ${
-                product.color === "white" ? "opacity-100" : "opacity-50"
+                product.color === "white" || product.color === "White" ? "opacity-100" : "opacity-50"
               }`}
             />
           </a>
@@ -21,7 +21,7 @@ const SelectColor = ({ product }) => {
           <a>
             <button
               className={`!text-[0.9375rem] rounded-full p-4 mx-2 border-2 border-[#A86549] bg-[#B55A30] text-white text-center font-bold flex justify-center items-center ${
-                product.color === "rust" ? "opacity-100" : "opacity-50"
+                product.color === "rust" || product.color === "Rust" ? "opacity-100" : "opacity-50"
               }`}
             />
           </a>
@@ -30,7 +30,7 @@ const SelectColor = ({ product }) => {
           <a>
             <button
               className={`!text-[0.9375rem] rounded-full p-4 border-2 border-black bg-black text-white text-center font-bold flex justify-center items-center ${
-                product.color === "black" ? "opacity-100" : "opacity-50"
+                product.color === "black" || product.color === "Black" ? "opacity-100" : "opacity-50"
               }`}
             />
           </a>

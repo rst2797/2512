@@ -5,12 +5,14 @@ import AddProducts from "../../components/admin/AddProducts.jsx";
 import { GrAdd } from "react-icons/gr";
 import ProductCards from "../../components/admin/ProductCards.jsx";
 import { useRouter } from "next/router";
+import { rediss } from "../../utils/redis";
 
 const Products = ({ products }) => {
   const [addProduct, setAddProduct] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
+    console.log(products);
     if (
       JSON.parse(localStorage.getItem("user"))?._id !==
         "65856027c169c5523ff9462e" &&
@@ -42,14 +44,60 @@ const Products = ({ products }) => {
 
 export default Products;
 
-export async function getServerSideProps() {
+const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
     );
+
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
+};
+export async function getServerSideProps() {
+  try {
+    const cachedData = await rediss.get("products");
+    const parsedCache = JSON.parse(cachedData);
+
+    if (!parsedCache) {
+      const res = await axios.get(
+        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+      );
+      console.log(res.data);
+
+      const products = await Promise.all(
+        res.data.products.map(async (product) => {
+          let images = [];
+
+          await Promise.all(
+            product.images.map(async (img) => {
+              if (img.includes("https://s3")) {
+                images.push(img);
+              } else {
+                const presigned = await getPresignedUrls("products-image", img);
+                images.push(presigned);
+              }
+            })
+          );
+
+          return { ...product, images };
+        })
+      );
+
+      // await rediss.set("products", JSON.stringify({ products }));
+
+      return {
+        props: {
+          products,
+        },
+      };
+    }
+
     return {
       props: {
-        products: res.data.products,
+        products: parsedCache.products,
       },
     };
   } catch (error) {

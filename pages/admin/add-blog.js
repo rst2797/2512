@@ -20,9 +20,10 @@ const TextEditor = () => {
   const [blogTitle, setTitle] = useState("");
   const [blogHtml, setBlogHtml] = useState("");
   const [featureMedia, setFeatureMedia] = useState(null);
+  const [featureMediaDb, setFeatureMediaDb] = useState(null);
 
   const [thumbnailAlt, setThumbnailAlt] = useState("");
-  const [metaTitle, setMetaTitle] = useState("");
+  const [metaTitle, setMetaTitle] = useState(null);
   const [metaDescription, setMetaDescription] = useState("");
   const router = useRouter();
 
@@ -78,6 +79,7 @@ const TextEditor = () => {
               .then((res) => {
                 console.log(res.data);
                 setFeatureMedia(res.data.url);
+                setFeatureMediaDb(`${blogId}_${e.target.files[0].name}`)
                 toast.success("Profile updated successfully....");
               });
           });
@@ -104,7 +106,7 @@ const TextEditor = () => {
               blogsummary: convertToRaw(editorState.getCurrentContent())
                 .blocks[0].text,
               alt: thumbnailAlt,
-              featureMedia: featureMedia,
+              featureMedia: featureMediaDb,
               metaTitle: metaTitle || blogTitle,
               metaDescription,
             },

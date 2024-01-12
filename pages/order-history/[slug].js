@@ -72,33 +72,78 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
 
 export default DeliveryReturns;
 
+const getPresignedUrl = async (key, image) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${image}`
+    );
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
+};
+
 export const getServerSideProps = async (context) => {
-  const cookies = new Cookies(context.req, context.res);
-  const temp = cookies.get("token");
+  try {
+    const cookies = new Cookies(context.req, context.res);
+    const temp = cookies.get("token");
+    const token = temp?.split("%22")[1];
 
-  const token = temp?.split("%22")[1];
-
-  const userId = context.query.slug;
-  const res = await axios.get(
-    `${process.env.NEXT_API_BASE_URL}/api/get-user-orders/${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      withCredentials: true,
-    }
-  );
-  if (res.data.success) {
-    return {
-      props: {
-        orders: res.data.orders,
-        success: true,
-        newOrder: context.query?.newOrder ?? false,
-      },
+    const userId = context.query.slug;
+    const headers = {
+      Authorization: `Bearer ${token}`,
     };
-  } else {
+
+    const res = await axios.get(
+      `${process.env.NEXT_API_BASE_URL}/api/get-user-orders/${userId}`,
+      { headers, withCredentials: true }
+    );
+
+    if (res.data.success) {
+      const ordersWithPresignedUrls = await Promise.all(
+        res.data.orders.map(async (order) => {
+          const ordersWithPresignedImages = await Promise.all(
+            order.items.map(async (item) => {
+              if (
+                item.images[0].includes("https://s3") &&
+                item.images[0].includes("x-id=GetObject")
+              ) {
+                const presignedUrl = await getPresignedUrl(
+                  item.images[0]
+                    .split("web.pacchisbarah.profile-pictures/")[1]
+                    .split("?")[0]
+                    .split("/")[0],
+                  item.images[0]
+                    .split("web.pacchisbarah.profile-pictures/")[1]
+                    .split("?")[0]
+                    .split("/")[1]
+                );
+                item.images[0] = presignedUrl;
+              }
+              return item;
+            })
+          );
+          return { ...order, items: ordersWithPresignedImages };
+        })
+      );
+
+      return {
+        props: {
+          orders: ordersWithPresignedUrls,
+          success: true,
+          newOrder: context.query?.newOrder ?? false,
+        },
+      };
+    } else {
+      return {
+        props: {
+          success: false,
+        },
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
     return {
       props: {
         success: false,

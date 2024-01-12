@@ -5,7 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import RadioGroup from "../../../components/admin/order/RadioGroup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const OrderDetails = ({ order, user }) => {
+const OrderDetails = ({ order }) => {
   const [orderData, setOrderData] = useState(order);
   const [userData, setUserData] = useState({});
   useEffect(() => {
@@ -155,10 +155,43 @@ const OrderDetails = ({ order, user }) => {
 
 export default OrderDetails;
 
+const getPresignedUrls = async (key, file) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
+    );
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
+};
+
 export async function getServerSideProps(context) {
   const orderRes = await axios.get(
-    `${process.env.NEXT_API_BASE_URL}/api/admin/get-order/${context.query.slug[0]}`
+    `http://localhost:4545/api/admin/get-order/${context.query.slug[0]}`
   );
+
+  await Promise.all(
+    orderRes.data.order.items.map(async (item, index) => {
+      await Promise.all(
+        item.images.map(async (ele, imgIndex) => {
+          if (ele.includes("x-id=GetObject")) {
+            const presigned = await getPresignedUrls(
+              "products-image",
+              ele
+                .split("web.pacchisbarah.profile-pictures/")[1]
+                .split("?")[0]
+                .split("/")[1]
+            );
+            // Update the specific item's image
+            orderRes.data.order.items[index].images[imgIndex] = presigned;
+          }
+        })
+      );
+    })
+  );
+
   return {
     props: {
       order: orderRes.data.order,

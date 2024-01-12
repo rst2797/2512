@@ -15,6 +15,7 @@ const Home = ({ products }) => {
     if (products && products.length > 0) {
       setLoading(false);
     }
+    console.log(products);
   }, [products]);
 
   return (
@@ -55,21 +56,57 @@ const Home = ({ products }) => {
 
 export default Home;
 
+const getPresignedUrls = async (key, file) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
+    );
+
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
+};
 export async function getServerSideProps() {
   try {
     const cachedData = await rediss.get("products");
     const parsedCache = JSON.parse(cachedData);
+
     if (!parsedCache) {
       const res = await axios.get(
         `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
       );
-      await rediss.set("products", JSON.stringify(res.data));
+      console.log(res.data);
+
+      const products = await Promise.all(
+        res.data.products.map(async (product) => {
+          let images = [];
+
+          await Promise.all(
+            product.images.map(async (img) => {
+              if (img.includes("https://s3")) {
+                images.push(img);
+              } else {
+                const presigned = await getPresignedUrls("products-image", img);
+                images.push(presigned);
+              }
+            })
+          );
+
+          return { ...product, images };
+        })
+      );
+
+      // await rediss.set("products", JSON.stringify({ products }));
+
       return {
         props: {
-          products: res.data.products,
+          products,
         },
       };
     }
+
     return {
       props: {
         products: parsedCache.products,

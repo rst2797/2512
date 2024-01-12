@@ -11,6 +11,7 @@ import "swiper/css";
 
 const SectionTwo = ({ products }) => {
   const [slideCheck, setSlideCheck] = useState(0);
+  console.log(products);
   return (
     <div className="h-auto lg:h-[92vh] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group.png')] py-4 flex flex-col-reverse lg:flex-row gap-8 items-center w-full">
       <div className="lg:max-w-[65vw] max-w-[90vw] lg:-ml-48">

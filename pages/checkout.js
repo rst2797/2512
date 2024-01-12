@@ -4,12 +4,33 @@ import { useCart } from "react-use-cart";
 import Navbar from "../components/common/header";
 import Image from "next/image";
 import Footer from "../components/common/footer";
+import axios from "axios";
 
 const Checkout = () => {
   const { items } = useCart();
   const [userData, setUserData] = useState(null);
+  const [updatedItems, setUpdatedItems] = useState([]);
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("user")));
+    console.log(items);
+    Promise.all(
+      items.map((item) => {
+        if (item.imageKey) {
+          axios
+            .get(
+              `http://localhost:4545/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
+            )
+            .then((res) => {
+              setUpdatedItems((prev) => [
+                ...prev,
+                { ...item, images: [res.data.url] },
+              ]);
+            });
+        } else {
+          setUpdatedItems((prev) => [...prev, { ...item }]);
+        }
+      })
+    );
   }, []);
   const estimatedDate = () => {
     // Get the current date
@@ -72,7 +93,7 @@ const Checkout = () => {
               <h3 className="text-2xl font-semibold py-2">
                 Delivery Estimates
               </h3>
-              {items.map((ele) => (
+              {updatedItems.map((ele) => (
                 <div
                   className="flex items-center justify-between lg:w-[40%] border-b-[1px] py-2"
                   key={ele.id}
@@ -87,9 +108,8 @@ const Checkout = () => {
           </div>
           {/* Proceed card */}
           <div className="hidden lg:block">
-          <ProceedCheckout items={items} />
+            <ProceedCheckout items={items} />
           </div>
-
         </div>
 
         {/* Order Summary */}
@@ -97,7 +117,7 @@ const Checkout = () => {
           <h3 className="font-lato-regular !text-2xl !font-semibold">
             Order Summary{" "}
           </h3>
-          {items.map((ele) => (
+          {updatedItems.map((ele) => (
             <div
               className="flex justify-between items-center border-b-[1px] border-[#0000005a] my-2"
               key={ele.id}
@@ -105,7 +125,9 @@ const Checkout = () => {
               <div className="flex items-center lg:w-[40%] border-b-[1px] py-2">
                 <Image src={ele.images[0]} alt="" width={120} height={150} />
                 <div className="px-4">
-                  <h3 className="font-sansita-regular !text-xl lg:!text-2xl">{ele.name}</h3>
+                  <h3 className="font-sansita-regular !text-xl lg:!text-2xl">
+                    {ele.name}
+                  </h3>
                   <div className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
                     Size: {ele.size}
                   </div>

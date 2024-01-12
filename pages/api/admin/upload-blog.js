@@ -1,6 +1,5 @@
 import authAdminMiddleware from "../../../middleware/authAdmin";
 import { Blogs } from "../../../schema/blogs";
-import Order from "../../../schema/orders";
 import { connection } from "../../../utils/database";
 
 async function uploadBlog(req, res) {
@@ -15,9 +14,8 @@ async function uploadBlog(req, res) {
       featureMedia,
       metaTitle,
       metaDescription,
-    } = req.body; // Assuming you pass the new status in the request body
+    } = req.body;
 
-    // Find the order by ID and update its status
     const blogData = new Blogs({
       title,
       bloghtml,

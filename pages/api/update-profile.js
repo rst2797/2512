@@ -5,13 +5,12 @@ export default async function updateUserStatus(req, res) {
   try {
     await connection();
 
-    const { userId } = req.query;
-    const { imageUri } = req.body;
+    const { userId, profile } = req.query;
 
     // Find the user by ID and update its profile
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { profile: imageUri },
+      { profile: `${userId}_${profile}` },
       { new: true } // Set { new: true } to return the updated document
     );
 

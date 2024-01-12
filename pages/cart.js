@@ -8,6 +8,7 @@ import Head from "next/head";
 import { useCart } from "react-use-cart";
 import { useEffect } from "react";
 import Link from "next/link";
+import axios from "axios";
 
 const Cart = () => {
   const { items, isEmpty } = useCart();
@@ -89,10 +90,26 @@ export default Cart;
 
 export function Product({ item }) {
   const { items, updateItemQuantity, getItem, removeItem } = useCart();
+  const [image, setImage] = useState("/");
 
   const [quantity, setQuantity] = useState(getItem(item.id).units);
   useEffect(() => {
     updateItemQuantity(item.id, quantity);
+    if (item.imageKey) {
+      if (item.imageKey[0].includes("https://s3")) {
+        setImage(item.images[0]);
+      } else {
+        axios
+          .get(
+            `http://localhost:4545/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
+          )
+          .then((res) => {
+            setImage(res.data.url);
+          });
+      }
+    } else {
+      setImage(item.images[0]);
+    }
   }, [quantity]);
   const removeProduct = (id) => {
     removeItem(id);
@@ -102,7 +119,7 @@ export function Product({ item }) {
     <div className="relative flex bg-white rounded-xl p-2 mb-4">
       <div className="flex justify-center items-center max-w-[40%] lg:max-w-full">
         <Image
-          src={item.images[0]}
+          src={image}
           alt="Sustainable and Organic Cloths"
           width={250}
           height={280}

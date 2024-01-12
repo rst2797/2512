@@ -4,18 +4,48 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from 'swiper/modules';
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
 
+const getPresignedUrls = async (key, file) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
+    );
+
+    return res.data.url;
+  } catch (error) {
+    console.error("Error getting presigned URL:", error);
+    throw error;
+  }
+};
 export default function SectionThree() {
   const [productImages, setProductImages] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("/api/get-all-products").then((res) => {
-      setProductImages([...res.data.products]);
-      console.log([...res.data.products])
+    axios.get("/api/get-all-products").then(async (res) => {
+      const products = await Promise.all(
+        res.data.products.map(async (product) => {
+          let images = [];
+
+          await Promise.all(
+            product.images.map(async (img) => {
+              if (img.includes("https://s3")) {
+                images.push(img);
+              } else {
+                const presigned = await getPresignedUrls("products-image", img);
+                images.push(presigned);
+              }
+            })
+          );
+
+          return { ...product, images };
+        })
+      );
+      console.log(products);
+      setProductImages(products);
     });
   }, []);
   return (
@@ -29,10 +59,10 @@ export default function SectionThree() {
           clickable: true,
         }}
         navigation={{
-          nextEl: '.next-arrow',
-          prevEl: '.prev-arrow',
+          nextEl: ".next-arrow",
+          prevEl: ".prev-arrow",
         }}
-        modules={[Navigation]} 
+        modules={[Navigation]}
         breakpoints={{
           400: {
             slidesPerView: 1,
@@ -58,15 +88,19 @@ export default function SectionThree() {
             <Link href={`/collection/${image._id}`}>
               <a>
                 <Image
-              src={image.images[1]}
-              alt={`2512 | carousel image ${index + 1}`}
-              width={600}
-              height={800}
-              className="object-cover rounded-t-lg"
-              onLoad={() => setLoading(false)}
-            />
-            <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">{image.name}</h3>
-            <h5 className="px-4 py-1 font-bold text-sm">₹{image.actualPrice}</h5>
+                  src={image.images[0]}
+                  alt={`2512 | carousel image ${index + 1}`}
+                  width={600}
+                  height={800}
+                  className="object-cover rounded-t-lg"
+                  onLoad={() => setLoading(false)}
+                />
+                <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">
+                  {image.name}
+                </h3>
+                <h5 className="px-4 py-1 font-bold text-sm">
+                  ₹{image.actualPrice}
+                </h5>
               </a>
             </Link>
           </SwiperSlide>

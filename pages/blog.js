@@ -13,7 +13,9 @@ import Link from "next/link";
 
 const fetchBlogs = async () => {
   try {
-    const blogs = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-all-blogs`);
+    const blogs = await axios.get(
+      `${process.env.NEXT_API_BASE_URL}/api/get-all-blogs`
+    );
     // const blogs = await axios.get(`http://localhost:4545/api/get-all-blogs`);
     if (blogs.data.success) {
       return blogs.data;
@@ -71,6 +73,13 @@ const Blog = ({ blogs }) => {
         <link rel="icon" href="/icons/favicon.ico" />
         <link rel="canonical" href="https://www.2512.in/blog" />
         <link rel="icon" href="/icons/favicon.ico" />
+        <link
+          rel="preload"
+          href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/blog/Mask+group+3.png"
+          as="image"
+          type="image/*"
+          crossOrigin="anonymous"
+        />
       </Head>
       <Navbar />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-[.94rem] py-24 text-[#2F2E2D] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/blog/Mask+group+3.png')]">

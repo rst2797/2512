@@ -3,22 +3,37 @@ import * as Yup from "yup";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { IoArrowForward } from "react-icons/io5";
 import { GrAdd } from "react-icons/gr";
+import { FaCheck } from "react-icons/fa6";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from "react";
+// import { rediss } from "../../utils/redis";
 
 const ProductForm = ({ setAddProduct }) => {
+  const [presignedUrls, setPresignedUrls] = useState([]);
+
+  const getPresignedUrls = async (file) => {
+    try {
+      const res = await axios.get(
+        `/api/admin/get-signed-url-to-upload-product-image?filename=${file}`,
+        {
+          baseURL: window.location.origin, // Include the current protocol and domain
+        }
+      );
+
+      return res.data.putSigned;
+    } catch (error) {
+      console.error("Error getting presigned URL:", error);
+      throw error;
+    }
+  };
+
   const initialValues = {
     name: "",
     breadcrumb: "",
     sku: "",
-    images: [
-      "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/final_products/LIVE_IN_THE_MOMENT_ORGANIC_T-SHIRT/1.JPG",
-      "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/final_products/LIVE_IN_THE_MOMENT_ORGANIC_T-SHIRT/1.JPG",
-      "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/final_products/LIVE_IN_THE_MOMENT_ORGANIC_T-SHIRT/1.JPG",
-      "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/final_products/LIVE_IN_THE_MOMENT_ORGANIC_T-SHIRT/1.JPG",
-      "https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/final_products/LIVE_IN_THE_MOMENT_ORGANIC_T-SHIRT/1.JPG",
-    ],
+    images: [],
     actualPrice: "",
     price: 0,
     offPercentage: "30%",
@@ -46,26 +61,50 @@ const ProductForm = ({ setAddProduct }) => {
     // Handle form submission, you can call your API to save the product data
     const token = JSON.parse(localStorage.getItem("token"));
     // ${process.env.NEXT_API_BASE_URL}
-    axios
-      .post(
-        `/api/admin/add-product`,
-        { ...values, selling_price: values.price },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-        setTimeout(() => {
-          setAddProduct(false);
-          window.location.reload();
-        }, 700);
-      });
+    if (presignedUrls.length === 5) {
+      axios
+        .post(
+          `/api/admin/add-product`,
+          { ...values, selling_price: values.price, images: presignedUrls },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          // await rediss.del("products");
+          toast.success(res.data.message);
+          setTimeout(() => {
+            setAddProduct(false);
+            window.location.reload();
+          }, 700);
+        });
+    } else {
+      toast.error("Please upload all product images to proceed!!");
+    }
   };
 
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const imageId = Date.now();
+
+    try {
+      const presignedUrl = await getPresignedUrls(`${imageId}_${file.name}`);
+      await axios.put(presignedUrl, file);
+
+      setPresignedUrls((prevUrls) => [...prevUrls, `${imageId}_${file.name}`]);
+      console.log("Presigned Array", presignedUrls);
+    } catch (error) {
+      // Handle errors
+      console.error("Error uploading image:", error);
+      toast.error("Error uploading image. Please try again.");
+    }
+  };
+  useEffect(() => {
+    console.log("Presigned Array", presignedUrls);
+  }, [presignedUrls]);
   return (
     <>
       <Formik
@@ -125,31 +164,44 @@ const ProductForm = ({ setAddProduct }) => {
               </div>
             </div>
           </div>
-          {/* <div className="my-2 flex flex-col">
-          <label htmlFor="images">Images</label>
-          <div className="flex flex-row flex-wrap gap-2 justify-between lg:max-w-[50vw] py-1 lg:py-4">
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div key={index} className="relative">
-                <label htmlFor={`imageInput${index}`}>
-                  <GrAdd className="border-2 border-black w-12 h-12 p-3 cursor-pointer" />
-                </label>
-                <Field
-                  type="file"
-                  accept="image/*"
-                  id={`imageInput${index}`}
-                  name={`images[${index}]`}
-                  className="sr-only"
-                />
+          <div className="my-2 flex flex-col">
+            <label htmlFor="images">Product Images</label>
+            <div className="flex flex-row flex-wrap gap-2 justify-between lg:max-w-[50vw] py-1 lg:py-4">
+              {[1, 2, 3, 4, 5].map((index) => (
+                <div key={index} className="relative">
+                  <label
+                    htmlFor={`imageInput${index}`}
+                    className={`${
+                      presignedUrls[index - 1] !== undefined
+                        ? "cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
+                  >
+                    {presignedUrls[index - 1] ? (
+                      <FaCheck className="border-2 border-black w-12 h-12 p-3 text-green-600" />
+                    ) : (
+                      <GrAdd className="border-2 border-black w-12 h-12 p-3 " />
+                    )}
+                  </label>
+                  <Field
+                    type="file"
+                    accept="image/*"
+                    disabled={presignedUrls[index - 1] !== undefined}
+                    id={`imageInput${index}`}
+                    name={`images[${index}]`}
+                    className="sr-only"
+                    onChange={handleImageUpload}
+                  />
 
-                <ErrorMessage
-                  className="absolute right-0 top-2"
-                  name={`images[${index}]`}
-                  component="div"
-                />
-              </div>
-            ))}
+                  <ErrorMessage
+                    className="absolute right-0 top-2"
+                    name={`images[${index}]`}
+                    component="div"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div> */}
           <div className="my-2  flex flex-col">
             <label htmlFor="actualPrice">Actual Price</label>
             <div className="relative">
