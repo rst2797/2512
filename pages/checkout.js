@@ -18,7 +18,7 @@ const Checkout = () => {
         if (item.imageKey) {
           axios
             .get(
-              `{process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
+              `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
             )
             .then((res) => {
               setUpdatedItems((prev) => [

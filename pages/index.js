@@ -66,7 +66,7 @@ export default Home;
 const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `{process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
+      `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
     );
 
     return res.data.url;
