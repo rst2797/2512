@@ -64,7 +64,7 @@ export default Blog;
 export const getServerSideProps = async ({ query }) => {
   try {
     const response = await axios.get(
-      `http://localhost:4545/api/get-blog?blogId=${query.slug}`
+      `{process.env.NEXT_API_BASE_URL}/api/get-blog?blogId=${query.slug}`
     );
 
     if (response.data.success) {
@@ -72,7 +72,7 @@ export const getServerSideProps = async ({ query }) => {
 
       if (blogData.image) {
         const preSignedUrl = await axios.get(
-          `http://localhost:4545/api/get-profile-picture-signedurl/blogs-thumbnail/${blogData.image}`
+          `{process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/blogs-thumbnail/${blogData.image}`
         );
         blogData.image = preSignedUrl.data.url;
       }

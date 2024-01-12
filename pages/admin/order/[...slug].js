@@ -158,7 +158,7 @@ export default OrderDetails;
 const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${file}`
+      `{process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
     );
     return res.data.url;
   } catch (error) {
@@ -169,7 +169,7 @@ const getPresignedUrls = async (key, file) => {
 
 export async function getServerSideProps(context) {
   const orderRes = await axios.get(
-    `http://localhost:4545/api/admin/get-order/${context.query.slug[0]}`
+    `{process.env.NEXT_API_BASE_URL}/api/admin/get-order/${context.query.slug[0]}`
   );
 
   await Promise.all(

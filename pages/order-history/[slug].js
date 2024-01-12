@@ -75,7 +75,7 @@ export default DeliveryReturns;
 const getPresignedUrl = async (key, image) => {
   try {
     const res = await axios.get(
-      `http://localhost:4545/api/get-profile-picture-signedurl/${key}/${image}`
+      `{process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${image}`
     );
     return res.data.url;
   } catch (error) {
