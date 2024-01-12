@@ -1,8 +1,6 @@
 import React from "react";
-import GoogleLogin from "react-google-login";
 import Form from "../components/Contact/Form";
 import Navbar from "../components/common/header";
-import Link from "next/link";
 import Image from "next/image";
 import countryData from "country-data";
 import { useEffect } from "react";

@@ -1,3 +1,4 @@
+
 import jwt from "jsonwebtoken";
 
 export default function authMiddleware(handler) {
@@ -5,7 +6,7 @@ export default function authMiddleware(handler) {
     const token = req.headers.authorization?.replace("Bearer ", "");
 
     if (!token) {
-      return res.json({
+      return res.status(401).json({
         error: true,
         success: false,
         message: "Unauthorized: No token provided",
@@ -19,7 +20,7 @@ export default function authMiddleware(handler) {
 
       return handler(req, res);
     } catch (error) {
-      return res.json({
+      return res.status(401).json({
         error: true,
         success: false,
         message: "Unauthorized: Invalid token",

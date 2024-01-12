@@ -1,7 +1,5 @@
 import React from "react";
 import { useEffect } from "react";
-import { createShipment } from "../../utils/shiprocketApi";
-import { getLocationByPostalCode } from "../../utils/getLocationByPostalCode";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 import { useRouter } from "next/router";
@@ -24,8 +22,12 @@ const Order = ({ totalPrice, orderId, userId, token }) => {
       user: userResponse.data.user,
       totalPrice,
     };
-    console.log(shippingDetails, userResponse.data);
+
     return await axios.post("/api/ship-order", shippingDetails).then(() => {
+      axios.post(`/api/order-confirmation`, {
+        email: userResponse.data.user.email,
+        customerName: userResponse.data.user.name,
+      });
       router.push(`/order-history/${userId}?newOrder=true`);
     });
   };

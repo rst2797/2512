@@ -41,6 +41,12 @@ const Form = ({ phoneCodes }) => {
             `/api/contact-us`,
             values
           );
+          if(response.data.success){
+              axios.post(`/api/contact-us-mail`, {
+                customerName: values.name,
+                email: values.email
+              })
+          }
           toast.success(response.data.message);
           resetForm();
         }

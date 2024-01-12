@@ -1,12 +1,12 @@
 // pages/api/auth/login.js
 
-import bcrypt from "bcrypt";
+import { resetPassword } from "../../utils/template.js";
+import { sendMail } from "../../utils/mailer.js";
 import jwt from "jsonwebtoken";
-import { User } from "../../schema/user";
-import { connection } from "../../utils/database";
+import axios from "axios";
 
 const generateResetToken = (userEmail) => {
-  const secret = process.env.RESET_TOKEN_SECRET;
+  const secret = process.env.JWT_SECRET;
   const expiresIn = "1h"; // Token validity period
 
   const resetToken = jwt.sign({ email: userEmail }, secret, { expiresIn });
@@ -14,32 +14,25 @@ const generateResetToken = (userEmail) => {
   return resetToken;
 };
 
-import nodemailer from "nodemailer";
-
-const sendResetEmail = (userEmail, resetToken) => {
-  const transporter = nodemailer.createTransport({
-    // Set up your email transporter configuration
-    // ...
-  });
-
+async function handleContactUsRequest(email, customerName) {
+  const resetToken = generateResetToken(email);
   const resetLink = `${process.env.NEXT_API_BASE_URL}/reset-password?token=${resetToken}`;
-
-  const mailOptions = {
-    from: "your@email.com",
-    to: userEmail,
-    subject: "Password Reset",
-    html: `Click <a href="${resetLink}">here</a> to reset your password.`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return {error: true, success: false, error}
-    } else {
-      return {error: false, success: true, info: info.response}
+  return new Promise(async (resolve, reject) => {
+    try {
+      const payload = {
+        to: email,
+        subject: "Forget Password | Pacchis Barah",
+        html: resetPassword(customerName, resetLink),
+      };
+      await sendMail(payload);
+      resolve(true);
+    } catch (error) {
+      reject({
+        error: error?.message || "Email not sent!",
+      });
     }
   });
-};
-
+}
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -47,9 +40,20 @@ export default async function handler(req, res) {
 
   try {
     const { email } = req.body;
-    return res
-      .status(200)
-      .json(sendResetEmail(email, generateResetToken(email)));
+    axios
+      .post(`${process.env.NEXT_API_BASE_URL}/api/get-user-with-email`, {
+        email,
+      })
+      .then((userRes) => {
+        handleContactUsRequest(email, userRes.data.user.name).then(
+          (emailResp) => {
+            return res.status(200).json({
+              success: true,
+              error: false,
+            });
+          }
+        );
+      });
   } catch (error) {
     return res.status(500).json({
       success: false,
