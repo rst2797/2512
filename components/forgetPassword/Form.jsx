@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
-const Form = ({ successRedirection }) => {
+const Form = () => {
   const [hide, setHide] = useState(true);
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -29,8 +29,7 @@ const Form = ({ successRedirection }) => {
         const response = await axios.post("/api/forget-password", values);
 
         if (response.data.success) {
-          toast.success(response.data.message);
-          router.push("" + successRedirection);
+          toast.success("Reset password link has been sent to email...");
         } else {
           toast.error(response.data.message);
         }

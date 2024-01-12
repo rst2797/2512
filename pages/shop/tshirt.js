@@ -3,10 +3,8 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer.jsx";
-import SectionTwo from "../../components/Category/SectionTwo.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
-import SectionThree from "../../components/Category/SectionThree.jsx";
-import { rediss } from "../../utils/redis";
+// import { rediss } from "../../utils/redis";
 
 const Home = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -70,7 +68,8 @@ const getPresignedUrls = async (key, file) => {
 };
 export async function getServerSideProps() {
   try {
-    const cachedData = await rediss.get("products");
+    // const cachedData = await rediss.get("products");
+    const cachedData = "null";
     const parsedCache = JSON.parse(cachedData);
 
     if (!parsedCache) {

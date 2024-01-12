@@ -31,6 +31,7 @@ const ProductForm = ({ setAddProduct }) => {
 
   const initialValues = {
     name: "",
+    description: "",
     breadcrumb: "",
     sku: "",
     images: [],
@@ -45,6 +46,7 @@ const ProductForm = ({ setAddProduct }) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(<RiErrorWarningFill />),
+    description: Yup.string().required(<RiErrorWarningFill />),
     breadcrumb: Yup.string().required(<RiErrorWarningFill />),
     sku: Yup.string().required(<RiErrorWarningFill />),
     images: Yup.array().required(<RiErrorWarningFill />),
@@ -125,6 +127,22 @@ const ProductForm = ({ setAddProduct }) => {
               <ErrorMessage
                 className="absolute right-0 top-2"
                 name="name"
+                component="div"
+              />
+            </div>
+          </div>
+          <div className="my-2 flex flex-col">
+            <label htmlFor="description">Product Description</label>
+            <div className="relative">
+              <Field
+                type="text"
+                id="description"
+                name="description"
+                className="w-full border-b-2 border-black focus:outline-none active:outline-none"
+              />
+              <ErrorMessage
+                className="absolute right-0 top-2"
+                name="description"
                 component="div"
               />
             </div>
@@ -284,7 +302,7 @@ const ProductForm = ({ setAddProduct }) => {
               </div>
             </div>
           </div>
-          <div className="my-2  flex flex-col">
+          <div className="my-2 flex flex-col">
             <label htmlFor="color">Color</label>
             <div className="relative">
               <Field

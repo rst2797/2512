@@ -7,6 +7,10 @@ export const Product =
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     breadcrumb: {
       type: String,
       required: true,
@@ -45,6 +49,7 @@ export const Product =
     },
     quantity: {
       type: Number,
+      default: 1
     },
     selling_price: { type: Number, required: true },
     sku: { type: String, required: true },

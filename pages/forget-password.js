@@ -3,7 +3,7 @@ import Form from "../components/forgetPassword/Form.jsx";
 import Navbar from "../components/common/header";
 import Image from "next/image";
 
-const ForgetPass = ({ successRedirection }) => {
+const ForgetPass = () => {
   return (
     <main>
       <div className="container bg-[#f2eadf] min-h-screen">
@@ -23,7 +23,7 @@ const ForgetPass = ({ successRedirection }) => {
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
                 Forget Password
               </h1>
-              <Form successRedirection={successRedirection} />
+              <Form />
             </div>
           </div>
         </div>
@@ -32,4 +32,4 @@ const ForgetPass = ({ successRedirection }) => {
   );
 };
 
-export default Login;
+export default ForgetPass;
