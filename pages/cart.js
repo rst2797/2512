@@ -42,7 +42,7 @@ const Cart = () => {
         <link rel="canonical" href="https://www.2512.in/cart" />
         <link rel="icon" href="/icons/favicon.ico" />
       </Head>
-      <div className="bg-[#F4E9DF] w-full lg:w-3/4 xl:w-2/3 2xl:w-full 2xl:px-20 min-h-screen">
+      <div className="bg-[#F4E9DF] w-full 2xl:px-20 min-h-screen">
         <Navbar />
         <div className="p-3 lg:p-6 2xl:p-0 2xl:pt-[4rem] pt-[4rem] mx-auto max-w-[1450px]">
           <div className="flex justify-between items-center py-4">
