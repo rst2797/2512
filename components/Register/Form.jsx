@@ -47,7 +47,7 @@ const Form = ({ phoneCodes }) => {
       values = {
         name: values.firstName + " " + values.lastName,
         email,
-        phone: `${countryCode} ${phone}`,
+        phone,
         password,
         currency: phoneCodes.currency,
       };

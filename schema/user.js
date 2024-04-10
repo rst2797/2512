@@ -18,7 +18,7 @@ export const User =
       required: true,
     },
     phone: {
-      type: String,
+      type: Number,
       required: true,
     },
     altphone: {

@@ -49,7 +49,7 @@ const Navbar = ({ position }) => {
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
-                  width={65}
+                  width={63}
                   height={48}
                 />
               </a>

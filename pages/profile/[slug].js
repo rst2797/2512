@@ -186,7 +186,9 @@ const Profile = ({ user, success }) => {
                     email: Yup.string()
                       .email("Invalid email address")
                       .required("Email is required"),
-                    phone: Yup.string().required("Phone is required"),
+                    phone: Yup.string()
+                      .matches(/^\d{10}$/, "Phone number must be 10 digits")
+                      .required("Phone is required"),
                   })}
                   onSubmit={(values, { setSubmitting }) => {
                     axios
