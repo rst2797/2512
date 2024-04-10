@@ -45,12 +45,12 @@ const Navbar = ({ position }) => {
               </button>
             </div>
             <Link href="/">
-              <a className="text-2xl font-bold pt-[.5rem] pb-[.3rem] lg:border-r-[1px] lg:border-[#A86549] lg:pr-12 pl-6 lg:pl-0">
+              <a className="text-2xl font-bold pt-[.5rem] lg:border-r-[1px] lg:border-[#A86549] lg:pr-12 pl-6 lg:pl-0">
                 <Image
                   src="/icons/2512_RGB 2.png"
                   alt="2512 | PACCHIS BARAH"
-                  width={55}
-                  height={40}
+                  width={65}
+                  height={48}
                 />
               </a>
             </Link>

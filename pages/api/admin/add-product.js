@@ -6,7 +6,6 @@ async function addProduct(req, res) {
   try {
     await connection();
 
-    console.log(req.body);
     await Product(req.body)
       .save()
       .then((data) => {

@@ -6,19 +6,25 @@ import { useRouter } from "next/router";
 import { useCart } from "react-use-cart";
 import Navbar from "../components/common/header";
 import Footer from "../components/common/footer";
-import { IoMdArrowBack, IoMdClose } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import ProceedCheckout from "../components/view-checkout/ProceedCheckout";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
 
-export default function YourBillingComponent() {
+export default function YourBillingComponent({
+  postal_code,
+  addressline1,
+  addressline2,
+  landmark,
+}) {
   const [userData, setUserData] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("Prepaid");
   const { items } = useCart();
 
   useEffect(() => {
-    const cookies = Cookies.get("token")
+    const cookies = Cookies.get("token");
     if (!cookies) {
       return router.push("/login?destination=/viewcheckout");
     }
@@ -29,7 +35,6 @@ export default function YourBillingComponent() {
     setTotalPrice(
       items.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
     );
-    console.log(totalPrice);
   }, []);
   const { emptyCart } = useCart();
   const router = useRouter();
@@ -39,6 +44,12 @@ export default function YourBillingComponent() {
       userId: userData._id,
       totalAmount: totalPrice,
       paymentMethod,
+      deliveryAddress: {
+        postalCode: postal_code,
+        address1: addressline1,
+        address2: addressline2,
+        landmark,
+      },
     };
     axios.post("/api/place-order", order).then((res) => {
       if (res.data.success) {
@@ -50,7 +61,7 @@ export default function YourBillingComponent() {
           .then(() => {
             emptyCart();
           });
-        router.push(`/order/${res.data.orderId}/${userData._id}/${totalPrice}`);
+        router.push(`/order/${res.data.orderId}/${userData._id}/${totalPrice}?postal_code=${postal_code}&addressline1=${addressline1}&addressline2=${addressline2 === "" ? null : addressline2}&landmark=${landmark === "" ? null : landmark}`);
       }
     });
   };
@@ -61,6 +72,12 @@ export default function YourBillingComponent() {
       userId: userData._id,
       totalAmount: totalPrice,
       paymentMethod: "Prepaid",
+      deliveryAddress: {
+        postalCode: postal_code,
+        address1: addressline1,
+        address2: addressline2,
+        landmark,
+      },
     };
     axios.post("/api/place-order", order).then((resp) => {
       if (resp.data.success) {
@@ -104,7 +121,7 @@ export default function YourBillingComponent() {
                 id: resp.data.orderId,
                 status: false,
               });
-              console.log(
+              toast.error(
                 "Payment failed. Please try again. Contact support for help"
               );
             });
@@ -177,10 +194,15 @@ export default function YourBillingComponent() {
           </div>
         </div>
       </div>
+      <ToastContainer pauseOnHover closeOnClick autoClose={2000} />
       <Footer />
     </div>
   );
 }
+
+export const getServerSideProps = ({ query }) => {
+  return { props: query };
+};
 
 export function Product({ item, disableRemove }) {
   const { items, updateItemQuantity, getItem } = useCart();

@@ -29,7 +29,6 @@ const Orders = ({ response, orders }) => {
       toast.error(response.message);
       router.push("/");
     }
-    console.log(orderResponse);
   }, [orderResponse]);
 
   const handleStatusChange = (orderId, event) => {
@@ -50,7 +49,6 @@ const Orders = ({ response, orders }) => {
           }
         )
         .then((res) => {
-          console.log(res.data);
           if (res.data.success) {
             axios
               .get("/api/admin/get-all-orders", {
@@ -70,7 +68,6 @@ const Orders = ({ response, orders }) => {
                 toast.success(res.data.message);
               });
           } else {
-            console.log(res.data);
             throw new Error(res.data.message);
           }
         })
@@ -78,7 +75,7 @@ const Orders = ({ response, orders }) => {
           alert(error.response.data.message);
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -99,7 +96,7 @@ const Orders = ({ response, orders }) => {
           <Sidebar />
           <div className="max-w-screen mx-auto">
             <div className="flex flex-col justify-center items-center p-4 ml-[15vw] md:p-8">
-              <label className="font-sansita-regular py-4 absolute top-0 left-0 hidden lg:block">
+              <label className="font-sansita-regular py-4 ml-1/2 hidden lg:block">
                 All Orders
               </label>
               <table className="border-2 border-black w-full">

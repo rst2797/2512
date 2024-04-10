@@ -51,7 +51,6 @@ const ResetPasswordForm = ({ token }) => {
             },
           }
         ).then(res=>{
-            console.log(res.data)
             toast.success(res.data.message);
         })
 

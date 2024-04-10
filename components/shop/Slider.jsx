@@ -44,7 +44,6 @@ export default function SectionThree() {
           return { ...product, images };
         })
       );
-      console.log(products);
       setProductImages(products);
     });
   }, []);

@@ -40,7 +40,6 @@ const Form = ({ token }) => {
           toast.error(response.data.message);
         }
       } catch (error) {
-        console.log(response.data.message);
         toast.error(response.data.message);
       }
     },

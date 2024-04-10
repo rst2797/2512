@@ -13,7 +13,6 @@ const Home = ({ products }) => {
     if (products && products.length > 0) {
       setLoading(false);
     }
-    console.log(products);
   }, [products]);
 
   return (
@@ -68,7 +67,6 @@ const getPresignedUrls = async (key, file) => {
 };
 export async function getServerSideProps() {
   try {
-    // const cachedData = await rediss.get("products");
     const cachedData = "null";
     const parsedCache = JSON.parse(cachedData);
 
@@ -76,7 +74,6 @@ export async function getServerSideProps() {
       const res = await axios.get(
         `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
       );
-      console.log(res.data);
 
       const products = await Promise.all(
         res.data.products.map(async (product) => {

@@ -55,7 +55,7 @@ const Cart = () => {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-12 justify-between py-4">
               <div className="lg:col-span-2">
-                {items.map((ele) => (
+                {items?.map((ele) => (
                   <Product key={ele.id} item={ele} disableRemove={false} />
                 ))}
               </div>
@@ -70,7 +70,14 @@ const Cart = () => {
                     <Link href="/login?destination=/cart">
                       <a className="py-[1rem] px-[0.94rem]">
                         <button className="px-4 py-[0.5625rem] font-bold text-white rounded-lg bg-[#A86549]">
-                          Login to checkout
+                          Login To Checkout
+                        </button>
+                      </a>
+                    </Link>
+                    <Link href="/register">
+                      <a className="py-[1rem] px-[0.94rem]">
+                        <button className="px-4 py-[0.5625rem] font-bold bg-white shadow-md rounded-lg text-[#A86549]">
+                          Create An Account
                         </button>
                       </a>
                     </Link>

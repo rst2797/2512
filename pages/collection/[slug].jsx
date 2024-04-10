@@ -7,7 +7,6 @@ import { memo } from "react";
 import { rediss } from "../../utils/redis";
 
 const TShirt = ({ product }) => {
-  console.log(product);
   return (
     <main className="bg-[#f2eadf]">
       <Head>
@@ -66,7 +65,6 @@ export async function getServerSideProps({ query }) {
     ...res.data.product,
     imageKey: [...res.data.product.images],
   };
-  console.log(product);
   let images = [];
 
   await Promise.all(

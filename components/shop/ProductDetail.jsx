@@ -22,7 +22,6 @@ const ProductDetail = ({ product }) => {
   };
 
   useEffect(() => {
-    console.log(activeFabricDetail);
     axios
       .post(`/api/get-product-rating`, {
         productId: product._id,

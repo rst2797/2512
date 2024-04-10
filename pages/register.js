@@ -37,7 +37,7 @@ const Register = () => {
               className="object-cover"
             />
           </div>
-          <div className="px-[0.94rem] lg:col-span-2 2xl:px-20 pt-[4.5rem]">
+          <div className="px-[0.94rem] lg:col-span-2 2xl:px-20 pt-[8rem]">
             <div className="pb-6">
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
                 Create Account
@@ -52,16 +52,6 @@ const Register = () => {
               </div>
               <div className="bg-white lg:bg-black h-[2px] w-[150px]" />
             </div>
-            {/* <div className="flex justify-center google-btn pb-8 lg:hidden">
-              <GoogleLogin
-                clientId="YOUR_GOOGLE_CLIENT_ID"
-                buttonText="Sign in with Google"
-                onSuccess={null}
-                onFailure={null}
-                cookiePolicy={"single_host_origin"}
-                style={{ width: "330px" }}
-              />
-            </div> */}
             <div className="lg:my-3 flex justify-center w-full">
               <Link href="/login?destination=/">
                 <a className="font-bold text-center rounded-lg w-[55%] bg-white py-2">

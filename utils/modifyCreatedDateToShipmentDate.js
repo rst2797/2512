@@ -10,10 +10,7 @@ export const modifyCreatedDateToShipmentDate = (createdAt) => {
   const formattedDate = modifiedDate.toLocaleString("en-US", {
     year: "numeric",
     month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false, // Use 24-hour format
+    day: "2-digit"
   });
 
   return formattedDate;

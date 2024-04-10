@@ -25,7 +25,6 @@ const AnalyticsReport = ({ deliveredOrders }) => {
         console.error("Error fetching sales analytics data:", error);
       }
     };
-    console.log(deliveredOrders);
     fetchData();
   }, []);
 

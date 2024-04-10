@@ -12,10 +12,9 @@ const Products = ({ products }) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(products);
     if (
       JSON.parse(localStorage.getItem("user"))?._id !==
-        "65856027c169c5523ff9462e" &&
+        "6614e4a92dbe62ee4ed655c8" &&
       JSON.parse(localStorage.getItem("user"))?.role !== "ADMIN"
     ) {
       return router.push("/");
@@ -65,7 +64,6 @@ export async function getServerSideProps() {
       const res = await axios.get(
         `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
       );
-      console.log(res.data);
 
       const products = await Promise.all(
         res.data.products.map(async (product) => {

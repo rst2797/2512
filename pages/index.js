@@ -84,7 +84,6 @@ export async function getServerSideProps() {
       const res = await axios.get(
         `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
       );
-      console.log(res.data);
 
       const products = await Promise.all(
         res.data.products.map(async (product) => {

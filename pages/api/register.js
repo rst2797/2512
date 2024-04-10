@@ -6,24 +6,23 @@ import { connection } from "../../utils/database";
 
 export default async function Register(req, res) {
   try {
-    const { name, email, phone, postalCode, password, address } = req.body;
-    await connection();
-
+    const { name, email, phone, password } = req.body;
+     connection();
+    
     const loginSchema = Joi.object({
       name: Joi.string().required(),
       email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .required()
-        .messages({
-          "string.email": "Please provide a valid email address",
-          "any.required": "Email is required",
-        }),
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.email": "Please provide a valid email address",
+        "any.required": "Email is required",
+      }),
       phone: Joi.string().required(),
-      postalCode: Joi.string().required(),
       password: Joi.string().min(6).required(),
-      address: Joi.string().required(),
     });
     const { error } = loginSchema.validate(req.body);
+    console.log(error, "USER");
     if (error) {
       return res.status(400).json({
         error: true,
@@ -31,7 +30,7 @@ export default async function Register(req, res) {
         message: error.details[0].message,
       });
     }
-
+    
     const isUserExist = await User.findOne({ email });
     if (!isUserExist) {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -39,12 +38,10 @@ export default async function Register(req, res) {
         name,
         email,
         phone,
-        postalCode,
         password: hashedPassword,
-        address,
       });
       await user.save();
-
+      
       const token = jwt.sign(
         {
           email: email,
@@ -52,7 +49,7 @@ export default async function Register(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "2d" }
       );
-
+      
       return res.status(200).json({
         error: false,
         success: true,

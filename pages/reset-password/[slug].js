@@ -22,6 +22,5 @@ const ResetPassword = ({ successRedirection }) => {
 
 export default ResetPassword;
 export const getServerSideProps = ({ query }) => {
-  console.log(query);
   return { props: {} };
 };

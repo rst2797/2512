@@ -10,23 +10,28 @@ const generateOrderId = (orderId) => {
 };
 export default async function PlaceOrder(req, res) {
   try {
-    const { order, user, totalPrice } = req.body;
-    // const { city, state, country } = getLocationByPostalCode(user.postalCode);
-    console.log("Order:- ", order)
+    const {
+      order,
+      user,
+      totalPrice,
+      postalCode,
+      addressline1,
+      addressline2,
+      landmark,
+    } = req.body;
 
     const orderToShip = {
       order_id: generateOrderId(order._id),
       order_date: modifyCreatedDateToShipmentDate(order.createdAt),
       pickup_location: "Primary",
       channel_id: "",
-      comment: "",
       billing_customer_name: user.name,
       billing_last_name: user.name,
-      billing_address: user.address,
-      billing_address_2: "",
-      billing_city: "Sehore",
-      billing_pincode: user.postalCode,
-      billing_state: "Madhya Pradesh",
+      billing_address: order.deliveryAddress.address1,
+      billing_address_2: order.deliveryAddress.address2,
+      billing_city: "New Delhi",
+      billing_pincode: order.deliveryAddress.postalCode,
+      billing_state: "Delhi",
       billing_country: "India",
       billing_email: user.email,
       billing_phone: user.phone,
@@ -54,18 +59,17 @@ export default async function PlaceOrder(req, res) {
       weight: 2.5,
     };
 
-
-
-    await axios
-    .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
-      email: "discretestructure3@gmail.com",
-      password: "P#Brs12!!",
-    })
-    .then(async (tokenRes) => {
-      const resp = await axios
-      .post(
-        "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
-        orderToShip,
+    console.log("ship order : ", orderToShip);
+    axios
+      .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
+        email: "discretestructure3@gmail.com",
+        password: "P#Brs12!!",
+      })
+      .then((tokenRes) => {
+        axios
+          .post(
+            "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
+            orderToShip,
             {
               headers: {
                 "Content-Type": "application/json",

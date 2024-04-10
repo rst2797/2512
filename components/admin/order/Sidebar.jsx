@@ -63,7 +63,7 @@ const Sidebar = () => {
       </div>
       <div className="flex flex-col justify-between px-8 font-bold text-[#F4E9DF]">
         <ul>
-          <li className="mt-24 mb-12">
+          <li>
             <Link href="/">
               <a className="flex items-center">
                 <FaHome className="text-2xl mx-2" />
@@ -71,7 +71,7 @@ const Sidebar = () => {
               </a>
             </Link>
           </li>
-          <li className="my-12">
+          <li className="mt-12">
             <Link href="/admin/orders">
               <a className="flex items-center">
                 <MdBookmarkBorder className="text-2xl mx-2" />
@@ -79,7 +79,7 @@ const Sidebar = () => {
               </a>
             </Link>
           </li>
-          <li className="mt-12 mb-10">
+          <li className="mt-12">
             <Link href="/admin/products">
               <a className="flex items-center">
                 <LiaTshirtSolid className="text-2xl mx-2" />
@@ -95,7 +95,7 @@ const Sidebar = () => {
               <div>
                 <span className="flex justify-between w-full">
                   <FaMailchimp className="text-2xl text-white" />
-                  <p>Subscribers</p>
+                  <p className="overflow-hidden text-ellipsis">Newsletter</p>
                 </span>
               </div>
               <div>
@@ -106,12 +106,12 @@ const Sidebar = () => {
                   }}
                 >
                   <FaDownload className="text-white text-2xl" />
-                  <p>Download Excelsheet</p>
+                  <p>Download</p>
                 </span>
               </div>
             </button>
           </li>
-          <li className="mb-12 mt-10 flex items-center">
+          <li className="flex items-center">
             <Link href="/admin/enquiries">
               <a className="flex items-center">
                 <RiContactsBookLine className="text-2xl mx-2" />
@@ -119,7 +119,7 @@ const Sidebar = () => {
               </a>
             </Link>
           </li>
-          <li className="my-12 flex items-center">
+          <li className="mt-12 flex items-center">
             <Link href="/admin/add-blog">
               <a className="flex items-center">
                 <TfiWrite className="text-2xl mx-2" />

@@ -16,7 +16,6 @@ export default async function getBlogs(req, res) {
       throw new Error("Blog not found!!");
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: error?.message || "An error occurred!",

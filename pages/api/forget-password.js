@@ -1,5 +1,3 @@
-// pages/api/auth/login.js
-
 import { resetPassword } from "../../utils/template.js";
 import { sendMail } from "../../utils/mailer.js";
 import jwt from "jsonwebtoken";
@@ -7,7 +5,7 @@ import axios from "axios";
 
 const generateResetToken = (userEmail) => {
   const secret = process.env.JWT_SECRET;
-  const expiresIn = "1h"; // Token validity period
+  const expiresIn = "1h";
 
   const resetToken = jwt.sign({ email: userEmail }, secret, { expiresIn });
 

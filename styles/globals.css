@@ -251,19 +251,3 @@ select:-webkit-autofill:focus {
 .swiper-button-next::after {
   font-size: 2rem !important;
 }
-
-
-/* input[type='radio']:checked:after {
-  width: 10px;
-  height: 10px;
-  border-radius: 15px;
-  top: -7px;
-  left: 1px;
-  border: 1px solid #A86549;
-  position: relative;
-  background-color: #A86549;
-  content: '';
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid white;
-} */

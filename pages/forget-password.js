@@ -18,8 +18,8 @@ const ForgetPass = () => {
               className="object-cover"
             />
           </div>
-          <div className="px-[0.94rem] col-span-2 2xl:px-20 pt-[4.5rem] h-screen flex flex-col justify-center">
-            <div className="pb-6 w-[70%]">
+          <div className="px-[0.94rem] lg:col-span-2 2xl:px-20 pt-[4.5rem] h-screen flex flex-col justify-center">
+            <div className="pb-6 lg:w-[70%]">
               <h1 className="font-sansita-regular font-extrabold text-4xl text-center">
                 Forget Password
               </h1>

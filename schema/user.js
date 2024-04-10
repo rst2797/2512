@@ -30,17 +30,9 @@ export const User =
       type: String,
       required: true,
     },
-    postalCode: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
     profile: {
       type: String,
       required: true,
-      default: "/images/profile/avatar.jpg"
+      default: "/images/images.png"
     }
   });

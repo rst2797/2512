@@ -27,14 +27,13 @@ export default function RadioGroup({ id, status }) {
         )
         .then((res) => {
           axios.get(`/api/admin/get-order/${id}`).then((res) => {
-            console.log(res.data);
             setOrderResponse(res.data);
           });
           toast.success(res.data.message);
           if (option === "delivered") router.push("/admin/orders");
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (

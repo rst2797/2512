@@ -28,31 +28,27 @@ const Form = ({ phoneCodes }) => {
       .min(6, <RiErrorWarningFill />)
       .max(40, <RiErrorWarningFill />)
       .required(<RiErrorWarningFill />),
-    postalCode: Yup.string().required(<RiErrorWarningFill />),
-    address: Yup.string().required(<RiErrorWarningFill />),
   });
 
   const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
+    countryCode: "",
     phone: "",
     password: "",
-    postalCode: "",
-    address: "",
   };
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      const { email, phone, password, postalCode, address } = values;
+      const { email, phone, password, countryCode } = values;
+      console.log(values);
       values = {
         name: values.firstName + " " + values.lastName,
         email,
-        phone,
+        phone: `${countryCode} ${phone}`,
         password,
-        postalCode,
-        address,
         currency: phoneCodes.currency,
       };
       try {
@@ -64,7 +60,6 @@ const Form = ({ phoneCodes }) => {
           Cookies.set("token", JSON.stringify(res.data.token), {
             expires: 2,
           });
-          console.log(res.data);
           router.push(`/profile/${res.data.user._id}`);
         } else {
           throw new Error(res.data.message);
@@ -149,9 +144,16 @@ const Form = ({ phoneCodes }) => {
           </label>
           <br />
           <div className="flex">
-            <select className="font-semibold text-xs py-2 w-min rounded-lg mr-4">
+            <select
+              id="countryCode"
+              name="countryCode"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.countryCode}
+              className="font-semibold text-xs py-2 w-min rounded-lg mr-4"
+            >
               {phoneCodes?.map((ele, index) => (
-                <option key={index}>
+                <option key={index} value={ele.phoneCode}>
                   {ele.code}&nbsp;{ele.phoneCode}
                 </option>
               ))}
@@ -160,7 +162,7 @@ const Form = ({ phoneCodes }) => {
               type="phone"
               id="phone"
               name="phone"
-              placeholder="+19854545382632"
+              placeholder="9876543210"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
@@ -204,46 +206,6 @@ const Form = ({ phoneCodes }) => {
           {formik.touched.password && formik.errors.password && (
             <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
               {formik.errors.password}
-            </div>
-          )}
-        </div>
-        <div className="my-4 lg:my-1 relative">
-          <label className="font-semibold" htmlFor="postalCode">
-            Postal Code:
-          </label>
-          <input
-            type="postalCode"
-            id="postalCode"
-            name="postalCode"
-            placeholder="Postal Code"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.postalCode}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%]"
-          />
-          {formik.touched.postalCode && formik.errors.postalCode && (
-            <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
-              {formik.errors.postalCode}
-            </div>
-          )}
-        </div>
-        <div className="my-4 lg:my-1 relative">
-          <label className="font-semibold" htmlFor="address">
-            Address:
-          </label>
-          <input
-            type="address"
-            id="address"
-            name="address"
-            placeholder="Address"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.address}
-            className="px-4 bg-transparent border-b-2 border-white outline-none bg-white rounded-lg py-2 min-w-[100%]"
-          />
-          {formik.touched.address && formik.errors.address && (
-            <div className="absolute right-0 top-6 lg:top-9 lg:right-2">
-              {formik.errors.address}
             </div>
           )}
         </div>

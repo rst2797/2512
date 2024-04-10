@@ -22,7 +22,6 @@ const fetchBlogs = async () => {
     }
     throw new Error(blogs.data.message);
   } catch (error) {
-    console.log("Error in getting the data");
     return {
       error: true,
       message: error.message,
@@ -42,8 +41,6 @@ const Blog = ({ blogs }) => {
   };
 
   useEffect(() => {
-    console.log(activeSlide);
-    console.log(blogs);
   }, [activeSlide, blogs]);
   return (
     <main className="min-h-screen bg-[#f2eadf]">

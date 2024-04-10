@@ -57,7 +57,6 @@ const TextEditor = () => {
     try {
       const formData = new FormData();
       formData.append("image", e.target.files[0]);
-      console.log(e.target.files[0]);
 
       await axios
         .post(
@@ -70,14 +69,12 @@ const TextEditor = () => {
           }
         )
         .then((res) => {
-          console.log(res.data);
           axios.put(res.data.putSigned, e.target.files[0]).then((res) => {
             axios
               .get(
                 `/api/get-profile-picture-signedurl/blogs-thumbnail/${blogId}_${e.target.files[0].name}`
               )
               .then((res) => {
-                console.log(res.data);
                 setFeatureMedia(res.data.url);
                 setFeatureMediaDb(`${blogId}_${e.target.files[0].name}`)
                 toast.success("Profile updated successfully....");
@@ -143,8 +140,6 @@ const TextEditor = () => {
     }
   };
   useEffect(() => {
-    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
-    console.log(blogTitle);
   }, [blogHtml, blogTitle, editorState]);
 
   return (

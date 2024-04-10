@@ -44,16 +44,16 @@ const Checkout = ({ items }) => {
         <h4>₹{discountedPrice}</h4>
       </div>
 
-      <Link href="/viewcheckout">
-        <a>
+      {/* <Link href="/viewcheckout">
+        <a> */}
           <button
-            type="button"
+            type="submit"
             className="bg-[#A86549] w-full py-2 my-4 font-bold text-sm text-[white] rounded-lg"
           >
             Place Order
           </button>
-        </a>
-      </Link>
+        {/* </a>
+      </Link> */}
     </div>
   );
 };

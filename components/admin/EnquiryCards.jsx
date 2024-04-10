@@ -4,7 +4,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 const EnquiryCards = ({ contacts }) => {
-  console.log(contacts);
   const [contactState, setContactState] = useState(contacts);
   const handleResolve = (id) => {
     axios

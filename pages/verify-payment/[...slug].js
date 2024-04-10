@@ -69,7 +69,6 @@ export const getServerSideProps = async (context) => {
       },
     }
   );
-  console.log(response.data);
   return {
     props: {
       success: response.data.success,

@@ -16,7 +16,6 @@ export default function authAdminMiddleware(handler) {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       req.user = decoded;
-      console.log(decoded)
 
       if (decoded.email === "darshboyat@gmail.com") return handler(req, res);
       else throw Error("Invalid Admin Token");

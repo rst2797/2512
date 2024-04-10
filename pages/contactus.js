@@ -27,7 +27,7 @@ const Register = () => {
       <div className="container bg-[#f2eadf] min-h-screen">
         <Navbar />
         <div className="2xl:grid grid-cols-3">
-          <div className="hidden lg:block h-screen overflow-y-hidden pt-16">
+          <div className="hidden 2xl:block h-screen overflow-y-hidden pt-16">
             <Image
               src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/auth.png"
               alt=""
@@ -51,23 +51,19 @@ const Register = () => {
             <div className="my-2 lg:px-48 text-center flex justify-center items-center">
               <div className="px-4">
                 <p className="font-semibold text-md">
-                  Reach out to us via email:
+                  Reach out to us via:
                 </p>
-                <p className="text-xl font-semibold">contactus@2512.in</p>
+                <p className="text-md font-semibold">contactus@2512.in | (+91) 9691826952</p>
               </div>
-              {/* <p className="text-center font-semibold text-md border-l-[1px] w-[35%] px-4 border-black">
-                <span className="font-bold">Address <br/></span>
-                <span>Gram Bhanwarasala, Sanwer Road, Indore</span>
-              </p> */}
             </div>
-            {/* <div className="flex items-center justify-center pt-6">
+            <div className="flex items-center justify-center">
               <div className="lg:bg-black h-[1px] pb-[0.115em] w-[165px]" />
               <div className="font-semibold px-3">Our Address</div>
               <div className="lg:bg-black h-[1px] pb-[0.115em] w-[165px]" />
             </div>
               <p className="text-center font-semibold text-md">
-                Gram Bhanwarasala, Sanwer Road, Indore
-              </p> */}
+                Gram Bhanwarasala, Sanwer Road, Indore 452001
+              </p>
           </div>
         </div>
       </div>

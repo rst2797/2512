@@ -52,7 +52,6 @@ const Form = ({ phoneCodes }) => {
         }
       } catch (error) {
         // Handle errors from both the try-catch block and axios request
-        console.log("Error caught:", error.message);
         toast.error(error.message);
       }
     },
@@ -147,7 +146,7 @@ const Form = ({ phoneCodes }) => {
               id="message"
               name="message"
               placeholder="Type here..."
-              rows={5}
+              rows={3}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.message}

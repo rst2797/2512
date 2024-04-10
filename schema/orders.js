@@ -72,11 +72,31 @@ const orderItemSchema = new Schema({
     required: true,
   },
 });
+
 const orderSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    deliveryAddress: {
+      type: {
+        postalCode: {
+          type: String,
+          required: true,
+        },
+        address1: {
+          type: String,
+          required: true,
+        },
+        address2: {
+          type: String,
+        },
+        landmark: {
+          type: String,
+        },
+      },
       required: true,
     },
     items: {

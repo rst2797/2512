@@ -49,7 +49,6 @@ const ProductForm = ({ setAddProduct }) => {
     description: Yup.string().required(<RiErrorWarningFill />),
     breadcrumb: Yup.string().required(<RiErrorWarningFill />),
     sku: Yup.string().required(<RiErrorWarningFill />),
-    images: Yup.array().required(<RiErrorWarningFill />),
     actualPrice: Yup.string().required(<RiErrorWarningFill />),
     price: Yup.number().required(<RiErrorWarningFill />),
     offPercentage: Yup.string().required(<RiErrorWarningFill />),
@@ -63,7 +62,7 @@ const ProductForm = ({ setAddProduct }) => {
     // Handle form submission, you can call your API to save the product data
     const token = JSON.parse(localStorage.getItem("token"));
     // ${process.env.NEXT_API_BASE_URL}
-    if (presignedUrls.length === 5) {
+    if (presignedUrls.length >= 2) {
       axios
         .post(
           `/api/admin/add-product`,
@@ -84,7 +83,7 @@ const ProductForm = ({ setAddProduct }) => {
           }, 700);
         });
     } else {
-      toast.error("Please upload all product images to proceed!!");
+      toast.error("Please upload at least 2 product images to proceed!!");
     }
   };
 
@@ -97,7 +96,6 @@ const ProductForm = ({ setAddProduct }) => {
       await axios.put(presignedUrl, file);
 
       setPresignedUrls((prevUrls) => [...prevUrls, `${imageId}_${file.name}`]);
-      console.log("Presigned Array", presignedUrls);
     } catch (error) {
       // Handle errors
       console.error("Error uploading image:", error);
@@ -105,7 +103,6 @@ const ProductForm = ({ setAddProduct }) => {
     }
   };
   useEffect(() => {
-    console.log("Presigned Array", presignedUrls);
   }, [presignedUrls]);
   return (
     <>

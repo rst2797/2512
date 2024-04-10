@@ -10,7 +10,7 @@ const ProfileOptions = ({ user }) => {
     {
       id: 1,
       name: "Account Settings",
-      link: `/`,
+      link: `#`,
     },
     {
       id: 2,
@@ -34,8 +34,8 @@ const ProfileOptions = ({ user }) => {
       {options.map((option) => (
         <Link href={option.link} key={option.id}>
           <a>
-            <div className="flex justify-between items-center pt-[.62rem] pb-[.94rem] border-b-[1px] text-[#2F2E2D] border-black font-[700]">
-              <h3>{option.name}</h3>
+            <div className={`flex justify-between items-center pt-[.62rem] pb-[.94rem] border-b-[1px] ${option?.id === 1 ? 'text-[#A86549] border-[#A86549] ' : 'text-[#2F2E2D] border-black '} font-[700]`}>
+              <h3 >{option.name}</h3>
               <IoChevronForwardSharp />
             </div>
           </a>

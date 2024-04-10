@@ -15,13 +15,13 @@ const SectionOne = () => {
         <p className="font-lato-regular lg:drop-shadow-none lg:w-[26rem] lg:text-[1.75rem] lg:leading-[2.375rem] ">
           A collection that embodies the concept of simplicity{" "}
           <span className="block lg:hidden">
-            <Link href="/kanso">
+            <Link href="/shop/tshirt">
               <a className="underline">Learn more</a>
             </Link>
           </span>
         </p>
         <span className="lg:block hidden mt-[1rem]">
-          <Link href="/kanso">
+          <Link href="/shop/tshirt">
             <a className="rounded-2xl bg-[#A86549] text-[#F4E9DF] py-[0.875rem] px-[1.25rem] text-[1rem] font-bold flex items-center w-fit">
               Learn more &nbsp; <IoArrowForward className="mt-1" />
             </a>

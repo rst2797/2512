@@ -10,11 +10,17 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "cookies";
 import { ThreeDots } from "react-loader-spinner";
-import { toast } from "react-toastify";
+import { FaCamera } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+
 const Profile = ({ user, success }) => {
   const [profileLoader, setProfileLoader] = useState(false);
   const [profile, setProfile] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [editable, setEditable] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
 
   const handleImageChange = async (e) => {
     e.preventDefault();
@@ -23,7 +29,6 @@ const Profile = ({ user, success }) => {
     try {
       const formData = new FormData();
       formData.append("image", e.target.files[0]);
-      console.log(e.target.files[0]);
       setProfileLoader(true);
 
       await axios
@@ -39,7 +44,6 @@ const Profile = ({ user, success }) => {
                 `/api/get-profile-picture-signedurl/user-profiles-pictures/${userId}_${e.target.files[0].name}`
               )
               .then((response) => {
-                console.log(res.data);
                 axios
                   .put(
                     `/api/update-profile?userId=${userId}&profile=${e.target.files[0].name}`
@@ -119,7 +123,11 @@ const Profile = ({ user, success }) => {
             <div className="pt-24 grid-cols-1 grid lg:grid-cols-4 gap-12">
               <ProfileOptions user={user} />
               <div className="lg:w-[70%] col-span-3 pt-6">
-                <div className="relative w-fit">
+                <div
+                  className="relative w-fit overflow-hidden rounded-full "
+                  onMouseEnter={() => setShowUpload(true)}
+                  onMouseLeave={() => setShowUpload(false)}
+                >
                   {selectedImage ? (
                     <Image
                       src={URL.createObjectURL(selectedImage)}
@@ -129,13 +137,21 @@ const Profile = ({ user, success }) => {
                       className="rounded-full"
                     />
                   ) : (
-                    <Image
-                      src={profile}
-                      alt="Profile Picture"
-                      width={100}
-                      height={100}
-                      className="rounded-full"
-                    />
+                    <span className="relative overflow-hidden">
+                      <Image
+                        src={profile}
+                        alt="Profile Picture"
+                        width={100}
+                        height={100}
+                        className="rounded-full"
+                      />
+                      {showUpload && (
+                        <span className="absolute left-0 bottom-14 right-0 rounded-full">
+                          <span className="bg-white py-14 px-20 opacity-60" />
+                          <FaCamera className="absolute top-6 left-10" />
+                        </span>
+                      )}
+                    </span>
                   )}
                   <input
                     type="file"
@@ -158,50 +174,104 @@ const Profile = ({ user, success }) => {
                     </div>
                   )}
                 </div>
-                <div className="flex justify-between pb-4 border-b-[1px] border-black">
-                  <h3 className="font-lato-regular !text-[1.3rem] font-semibold pt-[.88rem] text-[#2F2E2D] ">
-                    Profile Details
-                  </h3>
-                  <button className="bg-[#A86549] hidden lg:block text-white font-semibold text-sm rounded-xl py-0 px-[1.25rem] w-[10rem]">
-                    Edit
-                  </button>
-                </div>
-                <table className="w-full font-lato-regular !font-semibold !text-[1rem]">
-                  <tbody>
-                    <tr>
-                      <td className="py-2">Full Name</td>
-                      <td className="py-2">{user?.name}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Mobile No.</td>
-                      <td className="py-2">{user?.phone}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Email ID</td>
-                      <td className="py-2">{user?.email}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Gender</td>
-                      <td className="py-2">Male</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Date of Birth</td>
-                      <td className="py-2">28/07/1998</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Location</td>
-                      <td className="py-2 capitalize">{user?.address}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Alternate Mobile</td>
-                      <td className="py-2">----Not Added----</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button className="bg-[#A86549] lg:hidden text-white font-semibold text-sm rounded-lg py-2 px-[1.25rem] w-full my-4">
-                  Edit
-                </button>
+                <Formik
+                  initialValues={{
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone,
+                    altphone: user.altphone,
+                  }}
+                  validationSchema={Yup.object({
+                    name: Yup.string().required("Name is required"),
+                    email: Yup.string()
+                      .email("Invalid email address")
+                      .required("Email is required"),
+                    phone: Yup.string().required("Phone is required"),
+                  })}
+                  onSubmit={(values, { setSubmitting }) => {
+                    axios
+                      .put(`/api/edit-profile/${user._id}`, values)
+                      .then(() => {
+                        toast.success("Profile Updated Successfully...");
+                        setSubmitting(false);
+                        setEditable(false);
+                      });
+                  }}
+                >
+                  <Form>
+                    <div className="flex justify-between pb-4 border-b-[1px] border-black">
+                      <h3 className="font-lato-regular !text-[1.3rem] font-semibold pt-[.88rem] text-[#2F2E2D] ">
+                        Profile Details
+                      </h3>
+                      <button
+                        type={!editable ? "submit" : "button"}
+                        onClick={() => setEditable(!editable)}
+                        className="bg-[#A86549] hidden lg:block text-white font-semibold text-sm rounded-xl py-0 px-[1.25rem] w-[10rem]"
+                      >
+                        {editable ? "Save" : "Edit"}
+                      </button>
+                    </div>
+
+                    <div className="w-full font-lato-regular !font-semibold !text-[1rem]">
+                      <div className="py-2">
+                        <label htmlFor="name">Full Name</label>
+                        <Field
+                          type="text"
+                          name="name"
+                          className={`bg-transparent ${
+                            editable && "border-b border-black"
+                          } ml-[4.5rem]`}
+                        />
+                        <ErrorMessage name="name" component="div" />
+                      </div>
+                      <div className="py-2">
+                        <label htmlFor="email">Email</label>
+                        <Field
+                          type="email"
+                          name="email"
+                          className={`bg-transparent ${
+                            editable && "border-b border-black"
+                          } ml-[6.5rem]`}
+                        />
+                        <ErrorMessage name="email" component="div" />
+                      </div>
+                      <div className="py-2">
+                        <label htmlFor="phone">Phone</label>
+                        <Field
+                          type="text"
+                          name="phone"
+                          className={`bg-transparent ${
+                            editable && "border-b border-black"
+                          } ml-24`}
+                        />
+                        <ErrorMessage name="phone" component="div" />
+                      </div>
+                      <div className="py-2">
+                        <label htmlFor="altphone">Alternate Phone</label>
+                        <Field
+                          type="text"
+                          name="altphone"
+                          className={`bg-transparent ${
+                            editable && "border-b border-black"
+                          } ml-7`}
+                        />
+                        <ErrorMessage name="altphone" component="div" />
+                      </div>
+                    </div>
+                  </Form>
+                </Formik>
               </div>
+            </div>
+            <div className="p-4">
+              <ToastContainer
+                position="bottom-center"
+                autoClose={1000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnHover
+                style={{ marginBottom: "1rem", width: "fit-content" }}
+              />
             </div>
           </div>
           <Footer />

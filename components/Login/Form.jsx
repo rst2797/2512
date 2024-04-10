@@ -50,12 +50,8 @@ const Form = ({ successRedirection }) => {
             expires: 2,
           });
           toast.success(response.data.message);
-          console.log(
-            response.data.user._id === "65856027c169c5523ff9462e",
-            response.data.user.role === "ADMIN"
-          );
           if (
-            response.data.user._id === "65856027c169c5523ff9462e" &&
+            response.data.user._id === "6614e4a92dbe62ee4ed655c8" &&
             response.data.user.role === "ADMIN"
           ) {
             return router.push("/admin/orders");
@@ -68,7 +64,6 @@ const Form = ({ successRedirection }) => {
         }
       } catch (error) {
         setLogin(false);
-        console.log(error.response.data.message);
         toast.error(error.response.data.message);
       }
     },

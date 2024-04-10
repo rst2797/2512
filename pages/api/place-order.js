@@ -3,18 +3,18 @@ import {connection} from "../../utils/database.js"
 
 export default async function PlaceOrder(req, res) {
   try {
-    const { userId, items, totalAmount, paymentMethod } = req.body;
+    const { userId, items, totalAmount, paymentMethod, deliveryAddress } = req.body;
 
     await connection()
     const order = new Order({
       user: userId,
       items,
       totalAmount,
+      deliveryAddress,
       paymentMethod,
     });
 
     await order.save();
-    // console.log(order)
     return res.status(200).json({
       error: false,
       success: true,

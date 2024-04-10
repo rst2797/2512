@@ -5,8 +5,7 @@ const uri =
 export const connection =()=>{
   try {
       mongoose.connect(uri).then(()=>console.log('Database Connected'));
-
   } catch (error) {
-    console.log({error})
+    console.error({error})
   }
 }

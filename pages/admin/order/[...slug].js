@@ -12,7 +12,7 @@ const OrderDetails = ({ order }) => {
     setUserData(JSON.parse(localStorage.getItem("user")));
     if (
       JSON.parse(localStorage.getItem("user"))._id !==
-        "65856027c169c5523ff9462e" &&
+        "6614e4a92dbe62ee4ed655c8" &&
       JSON.parse(localStorage.getItem("user")).role !== "ADMIN"
     ) {
       return router.push("/");

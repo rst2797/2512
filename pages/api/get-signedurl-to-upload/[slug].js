@@ -35,7 +35,6 @@ async function handler(req, res) {
     await form.on("file", async (name, file) => {
       // Create a unique filename using the original file name
       const fileName = `${Date.now()}_${file.originalFilename}`;
-      console.log(fileName + " " + file);
 
       try {
         // Check if the file path exists
