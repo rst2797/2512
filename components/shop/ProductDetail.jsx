@@ -95,7 +95,7 @@ const ProductDetail = ({ product }) => {
             </div>
             <DeliveryDetails product={product} />
             <div className="hidden lg:block">
-              <p className="font-semibold lg:w-[90%] pt-16 pb-5">
+              <p className="font-semibold lg:w-[90%] pt-8 pb-5">
                 {activeFabricDetail === "care" ||
                 activeFabricDetail === "material" ? (
                   <>

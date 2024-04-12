@@ -65,14 +65,14 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
           </div>
         </a>
       </Link>
-      <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] border-black">
+      {/* <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] border-black">
         <h2 className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
             <EditableRating productId={product._id} readOnly={false} />
           </span>
         </h2>
-      </div>
+      </div> */}
     </div>
   );
 };
