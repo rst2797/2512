@@ -44,8 +44,7 @@ const Footer = () => {
             <div className="flex flex-col lg:flex-row justify-between">
               <div className="max-w-full lg:w-[45%] lg:text-start text-center mx-4 px-4 text-white text-lg">
                 Discover conscious fashion at PacchisBarah – your sustainable,
-                gender-inclusive organic clothing brand. Minimal design and
-                maximum impact. Shop now on mobile & web at www.2512.in
+                gender-inclusive organic clothing brand.
               </div>
               <div className="flex justify-around py-12 lg:py-0 px-4 lg:px-0 w-full">
                 <div className="flex flex-col lg:text-lg lg:ml-4">

@@ -11,7 +11,7 @@ const SectionFive = () => {
           <a className="lg:relative lg:top-32 lg:py-0 py-32 lg:flex flex-col bottom-40 left-0 right-0 text-white ">
             <>
               <h2 className="font-sansita-regular !text-[2.8rem] text-center lg:text-start lg:px-12 lg:py-1 lg:text-[2.5rem] lg:pt-20">
-                Kanso Our First Collection
+                Our First Collection
               </h2>
               <p className="font-semibold text-lg px-6 lg:px-12 py-4 lg:w-full lg:text-left text-center lg:text-lg">
                 Carefully curated collection of t-shirts made with organic cotton

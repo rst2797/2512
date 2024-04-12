@@ -32,10 +32,10 @@ const SectionFive = () => {
       </div>
       <div className="lg:absolute top-0 bottom-0 right-0">
         <Image
-          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/web/our+story/2.png"
+          src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/Palak_Dubey.JPG"
           alt="2512 Sustainable - Planet Love - Clothes"
-          width={650}
-          height={650}
+          width={500}
+          height={700}
         />
       </div>
     </div>

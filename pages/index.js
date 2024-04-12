@@ -54,7 +54,7 @@ const Home = ({ products }) => {
         <SectionTwo products={products} />
         <SectionFour />
         <SectionFive />
-        <SectionSix />
+        {/* <SectionSix /> */}
         <Footer />
       </div>
     </main>

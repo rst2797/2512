@@ -74,19 +74,19 @@ const ProductDetail = ({ product }) => {
               <h2 className="text-[1.125rem] font-lato-regular font-[800]">
                 ₹{product.price}
               </h2>
-              <small className="!text-[.85rem] ml-[0.75rem] font-lato-regular font-bold">
+              {/* <small className="!text-[.85rem] ml-[0.75rem] font-lato-regular font-bold">
                 <span className="line-through">₹{product.actualPrice}</span>{" "}
                 <span className="font-bold text-[#FF0909]">
                   {product.offPercentage} OFF
                 </span>
-              </small>
+              </small> */}
             </div>
-            <p className="font-bold flex items-center !text-[0.75rem]">
+            {/* <p className="font-bold flex items-center !text-[0.75rem]">
               {ratings.averageRating} &nbsp;{" "}
               <Rating overallRating={ratings.averageRating} /> &nbsp;{" "}
               {ratings.totalRatings}{" "}
               {ratings.totalRatings > 1 ? "Ratings" : "Rating"}
-            </p>
+            </p> */}
             <div className="lg:pt-8">
               <SelectColor product={product} />
             </div>
