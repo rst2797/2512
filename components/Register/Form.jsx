@@ -43,7 +43,6 @@ const Form = ({ phoneCodes }) => {
     validationSchema,
     onSubmit: async (values) => {
       const { email, phone, password, countryCode } = values;
-      console.log(values);
       values = {
         name: values.firstName + " " + values.lastName,
         email,

@@ -59,7 +59,6 @@ export default async function PlaceOrder(req, res) {
       weight: 2.5,
     };
 
-    console.log("ship order : ", orderToShip);
     axios
       .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
         email: "discretestructure3@gmail.com",

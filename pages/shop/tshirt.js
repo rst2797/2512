@@ -4,23 +4,22 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
-// import { rediss } from "../../utils/redis";
+import { rediss } from "../../utils/redis";
 
-const Home = () => {
+const Home = ({products}) => {
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  
-  useEffect(() => {
-    axios.get("/api/get-all-products").then((res) => {
-      setProducts(res.data.products);
-    });
-  }, []);
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   axios.get("/api/get-all-products").then((res) => {
+  //     setProducts(res.data.products);
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (products && products.length > 0) {
       setLoading(false);
     }
-    console.log(products);
   }, [products]);
 
   return (
@@ -75,13 +74,11 @@ const getPresignedUrls = async (key, file) => {
 };
 export async function getServerSideProps() {
   try {
-    // const cachedData = await rediss.get("products");
-    const cachedData = "null";
+    const cachedData = await rediss.get("products");
     const parsedCache = JSON.parse(cachedData);
 
     if (!parsedCache) {
       const res = await axios.get(`https://www.2512.in/api/get-all-products`);
-      console.log(res.data);
 
       const products = await Promise.all(
         res.data.products.map(async (product) => {
@@ -102,7 +99,7 @@ export async function getServerSideProps() {
         })
       );
 
-      // await rediss.set("products", JSON.stringify({ products }));
+      await rediss.set("products", JSON.stringify({ products }));
 
       return {
         props: {

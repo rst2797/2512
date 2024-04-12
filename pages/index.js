@@ -9,13 +9,7 @@ import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
 import { rediss } from "../utils/redis";
 import axios from "axios";
-const Home = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    axios.get("/api/get-all-products").then((res) => {
-      setProducts(res.data.products);
-    });
-  }, []);
+const Home = ({products}) => {
   return (
     <main>
       <Head>
@@ -108,7 +102,7 @@ export async function getServerSideProps() {
         })
       );
 
-      // await rediss.set("products", JSON.stringify({ products }));
+      await rediss.set("products", JSON.stringify({ products }));
 
       return {
         props: {

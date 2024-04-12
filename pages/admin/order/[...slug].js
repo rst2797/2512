@@ -38,10 +38,11 @@ const OrderDetails = ({ order }) => {
           </p>
           <p className="mb-2">
             <span className="font-semibold">Postal Code:</span>{" "}
-            {userData.postalCode}
+            {orderData.deliveryAddress.postalCode}
           </p>
           <p>
-            <span className="font-semibold">Address:</span> {userData.address}
+            <span className="font-semibold">Address:</span>{" "}
+            {`${orderData.deliveryAddress.address1} |OR| ${orderData.deliveryAddress.address1}`}
           </p>
         </div>
         <div className="bg-[#A86549] w-full lg:w-[450px] text-white px-12 py-4 rounded-lg">
@@ -102,7 +103,10 @@ const OrderDetails = ({ order }) => {
               <div className="mx-24 flex flex-col lg:flex-row gap-8">
                 <div className="flex flex-col justify-center">
                   <p className="mb-2">
-                    <span className="font-semibold text-ellipsis w-48 overflow-hidden whitespace-nowrap">Name:</span> {item.name}
+                    <span className="font-semibold text-ellipsis w-48 overflow-hidden whitespace-nowrap">
+                      Name:
+                    </span>{" "}
+                    {item.name}
                   </p>
                   <p className="mb-2 whitespace-nowrap">
                     <span className="font-semibold">Category:</span>{" "}

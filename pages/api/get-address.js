@@ -6,7 +6,6 @@ export default async function getAddress(req, res) {
     axios(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${postalCode}&types=address&key=AIzaSyAh_aDZhijrJ-R9l6oTU-iOXPZ9eXQzacY`
     ).then((resp) => {
-      console.log(resp.data);
       res.json(resp.data);
     });
   } catch (error) {

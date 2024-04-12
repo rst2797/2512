@@ -30,10 +30,10 @@ const ProductDetail = ({ product }) => {
             <h2 className="text-[1.125rem] font-lato-regular font-[800]">
               {product.price}
             </h2>
-            <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">
+            {/* <small className="!text-[.75rem] ml-[0.75rem] font-lato-regular">
               <span className="line-through">₹1399</span>{" "}
               <span className="font-semibold text-[#49AC56]">30% OFF</span>
-            </small>
+            </small> */}
           </div>
           <p className="font-lato-regular !font-[300] !text-[0.75rem]">
             Incl of taxes

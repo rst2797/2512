@@ -28,7 +28,6 @@ const Form = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post("/api/forget-password", values);
-        console.log(response)
         
         if (response.data.success) {
           toast.success("Reset password link has been sent to email...");

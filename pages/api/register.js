@@ -22,7 +22,6 @@ export default async function Register(req, res) {
       password: Joi.string().min(6).required(),
     });
     const { error } = loginSchema.validate(req.body);
-    console.log(error, "USER");
     if (error) {
       return res.status(400).json({
         error: true,

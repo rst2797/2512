@@ -71,23 +71,6 @@ const Checkout = () => {
     return formattedFiveDaysLater;
   };
 
-  const handlePostalCodeChange = (event) => {
-    const newPostalCode = event.target.value;
-    setPostalCode(newPostalCode);
-
-    fetchAddressDetails(newPostalCode);
-  };
-
-  const fetchAddressDetails = async (postalCode) => {
-    try {
-      const response = await axios.get(`/api/get-address`, { postalCode });
-      const address = response.predictions[0].description;
-      console.log(address);
-      setAddress(address);
-    } catch (error) {
-      console.error("Error fetching address:", error);
-    }
-  };
   const router = useRouter();
   const handleSubmit = (values) => {
     const { postalCode, addressLine1, addressLine2, landmark } = values;
@@ -273,14 +256,14 @@ const Checkout = () => {
                       <h2 className="font-lato-regular !font-semibold">
                         ₹{ele.price}
                       </h2>
-                      <div className="flex items-center">
+                      {/* <div className="flex items-center">
                         <h4 className="text-xs font-semibold line-through">
                           ₹1399
                         </h4>
                         <h5 className="text-xs text-[#FF0909] font-bold pl-2 whitespace-nowrap">
                           30% OFF
                         </h5>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 ))}
