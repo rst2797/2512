@@ -37,7 +37,7 @@ const CartDropdown = () => {
           {items.length ? (
             <>
               {items.map((item) => (
-                <div key={item.id} className="flex mb-4">
+                <div key={item.id} className="flex mb-4 border-b pb-2">
                   <Image
                     src={item.images[0]}
                     alt={item.name}
@@ -46,7 +46,10 @@ const CartDropdown = () => {
                     className="w-16 h-16 mr-4"
                   />
                   <div className="ml-2">
-                    <h3 className="font-bold">{item.name}</h3>
+                    <h3 className="font-bold text-ellipsis w-48 overflow-hidden whitespace-nowrap">
+                      {item.name}
+                    </h3>
+
                     <div className="flex items-center">
                       <small className="font-bold mt-2">
                         Price: {item.price}

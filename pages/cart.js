@@ -128,14 +128,14 @@ export function Product({ item }) {
         <Image
           src={image}
           alt="Sustainable and Organic Cloths"
-          width={250}
+          width={240}
           height={280}
           className="rounded-xl"
         />
       </div>
       <div className="flex flex-col justify-center px-4">
         <div>
-          <h2 className="font-sansita-regular !text-xl lg:!text-[2rem]">
+          <h2 className="font-sansita-regular !text-xl lg:!text-[2rem] w-[90%] pb-2">
             {item.name}
           </h2>
           <span className="font-lato-regular !font-semibold pt-2 !text-[1rem]">

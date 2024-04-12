@@ -10,7 +10,7 @@ const TShirt = ({ id }) => {
   const [product, setProduct] = useState();
   useEffect(() => {
     axios.get(`/api/get-product/${id}`).then((res) => {
-      setProduct(res.data.product);
+      setProduct({...res.data.product, id: res.data.product._id});
     });
   }, []);
   useEffect(()=>{}, [product])

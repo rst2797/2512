@@ -82,12 +82,12 @@ const ProductDetail = ({ product }) => {
                 </span>
               </small>
             </div>
-            <p className="font-bold flex items-center !text-[0.75rem]">
+            {/* <p className="font-bold flex items-center !text-[0.75rem]">
               {ratings.averageRating} &nbsp;{" "}
               <Rating overallRating={ratings.averageRating} /> &nbsp;{" "}
               {ratings.totalRatings}{" "}
               {ratings.totalRatings > 1 ? "Ratings" : "Rating"}
-            </p>
+            </p> */}
             <div className="lg:pt-8">
               <SelectColor product={product} />
             </div>
@@ -96,7 +96,7 @@ const ProductDetail = ({ product }) => {
             </div>
             <DeliveryDetails product={product} />
             <div className="hidden lg:block">
-              <p className="font-semibold lg:w-[90%] pt-16 pb-5">
+              <p className="font-semibold lg:w-[90%] pt-8 pb-24">
                 {activeFabricDetail === "care" ||
                 activeFabricDetail === "material" ? (
                   <>
