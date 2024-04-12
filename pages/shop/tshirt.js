@@ -6,13 +6,61 @@ import Footer from "../../components/common/footer.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
 // import { rediss } from "../../utils/redis";
 
-const Home = ({ products }) => {
+const Home = () => {
   const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    if (products && products.length > 0) {
-      setLoading(false);
+  async function fetchProduct() {
+    try {
+      const cachedData = "null";
+      const parsedCache = JSON.parse(cachedData);
+
+      if (!parsedCache) {
+        const res = await axios.get(`https://2512.in/api/get-all-products`);
+
+        const products = await Promise.all(
+          res.data.products.map(async (product) => {
+            let images = [];
+
+            await Promise.all(
+              product.images.map(async (img) => {
+                if (img.includes("https://s3")) {
+                  images.push(img);
+                } else {
+                  const presigned = await getPresignedUrls(
+                    "products-image",
+                    img
+                  );
+                  images.push(presigned);
+                }
+              })
+            );
+
+            return { ...product, images };
+          })
+        );
+
+        // await rediss.set("products", JSON.stringify({ products }));
+
+        return {
+          products,
+        };
+      }
+
+      return {
+        products: parsedCache.products,
+      };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return {
+        products: [],
+      };
     }
+  }
+  useEffect(() => {
+    fetchProduct().then((data) => {
+      setProducts(data.products);
+    });
   }, [products]);
 
   return (
@@ -65,55 +113,55 @@ const getPresignedUrls = async (key, file) => {
     throw error;
   }
 };
-export async function getServerSideProps() {
-  try {
-    const cachedData = "null";
-    const parsedCache = JSON.parse(cachedData);
+// export async function getServerSideProps() {
+//   try {
+//     const cachedData = "null";
+//     const parsedCache = JSON.parse(cachedData);
 
-    if (!parsedCache) {
-      const res = await axios.get(
-        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
-      );
+//     if (!parsedCache) {
+//       const res = await axios.get(
+//         `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+//       );
 
-      const products = await Promise.all(
-        res.data.products.map(async (product) => {
-          let images = [];
+//       const products = await Promise.all(
+//         res.data.products.map(async (product) => {
+//           let images = [];
 
-          await Promise.all(
-            product.images.map(async (img) => {
-              if (img.includes("https://s3")) {
-                images.push(img);
-              } else {
-                const presigned = await getPresignedUrls("products-image", img);
-                images.push(presigned);
-              }
-            })
-          );
+//           await Promise.all(
+//             product.images.map(async (img) => {
+//               if (img.includes("https://s3")) {
+//                 images.push(img);
+//               } else {
+//                 const presigned = await getPresignedUrls("products-image", img);
+//                 images.push(presigned);
+//               }
+//             })
+//           );
 
-          return { ...product, images };
-        })
-      );
+//           return { ...product, images };
+//         })
+//       );
 
-      // await rediss.set("products", JSON.stringify({ products }));
+//       // await rediss.set("products", JSON.stringify({ products }));
 
-      return {
-        props: {
-          products,
-        },
-      };
-    }
+//       return {
+//         props: {
+//           products,
+//         },
+//       };
+//     }
 
-    return {
-      props: {
-        products: parsedCache.products,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        products: [],
-      },
-    };
-  }
-}
+//     return {
+//       props: {
+//         products: parsedCache.products,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: {
+//         products: [],
+//       },
+//     };
+//   }
+// }
