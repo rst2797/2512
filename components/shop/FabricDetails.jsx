@@ -55,11 +55,8 @@ const FabricDetails = ({product, activeFabricDetail, setActiveFabricDetails }) =
         <a target="_blank">
           <div className="accordion-item hover:cursor-pointer transition-all py-[.6rem] border-b-[1px] !border-black">
             <h2 className="accordion-header flex py-[.35rem] justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
-              <span className="accordion-header-text">
+              <span className="accordion-header-text hover:border-b border-black">
                 Delivery, Returns & Exchange
-              </span>
-              <span className="accordion-header-icon">
-                {activeIndex === 3 ? <FaMinus /> : <FaPlus />}
               </span>
             </h2>
           </div>

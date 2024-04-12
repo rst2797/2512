@@ -21,7 +21,7 @@ const SectionThree = () => {
           Sustainability meets Artificial Intelligence
         </p>{" "}
         <div className="bg-white rounded-lg p-12 lg:mx-20">
-          <div className="flex flex-col lg:flex-row justify-between">
+          <div className="flex flex-col lg:flex-row justify-between lg:px-20">
             <div className="py-4 font-bold text-xl px-12 text-center lg:text-start">
               Kanso <br className="hidden lg:block" /> by{" "}
               <br className="hidden lg:block" /> Pacchis Barah

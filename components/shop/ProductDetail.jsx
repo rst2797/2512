@@ -20,6 +20,7 @@ const ProductDetail = ({ product }) => {
   const setProductSize = (s) => {
     product.size = s;
   };
+  const nameArray = product.name.split("/");
 
   // useEffect(() => {
   //   console.log(product)
@@ -68,19 +69,19 @@ const ProductDetail = ({ product }) => {
                 category={product.category}
               />
             </div>
-            <h2 className="!text-[1.5rem] text-[#2F2E2D] font-sansita-regular">
-              {product.name}
+            <h2 className="!text-[1.5rem] text-[#2F2E2D] !leading-[2rem] font-sansita-regular">
+              {nameArray[0]} <br /> {nameArray[1]}
             </h2>
             <div className="flex items-center pb-2">
               <h2 className="text-[1.125rem] font-lato-regular font-[800]">
                 ₹{product.price}
               </h2>
-              <small className="!text-[.85rem] ml-[0.75rem] font-lato-regular font-bold">
+              {/* <small className="!text-[.85rem] ml-[0.75rem] font-lato-regular font-bold">
                 <span className="line-through">₹{product.actualPrice}</span>{" "}
                 <span className="font-bold text-[#FF0909]">
                   {product.offPercentage} OFF
                 </span>
-              </small>
+              </small> */}
             </div>
             {/* <p className="font-bold flex items-center !text-[0.75rem]">
               {ratings.averageRating} &nbsp;{" "}
@@ -95,8 +96,11 @@ const ProductDetail = ({ product }) => {
               <SelectSize setProductSize={setProductSize} />
             </div>
             <DeliveryDetails product={product} />
+            <div className="flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%]">
+              <SecurityDetails />
+            </div>
             <div className="hidden lg:block">
-              <p className="font-semibold lg:w-[90%] pt-8 pb-24">
+              <p className="font-semibold lg:w-[90%] pt-24 pb-24">
                 {activeFabricDetail === "care" ||
                 activeFabricDetail === "material" ? (
                   <>
@@ -112,9 +116,6 @@ const ProductDetail = ({ product }) => {
               </p>
             </div>
             <MobFabricDetails product={product} />
-            <div className="lg:absolute bottom-3 left-0 right-0 flex bg-[#A86549] rounded-2xl py-4 text-white w-full lg:w-[85%] lg:ml-4">
-              <SecurityDetails />
-            </div>
           </div>
         </div>
         <SimilarProducts />

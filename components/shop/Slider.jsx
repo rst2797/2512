@@ -53,7 +53,7 @@ export default function SectionThree() {
         slidesPerView={1}
         spaceBetween={10}
         loop={true}
-        autoplay={true}
+        autoplay={{delay: 1500}}
         pagination={{
           clickable: true,
         }}
@@ -83,7 +83,7 @@ export default function SectionThree() {
         className="mySwiper"
       >
         {productImages.map((image, index) => (
-          <SwiperSlide key={index} className="bg-white rounded-lg">
+          <SwiperSlide key={index} className="bg-white rounded-lg min-h-[60vh] max-h-[60vh] relative">
             <Link href={`/collection/${image._id}`}>
               <a>
                 <Image
@@ -97,8 +97,8 @@ export default function SectionThree() {
                 <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">
                   {image.name}
                 </h3>
-                <h5 className="px-4 py-1 font-bold text-sm">
-                  ₹{image.actualPrice}
+                <h5 className="px-4 py-1 font-bold text-sm absolute bottom-3">
+                  ₹{image.price}
                 </h5>
               </a>
             </Link>

@@ -7,7 +7,7 @@ const SelectColor = ({ product }) => {
       <div className="font-semibold">
         <h2 className="capitalize">Color: {product.color}</h2>
       </div>
-      <div className="flex px-0 py-[.5rem] w-[25%]">
+      {/* <div className="flex px-0 py-[.5rem] w-[25%]">
         <Link href="#">
           <a>
             <button
@@ -35,7 +35,7 @@ const SelectColor = ({ product }) => {
             />
           </a>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

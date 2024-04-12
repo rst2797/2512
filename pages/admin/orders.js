@@ -9,13 +9,22 @@ import Cookies from "cookies";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-const fetchOrders = async (token) => {
-  const res = await axios.get(`https://www.2512.in/api/admin/get-all-orders`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res;
+const fetchOrders = async () => {
+  axios
+    .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
+      email: "discretestructure3@gmail.com",
+      password: "P#Brs12!!",
+    })
+    .then((tokenRes) => {
+      axios.get("https://apiv2.shiprocket.in/v1/external/orders", {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${tokenRes}`,
+        }
+      }).then(response=>{
+        console.log(response)
+      });
+    })
 };
 const Orders = ({ response, orders }) => {
   const [orderResponse, setOrderResponse] = useState(orders);
@@ -25,10 +34,11 @@ const Orders = ({ response, orders }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!response.success) {
-      toast.error(response.message);
-      router.push("/");
-    }
+    // if (!response.success) {
+    //   toast.error(response.message);
+    //   router.push("/");
+    // }
+    fetchOrders();
   }, [orderResponse]);
 
   const handleStatusChange = (orderId, event) => {
@@ -213,17 +223,18 @@ export const getServerSideProps = async (context) => {
   const token = serializedToken?.split("%22")[1];
 
   try {
-    const res = await fetchOrders(token);
+    const res = undefined
+    // const res = await fetchOrders(token);
 
     if (res.data.success) {
       return {
         props: {
           error: false,
-          orders: {
-            ...res.data,
-            orders: res.data.orders.filter((a) => a.status !== "delivered"),
-          },
-          response: res.data,
+          // orders: {
+          //   ...res.data,
+          //   orders: res.data.orders.filter((a) => a.status !== "delivered"),
+          // },
+          // response: res.data,
         },
       };
     } else {

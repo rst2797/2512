@@ -33,8 +33,8 @@ const OrderCard = ({ orders }) => {
                     <div className="px-8 flex flex-col justify-center">
                       <div className="flex items-center text-xl w-full pb-2 border-b-[1px] border-black">
                         <LuPackageCheck className="text-[#A86549]" />
-                        <h2 className="text-lg font-semibold text-[#2F2E2D] px-2">
-                          Delivered On 10-Jan-2024
+                        <h2 className="text-lg font-semibold text-[#2F2E2D] px-2 capitalize">
+                          {order.status}
                         </h2>
                       </div>
                       <div className="flex justify-between lg:w-[800px]">

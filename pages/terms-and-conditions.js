@@ -7,7 +7,7 @@ const TermsAndCondition = () => {
     "If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern our relationship with you in relation to this website.",
     "If you disagree with any part of these terms and conditions, please do not use our website.",
     "The term '2512' or 'us' or 'we' refers to the owner of the website whose registered office is:",
-    "2512 Fashion Pvt. Ltd.",
+    "2512 Pacchis Barah",
     "Gram Bhanwarasala, Sanwer Road, Indore, Madhya Pradesh, 452001.",
     "Phone: (+91) 9691826952. Email: info@2512.com",
     "The term 'you' refers to the user or viewer of our website.",
@@ -34,7 +34,7 @@ const TermsAndCondition = () => {
     <div className="bg-[#f2eadf]">
       <div className="max-w-[1450px] mx-auto  py-[1.125rem]"></div>
       <Navbar />
-      <div className="pt-[4rem] px-[.9485rem]">
+      <div className="pt-[4rem] px-[.9873rem] lg:px-[5rem]">
         <h1 className="font-sansita-regular !text-[2rem]">Welcome to 2512!</h1>
         <ul className="py-4">
           {aboutPacchisBarah.map((ele, index) => (
@@ -53,10 +53,10 @@ const TermsAndCondition = () => {
               {ele}
             </li>
           ))}
+        </ol>
           <h2 className="font-sansita-regular !text-[1.35rem]">
             Terms for Purchase on Our Website:
           </h2>
-        </ol>
         <ol className="px-4 pb-4">
           {termsForPurchase.map((ele, index) => (
             <li

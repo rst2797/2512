@@ -129,7 +129,7 @@ const SectionTwo = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <p className="text-center font-semibold w-[60%]">
+          <p className="text-center font-semibold">
             Join us in this sustainable journey, where every choice reflects a
             conscious effort to redefine fashion with style, responsibility, and
             care for our planet.

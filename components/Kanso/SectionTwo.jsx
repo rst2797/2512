@@ -7,10 +7,10 @@ const SectionTwo = () => {
     <div className="bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/kanso/Mask+group.png')] lg:bg-[#F4E9DF]">
       <div className="mx-auto max-w-[1450px]  lg:flex justify-between items-center w-full px-4 lg:px-20 py-24">
         <div className="lg:w-[40%] text-white">
-          <h2 className="font-sansita-regular !text-center !lg:text-left !leading-[4rem] py-4">
+          <h2 className="font-sansita-regular !text-center !lg:text-left !leading-[4rem] py-4 mr-32">
             Where Simplicity Inspires Serenity{" "}
           </h2>
-          <div className="bg-[#F4E9DF] rounded-full w-[360px] lg:w-[320px] lg:h-[100%] py-20 lg:py-8 mt-12">
+          <div className="bg-[#F4E9DF] rounded-full w-[360px] lg:w-[320px] lg:h-[100%] py-20 lg:py-8 mt-12 ml-5">
             <div className="text-[#2F2E2D] text-center pb-1">
               <h2 className="text-xl font-semibold">KAN</h2>
               <h4 className=" tracking-wide">Simplicity</h4>

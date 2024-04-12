@@ -56,9 +56,9 @@ const SectionTwo = ({ products }) => {
               <Link href={`/collection/${ele._id}`}>
                 <a>
                   <Image
-                    src={ele.images[0]}
+                    src={ele.images[1]}
                     alt={ele.breadcrumb}
-                    width={443}
+                    width={500}
                     height={675}
                     placeholder="blur"
                     blurDataURL="/images/placeholders/image.png"

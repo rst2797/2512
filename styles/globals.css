@@ -65,6 +65,7 @@
   @apply translate-y-[-50px];
 }
 
+
 @font-face {
   font-family: SansitaOne;
   src: url('/fonts/sansita/SansitaOne.ttf');
@@ -117,10 +118,10 @@ a {
 }
 
 .font-sansita-regular {
-  font-family: Sansita;
+  font-family: "Sansita", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 3rem;
-  font-weight: 100 !important;
-  line-height: 3rem;
 }
 
 .font-sansita-regular-kanso {

@@ -1,22 +1,25 @@
-import Order from "../../../schema/orders";
-import { connection } from "../../../utils/database";
-import authAdminMiddleware from "../../../middleware/authAdmin"
+import authAdminMiddleware from "../../../middleware/authAdmin";
+import axios from "axios";
 
 async function getOrders(req, res) {
-  try {
-    connection();
-    const orders = await Order.find();
-    res.status(200).json({
-      error: false,
-      success: true,
-      orders,
-      message: "Orders found successfully...",
+  axios
+    .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
+      email: "discretestructure3@gmail.com",
+      password: "P#Brs12!!",
+    })
+    .then((tokenRes) => {
+      Axios.post("https://apiv2.shiprocket.in/v1/external/orders", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenRes.data.token}`,
+        },
+      })
+        .then((shipRes) => {
+          return res.status(200).json(shipRes.data);
+        })
+        .catch((error) => {
+          return res.status(403).json(error);
+        });
     });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error?.message || "An error occurred!",
-    });
-  }
 }
-export default authAdminMiddleware(getOrders)
+export default authAdminMiddleware(getOrders);

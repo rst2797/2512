@@ -110,7 +110,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center lg:items-start">
-                <h2 className="text-xl text-white font-semibold">
+                <h2 className="text-xl text-white font-semibold pb-2">
                   JOIN THE COMMUNITY
                 </h2>
                 <p className="lg:font-semibold text-center lg:text-left w-full text-sm lg:text-md text-white">

@@ -27,16 +27,6 @@ const SectionThree = () => {
           ones who hold immense importance in our lives, igniting our dreams to
           reach greater heights.
         </p>
-
-        <p className="text-center lg:text-left mb-6 text-lg  font-lato-bold lg:!font-medium">
-          Guided by the unwavering support of my parents and grandparents, I
-          developed a profound care for the world and the impact of my actions.
-        </p>
-        <p className="text-center lg:text-left pb-3 text-lg font-lato-bold lg:!font-medium">
-          This led to the creation of Pacchis Barah, a clothing brand that
-          encapsulates the essence of these teachings, fostering a meaningful
-          connection between individuals and the world they inhabit.
-        </p>
       </div>
     </div>
   );

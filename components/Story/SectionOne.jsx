@@ -3,9 +3,8 @@ import Image from "next/image";
 
 const SectionOne = ({ children }) => {
   const details = [
-    "Our brand is built upon a passion for sustainable fashion and a commitment to leaving a positive impact on the world. Through certified textiles, such as organic cotton, we create clothing that not only looks good but also feels good in every sense.",
-    "At 2512 Pacchisbarah, we believe that simplicity is the ultimate form of sophistication. Our minimal designs capture the essence of understated elegance, allowing you to express your unique identity without conforming to traditional gender norms.",
-    "We embrace diversity and inclusivity, providing a clothing range that is suitable for everyone, regardless of gender.",
+    "The motivation behind starting the brand is centered around the planet and its people, aiming to bring about change in the fashion industry by establishing a capsule, gender-inclusive fashion brand that utilises certified eco-friendly textiles.",
+    "The problem we aim to address is the issue of over-consumption and excessive production in the fashion industry. There is a critical need to view fashion through an environmental lens, striving to create products with minimal impact on the planet while making a positive impact on society. It's not just about establishing a fashion brand, it’s about cultivating a conscious community.",
   ];
   return (
     <div className="relative overflow-hidden lg:px-20 min-h-screen bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/our-story/story_1.png')] bg-cover bg-center bg-no-repeat lg:min-h-[91vh] lg:mt-[4.2rem]">
@@ -25,7 +24,7 @@ const SectionOne = ({ children }) => {
           </p>
         ))}
       </div>
-      <div className="bg-[#0007] absolute z-10 left-0 top-0 h-screen w-screen lg:w-[35vw]"/>
+      <div className="bg-[#0007] absolute z-10 left-0 top-0 h-screen w-screen lg:w-[35vw]" />
     </div>
   );
 };

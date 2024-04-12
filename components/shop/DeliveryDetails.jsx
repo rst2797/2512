@@ -14,7 +14,7 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
       <AddToCart product={productState} quantity={quantity} />
 
       <div className="pt-[2rem]">
-        <div className="">
+        {/* <div className="">
           <h4 className="text-[1rem] leading-[.5rem] font-[700] text-[#2F2E2D]">
             Delivery Details
           </h4>
@@ -32,8 +32,8 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
           <button className="text-[#A86549] font-lato-regular !font-[700] !text-[0.8125rem] py-[0.6875rem] px-[0.625rem] w-[12rem] lg:w-[8.5rem] h-[2.5625rem] bg-white">
             Change Pincode
           </button>
-        </form>
-        <div className="flex items-center gap-[1.125rem] py-[.5rem]">
+        </form> */}
+        {/* <div className="flex items-center gap-[1.125rem] py-[.5rem]">
           <span>
             <h5 className="text-[#FF0909] font-lato-regular !text-[.75rem] !font-[700] !leading-[1rem]">
               Expected delivery by 7th January
@@ -42,7 +42,7 @@ const DeliveryDetails = ({ product, setProductQuantity }) => {
               Final delivery based on items in bag
             </p>
           </span>
-        </div>
+        </div> */}
       </div>
       {/* <ToastContainer
         position="bottom-center"
