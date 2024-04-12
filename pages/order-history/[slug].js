@@ -75,7 +75,7 @@ export default DeliveryReturns;
 const getPresignedUrl = async (key, image) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${image}`
+      `https://www.2512.in/api/get-profile-picture-signedurl/${key}/${image}`
     );
     return res.data.url;
   } catch (error) {
@@ -96,7 +96,7 @@ export const getServerSideProps = async (context) => {
     };
 
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-user-orders/${userId}`,
+      `https://www.2512.in/api/get-user-orders/${userId}`,
       { headers, withCredentials: true }
     );
 

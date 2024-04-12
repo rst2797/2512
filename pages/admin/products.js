@@ -46,7 +46,7 @@ export default Products;
 const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
+      `https://www.2512.in/api/get-profile-picture-signedurl/${key}/${file}`
     );
 
     return res.data.url;
@@ -62,7 +62,7 @@ export async function getServerSideProps() {
 
     if (!parsedCache) {
       const res = await axios.get(
-        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
+        `https://www.2512.in/api/get-all-products`
       );
 
       const products = await Promise.all(

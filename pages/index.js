@@ -9,7 +9,13 @@ import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
 import { rediss } from "../utils/redis";
 import axios from "axios";
-const Home = ({ products }) => {
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios.get("/api/get-all-products").then((res) => {
+      setProducts(res.data.products);
+    });
+  }, []);
   return (
     <main>
       <Head>
@@ -66,7 +72,7 @@ export default Home;
 const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
+      `https://www.2512.in/api/get-profile-picture-signedurl/${key}/${file}`
     );
 
     return res.data.url;
@@ -81,9 +87,7 @@ export async function getServerSideProps() {
     const parsedCache = JSON.parse(cachedData);
 
     if (!parsedCache) {
-      const res = await axios.get(
-        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
-      );
+      const res = await axios.get(`https://www.2512.in/api/get-all-products`);
 
       const products = await Promise.all(
         res.data.products.map(async (product) => {

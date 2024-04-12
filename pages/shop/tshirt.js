@@ -6,8 +6,15 @@ import Footer from "../../components/common/footer.jsx";
 import SectionOne from "../../components/Collection/SectionOne.jsx";
 // import { rediss } from "../../utils/redis";
 
-const Home = ({ products }) => {
+const Home = () => {
   const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  
+  useEffect(() => {
+    axios.get("/api/get-all-products").then((res) => {
+      setProducts(res.data.products);
+    });
+  }, []);
 
   useEffect(() => {
     if (products && products.length > 0) {
@@ -57,7 +64,7 @@ export default Home;
 const getPresignedUrls = async (key, file) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/${key}/${file}`
+      `https://www.2512.in/api/get-profile-picture-signedurl/${key}/${file}`
     );
 
     return res.data.url;
@@ -73,9 +80,7 @@ export async function getServerSideProps() {
     const parsedCache = JSON.parse(cachedData);
 
     if (!parsedCache) {
-      const res = await axios.get(
-        `${process.env.NEXT_API_BASE_URL}/api/get-all-products`
-      );
+      const res = await axios.get(`https://www.2512.in/api/get-all-products`);
       console.log(res.data);
 
       const products = await Promise.all(

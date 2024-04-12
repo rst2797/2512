@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 const fetchOrders = async (token) => {
-  const res = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/admin/get-all-orders`, {
+  const res = await axios.get(`https://www.2512.in/api/admin/get-all-orders`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

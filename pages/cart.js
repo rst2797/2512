@@ -108,7 +108,7 @@ export function Product({ item }) {
       } else {
         axios
           .get(
-            `${process.env.NEXT_API_BASE_URL}/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
+            `https://www.2512.in/api/get-profile-picture-signedurl/products-image/${item.imageKey[0]}`
           )
           .then((res) => {
             setImage(res.data.url);

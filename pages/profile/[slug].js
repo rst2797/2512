@@ -292,7 +292,7 @@ export async function getServerSideProps(context) {
   const token = temp?.split("%22")[1];
   try {
     const res = await axios.post(
-      `${process.env.NEXT_API_BASE_URL}/api/get-user`,
+      `https://www.2512.in/api/get-user`,
       {
         id: context.query.slug,
       },

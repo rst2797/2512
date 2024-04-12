@@ -49,7 +49,7 @@ export async function getServerSideProps(context) {
     const serializedToken = cookies.get("token");
     const token = serializedToken?.split("%22")[1];
     const res = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/admin/get-enquiries`,
+      `https://www.2512.in/api/admin/get-enquiries`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

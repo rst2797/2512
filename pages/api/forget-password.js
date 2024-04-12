@@ -14,7 +14,7 @@ const generateResetToken = (userEmail) => {
 
 async function handleContactUsRequest(email, customerName) {
   const resetToken = generateResetToken(email);
-  const resetLink = `${process.env.NEXT_API_BASE_URL}/reset-password?token=${resetToken}`;
+  const resetLink = `https://www.2512.in/reset-password?token=${resetToken}`;
   return new Promise(async (resolve, reject) => {
     try {
       const payload = {
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
   try {
     const { email } = req.body;
     axios
-      .post(`${process.env.NEXT_API_BASE_URL}/api/get-user-with-email`, {
+      .post(`https://www.2512.in/api/get-user-with-email`, {
         email,
       })
       .then((userRes) => {

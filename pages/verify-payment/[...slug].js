@@ -58,7 +58,7 @@ export const getServerSideProps = async (context) => {
     };
   }
   const response = await axios.post(
-    `${process.env.NEXT_API_BASE_URL}/api/verify-payment`,
+    `https://www.2512.in/api/verify-payment`,
     {
       order_id,
       payment_id,

@@ -14,9 +14,9 @@ import Link from "next/link";
 const fetchBlogs = async () => {
   try {
     const blogs = await axios.get(
-      `${process.env.NEXT_API_BASE_URL}/api/get-all-blogs`
+      `https://www.2512.in/api/get-all-blogs`
     );
-    // const blogs = await axios.get(`${process.env.NEXT_API_BASE_URL}/api/get-all-blogs`);
+    // const blogs = await axios.get(`https://www.2512.in/api/get-all-blogs`);
     if (blogs.data.success) {
       return blogs.data;
     }
