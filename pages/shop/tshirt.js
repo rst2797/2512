@@ -61,7 +61,7 @@ const Home = () => {
     fetchProduct().then((data) => {
       setProducts(data.products);
     });
-  }, [products]);
+  }, []);
 
   return (
     <main>
