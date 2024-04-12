@@ -71,7 +71,7 @@ const SectionTwo = ({ products }) => {
         </Swiper>
       </div>
       <div className="m-4 mt-32 flex flex-col justify-center">
-        <p className="font-lato-regular text-center lg:text-start !leading-7 lg:text-[1rem] font-semibold w-[60%] lg:text-[#2F2E2D] lg:pt-[1rem]">
+        <p className="font-lato-regular text-center lg:text-start !leading-7 lg:text-[1rem] font-semibold lg:w-[60%] lg:text-[#2F2E2D] lg:pt-[1rem]">
           Carefully curated collection of T-shirt made with GOTS certified 200
           GSM Organic Cotton
         </p>

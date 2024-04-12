@@ -7,7 +7,7 @@ import { PiStarFourLight } from "react-icons/pi";
 
 const SectionOne = () => {
   return (
-    <div className="relative z-20 min-h-[100vh] bg-cover bg-center bg-no-repeat bg-[url('/images/collage/mobileHome.png')] lg:bg-[url('/images/collage/home.png')]">
+    <div className="relative z-20 min-h-[95vh] lg:min-h-[100vh] bg-cover bg-center bg-no-repeat bg-[url('/images/collage/mobileHome.png')] lg:bg-[url('/images/collage/home.png')]">
       <p className="text-center text-black z-50 absolute top-1/2 left-0 w-full font-semibold text-xl">
         <Link href="/shop/tshirt">
           <a className="underline">Kanso</a>
