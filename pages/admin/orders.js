@@ -10,22 +10,30 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 const fetchOrders = async () => {
-  axios
-    .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
-      email: "discretestructure3@gmail.com",
-      password: "P#Brs12!!",
-    })
-    .then((tokenRes) => {
-      axios.get("https://apiv2.shiprocket.in/v1/external/orders", {
+  try {
+    const tokenRes = await axios.post(
+      "https://apiv2.shiprocket.in/v1/external/auth/login",
+      {
+        email: "discretestructure3@gmail.com",
+        password: "P#Brs12!!",
+      }
+    );
+    const response = await axios.get(
+      "https://apiv2.shiprocket.in/v1/external/orders",
+      {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${tokenRes}`,
-        }
-      }).then(response=>{
-        console.log(response)
-      });
-    })
+          Authorization: `Bearer ${tokenRes?.data?.token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return null;
+  }
 };
+
 const Orders = ({ response, orders }) => {
   const [orderResponse, setOrderResponse] = useState(orders);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,12 +42,17 @@ const Orders = ({ response, orders }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // if (!response.success) {
-    //   toast.error(response.message);
-    //   router.push("/");
-    // }
-    fetchOrders();
-  }, [orderResponse]);
+    const fetchData = async () => {
+      const { data } = await fetchOrders();
+      if (data) {
+        setOrderResponse(data);
+      } else {
+        // Handle the case when data is null, possibly display an error message
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleStatusChange = (orderId, event) => {
     try {
@@ -101,7 +114,7 @@ const Orders = ({ response, orders }) => {
 
   return (
     <>
-      {response.success && (
+      {orderResponse?.length > 0 && (
         <div className="bg-[#F4E9DF] min-h-screen relative">
           <Sidebar />
           <div className="max-w-screen mx-auto">
@@ -121,50 +134,38 @@ const Orders = ({ response, orders }) => {
                     <th className="border-x-2 border-black px-4">
                       Payment Method
                     </th>
-                    <th className="border-x-2 border-black px-4">Status</th>
+                    {/* <th className="border-x-2 border-black px-4">Status</th> */}
                     <th className="border-x-2 border-black px-4">View</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(currentOrders).length === 0 ? (
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center font-bold text-xl">
-                        No record found!!
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  ) : (
-                    currentOrders?.map((ele, index) => (
+                  {orderResponse?.length > 0 ? (
+                    orderResponse.map((order, index) => (
                       <tr
-                        key={ele.id}
+                        key={order.id}
                         className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
                       >
                         <td className="border-x-2 border-black px-4 w-fit">
                           {index + 1}
                         </td>
                         <td className="border-x-2 border-black px-4 py-3">
-                          {ele._id}
+                          {order.id}
                         </td>
                         <td className="border-x-2 border-black px-4">
-                          {ele.user}
+                          {order.customer_name}
                         </td>
                         <td className="border-x-2 border-black px-4">
-                          ₹&nbsp;{ele.totalAmount}
+                          ₹ {order.total}
                         </td>
                         <td className="border-x-2 border-black px-4">
-                          {ele.paymentMethod}
+                          {order.payment_method}
                         </td>
-                        <td className="border-x-2 border-black px-4">
+                        {/* <td className="border-x-2 border-black px-4">
                           <select
                             name="status"
                             id="status"
-                            value={ele.status}
-                            onChange={(e) => handleStatusChange(ele._id, e)}
+                            value={order.status}
+                            onChange={(e) => handleStatusChange(order.id, e)}
                             className="focus:outline-none active:outline-none bg-transparent"
                           >
                             <option value="pending">Pending</option>
@@ -172,14 +173,24 @@ const Orders = ({ response, orders }) => {
                             <option value="shipped">Shipped</option>
                             <option value="delivered">Delivered</option>
                           </select>
-                        </td>
+                        </td> */}
                         <td className="border-x-2 border-black px-4 cursor-pointer text-blue-500 font-bold">
-                          <Link href={`/admin/order/${ele._id}/${ele.user}`}>
+                          <Link href={`/admin/order/${order.id}`}>
                             <a className="flex items-center">See Order</a>
                           </Link>
                         </td>
                       </tr>
                     ))
+                  ) : (
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td className="text-center font-bold text-xl" colSpan="6">
+                        No records found!!
+                      </td>
+                      <td></td>
+                    </tr>
                   )}
                 </tbody>
               </table>
@@ -223,7 +234,7 @@ export const getServerSideProps = async (context) => {
   const token = serializedToken?.split("%22")[1];
 
   try {
-    const res = undefined
+    const res = undefined;
     // const res = await fetchOrders(token);
 
     if (res.data.success) {

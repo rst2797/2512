@@ -63,6 +63,10 @@ const SectionTwo = ({ products }) => {
                     placeholder="blur"
                     blurDataURL="/images/placeholders/image.png"
                     className="rounded-xl drop-shadow-xl w-full lg:w-auto"
+                    onError={(e) => {
+                      e.target.src = ele.images[0]; // Provide the path to your alternative image
+                      e.target.alt = ele.breadcrumb; // Provide an alternative description
+                    }}
                   />
                 </a>
               </Link>
