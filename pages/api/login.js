@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       {
         email: user.email,
       },
-      process.env.JWT_SECRET, // Use environment variable for the secret key
+      "2512SUSTAINABLECLOTHSPACCHIS12", // Use environment variable for the secret key
       { expiresIn: "2d" }
     );
 

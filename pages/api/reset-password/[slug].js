@@ -11,7 +11,7 @@ export default async function resetPassword(req, res) {
     const token = req.query.slug;
 
     // Verify the JWT token to get the email
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token, "2512SUSTAINABLECLOTHSPACCHIS12");
 
     // Find the user by email
     const user = await User.findOne({ email: decodedToken.email });

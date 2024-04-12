@@ -1,40 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import ProductNotFound from "../../components/shop/ProductNotFound";
 import ProductDetail from "../../components/shop/ProductDetail.jsx";
 import axios from "axios";
 import { memo } from "react";
-import { rediss } from "../../utils/redis";
+// import { rediss } from "../../utils/redis";
 
 const TShirt = ({ id }) => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState();
   useEffect(() => {
     axios.get(`/api/get-product/${id}`).then((res) => {
-      setProduct(res.data.products);
+      setProduct(res.data.product);
     });
   }, []);
+  useEffect(()=>{}, [product])
   return (
     <main className="bg-[#f2eadf]">
-      <Head>
-        <title>{`${product.breadcrumb} - 2512 Wardrobe Essentials`}</title>
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${product.breadcrumb} - 2512 Wardrobe Essentials`}
-        />
-        <meta property="og:description" content={`${product.description}`} />
-        <meta
-          property="og:url"
-          content="https://www.2512.in/sustainability"
-        />{" "}
-        <meta property="og:image" content="/icons/favicon.ico" />
-        <meta name="description" content={`${product.description}`} />
-        <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
-        <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
-        <link rel="icon" href="/icons/favicon.ico" />
-        <link rel="canonical" href="https://www.2512.in/sustainability" />{" "}
-        <link rel="icon" href="/icons/favicon.ico" />
-      </Head>
+      {product && (
+        <Head>
+          <title>{`${product.breadcrumb} - 2512 Wardrobe Essentials`}</title>
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:title"
+            content={`${product.breadcrumb} - 2512 Wardrobe Essentials`}
+          />
+          <meta property="og:description" content={`${product.description}`} />
+          <meta
+            property="og:url"
+            content="https://www.2512.in/sustainability"
+          />{" "}
+          <meta property="og:image" content="/icons/favicon.ico" />
+          <meta name="description" content={`${product.description}`} />
+          <meta property="twitter:creator" content="1225 | PACCHIS BARAH" />
+          <meta property="twitter:site" content="1225 | PACCHIS BARAH" />
+          <link rel="icon" href="/icons/favicon.ico" />
+          <link
+            rel="canonical"
+            href="https://www.2512.in/sustainability"
+          />{" "}
+          <link rel="icon" href="/icons/favicon.ico" />
+        </Head>
+      )}
       {product ? <ProductDetail product={product} /> : <ProductNotFound />}
     </main>
   );

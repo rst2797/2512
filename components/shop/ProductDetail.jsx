@@ -21,20 +21,21 @@ const ProductDetail = ({ product }) => {
     product.size = s;
   };
 
-  useEffect(() => {
-    axios
-      .post(`/api/get-product-rating`, {
-        productId: product._id,
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          setRatings({
-            totalRatings: res.data.totalRatings,
-            averageRating: res.data.averageRating,
-          });
-        }
-      });
-  }, [product, activeFabricDetail]);
+  // useEffect(() => {
+  //   console.log(product)
+  //   axios
+  //     .post(`/api/get-product-rating`, {
+  //       productId: product._id,
+  //     })
+  //     .then((res) => {
+  //       if (res.status == 200) {
+  //         setRatings({
+  //           totalRatings: res.data.totalRatings,
+  //           averageRating: res.data.averageRating,
+  //         });
+  //       }
+  //     });
+  // }, [product, activeFabricDetail]);
   return (
     <>
       <main className="bg-[#f2eadf] pt-[5rem] mx-auto lg:px-20 max-w-[1450px]">

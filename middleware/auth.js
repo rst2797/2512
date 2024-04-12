@@ -14,7 +14,7 @@ export default function authMiddleware(handler) {
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, "2512SUSTAINABLECLOTHSPACCHIS12");
 
       req.user = decoded;
 

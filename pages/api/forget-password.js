@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 
 const generateResetToken = (userEmail) => {
-  const secret = process.env.JWT_SECRET;
+  const secret = "2512SUSTAINABLECLOTHSPACCHIS12";
   const expiresIn = "1h";
 
   const resetToken = jwt.sign({ email: userEmail }, secret, { expiresIn });

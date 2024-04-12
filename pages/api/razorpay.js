@@ -1,8 +1,8 @@
 import Razorpay from "razorpay";
 import shortid from "shortid";
 const razorpay = new Razorpay({
-  key_id: process.env.PAYMENT_KEY,
-  key_secret: process.env.PAYMENT_SECRET,
+  key_id: "rzp_test_uTiONXbSXdfqHV",
+  key_secret: "5SpIMVNda1SIAb5bfokJHd66",
 });
 
 async function handler(req, res) {

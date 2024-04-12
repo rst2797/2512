@@ -46,7 +46,7 @@ export default async function Register(req, res) {
         {
           email: email,
         },
-        process.env.JWT_SECRET,
+        "2512SUSTAINABLECLOTHSPACCHIS12",
         { expiresIn: "2d" }
       );
       
