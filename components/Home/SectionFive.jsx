@@ -29,10 +29,10 @@ const SectionFive = () => {
         </Link>
         <div className="col-span-4">
           <Image
-            src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home_page_image2.jpeg"
+            src="/images/home_first_collection.jpeg"
             alt="A Sustainable Product From 2512"
-            width={500}
-            height={2000}
+            width={1500}
+            height={1000}
           />
         </div>
       </div>
