@@ -7,19 +7,19 @@ import axios from "axios";
 const ProductCards = ({ products }) => {
   const [render, setRender] = useState(false);
   const [ratings, setRatings] = useState([]);
-  useEffect(() => {
-    const productIds = products.map((obj) => obj._id);
-    axios
-      .post(`/api/get-products-rating`, {
-        productIds,
-      })
-      .then((res) => {
-        setRatings([res.data.ratings]);
-        setTimeout(() => {
-          setRender(true);
-        }, 1000);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const productIds = products.map((obj) => obj._id);
+  // //   axios
+  // //     .post(`/api/get-products-rating`, {
+  // //       productIds,
+  // //     })
+  // //     .then((res) => {
+  // //       setRatings([res.data.ratings]);
+  // //       setTimeout(() => {
+  // //         setRender(true);
+  // //       }, 1000);
+  // //     });
+  // // }, []);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-y-4 lg:gap-x-10 lg:gap-y-16">
       {products?.map((ele, index) => (
