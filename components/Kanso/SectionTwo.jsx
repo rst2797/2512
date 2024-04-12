@@ -7,21 +7,21 @@ const SectionTwo = () => {
     <div className="bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/kanso/Mask+group.png')] lg:bg-[#F4E9DF]">
       <div className="mx-auto max-w-[1450px]  lg:flex justify-between items-center w-full px-4 lg:px-20 py-24">
         <div className="lg:w-[40%] text-white">
-          <h2 className="font-sansita-regular !leading-[4rem] py-4">
+          <h2 className="font-sansita-regular !text-center !lg:text-left !leading-[4rem] py-4">
             Where Simplicity Inspires Serenity{" "}
           </h2>
-          <div className="bg-[#F4E9DF] rounded-full w-[400px] lg:w-[320px] h-[100%] py-20 lg:py-8 mt-12">
-            <div className="text-[#2F2E2D] text-center py-1">
-              <h2 className="text-2xl font-semibold">KAN</h2>
+          <div className="bg-[#F4E9DF] rounded-full w-[360px] lg:w-[320px] lg:h-[100%] py-20 lg:py-8 mt-12">
+            <div className="text-[#2F2E2D] text-center pb-1">
+              <h2 className="text-xl font-semibold">KAN</h2>
               <h4 className=" tracking-wide">Simplicity</h4>
             </div>
             <div className="text-[#2F2E2D] text-center flex flex-col items-center py-1">
-              <h2 className="text-2xl font-semibold">SO</h2>
+              <h2 className="text-xl font-semibold">SO</h2>
               <h4 className=" tracking-wide">elimination/removal</h4>
-              <div className="border-b-2 border-black w-[30px] mt-8" />
+              <div className="border-b-2 border-black w-[30px] mt-2 lg:mt-8" />
             </div>
-            <div className="text-[#2F2E2D] text-center py-1">
-              <h2 className="text-2xl font-semibold">KANSO</h2>
+            <div className="text-[#2F2E2D] text-center pb-1">
+              <h2 className="text-xl font-semibold">KANSO</h2>
               <h4 className="px-20 tracking-wide">
                 simplicity, purity, and a sense of tranquility
               </h4>
@@ -61,13 +61,6 @@ const SectionTwo = () => {
             Pacchis Barah, we&apos;ve embodied the essence of Kanso in our first
             collection, ...
           </p>
-          <Link href="/kanso">
-            <a>
-              <button className="bg-[#F4E9DF] text-[#2F2E2D] font-semibold text-xl py-3 px-4 rounded-lg flex items-center">
-                Read More <IoArrowForward className="ml-2" />{" "}
-              </button>
-            </a>
-          </Link>
         </div>
       </div>
     </div>

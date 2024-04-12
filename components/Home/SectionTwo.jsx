@@ -1,20 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoArrowForward } from "react-icons/io5";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-
-// import required modules
 
 const SectionTwo = ({ products }) => {
   const [slideCheck, setSlideCheck] = useState(0);
+  useEffect(() => {
+    if (slideCheck > 2) {
+      setTimeout(() => {
+        setSlideCheck(0);
+      }, 2500);
+    }
+  }, [slideCheck]);
   return (
     <div className="h-auto lg:h-[92vh] bg-[url('https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/Mask+group.png')] py-4 flex flex-col-reverse lg:flex-row gap-8 items-center w-full">
       <div className="lg:max-w-[65vw] max-w-[90vw] lg:-ml-48">
-        <Swiper loop
+        <Swiper
+          loop
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
           onSlideChange={(value) => setSlideCheck(value.activeIndex)}
           slidesPerView={3}
           breakpoints={{
@@ -65,12 +75,8 @@ const SectionTwo = ({ products }) => {
           Empowering You <br className="hidden lg:block" />& the Planet
         </h1>
         <p className="font-lato-regular text-center lg:text-start !leading-5 lg:text-[1.75rem] w-full lg:text-[#2F2E2D] lg:pt-[1rem]">
-          <Link href="/our-story">
-            <a className="leading-8">
-              A story of sustainability, creativity, and{" "}
-              <br className="hidden lg:block" /> craftsmanship.
-            </a>
-          </Link>
+          A story of sustainability, creativity, and{" "}
+          <br className="hidden lg:block" /> craftsmanship.
         </p>
 
         <span className="flex justify-center lg:justify-start w-full mt-[2rem] ">

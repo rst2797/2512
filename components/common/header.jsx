@@ -11,12 +11,13 @@ import { useCart } from "react-use-cart";
 import { FaRegUser } from "react-icons/fa6";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import CartDropdown from "../CartIcon";
 
 const Navbar = ({ position }) => {
   const [navOpen, setNavOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [user, setUser] = useState(false);
-  const { isEmpty, totalUniqueItems } = useCart();
+  
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
@@ -116,7 +117,8 @@ const Navbar = ({ position }) => {
                   <FaRegUser size={25} className="pl-1 lg:p-0 lg:mx-4" />
                 </a>
               </Link>
-              <Link href="/cart">
+              <CartDropdown />
+              {/* <Link href="/cart">
                 <a className="text-[1.25rem] relative">
                   {!isEmpty && (
                     <span className="absolute right-2 top-0 text-xs bg-[#A86549] text-white rounded-full w-4 h-4 text-center">
@@ -125,7 +127,7 @@ const Navbar = ({ position }) => {
                   )}
                   <IoBagOutline size={25} className="lg:mx-4" />
                 </a>
-              </Link>
+              </Link> */}
               <div className="justify-center hidden lg:flex ml-4">
                 {user ? (
                   <button

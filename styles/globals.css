@@ -251,3 +251,17 @@ select:-webkit-autofill:focus {
 .swiper-button-next::after {
   font-size: 2rem !important;
 }
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #edf2f7;
+}

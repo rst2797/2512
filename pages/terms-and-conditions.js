@@ -8,8 +8,8 @@ const TermsAndCondition = () => {
     "If you disagree with any part of these terms and conditions, please do not use our website.",
     "The term '2512' or 'us' or 'we' refers to the owner of the website whose registered office is:",
     "2512 Fashion Pvt. Ltd.",
-    "Street Address, City, State, Zip Code.",
-    "Phone: Your Phone Number. Email: info@2512.com",
+    "Gram Bhanwarasala, Sanwer Road, Indore, Madhya Pradesh, 452001.",
+    "Phone: (+91) 9691826952. Email: info@2512.com",
     "The term 'you' refers to the user or viewer of our website.",
   ];
   const termsOfUse = [
@@ -38,7 +38,7 @@ const TermsAndCondition = () => {
         <h1 className="font-sansita-regular !text-[2rem]">Welcome to 2512!</h1>
         <ul className="py-4">
           {aboutPacchisBarah.map((ele, index) => (
-            <li key={index} className="font-normal text-base leading-5">
+            <li key={index} className="font-normal text-base leading-5 pt-2">
               {ele}
             </li>
           ))}

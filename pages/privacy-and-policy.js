@@ -88,58 +88,61 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="bg-[#f2eadf]">
-    <div className="max-w-[1450px] mx-auto px-[.9485rem] py-[1.125rem]">
-    <Navbar />
-      <h2 className="font-sansita-regular !text-[2rem] pt-[6rem] pb-4">
-        Privacy Policy for 2512
-      </h2>
+      <div className="max-w-[1450px] mx-auto px-[.9485rem] py-[1.125rem]">
+        <Navbar />
+        <h2 className="font-sansita-regular !text-[2rem] pt-[6rem] pb-4">
+          Privacy Policy for 2512
+        </h2>
 
-      <h3 className="text-[1.3rem] font-semibold py-4">Introduction:</h3>
-      <p>
-        At 2512 or Pacchis Barah, we are committed to ensuring the privacy and
-        security of your personal information. This privacy policy outlines the
-        types of information we collect, how we use it, and the measures we take
-        to safeguard your data.
-      </p>
+        <h3 className="text-[1.3rem] font-semibold py-4">Introduction:</h3>
+        <p>
+          At 2512 or Pacchis Barah, we are committed to ensuring the privacy and
+          security of your personal information. This privacy policy outlines
+          the types of information we collect, how we use it, and the measures
+          we take to safeguard your data.
+        </p>
 
-      <h3 className="text-[1.3rem] font-semibold pt-4">
-        Information We Collect:
-      </h3>
+        <h3 className="text-[1.3rem] font-semibold pt-4">
+          Information We Collect:
+        </h3>
 
-      <ol>
-        {privacyPolicyData.map((ele, index) => (
-          <li className="pt-[2rem]" key={index}>
-            <strong className="font-bold text-[1rem]">{ele.title}</strong>
-            <ul className="list-disc px-12">
+        <ol>
+          {privacyPolicyData.map((ele, index) => (
+            <li className="pt-[2rem]" key={index}>
+              <strong className="font-bold text-[1rem]">{ele.title}</strong>
+              <ul className="list-disc px-12">
+                {ele.points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+
+        {additionalPrivacyPolicyData.map((ele) => (
+          <div className="pt-[2rem]" key={ele.id}>
+            <h3 className="font-bold text-[1rem]">{ele.title}</h3>
+            <ol className="list-decimal px-12">
               {ele.points.map((point, index) => (
                 <li key={index}>{point}</li>
               ))}
-            </ul>
-          </li>
+            </ol>
+          </div>
         ))}
-      </ol>
 
-      {additionalPrivacyPolicyData.map((ele) => (
-        <div className="pt-[2rem]" key={ele.id}>
-          <h3 className="font-bold text-[1rem]">{ele.title}</h3>
-          <ol className="list-decimal px-12">
-            {ele.points.map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
-          </ol>
-        </div>
-      ))}
-
-      <p className="pt-12">
-        By using our website, you agree to the terms outlined in this privacy
-        policy. For any inquiries or concerns, please contact us at{" "}
-        <a href="mailto:contact@2512pacchisbarah.com" className="text-blue-500 font-bold">
-        contactus@2512.in 
-        </a>
-        .
-      </p>
+        <p className="pt-12">
+          By using our website, you agree to the terms outlined in this privacy
+          policy. For any inquiries or concerns, please contact us at{" "}
+          <a
+            href="mailto:contact@2512pacchisbarah.com"
+            className="text-blue-500 font-bold"
+          >
+            contactus@2512.in
+          </a>
+          .
+        </p>
+      </div>
       <Footer />
-    </div>
     </div>
   );
 };
