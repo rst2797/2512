@@ -11,22 +11,7 @@ import { useRouter } from "next/router";
 
 const fetchOrders = async () => {
   try {
-    const tokenRes = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/auth/login",
-      {
-        email: "discretestructure3@gmail.com",
-        password: "P#Brs12!!",
-      }
-    );
-    const response = await axios.get(
-      "https://apiv2.shiprocket.in/v1/external/orders",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenRes?.data?.token}`,
-        },
-      }
-    );
+    const response = await axios.get(`/api/admin/get-all-orders`);
     return response.data;
   } catch (error) {
     console.error("Error fetching orders:", error);
@@ -34,7 +19,7 @@ const fetchOrders = async () => {
   }
 };
 
-const Orders = ({ response, orders }) => {
+const Orders = ({ orders }) => {
   const [orderResponse, setOrderResponse] = useState(orders);
   const [currentPage, setCurrentPage] = useState(1);
   const [addProduct, setAddProduct] = useState(false);
@@ -43,7 +28,7 @@ const Orders = ({ response, orders }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await fetchOrders();
+      const data = await fetchOrders();
       if (data) {
         setOrderResponse(data);
       } else {
@@ -105,18 +90,19 @@ const Orders = ({ response, orders }) => {
   // Pagination logic
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = orderResponse.orders?.slice(
+  const currentOrders = orderResponse.data?.slice(
     indexOfFirstOrder,
     indexOfLastOrder
   );
 
+  console.log(orderResponse, currentOrders);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
-      {orderResponse?.length > 0 && (
-        <div className="bg-[#F4E9DF] min-h-screen relative">
-          <Sidebar />
+      <div className="bg-[#F4E9DF] min-h-screen relative">
+        <Sidebar />
+        <>
           <div className="max-w-screen mx-auto">
             <div className="flex flex-col justify-center items-center p-4 ml-[15vw] md:p-8">
               <label className="font-sansita-regular py-4 ml-1/2 hidden lg:block">
@@ -139,8 +125,8 @@ const Orders = ({ response, orders }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orderResponse?.length > 0 ? (
-                    orderResponse.map((order, index) => (
+                  {currentOrders?.length > 0 ? (
+                    currentOrders.map((order, index) => (
                       <tr
                         key={order.id}
                         className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
@@ -198,7 +184,7 @@ const Orders = ({ response, orders }) => {
                 {Array.from(
                   {
                     length: Math.ceil(
-                      orderResponse.orders?.length / ordersPerPage
+                      orderResponse?.orders?.length / ordersPerPage
                     ),
                   },
                   (_, index) => (
@@ -220,9 +206,9 @@ const Orders = ({ response, orders }) => {
             onClick={() => setAddProduct(true)}
             className="fixed bottom-10 right-4 bg-[#A86549] text-[#F4E9DF] w-12 h-12 p-4 font-bold rounded-full drop-shadow-lg"
           />
-          {addProduct && <AddProducts setAddProduct={setAddProduct} />}
-        </div>
-      )}
+        </>
+        {addProduct && <AddProducts setAddProduct={setAddProduct} />}
+      </div>
     </>
   );
 };

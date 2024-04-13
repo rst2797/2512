@@ -26,7 +26,7 @@ export default async function PlaceOrder(req, res) {
       pickup_location: "Primary",
       channel_id: "",
       billing_customer_name: user.name,
-      billing_last_name: user.name,
+      billing_last_name: "",
       billing_address: order.deliveryAddress.address1,
       billing_address_2: order.deliveryAddress.address2,
       billing_city: `${order.deliveryAddress.address1} ${order.deliveryAddress.postalCode}`,

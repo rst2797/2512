@@ -19,9 +19,9 @@ const SectionThree = () => {
       </div>
       <div className="px-4 text-[#F4E9DF]">
         <h2 className="font-sansita-regular hidden lg:block leading-[70px] px-3 py-4 lg:py-12 !text-[2.5rem] text-center lg:text-start text-[#F4E9DF] w-full">
-          “Fashion forward, People centric, Planet loving”
+          “Fashion forward, <br/>People centric, <br/>Planet loving”
         </h2>
-        <p className="text-center lg:text-left lg:mb-6 lg:mt-6 text-lg font-lato-bold lg:!font-medium">
+        <p className="text-center lg:text-left lg:mb-6 lg:mt-6 text-lg font-lato-bold lg:!font-medium pb-4">
           Our name carries profound significance, evoking cherished bonds and
           inspiring lofty aspirations. It serves as a poignant reminder of the
           ones who hold immense importance in our lives, igniting our dreams to

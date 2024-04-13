@@ -5,16 +5,18 @@ import { FaCheckCircle } from "react-icons/fa";
 import RadioGroup from "../../../components/admin/order/RadioGroup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = ({ order, orderId }) => {
   const [orderData, setOrderData] = useState(order);
   const [userData, setUserData] = useState({});
+  const router = useRouter()
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("user")));
     if (
       JSON.parse(localStorage.getItem("user"))._id !==
-        "6614e4a92dbe62ee4ed655c8" &&
+        "661a42bbaf7eb53e4ae1521e" &&
       JSON.parse(localStorage.getItem("user")).role !== "ADMIN"
     ) {
       return router.push("/");
@@ -80,6 +82,7 @@ const OrderDetails = ({ order }) => {
           <h3 className="!text-2xl font-semibold mb-4 font-sansita-regular">
             Update Order Status
           </h3>
+          <button className="py-2">Generate Invoice</button>
           {/* <RadioGroup
             id={orderData?.channel_order_id}
             status={orderData?.status}
@@ -212,6 +215,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       order: order?.data,
+      orderId: context.query.slug[0]
     },
   };
 }

@@ -212,7 +212,7 @@ const Checkout = () => {
                             height={150}
                           />
                           <div className="px-4">
-                            <h3 className="font-sansita-regular !text-xl lg:!text-2xl">
+                            <h3 className="font-sansita-regular !text-sm lg:!text-2xl">
                               {ele.name}
                             </h3>
                             <div className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
@@ -221,10 +221,13 @@ const Checkout = () => {
                             <div className="font-lato-regular !text-[1rem] !font-semibold pb-2">
                               Color: {"White"}
                             </div>
+                            <h2 className="font-lato-regular !text-sm !font-semibold lg:hidden block">
+                              ₹{ele.price}
+                            </h2>
                           </div>
                         </div>
                         <div>
-                          <h2 className="font-lato-regular !font-semibold">
+                          <h2 className="font-lato-regular !font-semibold hidden lg:block">
                             ₹{ele.price}
                           </h2>
                           {/* <div className="flex items-center">

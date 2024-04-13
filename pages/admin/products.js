@@ -14,7 +14,7 @@ const Products = ({ products }) => {
   useEffect(() => {
     if (
       JSON.parse(localStorage.getItem("user"))?._id !==
-        "6614e4a92dbe62ee4ed655c8" &&
+        "661a42bbaf7eb53e4ae1521e" &&
       JSON.parse(localStorage.getItem("user"))?.role !== "ADMIN"
     ) {
       return router.push("/");

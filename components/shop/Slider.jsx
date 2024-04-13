@@ -92,7 +92,7 @@ export default function SectionThree() {
             <Link href={`/collection/${image._id}`}>
               <a>
                 <Image
-                  src={image.images[0]}
+                  src={image.images[1]}
                   alt={`2512 | carousel image ${index + 1}`}
                   width={600}
                   height={800}

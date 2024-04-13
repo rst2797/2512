@@ -26,7 +26,7 @@ const OrderCard = ({ orders }) => {
                 </div> */}
                 <div className="flex justify-between">
                   <div className="flex flex-col lg:flex-row py-4">
-                    <div className="">
+                    <div className="flex lg:inline-block justify-center">
                       <Image
                         src={ele.images[0]}
                         alt={ele.name}
@@ -52,14 +52,22 @@ const OrderCard = ({ orders }) => {
                               ₹{order.totalAmount}
                             </h2>
                           </div>
-                          <div className="flex justify-between w-[10rem] lg:w-[12rem] pt-12 lg:pt-0 py-4">
+                          <div className="lg:justify-between  lg:hidden flex gap-1">
+                            <button className="bg-[#A86549] text-white font-semibold text-xs py-[.5rem] px-[2rem] rounded-lg">
+                              Exchange
+                            </button>
+                            <button className="bg-[#A86549] text-white font-semibold text-xs py-[.5rem] px-[2.5rem] rounded-lg">
+                              Return
+                            </button>
+                          </div>
+                          <div className="grid grid-cols-3 gap-4 pt-4 lg:pt-0 pb-4">
                             <h4 className="text-[.65rem]">
                               <span className="font-semibold ">
                                 Size:&nbsp;
                               </span>
                               {ele.size}
                             </h4>
-                            <h4 className="text-[.65rem] px-16 lg:px-0">
+                            <h4 className="text-[.65rem] lg:px-0">
                               <span className="font-semibold">
                                 Color:&nbsp;
                               </span>
@@ -73,7 +81,7 @@ const OrderCard = ({ orders }) => {
                             </h4>
                           </div>
                         </div>
-                        <div className="flex flex-col lg:justify-between gap-1 py-4">
+                        <div className="flex-col lg:justify-between hidden lg:flex gap-1 py-4">
                           <button className="bg-[#A86549] text-white font-semibold text-xs py-[.5rem] px-[2rem] rounded-lg">
                             Exchange
                           </button>
@@ -83,11 +91,11 @@ const OrderCard = ({ orders }) => {
                         </div>
                       </div>
                       <div className="flex gap-4 lg:mt-4">
-                        <button className="bg-[#EADAC8] py-[.5rem] px-[2rem] lg:px-[3rem] text-xs font-semibold rounded-lg">
+                        <button className="bg-[#EADAC8] py-[.5rem]  w-1/2 text-center lg:px-[3rem] text-xs font-semibold rounded-lg">
                           Buy Again
                         </button>
                         <Link href={`/collection/${ele._id}`}>
-                          <a className="bg-[#EADAC8] py-[.5rem] px-[2rem] lg:px-[3rem] text-xs font-semibold rounded-lg">
+                          <a className="bg-[#EADAC8] py-[.5rem] w-1/2 text-center lg:px-[3rem] text-xs font-semibold rounded-lg">
                             {" "}
                             View Product
                           </a>

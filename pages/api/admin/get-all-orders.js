@@ -1,25 +1,31 @@
-import authAdminMiddleware from "../../../middleware/authAdmin";
 import axios from "axios";
 
 async function getOrders(req, res) {
-  axios
-    .post("https://apiv2.shiprocket.in/v1/external/auth/login", {
+  try {
+    // Authenticate with Shiprocket API
+    const tokenRes = await axios.post("https://apiv2.shiprocket.in/v1/external/auth/login", {
       email: "discretestructure3@gmail.com",
       password: "P#Brs12!!",
-    })
-    .then((tokenRes) => {
-      Axios.post("https://apiv2.shiprocket.in/v1/external/orders", {
+    });
+
+    // Fetch orders using the token
+    const shipRes = await axios.get(
+      "https://apiv2.shiprocket.in/v1/external/orders",
+      {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${tokenRes.data.token}`,
         },
-      })
-        .then((shipRes) => {
-          return res.status(200).json(shipRes.data);
-        })
-        .catch((error) => {
-          return res.status(403).json(error);
-        });
-    });
+      }
+    );
+
+    // Return the fetched orders
+    return res.status(200).json(shipRes.data);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching orders:", error);
+    return res.status(403).json({ error: error.message });
+  }
 }
-export default authAdminMiddleware(getOrders);
+
+export default getOrders;

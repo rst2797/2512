@@ -56,7 +56,7 @@ const SectionTwo = ({ products }) => {
               <Link href={`/collection/${ele._id}`}>
                 <a>
                   <Image
-                    src={ele.images[1]}
+                    src={ele.images[0]}
                     alt={ele.breadcrumb}
                     width={500}
                     height={675}

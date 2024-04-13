@@ -46,7 +46,7 @@ const Cart = () => {
         <Navbar />
         <div className="p-3 lg:p-6 2xl:p-0 2xl:pt-[4rem] pt-[4rem] mx-auto max-w-[1450px]">
           <div className="flex justify-between items-center py-4">
-            <h1 className="font-sansita-regular !text-[3rem] !font-[100] mb-4">
+            <h1 className="font-sansita-regular !text-[3rem] !font-[100] mt-4">
               Cart
             </h1>
           </div>
@@ -135,7 +135,7 @@ export function Product({ item }) {
       </div>
       <div className="flex flex-col justify-center px-4">
         <div>
-          <h2 className="font-sansita-regular !text-xl lg:!text-[2rem] w-[90%] pb-2">
+          <h2 className="font-sansita-regular !text-xl lg:!text-[1.5rem] w-[90%] pb-2">
             {item.name}
           </h2>
           <span className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
