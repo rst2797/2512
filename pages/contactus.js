@@ -47,18 +47,10 @@ const Register = () => {
               <div>
                 <p className="font-lato-regular text-sm">Reach out to us via:</p>
                 <p className="text-md lg:text-xl font-semibold font-lato-regular">
-                  contactus@2512.in | (+91) 9691826952
+                  contactus@2512.in
                 </p>
               </div>
-            </div>
-            <div className="flex items-center justify-center mt-4">
-              <div className="font-lato-regular">Address</div>
-            </div>
-            <div className="flex justify-center">
-              <p className="text-center font-semibold font-lato-regular text-md lg:text-xl lg:w-[65%]">
-                Gram Bhanwarasala, Sanwer Road, Indore 452001
-              </p>
-            </div>
+          </div>
           </div>
         </div>
       </div>

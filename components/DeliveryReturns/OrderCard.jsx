@@ -3,7 +3,16 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { LuPackageCheck } from "react-icons/lu";
 
-const OrderCard = ({ orders }) => {
+const OrderCard = ({ orders, products }) => {
+  const getProductImage = (sku) => {
+    const product = products.filter((product) => product.sku === sku);
+    return product[0].images[0];
+  };
+  const getProductColour = (sku) => {
+    const product = products.filter((product) => product.sku === sku);
+    return product[0].color;
+  };
+  
   return (
     <div className="px-[.94rem] min-h-screen flex flex-col items-center">
       {orders.length ? (
@@ -12,7 +21,7 @@ const OrderCard = ({ orders }) => {
             key={order.id}
             className="p-[.4rem] my-4 rounded-lg w-[80vw] lg:w-fit bg-white"
           >
-            {order.items.map((ele) => (
+            {order.products.map((ele) => (
               <div key={ele.id}>
                 {/* <div className="flex items-center">
                   <span>
@@ -28,7 +37,7 @@ const OrderCard = ({ orders }) => {
                   <div className="flex flex-col lg:flex-row py-4">
                     <div className="flex lg:inline-block justify-center">
                       <Image
-                        src={ele.images[0]}
+                        src={getProductImage(ele.channel_sku)}
                         alt={ele.name}
                         width={180}
                         height={200}
@@ -39,7 +48,7 @@ const OrderCard = ({ orders }) => {
                       <div className="flex items-center text-xl w-full pb-2 border-b-[1px] border-black">
                         <LuPackageCheck className="text-[#A86549]" />
                         <h2 className="text-lg font-semibold text-[#2F2E2D] px-2 capitalize">
-                          {order.status}
+                          {order.status} # {order.id}
                         </h2>
                       </div>
                       <div className="flex justify-between lg:w-[800px]">
@@ -49,7 +58,7 @@ const OrderCard = ({ orders }) => {
                           </h3>
                           <div className="flex items-center py-2 text-[#2F2E2D]">
                             <h2 className="font-bold text-[.85rem] pr-1">
-                              ₹{order.totalAmount}
+                              ₹{ele?.price * ele.quantity}
                             </h2>
                           </div>
                           <div className="lg:justify-between  lg:hidden flex gap-1">
@@ -67,11 +76,11 @@ const OrderCard = ({ orders }) => {
                               </span>
                               {ele.size}
                             </h4>
-                            <h4 className="text-[.65rem] lg:px-0">
-                              <span className="font-semibold">
+                            <h4 className="text-[.65rem] lg:px-0 capitalize">
+                              <span className="font-semibold ">
                                 Color:&nbsp;
                               </span>
-                              White
+                              {getProductColour(ele.channel_sku)}
                             </h4>
                             <h4 className="text-[.65rem]">
                               <span className="font-semibold">

@@ -8,7 +8,7 @@ import Cookies from "cookies";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const DeliveryReturns = ({ orders, success, newOrder }) => {
+const DeliveryReturns = ({ orders, success, newOrder, products }) => {
   const [user, setUser] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -16,7 +16,7 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
       toast.success("Order Placed Successfully...");
     }
     if (!success) {
-      router.push("/login?destination=/");
+      // router.push("/login?destination=/");
     }
     setUser(localStorage.getItem("user"));
   }, []);
@@ -60,7 +60,7 @@ const DeliveryReturns = ({ orders, success, newOrder }) => {
               <h1 className="font-sansita-regular !text-[2rem] lg:!text-[2.5rem] pb-[.94rem] text-center lg:px-[7rem] pt-16 text-[#2F2E2D] !font-[700]">
                 Order History
               </h1>
-              <Order orders={orders} />
+              <Order orders={orders} products={products} />
             </>
           )}
         </div>
@@ -96,43 +96,19 @@ export const getServerSideProps = async (context) => {
     };
 
     const res = await axios.get(
-      `https://www.2512.in/api/get-user-orders/${userId}`,
+      `http://localhost:4545/api/get-user-orders/${userId}`,
       { headers, withCredentials: true }
     );
 
-    if (res.data.success) {
-      const ordersWithPresignedUrls = await Promise.all(
-        res.data.orders.map(async (order) => {
-          const ordersWithPresignedImages = await Promise.all(
-            order.items.map(async (item) => {
-              if (
-                item.images[0].includes("https://s3") &&
-                item.images[0].includes("x-id=GetObject")
-              ) {
-                const presignedUrl = await getPresignedUrl(
-                  item.images[0]
-                    .split("web.pacchisbarah.profile-pictures/")[1]
-                    .split("?")[0]
-                    .split("/")[0],
-                  item.images[0]
-                    .split("web.pacchisbarah.profile-pictures/")[1]
-                    .split("?")[0]
-                    .split("/")[1]
-                );
-                item.images[0] = presignedUrl;
-              }
-              return item;
-            })
-          );
-          return { ...order, items: ordersWithPresignedImages };
-        })
-      );
+    const products = await axios.get("https://2512.in/api/get-all-products");
 
+    if (res.data.success) {
       return {
         props: {
-          orders: ordersWithPresignedUrls,
+          orders: res.data.orders,
           success: true,
           newOrder: context.query?.newOrder ?? false,
+          products: products?.data?.products,
         },
       };
     } else {

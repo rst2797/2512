@@ -14,10 +14,6 @@ export default async function PlaceOrder(req, res) {
       order,
       user,
       totalPrice,
-      postalCode,
-      addressline1,
-      addressline2,
-      landmark,
     } = req.body;
 
     const orderToShip = {

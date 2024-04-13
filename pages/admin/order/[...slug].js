@@ -11,10 +11,15 @@ import Link from "next/link";
 const OrderDetails = ({ order, orderId }) => {
   const [orderData, setOrderData] = useState(order);
   const [invoice, setInvoice] = useState(null);
+  const [cancel, setCancel] = useState(false);
+  const [ship, setShip] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [cancelLoading, setCancelLoading] = useState(false);
+  const [shipLoading, setShipLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
+    console.log(orderData?.shipments?.id);
     if (
       JSON.parse(localStorage.getItem("user"))._id !==
         "661a42bbaf7eb53e4ae1521e" &&
@@ -22,7 +27,6 @@ const OrderDetails = ({ order, orderId }) => {
     ) {
       return router.push("/");
     }
-    console.log(orderData)
   }, [orderData]);
 
   const [checkedItems, setCheckedItems] = useState([]);
@@ -35,12 +39,35 @@ const OrderDetails = ({ order, orderId }) => {
         setLoading(false);
         toast.success("Invoice Generated Successfully");
       });
-    }else{
+    } else {
+      console.log(invoice);
       toast.success("Invoice Downloaded...");
     }
   };
-
-  
+  const handleCancelOrder = async () => {
+    setCancelLoading(true);
+    setCancel(true);
+    axios.post("/api/admin/cancel-order", { orderId }).then((res) => {
+      setCancelLoading(false);
+      toast.success("Canceled Successfully");
+      setCancel(false);
+      router.push("/admin/orders");
+    });
+  };
+  const handleOrderShipment = async () => {
+    setShipLoading(true);
+    setShip(true);
+    axios
+      .post("/api/admin/create-order-shipment", {
+        orderId: orderData?.shipments?.id,
+      })
+      .then((res) => {
+        setShipLoading(false);
+        toast.success("Shipment Create Successfully");
+        setShip(false);
+        // router.push("/admin/orders");
+      });
+  };
 
   return (
     <div className="container mx-auto p-6 bg-[#F4E9DF] min-h-screen">
@@ -69,6 +96,18 @@ const OrderDetails = ({ order, orderId }) => {
           <p>
             <span className="font-semibold">Address:</span>{" "}
             {`${orderData?.customer_address}, ${orderData?.customer_city}, ${orderData?.customer_state}, ${orderData?.customer_country}`}
+          </p>
+          <p className="py-3">
+            <span className="font-semibold">Address 2:</span>{" "}
+            {`${
+              orderData?.customer_address_2 === "null"
+                ? "N/A"
+                : orderData?.customer_address_2
+            }`}
+          </p>
+          <p>
+            <span className="font-semibold">City:</span>{" "}
+            {`${orderData?.customer_city}, ${orderData?.customer_state}, ${orderData?.customer_country}`}
           </p>
         </div>
         <div className="bg-[#A86549] w-full lg:w-[450px] text-white px-12 py-4 rounded-lg">
@@ -103,28 +142,55 @@ const OrderDetails = ({ order, orderId }) => {
           <h3 className="!text-2xl font-semibold mb-4 font-sansita-regular ">
             Update Order Status
           </h3>
-          <button
-            onClick={() => handleInvoice()}
-            className="relative py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-white rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
-          >
-            {invoice ? (
-              <Link href={invoice}>
-                <a>Download</a>
-              </Link>
-            ) : loading ? (
-              <div className="flex">
-                <div className="border-l-4 border-black rounded-full p-3 animate-spin mr-2" />
-                <span>Generating...</span>
-              </div>
-            ) : (
-              "Generate Invoice"
-            )}
-          </button>
-
-          {/* <RadioGroup
-            id={orderData?.channel_order_id}
-            status={orderData?.status}
-          /> */}
+          <div className="grid grid-cols-1">
+            <button
+              onClick={() => handleInvoice()}
+              className="relative py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-white rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
+            >
+              {invoice ? (
+                <Link href={invoice}>
+                  <a>Download</a>
+                </Link>
+              ) : loading ? (
+                <div className="flex">
+                  <div className="border-l-4 border-black rounded-full p-3 animate-spin mr-2" />
+                  <span>Generating...</span>
+                </div>
+              ) : (
+                "Generate Invoice"
+              )}
+            </button>
+            {/* <button
+              onClick={() => handleOrderShipment()}
+              className="my-4 relative py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-white rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-green-500 before:to-green-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
+            >
+              {ship ? (
+                <>Ship</>
+              ) : shipLoading ? (
+                <div className="flex">
+                  <div className="border-l-4 border-black rounded-full p-3 animate-spin mr-2" />
+                  <span>Shipping...</span>
+                </div>
+              ) : (
+                "Ship Now"
+              )}
+            </button> */}
+            <button
+              onClick={() => handleCancelOrder()}
+              className="relative py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-white rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-red-500 before:to-red-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
+            >
+              {cancel ? (
+                <>Cancel</>
+              ) : cancelLoading ? (
+                <div className="flex">
+                  <div className="border-l-4 border-black rounded-full p-3 animate-spin mr-2" />
+                  <span>Canceling...</span>
+                </div>
+              ) : (
+                "Cancel Order"
+              )}
+            </button>
+          </div>
         </div>
       </div>
       <div className="">

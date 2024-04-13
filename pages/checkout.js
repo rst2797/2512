@@ -117,7 +117,7 @@ const Checkout = () => {
                       <table className="font-semibold border-t border-black">
                         <tbody>
                           <tr className="text-start">
-                            <td className="py-3 lg:pr-10">Postal Code</td>
+                            <td className="py-3 lg:pr-14">Postal Code</td>
                             <td className="py-3">
                               <Field
                                 type="text"
@@ -137,7 +137,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 lg:pr-10">Address Line 1</td>
+                            <td className="py-3 lg:pr-14">Address Line 1</td>
                             <td className="py-3">
                               <Field
                                 as="textarea"
@@ -159,7 +159,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 lg:pr-10">Address Line 2</td>
+                            <td className="py-3 lg:pr-14">Address Line 2</td>
                             <td className="py-3">
                               <Field
                                 as="textarea"
@@ -172,7 +172,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 lg:pr-10">Landmark</td>
+                            <td className="py-3 lg:pr-14">Landmark</td>
                             <td className="py-3">
                               <Field
                                 type="text"
@@ -204,7 +204,8 @@ const Checkout = () => {
                         className="flex justify-between items-center border-b-[1px] border-[#0000005a] my-2"
                         key={ele.id}
                       >
-                        <div className="flex items-center lg:w-[40%] border-b-[1px] py-2">
+                      {console.log(ele)}
+                        <div className="flex items-center border-b-[1px] py-2">
                           <Image
                             src={ele.images[0]}
                             alt=""
@@ -213,7 +214,7 @@ const Checkout = () => {
                           />
                           <div className="px-4">
                             <h3 className="font-sansita-regular !text-sm lg:!text-2xl">
-                              {ele.name}
+                              {ele.name.split("/")[0]}<br/>{ele.name.split("/")[1]}
                             </h3>
                             <div className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
                               Size: {ele.size}
@@ -222,13 +223,13 @@ const Checkout = () => {
                               Color: {"White"}
                             </div>
                             <h2 className="font-lato-regular !text-sm !font-semibold lg:hidden block">
-                              ₹{ele.price}
+                              ₹{ele.price} X {ele.units}
                             </h2>
                           </div>
                         </div>
                         <div>
-                          <h2 className="font-lato-regular !font-semibold hidden lg:block">
-                            ₹{ele.price}
+                          <h2 className="font-lato-regular !text-md !font-semibold hidden lg:block">
+                            ₹{ele.price} X {ele.units}
                           </h2>
                           {/* <div className="flex items-center">
                         <h4 className="text-xs font-semibold line-through">

@@ -135,8 +135,8 @@ export function Product({ item }) {
       </div>
       <div className="flex flex-col justify-center px-4">
         <div>
-          <h2 className="font-sansita-regular !text-xl lg:!text-[1.5rem] w-[90%] pb-2">
-            {item.name}
+          <h2 className="font-sansita-regular !text-xl lg:!text-[1.5rem] w-full pb-2">
+            {item.name.split("/")[0]}<br/>{item.name.split("/")[1]}
           </h2>
           <span className="font-lato-regular !font-semibold pt-2 !text-[1rem]">
             Size: {item.size}
