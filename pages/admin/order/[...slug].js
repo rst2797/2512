@@ -3,17 +3,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import RadioGroup from "../../../components/admin/order/RadioGroup";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const OrderDetails = ({ order, orderId }) => {
   const [orderData, setOrderData] = useState(order);
-  const [userData, setUserData] = useState({});
-  const router = useRouter()
+  const [invoice, setInvoice] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("user")));
     if (
       JSON.parse(localStorage.getItem("user"))._id !==
         "661a42bbaf7eb53e4ae1521e" &&
@@ -21,9 +22,25 @@ const OrderDetails = ({ order, orderId }) => {
     ) {
       return router.push("/");
     }
+    console.log(orderData)
   }, [orderData]);
 
   const [checkedItems, setCheckedItems] = useState([]);
+
+  const handleInvoice = async () => {
+    if (!invoice) {
+      setLoading(true);
+      axios.post("/api/admin/generate-invoice", { id: orderId }).then((res) => {
+        setInvoice(res.data.invoice_url);
+        setLoading(false);
+        toast.success("Invoice Generated Successfully");
+      });
+    }else{
+      toast.success("Invoice Downloaded...");
+    }
+  };
+
+  
 
   return (
     <div className="container mx-auto p-6 bg-[#F4E9DF] min-h-screen">
@@ -74,15 +91,36 @@ const OrderDetails = ({ order, orderId }) => {
             {orderData?.payment_method}
           </p>
           <p className="mb-2">
-            <span className="font-semibold">Order Date:</span>{" "}
-            {orderData?.order_date}
+            <span className="font-semibold">Estimated Delivery:</span>{" "}
+            {orderData?.shipments.created_at}
+          </p>
+          <p className="mb-2">
+            <span className="font-semibold">Estimated Delivery:</span>{" "}
+            {orderData?.sla}
           </p>
         </div>
         <div className="bg-[#A86549] w-full lg:w-[450px] text-white px-12 py-4 rounded-lg">
-          <h3 className="!text-2xl font-semibold mb-4 font-sansita-regular">
+          <h3 className="!text-2xl font-semibold mb-4 font-sansita-regular ">
             Update Order Status
           </h3>
-          <button className="py-2">Generate Invoice</button>
+          <button
+            onClick={() => handleInvoice()}
+            className="relative py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-white rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
+          >
+            {invoice ? (
+              <Link href={invoice}>
+                <a>Download</a>
+              </Link>
+            ) : loading ? (
+              <div className="flex">
+                <div className="border-l-4 border-black rounded-full p-3 animate-spin mr-2" />
+                <span>Generating...</span>
+              </div>
+            ) : (
+              "Generate Invoice"
+            )}
+          </button>
+
           {/* <RadioGroup
             id={orderData?.channel_order_id}
             status={orderData?.status}
@@ -215,7 +253,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       order: order?.data,
-      orderId: context.query.slug[0]
+      orderId: context.query.slug[0],
     },
   };
 }

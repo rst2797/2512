@@ -26,19 +26,6 @@ const Orders = ({ orders }) => {
   const ordersPerPage = 10;
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchOrders();
-      if (data) {
-        setOrderResponse(data);
-      } else {
-        // Handle the case when data is null, possibly display an error message
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const handleStatusChange = (orderId, event) => {
     try {
       axios
@@ -90,13 +77,24 @@ const Orders = ({ orders }) => {
   // Pagination logic
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = orderResponse.data?.slice(
-    indexOfFirstOrder,
-    indexOfLastOrder
-  );
+  const currentOrders = orderResponse.data
+    ?.filter((order) => order.status !== "CANCELED")
+    ?.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  console.log(orderResponse, currentOrders);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchOrders();
+      if (data) {
+        setOrderResponse(data);
+      } else {
+        // Handle the case when data is null, possibly display an error message
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -106,7 +104,7 @@ const Orders = ({ orders }) => {
           <div className="max-w-screen mx-auto">
             <div className="flex flex-col justify-center items-center p-4 ml-[15vw] md:p-8">
               <label className="font-sansita-regular py-4 ml-1/2 hidden lg:block">
-                All Orders
+                Orders
               </label>
               <table className="border-2 border-black w-full">
                 <thead>
@@ -120,7 +118,7 @@ const Orders = ({ orders }) => {
                     <th className="border-x-2 border-black px-4">
                       Payment Method
                     </th>
-                    {/* <th className="border-x-2 border-black px-4">Status</th> */}
+                    <th className="border-x-2 border-black px-4">Status</th>
                     <th className="border-x-2 border-black px-4">View</th>
                   </tr>
                 </thead>
@@ -129,7 +127,9 @@ const Orders = ({ orders }) => {
                     currentOrders.map((order, index) => (
                       <tr
                         key={order.id}
-                        className="focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2"
+                        className={`focus:text-white border-b-2 border-black hover:bg-[#a5a5a5] cursor-pointer py-2 ${
+                          order.status === "CANCELED" && "bg-red-300"
+                        }`}
                       >
                         <td className="border-x-2 border-black px-4 w-fit">
                           {index + 1}
@@ -145,6 +145,9 @@ const Orders = ({ orders }) => {
                         </td>
                         <td className="border-x-2 border-black px-4">
                           {order.payment_method}
+                        </td>
+                        <td className="border-x-2 border-black px-4 capitalize">
+                          {order.status}
                         </td>
                         {/* <td className="border-x-2 border-black px-4">
                           <select

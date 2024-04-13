@@ -14,7 +14,7 @@ const SectionFive = () => {
                 <h2 className="font-sansita-regular !leading-[2.5rem] !text-[2.8rem] text-center lg:px-4 lg:py-1 lg:text-[2.5rem] lg:pt-20">
                   Our First Collection
                 </h2>
-                <p className="font-semibold text-lg px-6 py-4 text-center lg:px-24 lg:text-lg">
+                <p className="font-semibold text-lg px-6 py-4 text-center lg:px-20 lg:text-lg">
                   A story of sustainability, creativity and craftsmanship.
                 </p>
                 <span className="flex justify-center w-full lg:mt-[1rem] lg:px-12">

@@ -45,7 +45,7 @@ const Home = ({ products }) => {
           href="/images/collage/home.png"
           as="image"
           type="image/*"
-          crossOrigin="anonymous"
+          crossOrigin=" "
         />
       </Head>
       <div className="container lg:mx-0 min-h-screen bg-[#f2eadf] relative">

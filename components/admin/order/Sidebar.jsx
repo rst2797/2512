@@ -11,7 +11,7 @@ import { LiaTshirtSolid } from "react-icons/lia";
 import { FaMailchimp, FaDownload } from "react-icons/fa6";
 import { GrAnalytics } from "react-icons/gr";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import * as XLSX from "xlsx";
 
@@ -23,7 +23,7 @@ const Sidebar = () => {
 
     // Convert data to worksheet
     const ws = XLSX.utils.json_to_sheet(data);
-    ws['!cols'] = [{ width: 40 }];
+    ws["!cols"] = [{ width: 40 }];
 
     // Add the worksheet to the workbook
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
@@ -45,9 +45,9 @@ const Sidebar = () => {
             icon: "success",
             title: "Your download has been assigned",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
-          const emails = res.data.emails.map((ele) =>[ele.email]);
+          const emails = res.data.emails.map((ele) => [ele.email]);
           exportToExcel(emails);
         } else {
           toast.error("Error Occured! Try Again Later.");
@@ -75,11 +75,19 @@ const Sidebar = () => {
             <Link href="/admin/orders">
               <a className="flex items-center">
                 <MdBookmarkBorder className="text-2xl mx-2" />
-                All Orders
+                Orders
               </a>
             </Link>
           </li>
-          <li className="mt-12">
+          <li className="flex items-center pt-10">
+            <Link href="/admin/canceled_orders">
+              <a className="flex items-center">
+                <RiContactsBookLine className="text-2xl mx-2" />
+                Canceled Orders
+              </a>
+            </Link>
+          </li>
+          <li className="mt-8">
             <Link href="/admin/products">
               <a className="flex items-center">
                 <LiaTshirtSolid className="text-2xl mx-2" />
@@ -95,7 +103,7 @@ const Sidebar = () => {
               <div>
                 <span className="flex justify-between w-full">
                   <FaMailchimp className="text-2xl text-white" />
-                  <p className="overflow-hidden text-ellipsis">Newsletter</p>
+                  <p className="overflow-hidden text-ellipsis mr-2">Newsletter</p>
                 </span>
               </div>
               <div>
