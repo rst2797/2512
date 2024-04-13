@@ -63,11 +63,11 @@ const Footer = () => {
                       Contact Us
                     </a>
                   </Link>
-                  <Link href="/blog" className="py-4">
+                  {/* <Link href="/blog" className="py-4">
                     <a className="text-white lg:text-lg text-sm py-2 no-underline text-center lg:text-left">
                       Blog
                     </a>
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="flex flex-col items-center lg:items-start lg:pl-4 lg:text-lg">
                   <Link href="/our-story">
