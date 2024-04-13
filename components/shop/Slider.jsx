@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
@@ -53,7 +53,9 @@ export default function SectionThree() {
         slidesPerView={1}
         spaceBetween={10}
         loop={true}
-        autoplay={{delay: 1500}}
+        autoplay={{
+          delay: 1500,
+        }}
         pagination={{
           clickable: true,
         }}
@@ -61,7 +63,7 @@ export default function SectionThree() {
           nextEl: ".next-arrow",
           prevEl: ".prev-arrow",
         }}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         breakpoints={{
           400: {
             slidesPerView: 1,
@@ -83,7 +85,10 @@ export default function SectionThree() {
         className="mySwiper"
       >
         {productImages.map((image, index) => (
-          <SwiperSlide key={index} className="bg-white rounded-lg min-h-[60vh] max-h-[60vh] relative">
+          <SwiperSlide
+            key={index}
+            className="bg-white rounded-lg lg:min-h-[60vh] lg:max-h-[60vh] relative"
+          >
             <Link href={`/collection/${image._id}`}>
               <a>
                 <Image
@@ -95,9 +100,11 @@ export default function SectionThree() {
                   onLoad={() => setLoading(false)}
                 />
                 <h3 className="font-sansita-regular !text-2xl lg:!text-[1rem] !leading-6 px-4">
-                  {image.name}
+                  {image.name.split("/")[0]}
+                  <br />
+                  {image.name.split("/")[1]}
                 </h3>
-                <h5 className="px-4 py-1 font-bold text-sm absolute bottom-3">
+                <h5 className="px-4 py-1 font-bold text-sm lg:absolute bottom-3">
                   ₹{image.price}
                 </h5>
               </a>

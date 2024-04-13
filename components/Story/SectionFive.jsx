@@ -9,7 +9,7 @@ const SectionFive = () => {
           Note from the Founder
         </h2>
 
-        <p className="text-center lg:text-left mb-6 mt-24 lg:mt-0 text-lg lg:text-md font-lato-bold lg:text-[#2F2E2D]">
+        <p className="text-center lg:text-left mb-6 mt-16 lg:mt-0 text-lg lg:text-md font-lato-bold lg:text-[#2F2E2D]">
           “ I believe that fashion should be a reflection of who we are and what
           we stand for. Pacchis Barah is dedicated to creating fashion that
           promotes individuality, promotes inclusivity and prioritises
@@ -26,7 +26,7 @@ const SectionFive = () => {
           <br /> (Founder & CEO )
         </p>
       </div>
-      <div className="lg:sticky top-0 bottom-0 lg:mt-20 ml-32">
+      <div className="flex justify-center lg:inline-block lg:sticky top-0 bottom-0 mt-4 lg:mt-20 lg:ml-32">
         <Image
           src="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/Palak_Dubey.JPG"
           alt="2512 Sustainable - Planet Love - Clothes"

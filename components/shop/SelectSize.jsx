@@ -9,7 +9,7 @@ const SelectSize = ({ setProductSize }) => {
 
   const handleSizeChart = () => {
     Swal.fire({
-      imageUrl: "/images/size-chart.png",
+      imageUrl: "/images/size-chart.jpeg",
       imageHeight: 500,
       imageAlt: "2512 size chart | Pacchis Barah Size Chart",
     });

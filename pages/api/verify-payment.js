@@ -6,7 +6,7 @@ const verification = (req, res) => {
   const razorpay_signature = req.headers["x-razorpay-signature"];
 
   // Pass yours key_secret here
-  const key_secret = "5SpIMVNda1SIAb5bfokJHd66";
+  const key_secret = "lTk1aNyTuwuSEqdczkdKARPl";
 
   // STEP 8: Verification & Send Response to User
 

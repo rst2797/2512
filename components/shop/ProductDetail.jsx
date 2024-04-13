@@ -115,7 +115,7 @@ const ProductDetail = ({ product }) => {
                 )}
               </p>
             </div>
-            <MobFabricDetails product={product} />
+          <MobFabricDetails product={product} />
           </div>
         </div>
         <SimilarProducts />

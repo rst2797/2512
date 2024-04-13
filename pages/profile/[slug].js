@@ -214,52 +214,69 @@ const Profile = ({ user, success }) => {
                       </button>
                     </div>
 
-                    <div className="w-full font-lato-regular !font-semibold !text-[1rem]">
-                      <div className="py-2">
-                        <label htmlFor="name">Full Name</label>
-                        <Field
-                          type="text"
-                          name="name"
-                          className={`bg-transparent ${
-                            editable && "border-b border-black"
-                          } ml-[4.5rem]`}
-                        />
-                        <ErrorMessage name="name" component="div" />
-                      </div>
-                      <div className="py-2">
-                        <label htmlFor="email">Email</label>
-                        <Field
-                          type="email"
-                          name="email"
-                          className={`bg-transparent ${
-                            editable && "border-b border-black"
-                          } ml-[6.5rem]`}
-                        />
-                        <ErrorMessage name="email" component="div" />
-                      </div>
-                      <div className="py-2">
-                        <label htmlFor="phone">Phone</label>
-                        <Field
-                          type="text"
-                          name="phone"
-                          className={`bg-transparent ${
-                            editable && "border-b border-black"
-                          } ml-24`}
-                        />
-                        <ErrorMessage name="phone" component="div" />
-                      </div>
-                      <div className="py-2">
-                        <label htmlFor="altphone">Alternate Phone</label>
-                        <Field
-                          type="text"
-                          name="altphone"
-                          className={`bg-transparent ${
-                            editable && "border-b border-black"
-                          } ml-7`}
-                        />
-                        <ErrorMessage name="altphone" component="div" />
-                      </div>
-                    </div>
+                    <table className="w-full font-lato-regular !font-semibold !text-[1rem]">
+                      <tr className="py-2">
+                        <td>
+                          <label htmlFor="name">Full Name</label>
+                        </td>
+                        <td>
+                          <Field
+                            type="text"
+                            name="name"
+                            className={`bg-transparent ${
+                              editable && "border-b border-black"
+                            }`}
+                          />
+                          <ErrorMessage name="name" component="div" />
+                        </td>
+                      </tr>
+                      <tr className="py-2">
+                        <td>
+                          <label htmlFor="email">Email</label>
+                        </td>
+                        <td>
+                          <Field
+                            type="email"
+                            name="email"
+                            className={`bg-transparent ${
+                              editable && "border-b border-black"
+                            }`}
+                          />
+                          <ErrorMessage name="email" component="div" />
+                        </td>
+                      </tr>
+                      <tr className="py-2">
+                        <td>
+                          {" "}
+                          <label htmlFor="phone">Phone</label>
+                        </td>
+                        <td>
+                          <Field
+                            type="text"
+                            name="phone"
+                            className={`bg-transparent ${
+                              editable && "border-b border-black"
+                            } `}
+                          />
+                          <ErrorMessage name="phone" component="div" />
+                        </td>
+                      </tr>
+                      <tr className="py-2">
+                        <td>
+                          <label htmlFor="altphone">Alternate Phone</label>
+                        </td>
+                        <td>
+                          <Field
+                            type="text"
+                            name="altphone"
+                            className={`bg-transparent ${
+                              editable && "border-b border-black"
+                            }`}
+                          />
+                          <ErrorMessage name="altphone" component="div" />
+                        </td>
+                      </tr>
+                    </table>
                   </Form>
                 </Formik>
               </div>

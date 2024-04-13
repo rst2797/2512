@@ -27,8 +27,6 @@ const Checkout = () => {
   const { items } = useCart();
   const [userData, setUserData] = useState(null);
   const [updatedItems, setUpdatedItems] = useState([]);
-  const [postalCode, setPostalCode] = useState("");
-  const [address, setAddress] = useState("");
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("user")));
     Promise.all(
@@ -99,7 +97,7 @@ const Checkout = () => {
                   {/* Delivery Detail */}
                   <div className="bg-white p-6 rounded-xl">
                     <h3 className="text-2xl font-semibold">Delivery Details</h3>
-                    <table className="w-1/2 font-semibold">
+                    <table className="lg:w-1/2 font-semibold">
                       <tbody>
                         <tr className="text-start">
                           <td className="py-3">Full Name</td>
@@ -119,7 +117,7 @@ const Checkout = () => {
                       <table className="font-semibold border-t border-black">
                         <tbody>
                           <tr className="text-start">
-                            <td className="py-3 pr-10">Postal Code</td>
+                            <td className="py-3 lg:pr-10">Postal Code</td>
                             <td className="py-3">
                               <Field
                                 type="text"
@@ -139,7 +137,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 pr-10">Address Line 1</td>
+                            <td className="py-3 lg:pr-10">Address Line 1</td>
                             <td className="py-3">
                               <Field
                                 as="textarea"
@@ -161,7 +159,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 pr-10">Address Line 2</td>
+                            <td className="py-3 lg:pr-10">Address Line 2</td>
                             <td className="py-3">
                               <Field
                                 as="textarea"
@@ -174,7 +172,7 @@ const Checkout = () => {
                             </td>
                           </tr>
                           <tr className="text-start">
-                            <td className="py-3 pr-10">Landmark</td>
+                            <td className="py-3 lg:pr-10">Landmark</td>
                             <td className="py-3">
                               <Field
                                 type="text"

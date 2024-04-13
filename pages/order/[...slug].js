@@ -6,39 +6,46 @@ import { useRouter } from "next/router";
 import Cookies from "cookies";
 import Navbar from "../../components/common/header";
 import Footer from "../../components/common/footer";
+import { toast } from "react-toastify";
 
 const Order = ({ totalPrice, orderId, userId, token, deliveryAddress }) => {
   const router = useRouter();
   const shipOrder = async () => {
-    const userResponse = await axios.get(`/api/admin/get-user/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    userResponse.data.user = {
-      ...userResponse.data.user,
-      postalCode: deliveryAddress.postal_code,
-      address: `${deliveryAddress.addressline1} - ${deliveryAddress.addressline1} - ${deliveryAddress.landmark}`,
-    };
-    const orderResponse = await axios.get(`/api/admin/get-order/${orderId}`);
-
-    const shippingDetails = {
-      order: orderResponse.data.order,
-      user: userResponse.data.user,
-      totalPrice,
-      postalCode: deliveryAddress.postal_code,
-      addressline1: deliveryAddress.addressline1,
-      addressline2: deliveryAddress.addressline2,
-      landmark: deliveryAddress.landmark,
-    };
-
-    return await axios.post("/api/ship-order", shippingDetails).then(() => {
-      axios.post(`/api/order-confirmation`, {
-        email: userResponse.data.user.email,
-        customerName: userResponse.data.user.name,
+    if (!sessionStorage.getItem(orderId)) {
+      const userResponse = await axios.get(`/api/admin/get-user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      userResponse.data.user = {
+        ...userResponse.data.user,
+        postalCode: deliveryAddress.postal_code,
+        address: `${deliveryAddress.addressline1} - ${deliveryAddress.addressline1} - ${deliveryAddress.landmark}`,
+      };
+      const orderResponse = await axios.get(`/api/get-order/${orderId}`);
+
+      const shippingDetails = {
+        order: orderResponse.data.order,
+        user: userResponse.data.user,
+        totalPrice,
+        postalCode: deliveryAddress.postal_code,
+        addressline1: deliveryAddress.addressline1,
+        addressline2: deliveryAddress.addressline2,
+        landmark: deliveryAddress.landmark,
+      };
+
+      return await axios.post("/api/ship-order", shippingDetails).then(() => {
+        sessionStorage.setItem(orderId, "true");
+        axios.post(`/api/order-confirmation`, {
+          email: userResponse.data.user.email,
+          customerName: userResponse.data.user.name,
+        });
+        router.push(`/order-history/${userId}?newOrder=true`);
+      });
+    } else {
+      toast.error("Order has been already placed!!");
       router.push(`/order-history/${userId}?newOrder=true`);
-    });
+    }
   };
   useEffect(() => {
     if (!token) {

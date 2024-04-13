@@ -152,14 +152,14 @@ export function Product({ item }) {
         <span className="font-lato-regular !font-extrabold py-2 !text-[1.5rem]">
           ₹{item.price}
         </span>
-        <div className="flex items-center leading-3">
+        {/* <div className="flex items-center leading-3">
           <span className="font-lato-regular !font-extrabold !text-[.75rem] pr-2 line-through">
             ₹{item.actualPrice}
           </span>
           <span className="text-xs text-[#FF0909] font-bold">
             {item.offPercentage} OFF
           </span>
-        </div>
+        </div> */}
       </div>
       <span
         className="absolute right-3 top-3"

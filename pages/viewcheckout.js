@@ -90,7 +90,7 @@ export default function YourBillingComponent({
           })
           .then((res) => {
             const options = {
-              key: "rzp_test_uTiONXbSXdfqHV",
+              key: "rzp_live_TLy2pMQeJF2n0k",
               name: res.data.name,
               currency: res.data.currency,
               amount: res.data.amount,

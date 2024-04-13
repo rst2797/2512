@@ -81,25 +81,25 @@ const MobFabricDetails = ({ product }) => {
       <div className="accordion-item transition-all py-[1rem] border-b-[1px] !border-black">
         <Link href={"/home/delivery-returns"}>
           <a target="_blank">
-            <h2 className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
+            <h2 className="hover:border-b border-black accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
               <span className="accordion-header-text">
                 Delivery, Returns & Exchange
               </span>
-              <span className="accordion-header-icon">
+              {/* <span className="accordion-header-icon">
                 {activeIndex === 3 ? <FaMinus /> : <FaPlus />}
-              </span>
+              </span> */}
             </h2>
           </a>
         </Link>
       </div>
-      <div className="accordion-item transition-all py-[1rem] border-b-[1px] border-black">
+      {/* <div className="accordion-item transition-all py-[1rem] border-b-[1px] border-black">
         <h2 className="accordion-header cursor-pointer flex justify-between font-bold font-lato-regular !text-[1rem] text-[#2F2E2D]">
           <span className="accordion-header-text">Rating & Reviews</span>
           <span className="accordion-header-icon flex gap-2">
             <EditableRating productId={product._id} readOnly={false} />
           </span>
         </h2>
-      </div>
+      </div> */}
     </div>
   );
 };

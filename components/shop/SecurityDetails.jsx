@@ -27,7 +27,7 @@ const SecurityDetails = () => {
           className="flex items-center justify-center text-center"
         >
           <Image src={item.Logo} alt="" width={50} height={50} />
-          <h2 className="font-lato-regular !text-[1rem] !font-[400] w-1/2">
+          <h2 className="font-lato-regular lg:text-[1rem] !text-xs !font-[400] w-1/2">
             {item.title}
           </h2>
         </div>
