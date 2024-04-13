@@ -9,7 +9,7 @@ import SectionFive from "../components/Home/SectionFive.jsx";
 import SectionSix from "../components/Home/SectionSix.jsx";
 import { rediss } from "../utils/redis";
 import axios from "axios";
-const Home = ({products}) => {
+const Home = ({ products }) => {
   return (
     <main>
       <Head>
@@ -42,7 +42,7 @@ const Home = ({products}) => {
         <link rel="icon" href="/icons/favicon.ico" />
         <link
           rel="preload"
-          href="https://s3.eu-north-1.amazonaws.com/web.pacchisbarah/images/home/0O9A8802+1.png"
+          href="/images/collage/home.png"
           as="image"
           type="image/*"
           crossOrigin="anonymous"
