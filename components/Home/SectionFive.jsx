@@ -7,7 +7,7 @@ const SectionFive = () => {
   return (
     <div className="overflow-hidden">
       <div className="relative overflow-hidden h-screen lg:h-[90vh] w-screen bg-cover origin-right bg-no-repeat lg:bg-cover lg:bg-left lg:bg-no-repeat bg-[url('/images/home_first_collection.jpeg')]">
-        <div className="bg-[#ffffffa4] sticky left-0 top-full lg:top-0 w-full lg:w-[30%] h-[30%] lg:h-full text-center">
+        <div className="bg-[#ffffffa4] sticky left-0 top-full lg:top-0 w-full lg:w-[35%] h-[30%] lg:h-full text-center">
           <Link href="/kanso">
             <a className="lg:sticky lg:top-[55%] lg:py-0 py-32 lg:flex flex-col bottom-40 left-0 right-0 text-black ">
               <>
