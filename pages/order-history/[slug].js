@@ -96,7 +96,7 @@ export const getServerSideProps = async (context) => {
     };
 
     const res = await axios.get(
-      `http://localhost:4545/api/get-user-orders/${userId}`,
+      `https://2512.in/api/get-user-orders/${userId}`,
       { headers, withCredentials: true }
     );
 

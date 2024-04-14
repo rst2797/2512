@@ -21,7 +21,7 @@ const OrderCard = ({ orders, products }) => {
             key={order.id}
             className="p-[.4rem] my-4 rounded-lg w-[80vw] lg:w-fit bg-white"
           >
-            {order.products.map((ele) => (
+            {order?.products?.map((ele) => (
               <div key={ele.id}>
                 {/* <div className="flex items-center">
                   <span>
