@@ -37,4 +37,4 @@ async function deleteProduct(req, res) {
   }
 }
 
-export default authAdminMiddleware(deleteProduct);
+export default deleteProduct;
