@@ -16,9 +16,11 @@ const DeliveryReturns = ({ orders, success, newOrder, products }) => {
       toast.success("Order Placed Successfully...");
     }
     if (!success) {
-      // router.push("/login?destination=/");
+      router.push("/login?destination=/");
     }
     setUser(localStorage.getItem("user"));
+
+    console.log(orders, products);
   }, []);
   return (
     <div className="bg-[#f2eadf] ">
@@ -96,11 +98,13 @@ export const getServerSideProps = async (context) => {
     };
 
     const res = await axios.get(
-      `https://2512.in/api/get-user-orders/${userId}`,
+      `https://stage.d1wxlzajybv9do.amplifyapp.com/api/get-user-orders/${userId}`,
       { headers, withCredentials: true }
     );
 
-    const products = await axios.get("https://2512.in/api/get-all-products");
+    const products = await axios.get(
+      "https://stage.d1wxlzajybv9do.amplifyapp.com/api/get-all-products"
+    );
 
     if (res.data.success) {
       return {
