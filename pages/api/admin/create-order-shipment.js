@@ -1,5 +1,32 @@
 import axios from "axios";
 
+async function generateAWB(orderId, token) {
+
+  const raw = JSON.stringify({
+    shipment_id: orderId,
+    courier_id: "",
+    status: "",
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: raw,
+    redirect: "follow",
+  };
+
+  const res = await fetch(
+    "https://apiv2.shiprocket.in/v1/external/courier/assign/awb",
+    requestOptions
+  );
+  const deserializedResp = await res.json(); // Await here
+
+  return deserializedResp;
+}
+
 async function createShipmment(req, res) {
   try {
     const { orderId } = req.body;
@@ -12,31 +39,9 @@ async function createShipmment(req, res) {
       }
     );
 
-    const awb = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/courier/assign/awb",
-      {
-        shipment_id: "522825937",
-        courier_id: "",
-        status: "",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${tokenRes}`,
-        },
-      }
-    );
-    const shipRes = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/courier/generate/pickup",
-      { shipment_id: [orderId] },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenRes.data.token}`,
-        },
-      }
-    );
+    const awb = await generateAWB(orderId, tokenRes.data.token); // Await here
 
-    return res.status(200).json(awb.data);
+    return res.status(200).json(awb);
   } catch (error) {
     // Handle errors
     console.error("Error fetching orders:", error);

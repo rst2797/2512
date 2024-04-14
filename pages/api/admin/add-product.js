@@ -1,6 +1,5 @@
 import { Product } from "../../../schema/product";
 import { connection } from "../../../utils/database";
-import authAdminMiddleware from "../../../middleware/authAdmin.js";
 
 async function addProduct(req, res) {
   try {
@@ -30,4 +29,4 @@ async function addProduct(req, res) {
   }
 }
 
-export default authAdminMiddleware(addProduct);
+export default addProduct;
