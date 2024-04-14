@@ -1,6 +1,6 @@
 import { Product } from "../../../schema/product";
 import { connection } from "../../../utils/database";
-
+import { rediss } from "../../../utils/redis";
 async function addProduct(req, res) {
   try {
     await connection();
@@ -8,6 +8,7 @@ async function addProduct(req, res) {
     await Product(req.body)
       .save()
       .then((data) => {
+        rediss.del("products");
         return res.status(200).json({
           error: false,
           success: true,

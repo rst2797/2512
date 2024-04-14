@@ -1,6 +1,7 @@
 import { Product } from "../../../schema/product";
 import { connection } from "../../../utils/database";
 import authAdminMiddleware from "../../../middleware/authAdmin";
+import { rediss } from "../../../utils/redis";
 
 async function deleteProduct(req, res) {
   try {
@@ -18,6 +19,7 @@ async function deleteProduct(req, res) {
     const deletedProduct = await Product.deleteOne({ _id: productId });
 
     if (deletedProduct.deletedCount === 1) {
+      rediss.del("products");
       return res.status(200).json({
         error: false,
         success: true,
