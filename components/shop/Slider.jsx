@@ -87,7 +87,7 @@ export default function SectionThree() {
         {productImages.map((image, index) => (
           <SwiperSlide
             key={index}
-            className="bg-white rounded-lg lg:min-h-[60vh] lg:max-h-[60vh] relative"
+            className="bg-white rounded-lg lg:min-h-[64vh] lg:max-h-[65vh] relative"
           >
             <Link href={`/collection/${image._id}`}>
               <a>
