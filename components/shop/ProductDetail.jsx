@@ -72,7 +72,7 @@ const ProductDetail = ({ product }) => {
             <h2 className="!text-[1.5rem] text-[#2F2E2D] !leading-[2rem] font-sansita-regular">
               {nameArray[0]} <br /> {nameArray[1]}
             </h2>
-            <div className="flex items-center pb-2">
+            <div className="flex items-center pt-4">
               <h2 className="text-[1.125rem] font-lato-regular font-[800]">
                 ₹{product.price}
               </h2>
