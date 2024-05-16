@@ -53,6 +53,6 @@ The project is structured with PascalCase for the frontend and kebab-case for th
 9. This README provides a brief overview; consider adding detailed documentation for each module or feature.
 10. Feel free to customize the project structure and dependencies based on your specific requirements.
 
-#### Author: Darshan Boyat - Software Developer & Freelancer
+#### Author: Rishabh Tomar - Software Developer & Freelancer
 
 ### Happy coding! 🚀
